@@ -1,6 +1,6 @@
 # Downturn
 
-Convert web pages to markdown. Zero runtime dependencies.
+Fetch web pages and convert to markdown. Zero runtime dependencies.
 
 Based on [macsplit/urltomarkdown](https://github.com/macsplit/urltomarkdown) by Lee Hanken. The original pulls in 634,636 lines of JavaScript through `node_modules/`. This is 5,862 lines, a 99.1% reduction.
 
