@@ -1,12 +1,18 @@
 # Downturn
 
-A downturn in dependencies.
+Convert web pages to markdown. Zero runtime dependencies.
 
-Web page to markdown converter. Zero dependencies. One `node` command.
+Based on [macsplit/urltomarkdown](https://github.com/macsplit/urltomarkdown) by Lee Hanken. The original pulls in 634,636 lines of JavaScript through `node_modules/`. This is 5,862 lines, a 99.1% reduction.
 
-A from-scratch rewrite of [macsplit/urltomarkdown](https://github.com/macsplit/urltomarkdown) by Lee Hanken. The original project used 8 npm packages that pulled in 634,636 lines of JavaScript across 7,427 files (62 MB) through `node_modules/`. Downturn delivers the same API and functionality in under 6,000 lines total -- a 99.1% reduction -- with nothing to install.
+The bulk of the original's size comes from [jsdom](https://github.com/jsdom/jsdom), a full browser environment simulation (DOM, CSS, events, navigation) used only to parse HTML into a DOM tree. Downturn replaces it with Mozilla's own [JSDOMParser](https://github.com/mozilla/readability/blob/main/JSDOMParser.js), the lightweight parser that Readability was actually designed for, extended with the handful of DOM methods that Turndown needs. The core libraries (Readability, Turndown) are vendored and ported to modern ESM. The result is validated against 415 tests, including Mozilla Readability's own 117 real-world test pages and Turndown's 140 conversion fixtures, both pulled from their upstream repos.
 
-## MCP Server (for AI agents)
+## Install
+
+```bash
+npx -y downturn
+```
+
+## MCP Server
 
 ```json
 {
@@ -19,19 +25,21 @@ A from-scratch rewrite of [macsplit/urltomarkdown](https://github.com/macsplit/u
 }
 ```
 
-Two tools are exposed:
-- **`url_to_markdown`** — fetch a URL and return markdown
-- **`html_to_markdown`** — convert an HTML string to markdown
+Tools:
+- **`url_to_markdown`** fetches a URL and returns markdown
+- **`html_to_markdown`** converts an HTML string to markdown
 
-Both support options: `include_title`, `include_links`, `use_readability`.
+Both accept `output_path` to write directly to a file, plus `include_title`, `include_links`, `use_readability` options.
+
+Example agent interactions:
+- "Convert this page to markdown" returns the text in context
+- "Save https://example.com/docs to docs/reference.md" writes the file directly
 
 ## HTTP Server
 
 ```bash
 PORT=3000 node index.mjs
 ```
-
-No `npm install`. No `node_modules`.
 
 ### GET
 
@@ -44,7 +52,7 @@ GET /?url=https://example.com
 | `url`     | required | URL to convert |
 | `title`   | `false` | Prepend page title as H1 |
 | `links`   | `true`  | Include hyperlinks (`false` to strip) |
-| `clean`   | `true`  | Use Readability to extract content (`false` for raw conversion) |
+| `clean`   | `true`  | Use Readability to extract content (`false` for raw) |
 
 ### POST
 
@@ -57,7 +65,7 @@ url=https://example.com&html=<html>...</html>
 
 Supply `html` directly to skip fetching. Query parameters work on POST too.
 
-### Response
+### Response headers
 
 ```
 Content-Type: text/markdown
@@ -67,15 +75,15 @@ Access-Control-Allow-Origin: *
 
 Rate limited to 5 requests per 30 seconds per IP. Follows redirects up to 5 hops.
 
-## How it works
+## Pipeline
 
-1. Fetch the page (Node.js built-in `https`, follows redirects)
+1. Fetch page (`node:https`, follows redirects)
 2. Strip scripts and styles
-3. Extract article content ([Mozilla Readability](https://github.com/mozilla/readability))
-4. Convert HTML to markdown ([Turndown](https://github.com/mixmark-io/turndown))
+3. Extract article content (Mozilla Readability)
+4. Convert to markdown (Turndown)
 5. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
 
-The HTML parser is Mozilla's [JSDOMParser](https://github.com/mozilla/readability/blob/main/JSDOMParser.js) -- a lightweight DOM built for Readability -- extended with `querySelector`, `outerHTML`, `cloneNode`, void element handling, and a fix for the original's infinite loop on unclosed comments.
+HTML parsing uses Mozilla's JSDOMParser with extensions for `querySelector`, `outerHTML`, `cloneNode`, and void element handling.
 
 ## Testing
 
@@ -83,12 +91,7 @@ The HTML parser is Mozilla's [JSDOMParser](https://github.com/mozilla/readabilit
 node --test tests/*.test.mjs
 ```
 
-415 tests:
-- 117 golden file tests (full pipeline on real-world pages, verified against original)
-- 117 Readability fixtures (content extraction on real HTML)
-- 140 Turndown fixtures (HTML-to-markdown conversion)
-- 32 unit tests (HTTP server, rate limiter, entity decoder)
-- 9 application-level tests
+415 tests covering the full pipeline against 117 real-world pages, plus Readability and Turndown fixture suites.
 
 ## Docker
 
@@ -97,33 +100,33 @@ docker build -t downturn .
 docker run -p 1337:1337 downturn
 ```
 
-## Project structure
+## Structure
 
 ```
-index.mjs                              HTTP server, routing
-mcp.mjs                               MCP stdio transport for AI agents
-url_to_markdown_processor.mjs          Core pipeline: parse, extract, convert
+index.mjs                              HTTP server
+mcp.mjs                               MCP stdio transport
+url_to_markdown_processor.mjs          Core pipeline
 url_to_markdown_readers.mjs            URL fetching, redirect following
-url_to_markdown_formatters.mjs         Pre-process code blocks and tables
-url_to_markdown_common_filters.mjs     Post-process markdown (site filters)
-url_to_markdown_apple_dev_docs.mjs     Apple developer docs JSON parser
-html_table_to_markdown.mjs             HTML tables to markdown tables
+url_to_markdown_formatters.mjs         Code block and table pre-processing
+url_to_markdown_common_filters.mjs     Post-processing filters
+url_to_markdown_apple_dev_docs.mjs     Apple developer docs parser
+html_table_to_markdown.mjs             HTML table conversion
 
 lib/
-  html_parser.mjs                      DOM parser (vendored JSDOMParser + extensions)
-  readability.mjs                      Content extraction (vendored Mozilla Readability)
+  html_parser.mjs                      DOM parser (vendored JSDOMParser)
+  readability.mjs                      Content extraction (vendored Readability)
   turndown.mjs                         HTML to markdown (vendored Turndown)
   html_entities.mjs                    HTML entity decoder
-  http_server.mjs                      Express-compatible HTTP server
+  http_server.mjs                      HTTP server on node:http
   rate_limiter.mjs                     Sliding window rate limiter
 ```
 
 ## Credits
 
-- Original project by [Lee Hanken](https://github.com/macsplit/urltomarkdown)
-- [Mozilla Readability](https://github.com/mozilla/readability) (Apache 2.0) -- content extraction
-- [JSDOMParser](https://github.com/mozilla/readability/blob/main/JSDOMParser.js) (MPL 2.0) -- lightweight HTML parser
-- [Turndown](https://github.com/mixmark-io/turndown) (MIT) -- HTML to markdown conversion
+- [Lee Hanken](https://github.com/macsplit/urltomarkdown), original project
+- [Mozilla Readability](https://github.com/mozilla/readability) (Apache 2.0)
+- [JSDOMParser](https://github.com/mozilla/readability/blob/main/JSDOMParser.js) (MPL 2.0)
+- [Turndown](https://github.com/mixmark-io/turndown) (MIT)
 
 ## License
 

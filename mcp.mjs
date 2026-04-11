@@ -8,6 +8,8 @@
 //   { "command": "node", "args": ["path/to/mcp.mjs"] }
 
 import { createInterface } from 'node:readline';
+import fs from 'node:fs';
+import path from 'node:path';
 import processor from './url_to_markdown_processor.mjs';
 import filters from './url_to_markdown_common_filters.mjs';
 import { JSDOM } from './lib/html_parser.mjs';
@@ -125,6 +127,7 @@ async function handleMessage(line) {
             type: 'object',
             properties: {
               url: { type: 'string', description: 'The URL to fetch and convert' },
+              output_path: { type: 'string', description: 'File path to write the markdown to. If omitted, returns the markdown as text.' },
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
@@ -140,6 +143,7 @@ async function handleMessage(line) {
             properties: {
               html: { type: 'string', description: 'The HTML string to convert' },
               url: { type: 'string', description: 'Base URL for resolving relative links', default: '' },
+              output_path: { type: 'string', description: 'File path to write the markdown to. If omitted, returns the markdown as text.' },
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
@@ -183,9 +187,18 @@ async function handleMessage(line) {
         return;
       }
 
-      sendResponse(id, {
-        content: [{ type: 'text', text: markdown }],
-      });
+      if (args.output_path) {
+        const outPath = path.resolve(args.output_path);
+        fs.mkdirSync(path.dirname(outPath), { recursive: true });
+        fs.writeFileSync(outPath, markdown);
+        sendResponse(id, {
+          content: [{ type: 'text', text: `Wrote ${markdown.length} chars to ${outPath}` }],
+        });
+      } else {
+        sendResponse(id, {
+          content: [{ type: 'text', text: markdown }],
+        });
+      }
     } catch (e) {
       sendResponse(id, {
         content: [{ type: 'text', text: `Error: ${e.message}` }],

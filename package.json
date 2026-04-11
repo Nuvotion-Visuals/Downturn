@@ -13,6 +13,10 @@
     "dev": "node --watch index.mjs",
     "mcp": "node mcp.mjs"
   },
-  "author": "Lee Hanken",
+  "author": "Tom Leamon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tom-leamon/downturn"
+  },
   "license": "MIT"
 }
