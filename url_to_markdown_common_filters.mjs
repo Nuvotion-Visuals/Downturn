@@ -69,8 +69,12 @@ export default {
 		}
 	],
 	strip_style_and_script_blocks(html) {
-  		html = html.replace(/<style[\s\S]*?<\/style>/g, "");
-  		return html.replace(/<script[\s\S]*?<\/script>/g, "");
+  		html = html.replace(/<style[\s\S]*?<\/style>/gi, "");
+  		html = html.replace(/<script[\s\S]*?<\/script>/gi, "");
+  		// Clean up orphan closing tags left by nested script/style blocks
+  		html = html.replace(/<\/script>/gi, "");
+  		html = html.replace(/<\/style>/gi, "");
+  		return html;
 	},
 	filter: function (url, data, ignore_links=false) {
 		let domain='';

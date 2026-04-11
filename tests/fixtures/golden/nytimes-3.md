@@ -1,0 +1,144 @@
+# 
+            Manhole Fires and Burst Pipes: How Winter Wreaks Havoc on What’s Underneath N.Y.C. - The New York Times
+        
+New York’s aging below-street infrastructure is tough to maintain, and the corrosive rock salt and “freeze-thaw” cycles of winter make it even worse.
+
+Image![](https://static01.nyt.com/images/2019/02/21/nyregion/21winterutilities1/merlin_150498339_cf9085e5-9756-4169-a5a5-5b516316a3fa-articleLarge.jpg?quality=75&auto=webp&disable=upscale)
+
+A Con Edison worker repairing underground cables this month in Flushing, Queens. The likely source of the problem was water and rock salt that had seeped underground.CreditCreditChang W. Lee/The New York Times
+
+[![Corey Kilgannon](https://static01.nyt.com/images/2018/02/20/multimedia/author-corey-kilgannon/author-corey-kilgannon-thumbLarge.jpg "Corey Kilgannon")](https://www.nytimes.com/by/corey-kilgannon)
+
+*   Feb. 21, 2019
+
+_\[What you need to know to start the day:_ [_Get New York Today in your inbox_](https://www.nytimes.com/newsletters/newyorktoday?module=inline)_.\]_
+
+A series of recent [manhole fires](https://nypost.com/2019/02/17/manhole-fires-force-theater-evacuations-in-midtown/) in the heart of Manhattan forced the evacuation of several theaters and was a stark reminder that the subway is not the only creaky infrastructure beneath the streets of New York City.
+
+Underground lies a chaotic assemblage of utilities that, much like the subway, are lifelines for the city: a sprawling tangle of water mains, power cables, gas and steam lines, telecom wires and sewers.
+
+The city has one of the oldest and largest networks of subterranean infrastructure in the world, with some portions dating more than a century and prone to leaks and cracks.
+
+And winter — from the corrosive rock salt used on streets and sidewalks to “freeze-thaw” cycles that weaken pipes — makes infrastructure problems even worse.
+
+In the late 1800s, many of the city’s overhead utilities were buried to lessen the exposure to winter weather. “People think it’s all protected and safe, but it’s really not,” said Patrick McHugh, vice president of electrical engineering and planning for Con Edison, which maintains about 90,000 miles of underground cable in the city.
+
+“You have water, sewage, electricity and gas down there, and people don’t appreciate the effort that goes into keeping all that working,” he added.
+
+Image![](https://static01.nyt.com/images/2019/02/21/nyregion/21winterutilitiesOAK15/merlin_56025490_f9412a36-eeb9-4a10-a41e-f324eb7a3248-articleLarge.jpg?quality=75&auto=webp&disable=upscale)
+
+In the late 1800s, overhead utilities were buried to lessen the exposure to winter weather.CreditKirsten Luce for The New York Times
+
+Rock salt on icy streets can cause mayhem below them
+----------------------------------------------------
+
+When rock salt melts ice, and the water seeps down manholes and into electrical units, it can set off fires and explosions strong enough to pop a 300-pound manhole cover five stories into the air.
+
+For days after a storm, Con Edison officials say, they often deal with scores of electrical fires caused by the rock salt eating away at electrical cable insulation. The wet salt can create sparking that burns the insulation, producing both fire and gases that can combust and pop the manhole lids.
+
+To alleviate the threat, the officials said, the utility switched most of its manhole covers to vented ones that allow gases to escape, “so they cannot form a combustible amount,” Mr. McHugh said.
+
+“It also lets smoke escape, which can tip off the public to notify the authorities,” he added.
+
+Winter can also bring an increase in gas-line breakages. Con Edison, which maintains 4,300 miles of gas mains in and around New York City, records about 500 leaks — most of them nonemergencies — in a typical month, but many more in winter.
+
+Even this past January, which was unseasonably mild, there were 750 leaks, Con Edison officials said.
+
+Image
+
+There are typically between 400 and 600 water main breaks each year in New York City, an official said.CreditMichael Appleton for The New York Times
+
+![](https://static01.nyt.com/images/2019/02/15/nyregion/00winterutilitiesOAK11/merlin_94083158_9e622a52-ec2f-4fbd-845c-5d530e94bc82-articleLarge.jpg?quality=90&auto=webp)
+
+‘Freeze-thaws’ linked to climate change can imperil utilities
+-------------------------------------------------------------
+
+The extreme temperature swings that many researchers link to climate change are adding to the challenges of winter.
+
+Officials monitor weather forecasts closely for freeze-thaw cycles, when they put extra repair crews on call.
+
+During a polar vortex in late January, for instance, single-digit temperatures in the city quickly ballooned into the 50s. The thaw, much welcomed by many New Yorkers, worried Tasos Georgelis, deputy commissioner for water and sewer operations at the Department of Environmental Protection, which operates the city’s [water system](https://www.nytimes.com/interactive/2016/03/24/nyregion/how-nyc-gets-its-water-new-york-101.html?action=click&contentCollection=New%20York&region=Footer&module=inline&version=WhatsNext&contentID=WhatsNext&moduleDetail=undefined&pgtype=Multimedia).
+
+“When you get a freeze and a thaw, the ground around the water mains expands and contracts, and puts external pressure on the pipes,” Mr. Georgelis said.
+
+Along the city’s roughly 6,500 miles of water mains, there are typically between 400 and 600 breaks a year, he added. The majority occur in winter, when the cold can make older cast-iron mains brittle.
+
+Environmental Protection officials said the department repaired 75 water-main breaks in January, including one in Lower Manhattan that disrupted rush-hour subway service and another on the West Side that snarled traffic and left nearby buildings without water for hours.
+
+The city’s 7,500 miles of sewer lines are less affected by cold weather because they are generally buried deeper than other utilities, below the frost line, agency officials said.
+
+Image
+
+In 1978, a water main break caused severe flooding in Bushwick, Brooklyn.CreditFred R. Conrad/The New York Times
+
+![](https://static01.nyt.com/images/2019/02/21/nyregion/21winterutilitiesOAK13/merlin_77720485_1f5be529-e659-49c3-a0bc-a3f312835d14-articleLarge.jpg?quality=90&auto=webp)
+
+How to replace century-old utilities: slowly, and carefully
+-----------------------------------------------------------
+
+Upgrading the city’s below-street utilities is a slow, painstaking process, “because you have such a fixed-in-place system,” said Rae Zimmerman, a research professor of planning and public administration at New York University.
+
+But there is progress. Con Edison officials said they had begun replacing the city’s nearly 1,600 miles of natural gas lines — which were made of either cast iron or unprotected steel — with plastic piping. The plastic is less susceptible to corrosion, cracks and leaks, said the officials, who added that they were swapping about 100 miles of line each year.
+
+The city is also replacing older, leak-prone water and sewer mains.
+
+Some pipes that are more than a century old hold up because they were built with a thicker grade of cast iron, according to Environmental Protection Department officials. For less healthy ones, the agency has invested more than $1 billion in the past five years — with an additional $1.4 billion budgeted over the next five years — for upgrades and replacements. New pipes will be made of a more durable, graphite-rich cast iron known as ductile iron.
+
+Image
+
+Matt Cruz snowboarded through Manhattan’s Lower East Side after a snowstorm in 2016 left the streets coated in slush and rock salt.CreditHiroko Masuike/The New York Times
+
+![](https://static01.nyt.com/images/2017/12/07/nyregion/00winter4/00winter4-articleLarge.jpg?quality=90&auto=webp)
+
+Construction during the winter isn’t always a good idea
+-------------------------------------------------------
+
+Of course, winter also poses problems aboveground. Most nonemergency repair and construction work involving concrete is halted because concrete and some types of dirt, used to fill in trenches, freeze in colder temperatures, said Ian Michaels, a spokesman for the city’s Department of Design and Construction.
+
+Digging by hand is also a challenge in frozen ground, so many excavations that are close to pipes and other utilities are put off, Mr. Michaels said.
+
+And asphalt is harder to obtain because it must be kept and transported at high temperatures, he added.
+
+In the extreme cold, city officials will not risk shutting down water mains for construction because spillage into the street could freeze, Mr. Michaels said. He added that stopping the water flow could freeze the private water-service connections that branch off the mains, he said.
+
+Even the basic task of locating utilities under the street can be complicated because infrastructure has been added piecemeal over the decades.
+
+Image
+
+A water main break in Manhattan in 2014. “When you get a freeze and a thaw, the ground around the water mains expands and contracts, and puts external pressure on the pipes,” said Tasos Georgelis of the city's Department of Environmental Protection.CreditÃngel Franco/The New York Times
+
+![](https://static01.nyt.com/images/2019/02/15/nyregion/00winterutilitiesOAK12/merlin_77751796_7f1b7a7a-23e9-49b2-b12e-1edfed680911-articleLarge.jpg?quality=90&auto=webp)
+
+Almost 1.8 million potholes filled since de Blasio took office
+--------------------------------------------------------------
+
+Street surfaces are affected by winter weather, too: Last year, the city filled 255,904 potholes.
+
+And should anyone forget that filling potholes, like snow removal, is a sacred staple of constituent services, transportation officials have compiled the number of potholes the city has filled — more than 1,786,300 — since Mayor Bill de Blasio took office in 2014.
+
+Potholes form when water and salt seep into cracks, freeze and expand, creating a larger crevice, said Joe Carbone, who works for the Transportation Department, where he is known as the pothole chief.
+
+Simply put, more freeze-thaw cycles [result in more potholes](https://www.nytimes.com/2011/02/07/nyregion/07pothole.html?module=inline), he said. Currently, the department has 25 crews repairing potholes. During peak pothole-repair season in early March, that number can expand to more than 60.
+
+Still, the department is continually resurfacing the city’s more than 6,000 miles of streets and 19,000 lane miles. Each year, agency officials said, it uses more than one million tons of asphalt to repave more than 1,300 lane-miles of street.
+
+Image
+
+Workers learning how to fix water main breaks at a training center in Queens.CreditChang W. Lee/The New York Times
+
+![](https://static01.nyt.com/images/2019/02/12/nyregion/00winterutilities2/merlin_150504129_e893b874-01eb-4d8f-8158-18512153e414-articleLarge.jpg?quality=90&auto=webp)
+
+So, where do people learn how to fix some of these issues?
+----------------------------------------------------------
+
+Of the 400 city laborers who work on water mains, many learn the finer points of leak repair at a training center in Queens, where underground pipes are made to spring leaks for repair drills.
+
+Workers from the Department of Environmental Protection recently gathered around a muddy hole as a co-worker, Nehemiah Dejesus, scrambled to apply a stainless-steel repair clamp around a cracked segment that was spewing water.
+
+“Don’t get nervous,” instructed Milton Velez, the agency’s district supervisor for Queens.
+
+“I’m not,” Mr. Dejesus said as he secured the clamp and stopped the leak. “It’s ‘Showtime at the Apollo.’”
+
+Corey Kilgannon is a Metro reporter covering news and human interest stories. His writes the [Character Study](https://www.nytimes.com/column/character-study) column in the Sunday Metropolitan section. He was also part of the team that won the 2009 Pulitzer Prize for Breaking News. [@coreykilgannon](https://twitter.com/coreykilgannon) • [Facebook](https://www.facebook.com/corey.kilgannon.9)
+
+A version of this article appears in print on , on Page A22 of the New York edition with the headline: Under the City’s Streets, A Battle Against Winter. [Order Reprints](http://www.nytreprints.com/) | [Today’s Paper](http://www.nytimes.com/pages/todayspaper/index.html) | [Subscribe](https://www.nytimes.com/subscriptions/Multiproduct/lp8HYKU.html?campaignId=48JQY)
