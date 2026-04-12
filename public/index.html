@@ -116,11 +116,18 @@ a:hover { text-decoration: underline; }
   color: var(--color-text);
   cursor: pointer;
 }
+/* Main layout */
+.main-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
 /* Split pane */
 .panes {
   flex: 1;
   display: flex;
   overflow: hidden;
+  min-width: 0;
 }
 .pane {
   flex: 1;
@@ -206,6 +213,32 @@ a:hover { text-decoration: underline; }
 #previewPane th { font-weight: 600; background: var(--color-bg-secondary); }
 #previewPane tr:nth-child(2n) { background: var(--color-bg-secondary); }
 #previewPane strong { font-weight: 600; }
+/* Nav sidebar */
+.nav-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  display: none;
+  font-size: var(--font-sm);
+}
+.nav-sidebar.open { display: block; }
+.nav-sidebar ul { list-style: none; padding: 8px 0; }
+.nav-sidebar li a {
+  display: block;
+  padding: 4px 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-sidebar li a:hover { color: var(--color-link); background: var(--color-bg-tertiary); }
+.nav-sidebar .nav-empty { padding: 16px; color: var(--color-text-placeholder); text-align: center; font-style: italic; }
+.nav-sidebar::-webkit-scrollbar { width: 8px; }
+.nav-sidebar::-webkit-scrollbar-track { background: transparent; }
+.nav-sidebar::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: 4px; }
 /* Bottom bar */
 .bottombar {
   display: flex;
@@ -218,7 +251,7 @@ a:hover { text-decoration: underline; }
   font-size: var(--font-sm);
   color: var(--color-text-muted);
 }
-.bottombar button {
+.bottombar button:not(.vt-btn) {
   height: 28px;
   padding: 0 var(--control-px);
   font-size: var(--font-sm);
@@ -230,26 +263,26 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 #copyBtn { width: 60px; text-align: center; }
-.bottombar button:hover { background: var(--color-border); border-color: var(--color-border-hover); }
+.bottombar button:not(.vt-btn):hover { background: var(--color-border); border-color: var(--color-border-hover); }
 .view-toggle {
   display: inline-flex;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  overflow: hidden;
 }
 .vt-btn {
-  height: 24px;
-  padding: 0 10px;
+  height: 28px;
+  padding: 0 var(--control-px);
   font-size: var(--font-sm);
-  background: var(--color-bg);
-  border: none;
-  border-right: 1px solid var(--color-border);
+  font-weight: 500;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-right: none;
+  border-radius: 0;
   color: var(--color-text-muted);
   cursor: pointer;
 }
-.vt-btn:last-child { border-right: none; }
+.vt-btn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.vt-btn:last-child { border-right: 1px solid var(--color-border); border-radius: 0 var(--radius) var(--radius) 0; }
 .vt-btn:hover { color: var(--color-text); }
-.vt-btn.active { background: var(--color-accent); color: #fff; }
+.vt-btn.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
 #status { flex: 1; }
 /* Empty state */
 .empty-state {
@@ -265,6 +298,11 @@ a:hover { text-decoration: underline; }
 <body>
 
 <div class="topbar">
+  <button class="nav-btn" id="backBtn" title="Back">&larr;</button>
+  <button class="nav-btn" id="fwdBtn" title="Forward">&rarr;</button>
+  <button class="nav-btn" id="refreshBtn" title="Refresh">&#8635;</button>
+  <button class="nav-btn" id="homeBtn" title="Home">Home</button>
+  <button class="nav-btn" id="navToggle" disabled title="Toggle site navigation">Nav</button>
   <input type="text" id="urlInput" placeholder="Enter a URL and press Enter" autofocus>
   <div id="loading"></div>
   <div class="topbar-right">
@@ -273,6 +311,7 @@ a:hover { text-decoration: underline; }
       <div id="settingsPopover">
         <label><input type="checkbox" id="optTitle" checked> Include title</label>
         <label><input type="checkbox" id="optLinks" checked> Include links</label>
+        <label><input type="checkbox" id="optImages" checked> Include images</label>
         <label><input type="checkbox" id="optClean" checked> Use Readability</label>
         <label><input type="checkbox" id="optAbsolute" checked> Absolute URLs</label>
       </div>
@@ -280,10 +319,13 @@ a:hover { text-decoration: underline; }
   </div>
 </div>
 
-<div class="panes">
-  <div class="pane" id="rawPane"><div class="empty-state">Markdown will appear here</div></div>
-  <div class="divider" id="divider"></div>
-  <div class="pane" id="previewPane"><div class="empty-state">Rendered preview will appear here</div></div>
+<div class="main-area">
+  <div class="nav-sidebar" id="navSidebar"><ul></ul></div>
+  <div class="panes">
+    <div class="pane" id="rawPane"><div class="empty-state">Markdown will appear here</div></div>
+    <div class="divider" id="divider"></div>
+    <div class="pane" id="previewPane"><div class="empty-state">Rendered preview will appear here</div></div>
+  </div>
 </div>
 
 <div class="bottombar">
@@ -301,14 +343,52 @@ a:hover { text-decoration: underline; }
 <script>
 const API_BASE = '';
 
+// Settings persistence
+const SETTINGS_KEY = 'downturn-settings';
+function saveSettings() {
+  const settings = {
+    optTitle: document.getElementById('optTitle').checked,
+    optLinks: document.getElementById('optLinks').checked,
+    optImages: document.getElementById('optImages').checked,
+    optClean: document.getElementById('optClean').checked,
+    optAbsolute: document.getElementById('optAbsolute').checked,
+    view: document.querySelector('.vt-btn.active')?.dataset.view || 'both',
+    navOpen: document.getElementById('navSidebar').classList.contains('open'),
+  };
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+}
+function applyView(view) {
+  document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.vt-btn[data-view="${view}"]`);
+  if (btn) btn.classList.add('active');
+  const panes = document.querySelector('.panes');
+  document.getElementById('rawPane').style.display = (view === 'preview') ? 'none' : '';
+  document.getElementById('previewPane').style.display = (view === 'raw') ? 'none' : '';
+  panes.classList.toggle('single', view !== 'both');
+}
+function loadSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+    if (!s) return;
+    if (s.optTitle !== undefined) document.getElementById('optTitle').checked = s.optTitle;
+    if (s.optLinks !== undefined) document.getElementById('optLinks').checked = s.optLinks;
+    if (s.optImages !== undefined) document.getElementById('optImages').checked = s.optImages;
+    if (s.optClean !== undefined) document.getElementById('optClean').checked = s.optClean;
+    if (s.optAbsolute !== undefined) document.getElementById('optAbsolute').checked = s.optAbsolute;
+    if (s.view) applyView(s.view);
+    if (s.navOpen) document.getElementById('navSidebar').classList.add('open');
+  } catch {}
+}
+
 // State
 let currentMarkdown = '';
-const mdCache = {}; // url -> markdown cache for instant back/forward
+const pageCache = {}; // url -> { markdown, nav }
 
 // Elements
 const urlInput = document.getElementById('urlInput');
 const rawPane = document.getElementById('rawPane');
 const previewPane = document.getElementById('previewPane');
+const navSidebar = document.getElementById('navSidebar');
 const loading = document.getElementById('loading');
 const statusEl = document.getElementById('status');
 const stats = document.getElementById('stats');
@@ -322,14 +402,18 @@ async function navigate(targetUrl, { pushState = true } = {}) {
 
   // Normalize
   if (!/^https?:\/\//i.test(targetUrl)) targetUrl = 'https://' + targetUrl;
+  // Fix double slashes (except in protocol)
+  targetUrl = targetUrl.replace(/(https?:\/\/)\/+/g, '$1');
 
   urlInput.value = targetUrl;
 
   // Check cache for instant back/forward
-  if (mdCache[targetUrl]) {
-    currentMarkdown = mdCache[targetUrl];
+  if (pageCache[targetUrl]) {
+    const cached = pageCache[targetUrl];
+    currentMarkdown = cached.markdown;
     const t0 = performance.now();
     render(currentMarkdown);
+    renderNav(cached.nav);
     showStats(currentMarkdown, performance.now() - t0, '(cached)');
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
@@ -343,8 +427,10 @@ async function navigate(targetUrl, { pushState = true } = {}) {
 
   const params = new URLSearchParams({
     url: targetUrl,
+    nav: 'true',
     title: document.getElementById('optTitle').checked,
     links: document.getElementById('optLinks').checked,
+    images: document.getElementById('optImages').checked,
     clean: document.getElementById('optClean').checked,
     absoluteUrls: document.getElementById('optAbsolute').checked,
   });
@@ -352,14 +438,15 @@ async function navigate(targetUrl, { pushState = true } = {}) {
   try {
     const resp = await fetch(`${API_BASE}/api?${params}`);
     if (!resp.ok) throw new Error(`${resp.status} ${resp.statusText}`);
-    const markdown = await resp.text();
+    const data = await resp.json();
     const elapsed = performance.now() - t0;
 
-    currentMarkdown = markdown;
-    mdCache[targetUrl] = markdown;
+    currentMarkdown = data.markdown;
+    pageCache[targetUrl] = data;
 
-    render(markdown);
-    showStats(markdown, elapsed);
+    render(data.markdown);
+    renderNav(data.nav);
+    showStats(data.markdown, elapsed);
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
   } catch (e) {
@@ -379,6 +466,29 @@ function render(markdown) {
     previewPane.scrollTop = 0;
   });
 }
+
+let currentNav = [];
+const navToggle = document.getElementById('navToggle');
+
+function renderNav(nav) {
+  const ul = navSidebar.querySelector('ul');
+  currentNav = nav || [];
+  if (currentNav.length === 0) {
+    navToggle.disabled = true;
+    ul.innerHTML = '<li class="nav-empty">No navigation found</li>';
+    return;
+  }
+  ul.innerHTML = currentNav.map(n =>
+    `<li><a href="${n.href}" title="${n.text}">${n.text}</a></li>`
+  ).join('');
+  navToggle.disabled = false;
+}
+
+navToggle.addEventListener('click', () => {
+  if (currentNav.length === 0) return;
+  navSidebar.classList.toggle('open');
+  saveSettings();
+});
 
 function showStats(markdown, ms, suffix) {
   const chars = markdown.length;
@@ -402,7 +512,8 @@ window.addEventListener('popstate', (e) => {
   }
 });
 
-// Load from URL on page load (e.g. shared link or refresh)
+// Init
+loadSettings();
 (function init() {
   const hash = window.location.hash.slice(1);
   const targetUrl = hash || new URLSearchParams(window.location.search).get('url');
@@ -566,19 +677,45 @@ function inline(text) {
   return text;
 }
 
-// Link interception in preview
-previewPane.addEventListener('click', (e) => {
-  const link = e.target.closest('a');
-  if (!link) return;
-  e.preventDefault();
-  const href = link.getAttribute('href');
-  if (!href || href.startsWith('#')) return;
-  navigate(href);
-});
+// Link interception in preview and nav sidebar
+for (const el of [previewPane, navSidebar]) {
+  el.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    navigate(href);
+  });
+}
 
 // URL input
 urlInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') navigate(urlInput.value.trim());
+});
+
+// Refresh
+document.getElementById('refreshBtn').addEventListener('click', () => {
+  for (const key in pageCache) delete pageCache[key];
+  const targetUrl = urlInput.value.trim();
+  if (targetUrl) navigate(targetUrl, { pushState: false });
+});
+
+// Back/Forward
+document.getElementById('backBtn').addEventListener('click', () => history.back());
+document.getElementById('fwdBtn').addEventListener('click', () => history.forward());
+
+// Home button
+document.getElementById('homeBtn').addEventListener('click', () => {
+  urlInput.value = '';
+  currentMarkdown = '';
+  rawPane.innerHTML = '<div class="empty-state">Markdown will appear here</div>';
+  previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
+  renderNav(null);
+  stats.textContent = '';
+  statusEl.textContent = '';
+  window.history.pushState({}, '', window.location.pathname);
+  urlInput.focus();
 });
 
 // Keyboard shortcuts
@@ -636,13 +773,8 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
 document.querySelector('.view-toggle').addEventListener('click', (e) => {
   const btn = e.target.closest('.vt-btn');
   if (!btn) return;
-  document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const view = btn.dataset.view;
-  const panes = document.querySelector('.panes');
-  rawPane.style.display = (view === 'preview') ? 'none' : '';
-  previewPane.style.display = (view === 'raw') ? 'none' : '';
-  panes.classList.toggle('single', view !== 'both');
+  applyView(btn.dataset.view);
+  saveSettings();
 });
 
 // Settings popover
@@ -652,6 +784,13 @@ settingsBtn.addEventListener('click', (e) => {
 });
 document.addEventListener('click', () => settingsPopover.classList.remove('open'));
 settingsPopover.addEventListener('click', (e) => e.stopPropagation());
+settingsPopover.addEventListener('change', () => {
+  saveSettings();
+  // Clear all cache and re-fetch current page with new options
+  for (const key in pageCache) delete pageCache[key];
+  const targetUrl = urlInput.value.trim();
+  if (targetUrl) navigate(targetUrl, { pushState: false });
+});
 
 // Resizable divider
 // divider already declared above

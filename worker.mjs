@@ -27,6 +27,37 @@ function convertHtml(html, url, { title = true, links = true, clean = true, abso
   return processor.process_dom(url, document, res, '', options);
 }
 
+// Extract navigation links from raw HTML before Readability strips them
+function extractNav(html, baseUrl) {
+  const doc = new JSDOM(html);
+  const root = doc.window.document;
+  const nav = [];
+  const seen = new Set();
+
+  // Collect links from <nav> elements, then <aside>, then <header>
+  const containers = [
+    ...root.querySelectorAll('nav'),
+    ...root.querySelectorAll('aside'),
+    ...root.querySelectorAll('header'),
+  ];
+
+  for (const container of containers) {
+    const anchors = container.querySelectorAll('a');
+    for (const a of anchors) {
+      const text = (a.textContent || '').trim();
+      let href = (a.getAttribute('href') || '').trim();
+      if (!text || !href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) continue;
+      // Resolve relative URLs
+      try { href = new URL(href, baseUrl).href; } catch { continue; }
+      if (seen.has(href)) continue;
+      seen.add(href);
+      nav.push({ text, href });
+    }
+  }
+
+  return nav;
+}
+
 function parseBoolean(val, defaultVal) {
   if (val === undefined || val === null) return defaultVal;
   return val === 'true';
@@ -46,7 +77,7 @@ async function handleRequest(request) {
 
   try {
     let targetUrl, html;
-    let title, links, clean, absoluteUrls;
+    let title, links, images, clean, absoluteUrls, includeNav;
 
     if (request.method === 'POST') {
       const body = await request.json();
@@ -54,14 +85,18 @@ async function handleRequest(request) {
       targetUrl = body.url || '';
       title = parseBoolean(body.title, true);
       links = parseBoolean(body.links, true);
+      images = parseBoolean(body.images, true);
       clean = parseBoolean(body.clean, true);
       absoluteUrls = parseBoolean(body.absoluteUrls, true);
+      includeNav = parseBoolean(body.nav, false);
     } else {
       targetUrl = url.searchParams.get('url');
       title = parseBoolean(url.searchParams.get('title'), true);
       links = parseBoolean(url.searchParams.get('links'), true);
+      images = parseBoolean(url.searchParams.get('images'), true);
       clean = parseBoolean(url.searchParams.get('clean'), true);
       absoluteUrls = parseBoolean(url.searchParams.get('absoluteUrls'), true);
+      includeNav = parseBoolean(url.searchParams.get('nav'), false);
     }
 
     if (!html && !targetUrl) {
@@ -79,7 +114,20 @@ async function handleRequest(request) {
       html = await resp.text();
     }
 
-    const markdown = convertHtml(html, targetUrl, { title, links, clean, absoluteUrls });
+    let markdown = convertHtml(html, targetUrl, { title, links, clean, absoluteUrls });
+    if (!images) {
+      markdown = markdown.replace(/!\[[^\]]*\]\([^\)]+\)\n*/g, '');
+    }
+
+    if (includeNav) {
+      const nav = extractNav(html, targetUrl);
+      return new Response(JSON.stringify({ markdown, nav }), {
+        headers: {
+          ...CORS_HEADERS,
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      });
+    }
 
     return new Response(markdown, {
       headers: {
