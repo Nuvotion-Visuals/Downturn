@@ -72,26 +72,18 @@ a:hover { text-decoration: underline; }
 /* Tab bar */
 .tabbar {
   display: flex;
-  align-items: flex-end;
+  align-items: stretch;
   background: var(--color-bg);
   padding: var(--space-md) var(--space-md) 0;
   flex-shrink: 0;
   gap: var(--space-sm);
-  position: relative;
-}
-.tabbar::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: var(--color-border);
-  z-index: 0;
+  border-bottom: 1px solid var(--color-border);
 }
 .tabs {
   display: flex;
-  overflow-x: auto;
   gap: var(--space-xs);
   min-width: 0;
+  flex-wrap: nowrap;
 }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
@@ -115,8 +107,7 @@ a:hover { text-decoration: underline; }
   background: var(--color-bg-secondary);
   color: var(--color-text);
   border-color: var(--color-border);
-  position: relative;
-  z-index: 1;
+  box-shadow: 0 1px 0 0 var(--color-bg-secondary);
 }
 .tab-title {
   overflow: hidden;
@@ -141,16 +132,16 @@ a:hover { text-decoration: underline; }
   width: var(--control-h-sm);
   height: var(--control-h-sm);
   background: none;
-  border: 1px solid transparent;
+  border: none;
   border-radius: var(--radius);
   color: var(--color-text-muted);
-  font-size: var(--font-base);
+  font-size: var(--font-sm);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-bottom: var(--space-xs);
+  align-self: center;
 }
 .tab-new:hover { background: var(--color-bg-tertiary); color: var(--color-text); }
 /* Top bar */
@@ -229,6 +220,51 @@ a:hover { text-decoration: underline; }
   color: var(--color-text);
   cursor: pointer;
 }
+.settings-section {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-md) 0 var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-md);
+}
+.settings-section:first-child { border-top: none; margin-top: 0; }
+.theme-picker {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+}
+.theme-btn {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-xs);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-align: center;
+}
+.theme-btn:hover { color: var(--color-text); border-color: var(--color-border-hover); }
+.theme-btn.active { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-white); }
+/* Right sidebar content */
+.right-sidebar-content {
+  padding: var(--space-lg);
+}
+.right-sidebar-content select {
+  width: 100%;
+  height: var(--control-h-sm);
+  padding: 0 var(--space-md);
+  font-size: var(--font-xs);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  margin-top: var(--space-xs);
+}
+.right-sidebar-content select:focus { border-color: var(--color-link); outline: none; }
 /* Main layout */
 .main-area { flex: 1; display: flex; overflow: hidden; }
 /* Split pane */
@@ -246,7 +282,7 @@ a:hover { text-decoration: underline; }
 }
 .pane::-webkit-scrollbar { width: var(--space-md); }
 .pane::-webkit-scrollbar-track { background: transparent; }
-.pane::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: var(--space-sm); }
+.pane::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); }
 .pane::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
 #rawPane {
   font-family: var(--font-mono);
@@ -381,7 +417,7 @@ a:hover { text-decoration: underline; }
 .file-tree-item.active { color: var(--color-text); background: var(--color-bg-tertiary); font-weight: 600; }
 .nav-sidebar::-webkit-scrollbar { width: var(--space-md); }
 .nav-sidebar::-webkit-scrollbar-track { background: transparent; }
-.nav-sidebar::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: var(--space-sm); }
+.nav-sidebar::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); }
 /* Right sidebar */
 .right-sidebar {
   width: var(--sidebar-w);
@@ -396,7 +432,6 @@ a:hover { text-decoration: underline; }
 /* Sidebar tabs */
 .sidebar-tabs {
   display: flex;
-  border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
 }
 .sidebar-tab {
@@ -554,7 +589,21 @@ a:hover { text-decoration: underline; }
     <div class="divider" id="divider"></div>
     <div class="pane" id="previewPane"><div class="empty-state">Rendered preview will appear here</div></div>
   </div>
-  <div class="right-sidebar" id="rightSidebar"></div>
+  <div class="right-sidebar" id="rightSidebar">
+    <div class="right-sidebar-content">
+      <div class="settings-section">Theme</div>
+      <div class="theme-picker">
+        <button class="theme-btn active" data-theme="auto">Auto</button>
+        <button class="theme-btn" data-theme="dark">Dark</button>
+        <button class="theme-btn" data-theme="light">Light</button>
+        <button class="theme-btn" data-theme="midnight">Black</button>
+      </div>
+      <div class="settings-section">Editor Font</div>
+      <select id="fontEditor"><option value="">System Default</option></select>
+      <div class="settings-section">Preview Font</div>
+      <select id="fontPreview"><option value="">System Default</option></select>
+    </div>
+  </div>
 </div>
 
 <div class="bottombar">
@@ -573,9 +622,12 @@ a:hover { text-decoration: underline; }
 <script type="module">
 import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce } from './ui.mjs';
 import * as db from './db.mjs';
+import { THEMES, applyTheme, getSystemTheme, listFonts } from './themes.mjs';
 const API_BASE = '';
 
 // Settings persistence
+let currentThemeName = 'auto';
+
 function saveSettings() {
   const settings = {
     optTitle: document.getElementById('optTitle').checked,
@@ -585,6 +637,9 @@ function saveSettings() {
     optAbsolute: document.getElementById('optAbsolute').checked,
     view: document.querySelector('.vt-btn.active')?.dataset.view || 'both',
     navOpen: document.getElementById('navSidebar').classList.contains('open'),
+    theme: currentThemeName,
+    fontEditor: document.getElementById('fontEditor').value || null,
+    fontPreview: document.getElementById('fontPreview').value || null,
   };
   db.saveSettings(settings);
 }
@@ -610,6 +665,20 @@ async function loadSettings() {
     const sidebar = document.getElementById('navSidebar');
     if (s.navOpen) sidebar.classList.add('open');
     else sidebar.classList.remove('open');
+    // Theme
+    if (s.theme) {
+      currentThemeName = s.theme;
+      setTheme(s.theme);
+    }
+    // Fonts
+    if (s.fontEditor) {
+      document.getElementById('fontEditor').value = s.fontEditor;
+      document.documentElement.style.setProperty('--font-mono', `"${s.fontEditor}", var(--font-mono)`);
+    }
+    if (s.fontPreview) {
+      document.getElementById('fontPreview').value = s.fontPreview;
+      document.documentElement.style.setProperty('--font-family', `"${s.fontPreview}", var(--font-family)`);
+    }
     return true;
   } catch { return false; }
 }
@@ -907,7 +976,10 @@ window.addEventListener('popstate', (e) => {
 
 // Init
 (async () => {
-  if (!(await loadSettings())) applyView('preview');
+  if (!(await loadSettings())) {
+    applyView('preview');
+    setTheme('auto');
+  }
   db.pruneCache(7);
   if (await loadTabs()) {
     renderTabs();
@@ -1240,6 +1312,68 @@ settingsPopover.addEventListener('change', () => {
   for (const key in pageCache) delete pageCache[key]; db.clearCache();
   const targetUrl = urlInput.value.trim();
   if (targetUrl) navigate(targetUrl, { pushState: false });
+});
+
+// Theme system
+function setTheme(name) {
+  currentThemeName = name;
+  const resolved = name === 'auto' ? getSystemTheme() : name;
+  const overrides = {};
+  const fe = document.getElementById('fontEditor').value;
+  const fp = document.getElementById('fontPreview').value;
+  if (fe) overrides['--font-mono'] = `"${fe}", ui-monospace, monospace`;
+  if (fp) overrides['--font-family'] = `"${fp}", -apple-system, sans-serif`;
+  applyTheme(resolved, overrides);
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === name));
+}
+
+document.querySelector('.theme-picker').addEventListener('click', (e) => {
+  const btn = e.target.closest('.theme-btn');
+  if (!btn) return;
+  setTheme(btn.dataset.theme);
+  saveSettings();
+});
+
+// Auto theme follows system
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (currentThemeName === 'auto') setTheme('auto');
+});
+
+// Font pickers
+(async () => {
+  const { all, mono } = await listFonts();
+  const editorSel = document.getElementById('fontEditor');
+  const previewSel = document.getElementById('fontPreview');
+  for (const f of mono) {
+    if (f === 'System Default') continue;
+    const opt = document.createElement('option');
+    opt.value = f; opt.textContent = f; opt.style.fontFamily = f;
+    editorSel.appendChild(opt);
+  }
+  for (const f of all) {
+    if (f === 'System Default') continue;
+    const opt = document.createElement('option');
+    opt.value = f; opt.textContent = f; opt.style.fontFamily = f;
+    previewSel.appendChild(opt);
+  }
+  // Restore saved values
+  const s = await db.getSettings();
+  if (s?.fontEditor) editorSel.value = s.fontEditor;
+  if (s?.fontPreview) previewSel.value = s.fontPreview;
+})();
+
+document.getElementById('fontEditor').addEventListener('change', (e) => {
+  const font = e.target.value;
+  if (font) document.documentElement.style.setProperty('--font-mono', `"${font}", ui-monospace, monospace`);
+  else document.documentElement.style.removeProperty('--font-mono');
+  saveSettings();
+});
+
+document.getElementById('fontPreview').addEventListener('change', (e) => {
+  const font = e.target.value;
+  if (font) document.documentElement.style.setProperty('--font-family', `"${font}", -apple-system, sans-serif`);
+  else document.documentElement.style.removeProperty('--font-family');
+  saveSettings();
 });
 
 // Right sidebar toggle
