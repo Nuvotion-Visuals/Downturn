@@ -11,7 +11,7 @@ I understand that one can play videos on one's computer. I understand these vide
 
 (Really my eventual goal is to be able to _create_ video on Linux, but I figured I'd start small, and see if I could just get _playback_ working before trying something that is undoubtedly ten thousand times harder.)
 
-I finally found [RPMs](http://mirrors.sctpc.com/dominik/linux/pkgs/mplayer/) of [mplayer](http://www.mplayerhq.hu/) that would consent to install themselves on a Red Hat 7.2 machine, and actually got it to play some videos. Amazing. But it's a total pain in the ass to use due to rampant "themeing." _Why do people do this?_ They map this stupid shaped window with no titlebar (oh, sorry, your choice of a dozen stupidly-shaped windows without titlebars) all of which use fonts that are way too small to read. But, here's the best part, there's no way to raise the window to the top. So if another window ever gets on top of it, well, sorry, you're out of luck. And half of the themes always map the window at the very bottom of the screen -- conveniently _under_ my panel where I can't reach it.
+I finally found [RPMs](http://mirrors.sctpc.com/dominik/linux/pkgs/mplayer%29 of [mplayer](http://www.mplayerhq.hu/) that would consent to install themselves on a Red Hat 7.2 machine, and actually got it to play some videos. Amazing. But it's a total pain in the ass to use due to rampant "themeing." _Why do people do this?_ They map this stupid shaped window with no titlebar (oh, sorry, your choice of a dozen stupidly-shaped windows without titlebars) all of which use fonts that are way too small to read. But, here's the best part, there's no way to raise the window to the top. So if another window ever gets on top of it, well, sorry, you're out of luck. And half of the themes always map the window at the very bottom of the screen -- conveniently _under_ my panel where I can't reach it.
 
 Resizing the window changes the aspect ratio of the video! Yeah, I'm sure someone has _ever_ wanted that.
 
@@ -19,9 +19,9 @@ It moves the mouse to the upper left corner of every dialog box it creates! Whic
 
 Fucking morons.
 
-So I gave up on that, and tried to install [gstreamer](http://gstreamer.net/). Get this. Their propose \`\`solution'' for distributing binaries on Red Hat systems? They point you at an RPM that installs **apt**, the Debian package system! Yeah, that's a _good_ idea, I want to struggle with two competing packaging systems on my machine just to install a single app. Well, I found some [RPMs](http://gstreamer.net/releases/redhat/redhat-72-i386/RPMS.ximian/) for Red Hat 7.2, but apparently they expect you to have already rectally inserted [Gnome2](http://www.gnome.org/) on that 7.2 system first. Uh, no. I've seen the horror of Red Hat 8.0, and there's no fucking way I'm putting Gnome2 on any more of my machines for at least another six months, maybe a year.
+So I gave up on that, and tried to install [gstreamer](http://gstreamer.net%29. Get this. Their propose \`\`solution'' for distributing binaries on Red Hat systems? They point you at an RPM that installs **apt**, the Debian package system! Yeah, that's a _good_ idea, I want to struggle with two competing packaging systems on my machine just to install a single app. Well, I found some [RPMs](http://gstreamer.net/releases/redhat/redhat-72-i386/RPMS.ximian/) for Red Hat 7.2, but apparently they expect you to have already rectally inserted [Gnome2](http://www.gnome.org%29 on that 7.2 system first. Uh, no. I've seen the horror of Red Hat 8.0, and there's no fucking way I'm putting Gnome2 on any more of my machines for at least another six months, maybe a year.
 
-Ok, no gstreamer. Let's try [Xine](http://xinehq.de/). I found [RPMs](http://rpmfind.net/linux/redhat/7.3/en/os/i386/RedHat/RPMS/), and it sucks about the same as mplayer, and in about the same ways, though slightly less bad: it doesn't screw the aspect ratio when you resize the window; and at least its stupidly-shaped window is always forced to be on top. I don't like that either, but it's better than _never_ being on top. It took me ten minutes to figure out where the "Open File" dialog was. It's on the button labeled **"://"** whose tooltip says "MRL Browser". Then you get to select file names from an oh-so-cute window that I guess is supposed to look like a tty, or maybe an LCD screen. It conveniently _centers_ the file names in the list, and truncates them at about 30 characters. The scrollbar is also composed of "characters": it's an underscore.
+Ok, no gstreamer. Let's try [Xine](http://xinehq.de/). I found [RPMs](http://rpmfind.net/linux/redhat/7.3/en/os/i386/RedHat/RPMS%29, and it sucks about the same as mplayer, and in about the same ways, though slightly less bad: it doesn't screw the aspect ratio when you resize the window; and at least its stupidly-shaped window is always forced to be on top. I don't like that either, but it's better than _never_ being on top. It took me ten minutes to figure out where the "Open File" dialog was. It's on the button labeled **"://"** whose tooltip says "MRL Browser". Then you get to select file names from an oh-so-cute window that I guess is supposed to look like a tty, or maybe an LCD screen. It conveniently _centers_ the file names in the list, and truncates them at about 30 characters. The scrollbar is also composed of "characters": it's an underscore.
 
 _What are these fucktards **thinking???**_
 
@@ -35,7 +35,7 @@ An idiocy that all of these programs have in common is that, in addition to open
 
 **And here's the Random Commentary section:**
 
-> **[Makali](http://www.lazycat.org/) wrote:**
+> **[Makali](http://www.lazycat.org%29 wrote:**
 > 
 > _Whenever a programmer thinks, "Hey, skins, what a cool idea", their computer's speakers should create some sort of cock-shaped soundwave and plunge it repeatedly through their skulls._
 > 
@@ -59,7 +59,7 @@ An idiocy that all of these programs have in common is that, in addition to open
 > 
 > Yes, every single time I try something like this, I very seriously consider [getting a Mac](http://fakehost/gruntle/bittybox.html).
 > 
-> Really the only thing that's stopping me is that I fear the [Emacs situation](http://www.xemacs.org/).
+> Really the only thing that's stopping me is that I fear the [Emacs situation](http://www.xemacs.org%29.
 > 
 > (By which I mean, \`\`Lack of a usable version thereof.'' No, running RMSmacs inside a terminal window doesn't qualify. Nor does running an X server on the Mac: if I were going to switch, why in the world would I continue inflicting the X Windows Disaster on myself? Wouldn't getting away from that be the _whole point?_)
 > 

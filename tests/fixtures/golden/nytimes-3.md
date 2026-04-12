@@ -11,7 +11,7 @@ A Con Edison worker repairing underground cables this month in Flushing, Queens.
 
 _\[What you need to know to start the day:_ [_Get New York Today in your inbox_](https://www.nytimes.com/newsletters/newyorktoday?module=inline)_.\]_
 
-A series of recent [manhole fires](https://nypost.com/2019/02/17/manhole-fires-force-theater-evacuations-in-midtown/) in the heart of Manhattan forced the evacuation of several theaters and was a stark reminder that the subway is not the only creaky infrastructure beneath the streets of New York City.
+A series of recent [manhole fires](https://nypost.com/2019/02/17/manhole-fires-force-theater-evacuations-in-midtown%29 in the heart of Manhattan forced the evacuation of several theaters and was a stark reminder that the subway is not the only creaky infrastructure beneath the streets of New York City.
 
 Underground lies a chaotic assemblage of utilities that, much like the subway, are lifelines for the city: a sprawling tangle of water mains, power cables, gas and steam lines, telecom wires and sewers.
 
@@ -139,4 +139,4 @@ Workers from the Department of Environmental Protection recently gathered around
 
 Corey Kilgannon is a Metro reporter covering news and human interest stories. His writes the [Character Study](https://www.nytimes.com/column/character-study) column in the Sunday Metropolitan section. He was also part of the team that won the 2009 Pulitzer Prize for Breaking News. [@coreykilgannon](https://twitter.com/coreykilgannon) • [Facebook](https://www.facebook.com/corey.kilgannon.9)
 
-A version of this article appears in print on , on Page A22 of the New York edition with the headline: Under the City’s Streets, A Battle Against Winter. [Order Reprints](http://www.nytreprints.com/) | [Today’s Paper](http://www.nytimes.com/pages/todayspaper/index.html) | [Subscribe](https://www.nytimes.com/subscriptions/Multiproduct/lp8HYKU.html?campaignId=48JQY)
+A version of this article appears in print on , on Page A22 of the New York edition with the headline: Under the City’s Streets, A Battle Against Winter. [Order Reprints](http://www.nytreprints.com%29 | [Today’s Paper](http://www.nytimes.com/pages/todayspaper/index.html) | [Subscribe](https://www.nytimes.com/subscriptions/Multiproduct/lp8HYKU.html?campaignId=48JQY)

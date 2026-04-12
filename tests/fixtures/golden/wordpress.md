@@ -1,7 +1,7 @@
 # Stack Overflow Jobs Data Shows ReactJS Skills in High Demand, WordPress Market Oversaturated with Developers – WordPress Tavern
 [![](https://i0.wp.com/wptavern.com/wp-content/uploads/2016/07/stack-overflow.png?resize=1025%2C401&ssl=1)](https://i0.wp.com/wptavern.com/wp-content/uploads/2016/07/stack-overflow.png?ssl=1)
 
-Stack Overflow published its analysis of [2017 hiring trends](https://stackoverflow.blog/2017/03/09/developer-hiring-trends-2017/) based on the targeting options employers selected when posting to [Stack Overflow Jobs](http://stackoverflow.com/jobs). The report, which compares data from 200 companies since 2015, ranks ReactJS, Docker, and Ansible at the top of the fastest growing skills in demand. When comparing the percentage change from 2015 to 2016, technologies like AJAX, Backbone.js, jQuery, and WordPress are less in demand.
+Stack Overflow published its analysis of [2017 hiring trends](https://stackoverflow.blog/2017/03/09/developer-hiring-trends-2017%29 based on the targeting options employers selected when posting to [Stack Overflow Jobs](http://stackoverflow.com/jobs). The report, which compares data from 200 companies since 2015, ranks ReactJS, Docker, and Ansible at the top of the fastest growing skills in demand. When comparing the percentage change from 2015 to 2016, technologies like AJAX, Backbone.js, jQuery, and WordPress are less in demand.
 
 [![](https://i2.wp.com/wptavern.com/wp-content/uploads/2017/03/ChangesinDemand.png?resize=975%2C1115&ssl=1)](https://i2.wp.com/wptavern.com/wp-content/uploads/2017/03/ChangesinDemand.png?ssl=1)
 

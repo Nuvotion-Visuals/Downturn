@@ -120,7 +120,7 @@ repeat every second:
 The Store Consumer polls tasks that failed in earlier execution attempts. This helps with the at-least-once guarantee that the ATF system provides. More details on how the Store Consumer polls new and previously failed tasks is presented in the [Lifecycle of a task](https://paper.dropbox.com/doc/How-we-designed-Dropboxs-ATF-an-async-task-framework--A~wmq5aW48OkHns4LzkM~o6zAg-cf95JuxevqilF2iWWATj6#:uid=342792671048375002388848&h2=Lifecycle-of-a-task) section below.
 
 **Queue  
-**ATF uses AWS [Simple Queue Service](https://aws.amazon.com/sqs/) (SQS) to queue tasks internally. These queues act as a buffer between the Store Consumer and Controllers (described below). Each <lambda, priority>  pair gets a dedicated SQS queue. The total number of SQS queues used by ATF is #lambdas x #priorities.
+**ATF uses AWS [Simple Queue Service](https://aws.amazon.com/sqs%29 (SQS) to queue tasks internally. These queues act as a buffer between the Store Consumer and Controllers (described below). Each <lambda, priority>  pair gets a dedicated SQS queue. The total number of SQS queues used by ATF is #lambdas x #priorities.
 
 **Controller  
 **Worker hosts are physical hosts dedicated for task execution. Each worker host has one controller process responsible for polling tasks from SQS queues in a background thread, and then pushing them onto process local buffered queues. The Controller is only aware of the lambdas it is serving and thus polls only the limited set of necessary queues. 

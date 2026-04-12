@@ -4,7 +4,7 @@ Emscripten has always focused first and foremost on compiling to the Web and oth
 Using standalone mode in Emscripten [#](#using-standalone-mode-in-emscripten)
 -----------------------------------------------------------------------------
 
-First, let's see what you can do with this new feature! Similar to [this post](https://hacks.mozilla.org/2018/01/shrinking-webassembly-and-javascript-code-sizes-in-emscripten/) let's start with a "hello world" type program that exports a single function that adds two numbers:
+First, let's see what you can do with this new feature! Similar to [this post](https://hacks.mozilla.org/2018/01/shrinking-webassembly-and-javascript-code-sizes-in-emscripten%29 let's start with a "hello world" type program that exports a single function that adds two numbers:
 
 ```
 // add.c
@@ -66,7 +66,7 @@ Just 4 lines! Running that prints `42` as expected. Note that while this example
 
 ### Running in Wasm runtimes [#](#running-in-wasm-runtimes)
 
-Another nice thing about standalone Wasm files is that you can run them in Wasm runtimes like [wasmer](https://wasmer.io/), [wasmtime](https://github.com/bytecodealliance/wasmtime), or [WAVM](https://github.com/WAVM/WAVM). For example, consider this hello world:
+Another nice thing about standalone Wasm files is that you can run them in Wasm runtimes like [wasmer](https://wasmer.io%29, [wasmtime](https://github.com/bytecodealliance/wasmtime), or [WAVM](https://github.com/WAVM/WAVM). For example, consider this hello world:
 
 ```
 // hello.cpp
@@ -124,7 +124,7 @@ wasm   =>   function musl_writev(..) { .. console.log(..) .. }
 ```
 
 
-`musl_writev` is an implementation of the Linux syscall interface that [musl libc](https://www.musl-libc.org/) uses to write data to a file descriptor, and that ends up calling `console.log` with the proper data. The Wasm module imports and calls that `musl_writev`, which defines an ABI between the JS and the Wasm. That ABI is arbitrary (and in fact Emscripten has changed its ABI over time to optimize it). If we replace that with an ABI that matches WASI, we can get this:
+`musl_writev` is an implementation of the Linux syscall interface that [musl libc](https://www.musl-libc.org%29 uses to write data to a file descriptor, and that ends up calling `console.log` with the proper data. The Wasm module imports and calls that `musl_writev`, which defines an ABI between the JS and the Wasm. That ABI is arbitrary (and in fact Emscripten has changed its ABI over time to optimize it). If we replace that with an ABI that matches WASI, we can get this:
 
 ```
 wasm   =>   function __wasi_fd_write(..) { .. console.log(..) .. }
@@ -135,7 +135,7 @@ This isn't a big change, just requiring some refactoring of the ABI, and when ru
 
 Another advantage of Emscripten using WASI APIs is that we can help the WASI spec by finding real-world issues. For example, we found that [changing the WASI "whence" constants](https://github.com/WebAssembly/WASI/pull/106) would be useful, and we've started some discussions around [code size](https://github.com/WebAssembly/WASI/issues/109) and [POSIX compatibility](https://github.com/WebAssembly/WASI/issues/122).
 
-Emscripten using WASI as much as possible is also useful in that it lets users use a single SDK to target Web, server, and plugin environments. Emscripten isn't the only SDK allowing that, as the WASI SDK's output can be run on the Web using the [WASI Web Polyfill](https://wasi.dev/polyfill/) or Wasmer's [wasmer-js](https://github.com/wasmerio/wasmer-js), but Emscripten’s Web output is more compact, so it lets a single SDK be used without compromising Web performance.
+Emscripten using WASI as much as possible is also useful in that it lets users use a single SDK to target Web, server, and plugin environments. Emscripten isn't the only SDK allowing that, as the WASI SDK's output can be run on the Web using the [WASI Web Polyfill](https://wasi.dev/polyfill%29 or Wasmer's [wasmer-js](https://github.com/wasmerio/wasmer-js), but Emscripten’s Web output is more compact, so it lets a single SDK be used without compromising Web performance.
 
 Speaking of which, you can emit a standalone Wasm file from Emscripten with optional JS in a single command:
 

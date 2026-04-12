@@ -56,7 +56,7 @@ But still, you get the people telling her something she already acknowledge:
 
 Thank you for restating something in the article. To the person who wrote it.
 
-In the original article, Samantha talked about the money Marco makes from his podcast. She based that on the numbers [provided by ATP in terms of sponsorship rates](http://atp.fm/sponsor/) and the number of current sponsors the podcast has. Is this going to yield perfect numbers? No. But the numbers you get from it will at least be reasonable, or should be unless the published sponsorship rates are just fantasy, and you’re stupid for taking them seriously.
+In the original article, Samantha talked about the money Marco makes from his podcast. She based that on the numbers [provided by ATP in terms of sponsorship rates](http://atp.fm/sponsor%29 and the number of current sponsors the podcast has. Is this going to yield perfect numbers? No. But the numbers you get from it will at least be reasonable, or should be unless the published sponsorship rates are just fantasy, and you’re stupid for taking them seriously.
 
 At first, she went with a simple formula:
 

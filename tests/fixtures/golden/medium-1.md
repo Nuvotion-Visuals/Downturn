@@ -1,9 +1,9 @@
 # The Open Journalism Project: Better Student Journalism — Medium
 #### _Better Student Journalism_
 
-We pushed out the first version of the [Open Journalism site](http://pippinlee.github.io/open-journalism-project/) in January. Our goal is for the site to be a place to teach students what they should know about journalism on the web. It should be fun too.
+We pushed out the first version of the [Open Journalism site](http://pippinlee.github.io/open-journalism-project%29 in January. Our goal is for the site to be a place to teach students what they should know about journalism on the web. It should be fun too.
 
-Topics like [mapping](http://pippinlee.github.io/open-journalism-project/Mapping/), [security](http://pippinlee.github.io/open-journalism-project/Security/), command line tools, and [open source](http://pippinlee.github.io/open-journalism-project/Open-source/) are all concepts that should be made more accessible, and should be easily understood at a basic level by all journalists. We’re focusing on students because we know student journalism well, and we believe that teaching maturing journalists about the web will provide them with an important lens to view the world with. This is how we got to where we are now.
+Topics like [mapping](http://pippinlee.github.io/open-journalism-project/Mapping/), [security](http://pippinlee.github.io/open-journalism-project/Security%29, command line tools, and [open source](http://pippinlee.github.io/open-journalism-project/Open-source/) are all concepts that should be made more accessible, and should be easily understood at a basic level by all journalists. We’re focusing on students because we know student journalism well, and we believe that teaching maturing journalists about the web will provide them with an important lens to view the world with. This is how we got to where we are now.
 
 ### Circa 2011
 
@@ -63,7 +63,7 @@ Two years later, we went back and looked at what had changed. We talked to a doz
 *   Significantly reduced print production of many papers
 *   Computers aren’t set up for experimenting with software and code, and often locked down
 
-Newsrooms have traditionally been covered in copies of The New York Times or Globe and Mail. Instead newsrooms should try spend at 20 minutes each week going over the coolest/weirdest online storytelling in an effort to expose each other to what is possible. “[Hey, what has the New York Times R&D lab been up to this week?](http://nytlabs.com/)”
+Newsrooms have traditionally been covered in copies of The New York Times or Globe and Mail. Instead newsrooms should try spend at 20 minutes each week going over the coolest/weirdest online storytelling in an effort to expose each other to what is possible. “[Hey, what has the New York Times R&D lab been up to this week?](http://nytlabs.com%29”
 
 Instead of having computers that are locked down, try setting aside a few office computers that allow students to play and “break”, or encourage editors to buy their own Macbooks so they’re always able to practice with code and new tools on their own.
 
@@ -105,7 +105,7 @@ The current Open Journalism site was a few years in the making. This was an orig
 *   **New process**  
     Our rough research has told us newsrooms need to be reorganized. This includes every part of the newsroom’s workflow: from where a story and its information comes from, to thinking of every word, pixel, and interaction the reader will have with your stories. If I was a photo editor that wanted to re-think my process with digital tools in mind, I’d start by asking “how are photo assignments processed and sent out?”, “how do we receive images?”, “what formats do images need to be exported in?”, “what type of screens will the images be viewed on?”, and “how are the designers getting these images?” Making a student newsroom digital isn’t about producing “digital manifestos”, it’s about being curious enough that you’ll want to to continue experimenting with your process until you’ve found one that fits your newsroom’s needs.
 *   **More (remote) mentorship**  
-    Lack of mentorship is still a big problem. [Google’s fellowship program](http://www.google.com/get/journalismfellowship/) is great. The fact that it only caters to United States students isn’t. There are only a handful of internships in Canada where students interested in journalism can get experience writing code and building interactive stories. We’re OK with this for now, as we expect internships and mentorship over the next 5 years between professional newsrooms and student newsrooms will only increase. It’s worth noting that some of that mentorship will likely be done remotely.
+    Lack of mentorship is still a big problem. [Google’s fellowship program](http://www.google.com/get/journalismfellowship%29 is great. The fact that it only caters to United States students isn’t. There are only a handful of internships in Canada where students interested in journalism can get experience writing code and building interactive stories. We’re OK with this for now, as we expect internships and mentorship over the next 5 years between professional newsrooms and student newsrooms will only increase. It’s worth noting that some of that mentorship will likely be done remotely.
 *   **Changing a newsroom culture**  
     Skill diversity needs to change. We encourage every student newsroom we talk to, to start building a partnership with their school’s Computer Science department. It will take some work, but you’ll find there are many CS undergrads that love playing with web technologies, and using data to tell stories. Changing who is in the newsroom should be one of the first steps newsrooms take to changing how they tell stories. The same goes with getting designers who understand the wonderful interactive elements of the web and students who love statistics and exploring data. Getting students who are amazing at design, data, code, words, and images into one room is one of the coolest experience I’ve had. Everyone benefits from a more diverse newsroom.
 
@@ -135,9 +135,9 @@ We’re also asking professional newsrooms to be more open about their process o
 
 ### This is a start
 
-We going to continue slowly growing the content on [Open Journalism](http://pippinlee.github.io/open-journalism-project/). We still consider this the beta version, but expect to polish it, and beef up the content for a real launch at the beginning of the summer.
+We going to continue slowly growing the content on [Open Journalism](http://pippinlee.github.io/open-journalism-project%29. We still consider this the beta version, but expect to polish it, and beef up the content for a real launch at the beginning of the summer.
 
-We expect to have more original tutorials as well as the beginnings of what a curriculum may look like that a student newsroom can adopt to start guiding their transition to become a web first newsroom. We’re also going to be working with the [Queen’s Journal](http://queensjournal.ca/) and [The Ubyssey](http://ubyssey.ca/)next school year to better understand how to make the student newsroom a place for experimenting with telling stories on the web. If this sound like a good idea in your newsroom, we’re still looking to add 1 more school.
+We expect to have more original tutorials as well as the beginnings of what a curriculum may look like that a student newsroom can adopt to start guiding their transition to become a web first newsroom. We’re also going to be working with the [Queen’s Journal](http://queensjournal.ca/) and [The Ubyssey](http://ubyssey.ca%29next school year to better understand how to make the student newsroom a place for experimenting with telling stories on the web. If this sound like a good idea in your newsroom, we’re still looking to add 1 more school.
 
 We’re trying out some new shoes. And while they’re not self-lacing, and smell a bit different, we feel lacing up a new pair of kicks can change a lot.
 

@@ -25,7 +25,7 @@ More ways to customize
 
 Make Firefox match your style. Choose from thousands of themes and dress up your browser with a single click.
 
-[Try it now](https://addons.mozilla.org/firefox/themes/)  
+[Try it now](https://addons.mozilla.org/firefox/themes%29  
 [Learn more](https://support.mozilla.org/kb/use-themes-change-look-of-firefox)
 
 [Next](#add-ons)

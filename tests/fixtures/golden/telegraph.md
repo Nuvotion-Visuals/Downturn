@@ -1,5 +1,5 @@
 # Zimbabwe coup: Robert Mugabe and wife Grace 'insisting he finishes his term', as priest steps in to mediate
-Zimbabwe President [Robert Mugabe](http://www.telegraph.co.uk/news/2017/11/17/zimbabwes-ruling-party-drafting-motion-fire-robert-mugabe-sunday/), his wife Grace and two key figures from her G40 political faction are under house arrest at Mugabe's "Blue House" compound in Harare and are insisting the 93 year-old finishes his presidential term, a source said.
+Zimbabwe President [Robert Mugabe](http://www.telegraph.co.uk/news/2017/11/17/zimbabwes-ruling-party-drafting-motion-fire-robert-mugabe-sunday%29, his wife Grace and two key figures from her G40 political faction are under house arrest at Mugabe's "Blue House" compound in Harare and are insisting the 93 year-old finishes his presidential term, a source said.
 
 The G40 figures are cabinet ministers Jonathan Moyo and Saviour Kasukuwere, who fled to the compound after their homes were attacked by troops in Tuesday night's coup, the source, who said he had spoken to people inside the compound, told Reuters.
 

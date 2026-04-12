@@ -35,7 +35,7 @@ That is user experience.
 
 IAB Tech Lab Members can join the IAB Tech Lab Ad Blocking Working Group, please email [adblocking@iab.com](mailto:adblocking@iab.com) for more information.
 
-Read [more about ad blocking here](http://www.iab.com/insights/ad-blocking/).
+Read [more about ad blocking here](http://www.iab.com/insights/ad-blocking%29.
 
 ![Auto Draft 14](http://www.iab.com/wp-content/uploads/2015/05/auto-draft-16-150x150.jpg)
 

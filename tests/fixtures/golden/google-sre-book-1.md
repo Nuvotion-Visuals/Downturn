@@ -26,7 +26,7 @@ Node and machine
 Used interchangeably to indicate a single instance of a running kernel in either a physical server, virtual machine, or container. There might be multiple _services_ worth monitoring on a single machine. The services may either be:
 
 *   Related to each other: for example, a caching server and a web server
-*   Unrelated services sharing hardware: for example, a code repository and a master for a configuration system like [Puppet](https://puppetlabs.com/puppet/puppet-open-source) or [Chef](https://www.chef.io/chef/)
+*   Unrelated services sharing hardware: for example, a code repository and a master for a configuration system like [Puppet](https://puppetlabs.com/puppet/puppet-open-source) or [Chef](https://www.chef.io/chef%29
 
 Any change to a service’s running software or its configuration.
 

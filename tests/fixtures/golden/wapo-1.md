@@ -27,7 +27,7 @@ Gunmen in military uniforms stormed Tunisia's national museum, killing at least 
 
 Tourism is critical to Tunisia’s economy, accounting for 15 percent of its gross domestic product in 2013, according to the World Travel and Tourism Council, an industry body. The Bardo museum hosts one of the world’s most outstanding collections of Roman mosaics and is popular with tourists and Tunisians alike.
 
-_\[[Bardo museum houses amazing Roman treasures](http://www.washingtonpost.com/blogs/worldviews/wp/2015/03/18/tunisias-bardo-museum-attacked-by-terrorists-is-home-to-amazing-roman-treasures/)\]_
+_\[[Bardo museum houses amazing Roman treasures](http://www.washingtonpost.com/blogs/worldviews/wp/2015/03/18/tunisias-bardo-museum-attacked-by-terrorists-is-home-to-amazing-roman-treasures%29\]_
 
 The attack is “also aimed at the country’s security and stability during the transition period,” Azzouz said. “And it could have political repercussions — like the curtailing of human rights, or even less government transparency if there’s fear of further attacks.”
 
@@ -45,7 +45,7 @@ Map: Flow of foreign fighters to Syria
 
 After the collapse of the authoritarian system in 2011, hard-line Muslims known as Salafists attacked bars and art galleries. Then, in 2012, hundreds of Islamists [assaulted the U.S. Embassy](http://www.washingtonpost.com/world/middle_east/in-tunisia-embassy-attack-tests-fledgling-democracy/2012/09/20/19f3986a-0273-11e2-8102-ebee9c66e190_story.html) in Tunis, shattering windows and hurling gasoline bombs, after the release of a crude online video about the prophet Muhammad. [](http://www.bbc.com/news/world-africa-23452979)The government outlawed the group behind the attack — Ansar al-Sharia, an al-Qaeda-linked organization — and began a crackdown. But the killing [of two leftist politicians](http://www.bbc.com/news/world-africa-23452979) in 2013 prompted a fresh political crisis, and Ennahda stepped down, replaced by a technocratic government.
 
-Tunisia’s [current coalition government](http://www.washingtonpost.com/blogs/monkey-cage/wp/2015/02/03/tunisia-opts-for-an-inclusive-new-government/) includes an Ennahda minister in the cabinet. Still, many leftist figures openly oppose collaboration with the movement’s leaders.
+Tunisia’s [current coalition government](http://www.washingtonpost.com/blogs/monkey-cage/wp/2015/02/03/tunisia-opts-for-an-inclusive-new-government%29 includes an Ennahda minister in the cabinet. Still, many leftist figures openly oppose collaboration with the movement’s leaders.
 
 “Ennahda is responsible for the current deterioration of the situation, because they were careless with the extremists” while they were in power, Azzouz said.
 

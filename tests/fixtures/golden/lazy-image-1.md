@@ -4,7 +4,7 @@
 Why CPU monitoring is important?
 --------------------------------
 
-I work at [Voodoo](http://voodoo.io/), a French company that creates mobile video games. We have a lot of challenges with performance, availability, and scalability because of the insane amount of traffic our infrastructure supports (billions of events/requests per day …… no joke!). In this setting, every metric is important and gives us a lot of information about the state of our system.
+I work at [Voodoo](http://voodoo.io%29, a French company that creates mobile video games. We have a lot of challenges with performance, availability, and scalability because of the insane amount of traffic our infrastructure supports (billions of events/requests per day …… no joke!). In this setting, every metric is important and gives us a lot of information about the state of our system.
 
 When working with Node.js one of the most critical resources to monitor is the CPU. Most of the time, when working on a low traffic API or project we don’t realize how many simple lines of code can have a huge impact on CPU. On the other hand, when traffic increases, a simple mistake can cost dearly.
 
@@ -87,7 +87,7 @@ Flame chart
 
 But once again, you have to stop your app, launch the tool, then terminate the script in order to display the graph (files are generated on the disk).
 
-For more details, you can see the [project](https://clinicjs.org/).
+For more details, you can see the [project](https://clinicjs.org%29.
 
 **To sum up**, here is the list of drawbacks of the two previous solutions.
 

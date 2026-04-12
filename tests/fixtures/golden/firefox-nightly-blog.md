@@ -1,7 +1,7 @@
 # These Weeks in Firefox: Issue 85 – Firefox Nightly News
 ### Highlights
 
-*   [Here’s our Firefox Year in Review!](https://blog.mozilla.org/blog/2020/12/15/our-year-in-review-how-weve-kept-firefox-working-for-you-in-2020/)
+*   [Here’s our Firefox Year in Review!](https://blog.mozilla.org/blog/2020/12/15/our-year-in-review-how-weve-kept-firefox-working-for-you-in-2020%29
 *   [Here’s our Performance Year in Review!](https://blog.mozilla.org/performance/2020/12/15/2020-year-in-review/)
 *   We’ve just landed [Bug 1553982](https://bugzilla.mozilla.org/show_bug.cgi?id=1553982), which aims to prevent starting an update while another Firefox instance is running (the cause of that about:restartrequired error page you may have seen).
     *   [![The about:restartrequired error page, saying "Sorry. We just need to do one small thing to keep going. Nightly has just been updated in the background. Click Restart Nightly to complete the update. We will restore all your pages, windows and tabs afterwards, so you can be on your way quickly.", followed by a button to restart Nightly.](https://3sgkpvh31s44756j71xlti9b-wpengine.netdna-ssl.com/files/2020/12/headlines85_0.png)](https://3sgkpvh31s44756j71xlti9b-wpengine.netdna-ssl.com/files/2020/12/headlines85_0.png)
@@ -22,7 +22,7 @@
 
 *   \[harry\] Amy Churchwell joins the Search & Navigation team today. She transferred internally from Marketing Engineering. Welcome Amy!
 
-#### [Resolved bugs (excluding employees)](https://bugzilla.mozilla.org/buglist.cgi?title=Resolved%20bugs%20\(excluding%20employees\)&quicksearch=1647931%2C1649618%2C1650645%2C1652412%2C1654217%2C1664768%2C1666831%2C1667061%2C1671579%2C1674806%2C1678173%2C1678372%2C1678616%2C1678865%2C1678866%2C1679252%2C1679412%2C1680931%2C1681213%2C1681554%2C1681642%2C1681948)
+#### [Resolved bugs (excluding employees)](https://bugzilla.mozilla.org/buglist.cgi?title=Resolved%20bugs%20\%28excluding%20employees\%29&quicksearch=1647931%2C1649618%2C1650645%2C1652412%2C1654217%2C1664768%2C1666831%2C1667061%2C1671579%2C1674806%2C1678173%2C1678372%2C1678616%2C1678865%2C1678866%2C1679252%2C1679412%2C1680931%2C1681213%2C1681554%2C1681642%2C1681948)
 
 #### Fixed more than one bug
 

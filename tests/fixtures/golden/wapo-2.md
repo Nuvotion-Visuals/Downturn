@@ -44,7 +44,7 @@ The second test — talks with Palestinians — could be even more difficult. In
 
 “Already, Israeli and Palestinian leaders have demonstrated a willingness to take significant political risks,” Obama said in his speech. Palestinian Authority President Mahmoud Abbas “has put aside efforts to shortcut the pursuit of peace and come to the negotiating table. Prime Minister Netanyahu has released Palestinian prisoners and reaffirmed his commitment to a Palestinian state.”
 
-Today, [the signals could not differ more](http://www.washingtonpost.com/blogs/worldviews/wp/2015/03/18/what-netanyahus-election-victory-means-for-the-palestinians/). The Palestinian Authority has said that after it joins the International Criminal Court at The Hague on April 1, it will press war crimes charges against Israel for the bloody Gaza conflict during the summer. Israel, which controls tax receipts, has pledged to punish the Palestinian Authority by freezing its tax revenue.
+Today, [the signals could not differ more](http://www.washingtonpost.com/blogs/worldviews/wp/2015/03/18/what-netanyahus-election-victory-means-for-the-palestinians%29. The Palestinian Authority has said that after it joins the International Criminal Court at The Hague on April 1, it will press war crimes charges against Israel for the bloody Gaza conflict during the summer. Israel, which controls tax receipts, has pledged to punish the Palestinian Authority by freezing its tax revenue.
 
 The United States, which gives hundreds of millions of dollars of economic aid to the Palestinian Authority, would be caught in the middle. It has been trying to persuade both sides to stand down, but Netanyahu’s declaration that there would be no Palestinian state on his watch makes that more difficult.
 

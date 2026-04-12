@@ -14,7 +14,7 @@ But the exact moment at which information becomes known to us - or when the "tip
 
 In other words, we do not yet know when that intellectually satisfying "a-ha!" moment takes place, or what the biology is behind it. This is why a team of researchers at Columbia University in New York City, NY, set out to investigate this moment in more detail.
 
-The scientists were led by Michael Shadlen, Ph.D., of Columbia University's Mortimer B. Zuckerman Mind Brain Behavior Institute, and the [findings](http://www.cell.com/current-biology/fulltext/S0960-9822\(17\)30784-4) were published in the journal _Current Biology._
+The scientists were led by Michael Shadlen, Ph.D., of Columbia University's Mortimer B. Zuckerman Mind Brain Behavior Institute, and the [findings](http://www.cell.com/current-biology/fulltext/S0960-9822\%2817\%2930784-4) were published in the journal _Current Biology._
 
 The hypothesis
 --------------

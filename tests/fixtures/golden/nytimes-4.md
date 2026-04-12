@@ -109,4 +109,4 @@ The difference, Mr. Warner said, was that the economy was near the precipice the
 
 Nelson D. Schwartz has covered economics since 2012. Previously, he wrote about Wall Street and banking, and also served as European economic correspondent in Paris. He joined The Times in 2007 as a feature writer for the Sunday Business section. [@NelsonSchwartz](https://twitter.com/NelsonSchwartz)
 
-A version of this article appears in print on , on Page A1 of the New York edition with the headline: What May Soon Exceed Cost of U.S. Military? Interest on U.S. Debt . [Order Reprints](http://www.nytreprints.com/) | [Today’s Paper](http://www.nytimes.com/pages/todayspaper/index.html) | [Subscribe](https://www.nytimes.com/subscriptions/Multiproduct/lp8HYKU.html?campaignId=48JQY)
+A version of this article appears in print on , on Page A1 of the New York edition with the headline: What May Soon Exceed Cost of U.S. Military? Interest on U.S. Debt . [Order Reprints](http://www.nytreprints.com%29 | [Today’s Paper](http://www.nytimes.com/pages/todayspaper/index.html) | [Subscribe](https://www.nytimes.com/subscriptions/Multiproduct/lp8HYKU.html?campaignId=48JQY)

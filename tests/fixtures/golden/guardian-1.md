@@ -41,7 +41,7 @@ And as more whales beach and die – from exhaustion, heat stroke or seagulls fe
 
 “These days it is like a zoo. People just want to come and gawk at us, without even trying to understand what is happening with the animals and the environment,” says Parata, bristling with anger.
 
-[whale strandings](https://interactive.guim.co.uk/uploader/embed/2019/01/stranded_whales/giv-3902U99iNUM3iDSZ/)
+[whale strandings](https://interactive.guim.co.uk/uploader/embed/2019/01/stranded_whales/giv-3902U99iNUM3iDSZ%29
 
 “When will we talk about what is hurting these animals out on the sea? They are drowning out there, they can’t breathe, they beach themselves to be with the Aunties.”
 

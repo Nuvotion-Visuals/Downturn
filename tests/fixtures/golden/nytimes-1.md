@@ -35,9 +35,9 @@ Officials divulged Thursday that the Sudanese government had allowed two visits 
 
 In addition to continuing violence in Darfur, several other serious conflicts are raging in southern and central Sudan, along with a civil war in newly independent South Sudan, which Sudan has been suspected of inflaming with covert arms shipments.
 
-[Eric Reeves](http://sudanreeves.org/2016/07/04/eric-reeves-is-now-a-senior-fellow-at-harvard-universitys-francois-xavier-bagnoud-center-for-health-and-human-rights/), one of the leading American academic voices on Sudan, said he was “appalled” that the American government was lifting sanctions.
+[Eric Reeves](http://sudanreeves.org/2016/07/04/eric-reeves-is-now-a-senior-fellow-at-harvard-universitys-francois-xavier-bagnoud-center-for-health-and-human-rights%29, one of the leading American academic voices on Sudan, said he was “appalled” that the American government was lifting sanctions.
 
-He said that Sudan’s military-dominated government continued to commit grave human rights abuses and atrocities, and he noted that just last week Sudanese security services [killed](http://sudanreeves.org/2017/01/02/7710/) [more than 10 civilians in Darfur](http://sudanreeves.org/2017/01/02/7710/).
+He said that Sudan’s military-dominated government continued to commit grave human rights abuses and atrocities, and he noted that just last week Sudanese security services [killed](http://sudanreeves.org/2017/01/02/7710/) [more than 10 civilians in Darfur](http://sudanreeves.org/2017/01/02/7710%29.
 
 “There is no reason to believe the guys in charge have changed their stripes,” said Mr. Reeves, a senior fellow at the François-Xavier Bagnoud Center for Health and Human Rights at Harvard University. “These guys are the worst of the worst.”
 

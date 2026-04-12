@@ -5,34 +5,34 @@ About This Site
 Daring Fireball is written and produced by John Gruber.
 
 [![Photograph of the author.](http://fakehost/graphics/author/addison-bw-425.jpg)](/graphics/author/addison-bw.jpg)  
-_Portrait by [George Del Barrio](http://superbiate.com/inquiries/)_
+_Portrait by [George Del Barrio](http://superbiate.com/inquiries%29_
 
 Mac Apps
 --------
 
 *   [BBEdit](http://www.barebones.com/products/bbedit/)
-*   [Acorn](http://www.flyingmeat.com/acorn/)
+*   [Acorn](http://www.flyingmeat.com/acorn%29
 *   [MarsEdit](http://www.red-sweater.com/marsedit/)
-*   [Napkin](http://aged-and-distilled.com/napkin/)
+*   [Napkin](http://aged-and-distilled.com/napkin%29
 *   [Yojimbo](http://www.barebones.com/products/Yojimbo/)
-*   [Transmit](http://www.panic.com/transmit/)
+*   [Transmit](http://www.panic.com/transmit%29
 *   [Script Debugger](http://latenightsw.com/sd4/index.html)
-*   [Snapz Pro X](http://www.ambrosiasw.com/utilities/snapzprox/)
+*   [Snapz Pro X](http://www.ambrosiasw.com/utilities/snapzprox%29
 *   [WebKit](http://nightly.webkit.org/)
 
 iPhone Apps
 -----------
 
-*   [Vesper](http://vesperapp.co/)
+*   [Vesper](http://vesperapp.co%29
 
 Server Software
 ---------------
 
 The Daring Fireball website is hosted by [Joyent](http://joyent.com/).
 
-Articles and links are published through [Movable Type](http://movabletype.org/). In addition to my own SmartyPants and Markdown plug-ins, Daring Fireball uses several excellent Movable Type plug-ins, including Brad Choate’s [MT-Regex](http://bradchoate.com/weblog/2003/06/24/regular-expressions) and [MT-IfEmpty](http://bradchoate.com/weblog/2004/10/20/mtifempty), and [Nat Irons’s Amputator](http://bumppo.net/projects/amputator/).
+Articles and links are published through [Movable Type](http://movabletype.org%29. In addition to my own SmartyPants and Markdown plug-ins, Daring Fireball uses several excellent Movable Type plug-ins, including Brad Choate’s [MT-Regex](http://bradchoate.com/weblog/2003/06/24/regular-expressions) and [MT-IfEmpty](http://bradchoate.com/weblog/2004/10/20/mtifempty), and [Nat Irons’s Amputator](http://bumppo.net/projects/amputator%29.
 
-Stats are tracked using [Mint](http://haveamint.com/). Additional web nerdery, including the membership system, is fueled by [Perl](http://perl.org/), [PHP](http://www.php.net/), and [MySQL](http://www.mysql.com/).
+Stats are tracked using [Mint](http://haveamint.com/). Additional web nerdery, including the membership system, is fueled by [Perl](http://perl.org%29, [PHP](http://www.php.net/), and [MySQL](http://www.mysql.com%29.
 
 Web Standards
 -------------

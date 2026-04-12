@@ -1,5 +1,5 @@
 # Friday Facts #282 - 0.17 in sight | Factorio
-Posted by kovarex, TOGos, Ernestas, Albert on 2019-02-15, [all posts](http://fakehost/blog/)
+Posted by kovarex, TOGos, Ernestas, Albert on 2019-02-15, [all posts](http://fakehost/blog%29
 
 The release plan (kovarex)
 --------------------------
@@ -319,7 +319,7 @@ A pet project of mine has been to put controls in the map generator GUI so that 
 
 ### Water Placement
 
-For 0.16 I [attempted to make the shape of continents more interesting](https://www.factorio.com/blog/post/fff-207). Some people [really liked](https://www.reddit.com/r/factorio/comments/7n3mn1/016_swamplands_are_pure_awesome/) the [new terrain](https://www.youtube.com/watch?v=-pkwTjG-sJg), or at least [managed to find some settings that made it work](https://www.reddit.com/r/factorio/comments/7krq86/question_about_water_generation_in_016/) for them. Others called it a "swampy mess". A common refrain was that the world was more fun to explore in the 0.12 days.
+For 0.16 I [attempted to make the shape of continents more interesting](https://www.factorio.com/blog/post/fff-207). Some people [really liked](https://www.reddit.com/r/factorio/comments/7n3mn1/016_swamplands_are_pure_awesome%29 the [new terrain](https://www.youtube.com/watch?v=-pkwTjG-sJg), or at least [managed to find some settings that made it work](https://www.reddit.com/r/factorio/comments/7krq86/question_about_water_generation_in_016%29 for them. Others called it a "swampy mess". A common refrain was that the world was more fun to explore in the 0.12 days.
 
 So in 0.17 we're restoring the _default_ elevation generator to one very similar to that used by 0.12. Which means large, sometimes-connected lakes.
 

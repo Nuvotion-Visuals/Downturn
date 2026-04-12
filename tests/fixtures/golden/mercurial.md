@@ -258,7 +258,7 @@ exporting bookmark bug15
 ```
 
 
-(The use of \-B is important to ensure that we only push the bookmarked head, and that the bookmark itself is pushed. See this [guide to bookmarks](http://mercurial.aragost.com/kick-start/en/bookmarks/), especially the [Sharing Bookmarks](http://mercurial.aragost.com/kick-start/en/bookmarks/#sharing-bookmarks) section, if you’re not familiar with bookmarks.)
+(The use of \-B is important to ensure that we only push the bookmarked head, and that the bookmark itself is pushed. See this [guide to bookmarks](http://mercurial.aragost.com/kick-start/en/bookmarks%29, especially the [Sharing Bookmarks](http://mercurial.aragost.com/kick-start/en/bookmarks/#sharing-bookmarks) section, if you’re not familiar with bookmarks.)
 
 Some time passes, and Alice receives her code review. As a result, Alice revises her fix and submits it for a second review:
 
@@ -523,7 +523,7 @@ Figure 10 shows how Bob’s repository looks now.
 
 We carefully dodged a merge conflict by specifying a merge tool (internal:other) that will take Alice’s changes over Bob’s. (You might wonder why Bob wouldn’t prefer his own changes by using internal:local. He’s avoiding a [bug](#bug) in evolve that occurs when evolving divergent changesets using internal:local.)
 
-\# XXX this link does not work .. bug: [https://bitbucket.org/marmoute/mutable-history/issue/48/](https://bitbucket.org/marmoute/mutable-history/issue/48/)
+\# XXX this link does not work .. bug: [https://bitbucket.org/marmoute/mutable-history/issue/48/](https://bitbucket.org/marmoute/mutable-history/issue/48%29
 
 \*\* STOP HERE: WORK IN PROGRESS \*\*
 

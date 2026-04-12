@@ -44,6 +44,10 @@ export default {
 					replacement: (match, title) => {
 						return '\n'+title+'\n'+'-'.repeat(title.length)+'\n'
 					}
+				},
+				{
+					find: /\[?\\\[([\w\d]+)\\\]\]?\(#cite_note[^\)]*\)/g,
+					replacement: '[$1]'
 				}
 
 			]

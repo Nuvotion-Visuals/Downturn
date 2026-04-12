@@ -123,7 +123,7 @@ The Work _is_ [_streaming on Topic.com_](https://www.topic.com/the-work) _and av
 
 Frederick Wiseman is one of the towering giants of nonfiction film, a keen observer of American institutions — ranging from prisons to dance companies to welfare offices — for the past half-century. _Ex Libris_ is his mesmerizing look at the New York Public Library and the many functions it fills, which go far beyond housing books. Wiseman works in the observational mode, which means his films contain no captions, dates, or talking-head interviews: We just see what his camera captured, which in this case includes community meetings, benefit dinners, after-school programs, readings with authors and scholars (including Richard Dawkins and Ta-Nehisi Coates), and NYPL patrons going about their business in the library’s branches all over the city. The result is almost hypnotic and, perhaps surprisingly, deeply moving. It makes a case for having faith in the public institutions where ordinary people work — away from the limelight, without trying to score political points — in order to make our communities truly better.
 
-Ex Libris _will air on PBS in the fall and then be available to cardholders in many library systems across the country via_ [_Kanopy_](https://www.kanopy.com/)_._
+Ex Libris _will air on PBS in the fall and then be available to cardholders in many library systems across the country via_ [_Kanopy_](https://www.kanopy.com%29_._
 
 ### 1) [_Lady Bird_](https://www.vox.com/2017/11/2/16552860/lady-bird-review-saoirse-ronan-greta-gerwig)
 

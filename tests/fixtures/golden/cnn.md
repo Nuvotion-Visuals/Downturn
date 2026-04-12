@@ -2,7 +2,7 @@
 The U.S. has long been heralded as a land of opportunity -- a place where anyone can succeed regardless of the economic class they were born into.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-But a new report released on Monday by [Stanford University's Center on Poverty and Inequality](http://web.stanford.edu/group/scspi-dev/cgi-bin/) calls that into question.
+But a new report released on Monday by [Stanford University's Center on Poverty and Inequality](http://web.stanford.edu/group/scspi-dev/cgi-bin%29 calls that into question.
 
 The report assessed poverty levels, income and wealth inequality, economic mobility and unemployment levels among 10 wealthy countries with social welfare programs.
 

@@ -45,6 +45,15 @@ export default {
 		let result = (url) ? common_filters.filter(url, markdown, ignore_links, absolute_urls) : markdown;
 		// Strip link titles: [text](url "title") -> [text](url)
 		result = result.replace(/(\[[^\]]*\]\(.*?)\s+"[^"]*"\)/g, '$1)');
+		// Fix parens in markdown link URLs:
+		// 1. Turndown escapes: /( -> %28, /) -> %29
+		// 2. Raw parens in URLs (e.g. Wikipedia): (text) -> %28text%29
+		result = result.replace(/(!?\[[^\]]*\])\(([^)]*(?:\/[\(\)]|\([^)]*\))[^)]*)\)/g, (match, linkText, url) => {
+			const fixed = url
+				.replace(/\/\(/g, '%28').replace(/\/\)/g, '%29')
+				.replace(/\(([^)]*)\)/g, '%28$1%29');
+			return linkText + '(' + fixed + ')';
+		});
 		if (inline_title && title) {
 			result = "# " + title.textContent.replace(/\s+/g, ' ').trim() + "\n" + result;
 		}

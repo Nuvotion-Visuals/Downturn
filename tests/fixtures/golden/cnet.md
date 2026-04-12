@@ -7,9 +7,9 @@ Photo by James Martin/CNET
 
 Anyone who has ever been involved in closing a billion-dollar acquisition deal will tell you that you don't go in without a clear, well thought out plan.
 
-Facebook CEO Mark Zuckerberg knows a thing or two about how to seal the deal on blockbuster buys. After all, he's the man behind his company's [$19 billion acquisition](https://www.cnet.com/news/facebook-closes-19-billion-deal-for-whatsapp/) of WhatsApp, he [personally brokered](https://www.cnet.com/news/zuckerberg-did-1-billion-instagram-deal-on-his-own/) its $1 billion buyout of [Instagram](https://www.cnet.com/news/why-facebook-plunked-down-1-billion-to-buy-instagram/) and closed the [$3 billion deal](https://www.cnet.com/news/facebook-to-buy-oculus-for-2-billion/) to buy Oculus VR.
+Facebook CEO Mark Zuckerberg knows a thing or two about how to seal the deal on blockbuster buys. After all, he's the man behind his company's [$19 billion acquisition](https://www.cnet.com/news/facebook-closes-19-billion-deal-for-whatsapp%29 of WhatsApp, he [personally brokered](https://www.cnet.com/news/zuckerberg-did-1-billion-instagram-deal-on-his-own/) its $1 billion buyout of [Instagram](https://www.cnet.com/news/why-facebook-plunked-down-1-billion-to-buy-instagram%29 and closed the [$3 billion deal](https://www.cnet.com/news/facebook-to-buy-oculus-for-2-billion/) to buy Oculus VR.
 
-Zuckerberg offered a primer on the strategies he and his company employ when they see an attractive target during testimony Tuesday [in a lawsuit with ZeniMax Media](https://www.cnet.com/news/zenimax-sues-oculus-over-virtual-reality-rift-tech/), which accuses Oculus and Facebook of "misappropriating" trade secrets and copyright infringement. At the heart of the lawsuit is technology that helped create liftoff for virtual reality, one of the [hottest gadget trends today.](http://www.cbsnews.com/videos/the-reality-of-the-virtual-world/)
+Zuckerberg offered a primer on the strategies he and his company employ when they see an attractive target during testimony Tuesday [in a lawsuit with ZeniMax Media](https://www.cnet.com/news/zenimax-sues-oculus-over-virtual-reality-rift-tech%29, which accuses Oculus and Facebook of "misappropriating" trade secrets and copyright infringement. At the heart of the lawsuit is technology that helped create liftoff for virtual reality, one of the [hottest gadget trends today.](http://www.cbsnews.com/videos/the-reality-of-the-virtual-world/)
 
 A key Facebook approach is building a long-term relationship with your target, Zuckerberg said at the trial. These deals don't just pop up over night, he said according to a transcript reviewed by [Business Insider](http://www.businessinsider.com/mark-zuckerberg-explains-facebooks-acquisition-strategy-2017-1). They take time to cultivate.
 
@@ -27,7 +27,7 @@ It also pays to be weary of competing suitors for your startup, Zuckerberg said,
 
 > Often, if a company knows we're offering something, they will offer more. So being able to move quickly not only increases our chance of being able to get a deal done if we want to, but it makes it so we don't have end up having to pay a lot more because the process drags out.
 
-It wasn't clear why these strategies didn't work on Snapchat CEO Evan Spiegel, who [famously rebuffed](https://www.cnet.com/news/snapchat-said-to-rebuff-3-billion-offer-from-facebook/) a $3 billion takeover offer from Facebook in 2013.
+It wasn't clear why these strategies didn't work on Snapchat CEO Evan Spiegel, who [famously rebuffed](https://www.cnet.com/news/snapchat-said-to-rebuff-3-billion-offer-from-facebook%29 a $3 billion takeover offer from Facebook in 2013.
 
 _**Tech Enabled:** CNET chronicles tech's role in providing new kinds of accessibility. Check it out [here](https://www.cnet.com/tech-enabled/)._
 

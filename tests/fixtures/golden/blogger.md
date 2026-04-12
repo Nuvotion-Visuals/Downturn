@@ -36,7 +36,7 @@ As if this wasn't enough of a problem, the largest GreenPak4 device (the SLG4662
 
 The icing on the cake is that schematics are a pain to diff and collaborate on. Although GreenPak schematics are XML based, which is a touch better than binary, who wants to read a giant XML diff and try to figure out what's going on in the circuit?
 
-This isn't going to be a post on the quirks of Silego's software, though - that would be boring. As it turns out, there's one more exciting feature of these chips that I didn't mention earlier: the configuration bitstream is 100% documented in the device datasheet! This is unheard of in the programmable logic world. As Nick of Arachnid Labs [says](http://www.arachnidlabs.com/blog/2015/03/30/greenpak/), the chip is "just dying for someone to write a VHDL or Verilog compiler for it". As you can probably guess by from the title of this post, I've been busy doing exactly that.
+This isn't going to be a post on the quirks of Silego's software, though - that would be boring. As it turns out, there's one more exciting feature of these chips that I didn't mention earlier: the configuration bitstream is 100% documented in the device datasheet! This is unheard of in the programmable logic world. As Nick of Arachnid Labs [says](http://www.arachnidlabs.com/blog/2015/03/30/greenpak%29, the chip is "just dying for someone to write a VHDL or Verilog compiler for it". As you can probably guess by from the title of this post, I've been busy doing exactly that.
 
 Great! How does it work?
 ------------------------
@@ -101,7 +101,7 @@ Great, let's get started!
 
 If you don't already have one, you'll need to buy a [GreenPak4 development kit](http://www.silego.com/buy/index.php?main_page=product_info&products_id=388). The kit includes samples of the SLG46620V (among other devices) and a programmer/emulation board. While you're waiting for it to arrive, install [GreenPak Designer](http://www.silego.com/softdoc/software.html).
 
-Download and install Yosys. Although Clifford is pretty good at merging my pull requests, only [my fork on Github](https://github.com/azonenberg/yosys/) is guaranteed to have the most up-to-date support for GreenPak devices so don't be surprised if you can't use a bleeding-edge feature with mainline Yosys.
+Download and install Yosys. Although Clifford is pretty good at merging my pull requests, only [my fork on Github](https://github.com/azonenberg/yosys%29 is guaranteed to have the most up-to-date support for GreenPak devices so don't be surprised if you can't use a bleeding-edge feature with mainline Yosys.
 
 Download and install gp4par. You can get it from [the Github repository](https://github.com/azonenberg/openfpga/).
 
