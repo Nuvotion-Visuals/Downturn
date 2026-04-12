@@ -136,9 +136,8 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 8px 8px;
   background: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
 }
 .nav-btn {
@@ -221,6 +220,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   overflow: hidden;
   min-width: 0;
+  border-top: 1px solid var(--color-border);
 }
 .pane {
   flex: 1;
@@ -387,12 +387,12 @@ a:hover { text-decoration: underline; }
   background: var(--color-bg-tertiary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  color: var(--color-text-muted);
+  color: var(--color-text);
   cursor: pointer;
 }
 #copyBtn { width: 60px; text-align: center; }
-.bottombar button:hover:not(:disabled) { background: var(--color-border); border-color: var(--color-border-hover); color: var(--color-text); }
-.bottombar button:disabled { color: var(--color-text-placeholder); cursor: default; }
+.bottombar button:hover:not(:disabled) { background: var(--color-border); border-color: var(--color-border-hover); }
+.bottombar button:disabled { color: var(--color-text-muted); cursor: default; }
 .view-toggle { display: inline-flex; }
 .view-toggle .vt-btn { border-radius: 0; border-right: none; }
 .view-toggle .vt-btn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
@@ -459,7 +459,7 @@ a:hover { text-decoration: underline; }
     <button class="vt-btn" data-view="raw">Markdown</button>
     <button class="vt-btn active" data-view="preview">Preview</button>
   </div>
-  <button id="openBtn" disabled>Open in browser</button>
+  <button id="openBtn" style="display:none">Open in browser</button>
   <span id="status"></span>
   <span id="stats"></span>
 </div>
@@ -567,7 +567,7 @@ function tabTitle(tab) {
   if (tab.url) {
     try { return new URL(tab.url).hostname; } catch {}
   }
-  return 'New Tab';
+  return 'Start Page';
 }
 
 function renderTabs() {
@@ -594,14 +594,13 @@ function displayTab(tab) {
     previewPane.innerHTML = markdownToHtml(tab.markdown);
     document.getElementById('copyBtn').disabled = false;
     document.getElementById('downloadBtn').disabled = false;
-    document.getElementById('openBtn').disabled = false;
   } else {
     rawPane.value = '';
     previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
     document.getElementById('copyBtn').disabled = true;
     document.getElementById('downloadBtn').disabled = true;
-    document.getElementById('openBtn').disabled = true;
   }
+  document.getElementById('openBtn').style.display = tab.url ? '' : 'none';
   // Show file tree or nav depending on tab source
   if (folderTree.length && (tab.source === 'file' || !tab.url)) {
     renderFileTree(folderTree);
@@ -632,9 +631,29 @@ function createTab(url) {
   activeTabId = tab.id;
   renderTabs();
   displayTab(tab);
-  if (url) navigate(url);
-  else urlInput.focus();
+  if (url) {
+    navigate(url);
+  } else {
+    loadStartPage(tab);
+    urlInput.focus();
+  }
   return tab;
+}
+
+async function loadStartPage(tab) {
+  try {
+    const resp = await fetch('/start.md');
+    if (!resp.ok) return;
+    const md = await resp.text();
+    tab.markdown = md;
+    if (getActiveTab() === tab) {
+      rawPane.value = md;
+      previewPane.innerHTML = markdownToHtml(md);
+      document.getElementById('copyBtn').disabled = false;
+      document.getElementById('downloadBtn').disabled = false;
+    }
+    renderTabs();
+  } catch {}
 }
 
 function closeTab(id) {
@@ -686,7 +705,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     stats.textContent = tab.stats;
     document.getElementById('copyBtn').disabled = false;
     document.getElementById('downloadBtn').disabled = false;
-    document.getElementById('openBtn').disabled = false;
+    document.getElementById('openBtn').style.display = '';
     requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
@@ -725,7 +744,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     stats.textContent = tab.stats;
     document.getElementById('copyBtn').disabled = false;
     document.getElementById('downloadBtn').disabled = false;
-    document.getElementById('openBtn').disabled = false;
+    document.getElementById('openBtn').style.display = '';
     requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
@@ -744,7 +763,7 @@ function renderNav(nav) {
   const currentUrl = urlInput.value;
   const navArr = nav || [];
   if (navArr.length === 0) {
-    ul.innerHTML = '<li class="nav-empty">No navigation found</li>';
+    ul.innerHTML = '<li class="nav-empty">Navigation will appear here for supported websites and folders</li>';
     return;
   }
   ul.innerHTML = navArr.map(n =>
@@ -834,7 +853,10 @@ document.getElementById('homeBtn').addEventListener('click', () => {
   tab.markdown = '';
   tab.nav = [];
   tab.stats = '';
+  tab.filePath = '';
+  tab.source = '';
   displayTab(tab);
+  loadStartPage(tab);
   renderTabs();
   urlInput.focus();
 });

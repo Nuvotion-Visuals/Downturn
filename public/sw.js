@@ -1,4 +1,4 @@
-const CACHE_NAME = 'downturn-v4';
+const CACHE_NAME = 'downturn-v5';
 const SHELL_ASSETS = [
   '/',
   '/ui.mjs',
@@ -9,6 +9,7 @@ const SHELL_ASSETS = [
   '/web-app-manifest-192x192.png',
   '/web-app-manifest-512x512.png',
   '/site.webmanifest',
+  '/start.md',
 ];
 
 // Install — cache the app shell

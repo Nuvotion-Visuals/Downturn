@@ -173,6 +173,7 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
     '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css',
     '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon',
     '.webmanifest': 'application/manifest+json', '.json': 'application/json',
+    '.md': 'text/markdown',
   };
   for (const file of fs.readdirSync(publicDir)) {
     const ext = path.extname(file);
