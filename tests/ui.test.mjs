@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { esc, inline, markdownToHtml, normalizeUrl, formatStats } from '../public/ui.mjs';
+import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce } from '../public/ui.mjs';
 
 // --- esc ---
 
@@ -317,4 +317,31 @@ test('formatStats: KB calculation', () => {
   const bigString = 'a'.repeat(1024);
   const result = formatStats(bigString, 10);
   assert.ok(result.includes('1.0 KB'));
+});
+
+// --- debounce ---
+
+test('debounce: calls function after delay', async () => {
+  let called = 0;
+  const fn = debounce(() => called++, 50);
+  fn();
+  assert.strictEqual(called, 0);
+  await new Promise(r => setTimeout(r, 80));
+  assert.strictEqual(called, 1);
+});
+
+test('debounce: collapses rapid calls', async () => {
+  let called = 0;
+  const fn = debounce(() => called++, 50);
+  fn(); fn(); fn(); fn(); fn();
+  await new Promise(r => setTimeout(r, 80));
+  assert.strictEqual(called, 1);
+});
+
+test('debounce: passes arguments', async () => {
+  let result;
+  const fn = debounce((a, b) => { result = a + b; }, 50);
+  fn(2, 3);
+  await new Promise(r => setTimeout(r, 80));
+  assert.strictEqual(result, 5);
 });

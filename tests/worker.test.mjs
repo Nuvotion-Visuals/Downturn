@@ -139,11 +139,11 @@ test('worker: nav=true returns JSON with markdown and nav', async () => {
   assert.ok(resp.headers.get('content-type').includes('application/json'));
   const data = await resp.json();
   assert.ok(data.markdown.includes('Content'));
-  assert.strictEqual(data.nav.length, 2);
-  assert.strictEqual(data.nav[0].text, 'About');
-  assert.strictEqual(data.nav[0].href, 'https://example.com/about');
-  assert.strictEqual(data.nav[1].text, 'Contact');
-  assert.strictEqual(data.nav[1].href, 'https://example.com/contact');
+  // First entry is always "Home"
+  assert.strictEqual(data.nav[0].text, 'Home');
+  assert.strictEqual(data.nav[0].href, 'https://example.com/');
+  assert.ok(data.nav.find(n => n.text === 'About' && n.href === 'https://example.com/about'));
+  assert.ok(data.nav.find(n => n.text === 'Contact' && n.href === 'https://example.com/contact'));
 });
 
 test('worker: nav=false returns plain markdown', async () => {
@@ -171,9 +171,8 @@ test('worker: nav extracts from <nav> elements', async () => {
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav.length, 2);
-  assert.strictEqual(data.nav[0].text, 'Docs');
-  assert.strictEqual(data.nav[1].text, 'API');
+  assert.ok(data.nav.find(n => n.text === 'Docs'));
+  assert.ok(data.nav.find(n => n.text === 'API'));
 });
 
 test('worker: nav extracts from <aside> elements', async () => {
@@ -187,8 +186,7 @@ test('worker: nav extracts from <aside> elements', async () => {
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav.length, 1);
-  assert.strictEqual(data.nav[0].text, 'Sidebar');
+  assert.ok(data.nav.find(n => n.text === 'Sidebar'));
 });
 
 test('worker: nav extracts from <header> elements', async () => {
@@ -196,14 +194,13 @@ test('worker: nav extracts from <header> elements', async () => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      html: '<html><body><header><a href="/home">Home</a></header><p>Body</p></body></html>',
+      html: '<html><body><header><a href="/page">Page</a></header><p>Body</p></body></html>',
       url: 'https://example.com/',
       nav: 'true',
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav.length, 1);
-  assert.strictEqual(data.nav[0].text, 'Home');
+  assert.ok(data.nav.find(n => n.text === 'Page'));
 });
 
 test('worker: nav deduplicates links', async () => {
@@ -217,8 +214,8 @@ test('worker: nav deduplicates links', async () => {
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav.length, 1, 'duplicate href should be deduplicated');
-  assert.strictEqual(data.nav[0].text, 'About');
+  const aboutLinks = data.nav.filter(n => n.href === 'https://example.com/about');
+  assert.strictEqual(aboutLinks.length, 1, 'duplicate href should be deduplicated');
 });
 
 test('worker: nav skips anchor-only, javascript:, and mailto: links', async () => {
@@ -232,8 +229,10 @@ test('worker: nav skips anchor-only, javascript:, and mailto: links', async () =
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav.length, 1);
-  assert.strictEqual(data.nav[0].text, 'Real');
+  assert.ok(data.nav.find(n => n.text === 'Real'));
+  assert.ok(!data.nav.find(n => n.text === 'Anchor'));
+  assert.ok(!data.nav.find(n => n.text === 'JS'));
+  assert.ok(!data.nav.find(n => n.text === 'Email'));
 });
 
 test('worker: nav resolves relative URLs', async () => {
@@ -247,23 +246,24 @@ test('worker: nav resolves relative URLs', async () => {
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav[0].href, 'https://example.com/docs/guide/start');
-  assert.strictEqual(data.nav[1].href, 'https://example.com/other');
-  assert.strictEqual(data.nav[2].href, 'https://example.com/absolute');
+  assert.ok(data.nav.find(n => n.href === 'https://example.com/docs/guide/start'));
+  assert.ok(data.nav.find(n => n.href === 'https://example.com/other'));
+  assert.ok(data.nav.find(n => n.href === 'https://example.com/absolute'));
 });
 
-test('worker: nav returns empty array when no nav elements', async () => {
+test('worker: nav always includes site home link', async () => {
   const resp = await fetch(api('/'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       html: '<html><body><p>No nav here</p></body></html>',
-      url: 'https://example.com/',
+      url: 'https://example.com/some/page',
       nav: 'true',
     }),
   });
   const data = await resp.json();
-  assert.deepStrictEqual(data.nav, []);
+  assert.strictEqual(data.nav[0].text, 'Home');
+  assert.strictEqual(data.nav[0].href, 'https://example.com/');
 });
 
 test('worker: nav skips links with empty text', async () => {
@@ -277,8 +277,8 @@ test('worker: nav skips links with empty text', async () => {
     }),
   });
   const data = await resp.json();
-  assert.strictEqual(data.nav.length, 1);
-  assert.strictEqual(data.nav[0].text, 'Real Link');
+  assert.ok(data.nav.find(n => n.text === 'Real Link'));
+  assert.ok(!data.nav.find(n => n.href === 'https://example.com/empty'));
 });
 
 // --- CORS headers on all responses ---

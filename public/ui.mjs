@@ -164,6 +164,14 @@ export function normalizeUrl(targetUrl) {
   return targetUrl;
 }
 
+export function debounce(fn, ms) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), ms);
+  };
+}
+
 export function formatStats(markdown, ms, suffix) {
   const chars = markdown.length;
   const bytes = new TextEncoder().encode(markdown).length;

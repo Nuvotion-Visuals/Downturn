@@ -218,12 +218,18 @@ a:hover { text-decoration: underline; }
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   font-size: var(--font-base);
   line-height: 1.6;
-  white-space: pre-wrap;
   word-break: break-word;
   border-right: 1px solid var(--color-border);
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
   user-select: text;
   color: var(--color-text);
+  background: var(--color-bg);
+  resize: none;
+  outline: none;
 }
+#rawPane::placeholder { color: var(--color-text-placeholder); }
 .panes.single .pane {
   border-right: none;
   max-width: none;
@@ -391,7 +397,7 @@ a:hover { text-decoration: underline; }
 <div class="main-area">
   <div class="nav-sidebar open" id="navSidebar"><ul></ul></div>
   <div class="panes">
-    <div class="pane" id="rawPane"><div class="empty-state">Markdown will appear here</div></div>
+    <textarea class="pane" id="rawPane" placeholder="Markdown will appear here"></textarea>
     <div class="divider" id="divider"></div>
     <div class="pane" id="previewPane"><div class="empty-state">Rendered preview will appear here</div></div>
   </div>
@@ -411,7 +417,7 @@ a:hover { text-decoration: underline; }
 </div>
 
 <script type="module">
-import { markdownToHtml, inline, esc, normalizeUrl, formatStats } from './ui.mjs';
+import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce } from './ui.mjs';
 const API_BASE = '';
 
 // Settings persistence
@@ -532,13 +538,13 @@ function saveTabScroll() {
 function displayTab(tab) {
   urlInput.value = tab.url || '';
   if (tab.markdown) {
-    rawPane.textContent = tab.markdown;
+    rawPane.value = tab.markdown;
     previewPane.innerHTML = markdownToHtml(tab.markdown);
     document.getElementById('copyBtn').disabled = false;
     document.getElementById('downloadBtn').disabled = false;
     document.getElementById('openBtn').disabled = false;
   } else {
-    rawPane.innerHTML = '<div class="empty-state">Markdown will appear here</div>';
+    rawPane.value = '';
     previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
     document.getElementById('copyBtn').disabled = true;
     document.getElementById('downloadBtn').disabled = true;
@@ -616,7 +622,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     tab.markdown = cached.markdown;
     tab.nav = cached.nav;
     const t0 = performance.now();
-    rawPane.textContent = tab.markdown;
+    rawPane.value = tab.markdown;
     previewPane.innerHTML = markdownToHtml(tab.markdown);
     renderNav(tab.nav);
     tab.stats = formatStats(tab.markdown, performance.now() - t0, '(cached)');
@@ -655,7 +661,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     tab.nav = data.nav;
     pageCache[targetUrl] = data;
 
-    rawPane.textContent = tab.markdown;
+    rawPane.value = tab.markdown;
     previewPane.innerHTML = markdownToHtml(tab.markdown);
     renderNav(tab.nav);
     tab.stats = formatStats(tab.markdown, elapsed);
@@ -669,7 +675,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     renderTabs();
   } catch (e) {
     statusEl.textContent = `Error: ${e.message}`;
-    rawPane.textContent = `Error: ${e.message}`;
+    rawPane.value = `Error: ${e.message}`;
     previewPane.innerHTML = `<div class="empty-state">Error: ${e.message}</div>`;
   } finally {
     loading.style.display = 'none';
@@ -785,6 +791,19 @@ document.addEventListener('keydown', (e) => {
     switchTab(tabs[next].id);
   }
 });
+
+// Live preview on edit
+rawPane.addEventListener('input', debounce(() => {
+  const tab = getActiveTab();
+  if (!tab) return;
+  tab.markdown = rawPane.value;
+  previewPane.innerHTML = markdownToHtml(rawPane.value);
+  stats.textContent = formatStats(rawPane.value, 0, '(edited)');
+  tab.stats = stats.textContent;
+  document.getElementById('copyBtn').disabled = !rawPane.value;
+  document.getElementById('downloadBtn').disabled = !rawPane.value;
+  renderTabs();
+}, 150));
 
 // Copy
 const copyBtn = document.getElementById('copyBtn');
