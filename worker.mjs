@@ -168,11 +168,21 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
   const dir = path.dirname(new URL(import.meta.url).pathname);
   const publicDir = path.join(dir, 'public');
   HTML_PAGE = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
-  // Load static JS modules
-  for (const file of fs.readdirSync(publicDir).filter(f => f.endsWith('.mjs') || f.endsWith('.js') || f.endsWith('.css'))) {
+  // Load static files
+  const MIME = {
+    '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css',
+    '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon',
+    '.webmanifest': 'application/manifest+json', '.json': 'application/json',
+  };
+  for (const file of fs.readdirSync(publicDir)) {
     const ext = path.extname(file);
-    const types = { '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css' };
-    STATIC_FILES['/' + file] = { content: fs.readFileSync(path.join(publicDir, file), 'utf8'), type: types[ext] };
+    if (!MIME[ext]) continue;
+    const filePath = path.join(publicDir, file);
+    if (ext === '.png' || ext === '.ico') {
+      STATIC_FILES['/' + file] = { content: fs.readFileSync(filePath), type: MIME[ext], binary: true };
+    } else {
+      STATIC_FILES['/' + file] = { content: fs.readFileSync(filePath, 'utf8'), type: MIME[ext] };
+    }
   }
   const port = process.env.PORT || 4001;
   http.createServer(async (req, res) => {

@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Downturn</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <style>
 /* GitHub dark theme tokens */
 :root {
@@ -319,6 +324,34 @@ a:hover { text-decoration: underline; }
 .nav-sidebar li a:hover { color: var(--color-link); background: var(--color-bg-tertiary); }
 .nav-sidebar li a.active { color: var(--color-text); background: var(--color-bg-tertiary); font-weight: 600; }
 .nav-sidebar .nav-empty { padding: 16px; color: var(--color-text-placeholder); text-align: center; font-style: italic; }
+.file-tree-dir {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  user-select: none;
+}
+.file-tree-dir svg { width: 10px; height: 10px; fill: currentColor; transition: transform 0.15s; flex-shrink: 0; }
+.file-tree-group.open > .file-tree-dir svg { transform: rotate(90deg); }
+.file-tree-group > .file-tree-children { display: none; }
+.file-tree-group.open > .file-tree-children { display: block; }
+.file-tree-item {
+  display: block;
+  padding: 3px 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: var(--font-sm);
+}
+.file-tree-item:hover { color: var(--color-link); background: var(--color-bg-tertiary); }
+.file-tree-item.active { color: var(--color-text); background: var(--color-bg-tertiary); font-weight: 600; }
 .nav-sidebar::-webkit-scrollbar { width: 8px; }
 .nav-sidebar::-webkit-scrollbar-track { background: transparent; }
 .nav-sidebar::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: 4px; }
@@ -378,6 +411,9 @@ a:hover { text-decoration: underline; }
   <button class="nav-btn" id="fwdBtn" title="Forward"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
   <button class="nav-btn" id="refreshBtn" title="Refresh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M386.3 160L336 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"/></svg></button>
   <button class="nav-btn" id="homeBtn" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 0 160c0 35.3-28.7 64-64 64l-320 0c-35.3 0-64-28.7-64-64l0-160-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg></button>
+  <div class="topbar-sep"></div>
+  <button class="nav-btn" id="openFileBtn" title="Open file (Ctrl+O)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64L256 0l0 128 128 0z"/></svg></button>
+  <button class="nav-btn" id="openFolderBtn" title="Open folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M88.7 223.8L0 375.8 0 96C0 60.7 28.7 32 64 32l117.5 0c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7L416 96c35.3 0 64 28.7 64 64l0 32-336 0c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.2C122.1 230 132.6 224 144 224l400 0c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480L32 480c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z"/></svg></button>
   <input type="text" id="urlInput" placeholder="Enter a URL and press Enter" autofocus>
   <div id="loading"></div>
   <div class="topbar-right">
@@ -479,6 +515,9 @@ let activeTabId = 0;
 let nextTabId = 1;
 const pageCache = {};
 const TABS_KEY = 'downturn-tabs-v2';
+let folderHandle = null;
+let folderTree = [];
+let fileHandles = new Map();
 
 function saveTabs() {
   const data = {
@@ -508,6 +547,7 @@ function getTab(id) { return tabs.find(t => t.id === id); }
 function getActiveTab() { return getTab(activeTabId); }
 
 function tabTitle(tab) {
+  if (tab.filePath) return tab.filePath;
   if (tab.markdown) {
     const m = tab.markdown.match(/^#\s+(.+)/m);
     if (m) return m[1].slice(0, 40);
@@ -536,7 +576,7 @@ function saveTabScroll() {
 }
 
 function displayTab(tab) {
-  urlInput.value = tab.url || '';
+  urlInput.value = tab.filePath || tab.url || '';
   if (tab.markdown) {
     rawPane.value = tab.markdown;
     previewPane.innerHTML = markdownToHtml(tab.markdown);
@@ -550,7 +590,12 @@ function displayTab(tab) {
     document.getElementById('downloadBtn').disabled = true;
     document.getElementById('openBtn').disabled = true;
   }
-  renderNav(tab.nav || null);
+  // Show file tree or nav depending on tab source
+  if (folderTree.length && (tab.source === 'file' || !tab.url)) {
+    renderFileTree(folderTree);
+  } else {
+    renderNav(tab.nav || null);
+  }
   stats.textContent = tab.stats || '';
   statusEl.textContent = '';
   requestAnimationFrame(() => {
@@ -707,8 +752,11 @@ function showStats(markdown, ms, suffix) {
 
 // Browser back/forward
 window.addEventListener('popstate', (e) => {
-  const targetUrl = e.state?.url;
-  if (targetUrl) navigate(targetUrl, { pushState: false });
+  if (e.state?.filePath) {
+    openFileFromTree(e.state.filePath, { pushState: false });
+  } else if (e.state?.url) {
+    navigate(e.state.url, { pushState: false });
+  }
 });
 
 // Init
@@ -728,7 +776,7 @@ if (loadTabs()) {
 }
 
 // Link interception — Ctrl/middle-click opens new tab
-for (const el of [previewPane, navSidebar]) {
+for (const el of [previewPane]) {
   el.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
@@ -779,11 +827,177 @@ document.getElementById('homeBtn').addEventListener('click', () => {
   urlInput.focus();
 });
 
+// File/Folder handling
+
+async function scanDirectory(dirHandle, prefix = '') {
+  const items = [];
+  for await (const [name, handle] of dirHandle.entries()) {
+    if (handle.kind === 'file' && /\.(md|markdown|txt)$/i.test(name)) {
+      items.push({ name, path: prefix + name, handle, kind: 'file' });
+    } else if (handle.kind === 'directory' && !name.startsWith('.') && name !== 'node_modules') {
+      const children = await scanDirectory(handle, prefix + name + '/');
+      if (children.length) items.push({ name, path: prefix + name, handle, kind: 'dir', children });
+    }
+  }
+  return items.sort((a, b) => (a.kind === b.kind ? a.name.localeCompare(b.name) : a.kind === 'dir' ? -1 : 1));
+}
+
+function renderFileTree(tree, depth = 0) {
+  const ul = navSidebar.querySelector('ul');
+  const activeTab = getActiveTab();
+  const activePath = activeTab?.filePath || '';
+
+  const chevron = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>';
+
+  function buildHtml(items, depth) {
+    let html = '';
+    for (const item of items) {
+      const pad = `padding-left: ${16 + depth * 14}px`;
+      if (item.kind === 'dir') {
+        html += `<li class="file-tree-group open">`;
+        html += `<div class="file-tree-dir" style="${pad}" data-path="${item.path}">${chevron}${item.name}</div>`;
+        html += `<ul class="file-tree-children">${item.children ? buildHtml(item.children, depth + 1) : ''}</ul>`;
+        html += `</li>`;
+      } else {
+        const active = item.path === activePath ? ' active' : '';
+        html += `<li><a class="file-tree-item${active}" style="${pad}" data-path="${item.path}">${item.name}</a></li>`;
+      }
+    }
+    return html;
+  }
+
+  ul.innerHTML = buildHtml(tree, 0);
+}
+
+async function openFileFromTree(path, { pushState = true } = {}) {
+  // Find the handle by walking the tree
+  function findHandle(items, target) {
+    for (const item of items) {
+      if (item.path === target && item.kind === 'file') return item.handle;
+      if (item.children) { const h = findHandle(item.children, target); if (h) return h; }
+    }
+    return null;
+  }
+  const handle = findHandle(folderTree, path);
+  if (!handle) return;
+  const file = await handle.getFile();
+  const text = await file.text();
+  const tab = getActiveTab();
+  tab.source = 'file';
+  tab.filePath = path;
+  tab.markdown = text;
+  tab.url = '';
+  tab.nav = [];
+  fileHandles.set(tab.id, handle);
+  rawPane.value = text;
+  previewPane.innerHTML = markdownToHtml(text);
+  document.getElementById('copyBtn').disabled = false;
+  document.getElementById('downloadBtn').disabled = false;
+  document.getElementById('openBtn').disabled = true;
+  urlInput.value = path;
+  stats.textContent = formatStats(text, 0);
+  tab.stats = stats.textContent;
+  renderTabs();
+  renderFileTree(folderTree);
+  if (pushState) window.history.pushState({ filePath: path }, '', '#file:' + path);
+  requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
+}
+
+// Sidebar click — handles both nav links and file tree
+navSidebar.addEventListener('click', (e) => {
+  // Toggle folder expand/collapse
+  const dir = e.target.closest('.file-tree-dir');
+  if (dir) { dir.closest('.file-tree-group').classList.toggle('open'); return; }
+
+  // Open file from tree
+  const fileItem = e.target.closest('.file-tree-item');
+  if (fileItem) {
+    e.preventDefault();
+    const path = fileItem.dataset.path;
+    if (e.ctrlKey || e.metaKey) {
+      createTab();
+    }
+    openFileFromTree(path);
+    return;
+  }
+
+  // Nav link
+  const link = e.target.closest('a');
+  if (!link) return;
+  e.preventDefault();
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('#')) return;
+  if (e.ctrlKey || e.metaKey) {
+    createTab(href);
+  } else {
+    navigate(href);
+  }
+});
+
+// Open file button
+document.getElementById('openFileBtn').addEventListener('click', async () => {
+  if (!window.showOpenFilePicker) { statusEl.textContent = 'File API not available (requires HTTPS)'; return; }
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [{ description: 'Markdown', accept: { 'text/markdown': ['.md', '.markdown', '.txt'] } }],
+    });
+    const file = await handle.getFile();
+    const text = await file.text();
+    const tab = createTab();
+    tab.source = 'file';
+    tab.filePath = handle.name;
+    tab.markdown = text;
+    fileHandles.set(tab.id, handle);
+    displayTab(tab);
+    renderTabs();
+  } catch {}
+});
+
+// Open folder button
+document.getElementById('openFolderBtn').addEventListener('click', async () => {
+  if (!window.showDirectoryPicker) { statusEl.textContent = 'Folder API not available (requires HTTPS)'; return; }
+  try {
+    folderHandle = await window.showDirectoryPicker();
+    folderTree = await scanDirectory(folderHandle);
+    renderFileTree(folderTree);
+    navSidebar.classList.add('open');
+    saveSettings();
+  } catch {}
+});
+
+// Save (Ctrl+S)
+async function saveFile() {
+  const tab = getActiveTab();
+  if (!tab?.markdown) return;
+  let handle = fileHandles.get(tab.id);
+  if (!handle && window.showSaveFilePicker) {
+    try {
+      handle = await window.showSaveFilePicker({
+        suggestedName: (tab.filePath || 'document') + (tab.filePath?.endsWith('.md') ? '' : '.md'),
+        types: [{ description: 'Markdown', accept: { 'text/markdown': ['.md'] } }],
+      });
+      fileHandles.set(tab.id, handle);
+      tab.source = 'file';
+      tab.filePath = handle.name;
+    } catch { return; }
+  }
+  if (!handle) return;
+  const writable = await handle.createWritable();
+  await writable.write(rawPane.value);
+  await writable.close();
+  tab.markdown = rawPane.value;
+  statusEl.textContent = 'Saved';
+  setTimeout(() => { statusEl.textContent = ''; }, 1500);
+  renderTabs();
+}
+
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'l') { e.preventDefault(); urlInput.focus(); urlInput.select(); }
   if ((e.ctrlKey || e.metaKey) && e.key === 't') { e.preventDefault(); createTab(); }
   if ((e.ctrlKey || e.metaKey) && e.key === 'w') { e.preventDefault(); closeTab(activeTabId); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'o') { e.preventDefault(); document.getElementById('openFileBtn').click(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveFile(); }
   if (e.ctrlKey && e.key === 'Tab') {
     e.preventDefault();
     const idx = tabs.findIndex(t => t.id === activeTabId);
@@ -901,6 +1115,11 @@ document.addEventListener('mouseup', () => {
     document.body.style.userSelect = '';
   }
 });
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
 </script>
 </body>
 </html>
