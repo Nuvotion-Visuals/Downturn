@@ -15,6 +15,7 @@ import filters from './url_to_markdown_common_filters.mjs';
 import { JSDOM } from './lib/html_parser.mjs';
 import https from 'node:https';
 import http from 'node:http';
+import { slugify, extractTitle } from './title_utils.mjs';
 
 const SERVICE_USER_AGENT = 'Downturn/2.0';
 const TIMEOUT_MS = 15000;
@@ -49,7 +50,7 @@ function fetchUrl(url) {
   });
 }
 
-// Convert URL to markdown
+// Convert URL to markdown, returns { markdown, html } so callers can extract metadata from the raw HTML
 async function urlToMarkdown(url, { title = true, links = true, clean = true } = {}) {
   const html = await fetchUrl(url);
   const stripped = filters.strip_style_and_script_blocks(html);
@@ -60,12 +61,12 @@ async function urlToMarkdown(url, { title = true, links = true, clean = true } =
     ignore_links: !links,
     improve_readability: clean,
   };
-  return processor.process_dom(url, document, res, '', options);
+  return { markdown: processor.process_dom(url, document, res, '', options), html };
 }
 
-// Convert HTML string to markdown
-function htmlToMarkdown(html, url = '', { title = true, links = true, clean = true } = {}) {
-  const stripped = filters.strip_style_and_script_blocks(html);
+// Convert HTML string to markdown, returns { markdown, html } for metadata extraction
+function htmlToMarkdown(htmlStr, url = '', { title = true, links = true, clean = true } = {}) {
+  const stripped = filters.strip_style_and_script_blocks(htmlStr);
   const document = new JSDOM(stripped);
   const res = { header: () => {} };
   const options = {
@@ -73,7 +74,7 @@ function htmlToMarkdown(html, url = '', { title = true, links = true, clean = tr
     ignore_links: !links,
     improve_readability: clean,
   };
-  return processor.process_dom(url, document, res, '', options);
+  return { markdown: processor.process_dom(url, document, res, '', options), html: htmlStr };
 }
 
 // MCP protocol
@@ -127,7 +128,8 @@ async function handleMessage(line) {
             type: 'object',
             properties: {
               url: { type: 'string', description: 'The URL to fetch and convert' },
-              output_path: { type: 'string', description: 'File path to write the markdown to. If omitted, returns the markdown as text.' },
+              output_path: { type: 'string', description: 'Full file path to write the markdown to. Overrides output_dir.' },
+              output_dir: { type: 'string', description: 'Directory to write the markdown to. Filename is auto-generated from the page title (h1 → og:title → <title> → URL slug).' },
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
@@ -143,7 +145,8 @@ async function handleMessage(line) {
             properties: {
               html: { type: 'string', description: 'The HTML string to convert' },
               url: { type: 'string', description: 'Base URL for resolving relative links', default: '' },
-              output_path: { type: 'string', description: 'File path to write the markdown to. If omitted, returns the markdown as text.' },
+              output_path: { type: 'string', description: 'Full file path to write the markdown to. Overrides output_dir.' },
+              output_dir: { type: 'string', description: 'Directory to write the markdown to. Filename is auto-generated from the page title (h1 → og:title → <title> → URL slug).' },
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
@@ -161,13 +164,13 @@ async function handleMessage(line) {
     const args = params?.arguments || {};
 
     try {
-      let markdown;
+      let result;
       if (toolName === 'url_to_markdown') {
         if (!args.url) {
           sendError(id, -32602, 'Missing required parameter: url');
           return;
         }
-        markdown = await urlToMarkdown(args.url, {
+        result = await urlToMarkdown(args.url, {
           title: args.include_title ?? true,
           links: args.include_links ?? true,
           clean: args.use_readability ?? true,
@@ -177,7 +180,7 @@ async function handleMessage(line) {
           sendError(id, -32602, 'Missing required parameter: html');
           return;
         }
-        markdown = htmlToMarkdown(args.html, args.url || '', {
+        result = htmlToMarkdown(args.html, args.url || '', {
           title: args.include_title ?? true,
           links: args.include_links ?? true,
           clean: args.use_readability ?? true,
@@ -187,8 +190,29 @@ async function handleMessage(line) {
         return;
       }
 
+      const { markdown, html: sourceHtml } = result;
+
+      // Resolve output path: explicit output_path wins, then output_dir with auto-naming
+      let outPath = null;
       if (args.output_path) {
-        const outPath = path.resolve(args.output_path);
+        outPath = path.resolve(args.output_path);
+      } else if (args.output_dir) {
+        const pageTitle = extractTitle(sourceHtml);
+        let slug = pageTitle ? slugify(pageTitle) : null;
+        if (!slug && args.url) {
+          // Fallback: slug from URL pathname
+          try {
+            const pathname = new URL(args.url).pathname.replace(/\/$/, '');
+            slug = slugify(pathname.split('/').pop() || 'page');
+          } catch {
+            slug = 'page';
+          }
+        }
+        slug = slug || 'page';
+        outPath = path.resolve(args.output_dir, slug + '.md');
+      }
+
+      if (outPath) {
         fs.mkdirSync(path.dirname(outPath), { recursive: true });
         fs.writeFileSync(outPath, markdown);
         sendResponse(id, {
