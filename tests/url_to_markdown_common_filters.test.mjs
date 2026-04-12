@@ -77,6 +77,38 @@ test('absolute_urls=false preserves root-relative URLs', () => {
 	assert.strictEqual(result, '[home](/about)');
 });
 
+// --- Link title stripping ---
+
+test('strips title from relative link when resolving to absolute', () => {
+	const md = '[Page](/wiki/Page "Page title")';
+	const result = filters.filter('https://en.wikipedia.org/wiki/Test', md);
+	assert.strictEqual(result, '[Page](https://en.wikipedia.org/wiki/Page)');
+});
+
+test('strips title from absolute link', () => {
+	const md = '[Web browser](https://en.wikipedia.org/wiki/Web_browser "Web browser")';
+	const result = filters.filter('https://en.wikipedia.org/wiki/Test', md);
+	assert.strictEqual(result, '[Web browser](https://en.wikipedia.org/wiki/Web_browser)');
+});
+
+test('strips title from link with underscores in URL', () => {
+	const md = '[Programming language](https://en.wikipedia.org/wiki/Programming_language "Programming language")';
+	const result = filters.filter('https://en.wikipedia.org/wiki/Test', md);
+	assert.strictEqual(result, '[Programming language](https://en.wikipedia.org/wiki/Programming_language)');
+});
+
+test('strips title from image link', () => {
+	const md = '![photo](images/pic.png "Photo caption")';
+	const result = filters.filter('https://example.com/page/', md);
+	assert.strictEqual(result, '![photo](https://example.com/page/images/pic.png)');
+});
+
+test('does not strip text that looks like a title from plain URLs', () => {
+	const md = '[link](https://example.com/path)';
+	const result = filters.filter('https://example.com/', md);
+	assert.strictEqual(result, '[link](https://example.com/path)');
+});
+
 test('resolves multiple relative URLs in one document', () => {
 	const md = '![a](images/a.png)\n\n[link](page2)\n\n![b](../images/b.png)';
 	const result = filters.filter('https://example.com/docs/guide/', md);

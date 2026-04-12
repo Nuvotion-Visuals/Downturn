@@ -27,6 +27,7 @@ function convertHtml(html, url, { title = true, links = true, clean = true, abso
   return processor.process_dom(url, document, res, '', options);
 }
 
+
 // Extract navigation links from raw HTML before Readability strips them
 function extractNav(html, baseUrl) {
   const doc = new JSDOM(html);

@@ -71,7 +71,7 @@ Heba Habib contributed to this report.
 
 **Read more:**
 
-[Tunisia’s Islamists get a sobering lesson in governing](http://www.washingtonpost.com/world/middle_east/tunisias-islamists-get-sobering-lesson-in-governing/2014/11/20/b6fc8988-65ad-11e4-ab86-46000e1d0035_story.html "www.washingtonpost.com")
+[Tunisia’s Islamists get a sobering lesson in governing](http://www.washingtonpost.com/world/middle_east/tunisias-islamists-get-sobering-lesson-in-governing/2014/11/20/b6fc8988-65ad-11e4-ab86-46000e1d0035_story.html)
 
 [Tunisia sends most foreign fighters to Islamic State in Syria](http://www.washingtonpost.com/world/national-security/tunisia-after-igniting-arab-spring-sends-the-most-fighters-to-islamic-state-in-syria/2014/10/28/b5db4faa-5971-11e4-8264-deed989ae9a2_story.html)
 

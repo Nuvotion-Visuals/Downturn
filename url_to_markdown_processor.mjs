@@ -43,6 +43,8 @@ export default {
 		markdown = markdown.replace(/\)\s*\n[\s\n]*\]\(/g, ')](');
 		markdown = markdown.replace(/\]\s*\n[\s\n]*\(/g, '](');
 		let result = (url) ? common_filters.filter(url, markdown, ignore_links, absolute_urls) : markdown;
+		// Strip link titles: [text](url "title") -> [text](url)
+		result = result.replace(/(\[[^\]]*\]\(.*?)\s+"[^"]*"\)/g, '$1)');
 		if (inline_title && title) {
 			result = "# " + title.textContent.replace(/\s+/g, ' ').trim() + "\n" + result;
 		}

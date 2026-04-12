@@ -5,7 +5,7 @@ Image![](https://static01.nyt.com/images/2019/02/21/nyregion/21winterutilities1/
 
 A Con Edison worker repairing underground cables this month in Flushing, Queens. The likely source of the problem was water and rock salt that had seeped underground.CreditCreditChang W. Lee/The New York Times
 
-[![Corey Kilgannon](https://static01.nyt.com/images/2018/02/20/multimedia/author-corey-kilgannon/author-corey-kilgannon-thumbLarge.jpg "Corey Kilgannon")](https://www.nytimes.com/by/corey-kilgannon)
+[![Corey Kilgannon](https://static01.nyt.com/images/2018/02/20/multimedia/author-corey-kilgannon/author-corey-kilgannon-thumbLarge.jpg)](https://www.nytimes.com/by/corey-kilgannon)
 
 *   Feb. 21, 2019
 

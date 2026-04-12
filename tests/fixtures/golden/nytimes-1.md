@@ -7,13 +7,13 @@ Photo
 
 United Nations peacekeepers at a refugee camp in Sudan on Monday. In exchange for the lifting of United States trade sanctions, Sudan has said it will improve access for aid groups, stop supporting rebels in neighboring South Sudan and cooperate with American intelligence agents. Credit Ashraf Shazly/Agence France-Presse — Getty Images
 
-LONDON — After nearly 20 years of hostile relations, the American government plans to reverse its position on [Sudan](http://topics.nytimes.com/top/news/international/countriesandterritories/sudan/index.html?inline=nyt-geo "More news and information about Sudan.") and lift trade sanctions, Obama administration officials said late Thursday.
+LONDON — After nearly 20 years of hostile relations, the American government plans to reverse its position on [Sudan](http://topics.nytimes.com/top/news/international/countriesandterritories/sudan/index.html?inline=nyt-geo) and lift trade sanctions, Obama administration officials said late Thursday.
 
 Sudan is one of the poorest, most isolated and most violent countries in Africa, and for years the United States has imposed punitive measures against it in a largely unsuccessful attempt to get the Sudanese government to stop killing its own people.
 
 On Friday, the Obama administration will announce a new Sudan strategy. For the first time since the 1990s, the nation will be able to trade extensively with the United States, allowing it to buy goods like tractors and spare parts and attract much-needed investment in its collapsing economy.
 
-In return, Sudan will improve access for aid groups, stop supporting rebels in neighboring [South Sudan](http://topics.nytimes.com/top/news/international/countriesandterritories/south-sudan/index.html?inline=nyt-geo "More articles about South Sudan."), cease the bombing of insurgent territory and cooperate with American intelligence agents.
+In return, Sudan will improve access for aid groups, stop supporting rebels in neighboring [South Sudan](http://topics.nytimes.com/top/news/international/countriesandterritories/south-sudan/index.html?inline=nyt-geo), cease the bombing of insurgent territory and cooperate with American intelligence agents.
 
 American officials said Sudan had already shown important progress on a number of these fronts. But to make sure the progress continues, the executive order that President Obama plans to sign on Friday, days before leaving office, will have a six-month review period. If Sudan fails to live up to its commitments, the embargo can be reinstated.
 

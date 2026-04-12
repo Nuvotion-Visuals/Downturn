@@ -8,7 +8,7 @@ Many of us have noticed that we seem to get our best ideas when we're in the sho
 
 A large body of neuroscientific [studies](http://journals.sagepub.com/doi/abs/10.1177/0956797612446024) has pointed out that the brain does a lot of work in its spare time, the so-called idle state - wherein the brain does not appear to be thinking about anything at all - and that this is the time when it works at its hardest to find solutions to complex problems.
 
-With time and advances in [neuroscience](http://fakehost/articles/248680.php%20%22What%20is%20neuroscience?%22), it has become more and more clear to researchers that Freud _was_ right and the mind, as well as the brain, do work unconsciously. In fact, it would be safe to say that what is consciously known to us is just the tip of a much larger iceberg, deeply submerged in unconscious waters.
+With time and advances in [neuroscience](http://fakehost/articles/248680.php), it has become more and more clear to researchers that Freud _was_ right and the mind, as well as the brain, do work unconsciously. In fact, it would be safe to say that what is consciously known to us is just the tip of a much larger iceberg, deeply submerged in unconscious waters.
 
 But the exact moment at which information becomes known to us - or when the "tip of the iceberg" pierces through the water, and the unconscious becomes conscious - has been somewhat of a mystery, from a neuroscientific point of view.
 

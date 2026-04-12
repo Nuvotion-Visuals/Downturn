@@ -5,7 +5,7 @@
 
 　　但是，很快普通人都会有机会向人类“最终的边疆”出发——以平民化旅行的形式，去探索和殖民火星。确实，火星之旅将是一次令人感到痛苦的旅行，可能一去不复返并要几年时间才能完成，但是否应该允许参与者在旅程中痛饮一番？或至少携带能在火星上发酵自制酒精饮料的设备？
 
-![(Credit: Nasa)](http://imgtech.gmw.cn/attachement/jpg/site2/20170310/448a5bc1e2861a2c4e5929.jpg "宇航员在太空中喝酒会怎么样？后果很严重")
+![(Credit: Nasa)](http://imgtech.gmw.cn/attachement/jpg/site2/20170310/448a5bc1e2861a2c4e5929.jpg)
 
 　　图注：巴兹?奥尔德林(Buzz Aldrin)可能是第二个在月球上行走的人，但他是第一个在月球上喝酒的人
 
@@ -31,7 +31,7 @@
 
 　　为此，国际空间站上的宇航员甚至没有被提供含有酒精的产品，例如漱口水、香水或须后水。如果在国际空间站上饮酒狂欢，溢出的啤酒也可能存在损坏设备的风险。
 
-![(Credit: iStock)](http://imgtech.gmw.cn/attachement/jpg/site2/20170310/448a5bc1e2861a2c4e592a.jpg "宇航员在太空中喝酒会怎么样？后果很严重")
+![(Credit: iStock)](http://imgtech.gmw.cn/attachement/jpg/site2/20170310/448a5bc1e2861a2c4e592a.jpg)
 
 　　图注：测试表明，有关人在高空中喝酒更容易醉的传言是不正确的
 
@@ -65,7 +65,7 @@
 
 　　然而，像戴夫?汉森这样的专家认为，继续禁止饮酒并没有什么害处。除了实际的安全问题，饮酒还可能有其它挑战。汉森认为，地球人存在许多社会文化方面的差异，而且人连续几年时间呆在一个狭小的空间里，很容易突然发怒，这些因素都使饮酒问题变得很棘手。
 
-![(Credit: David Frohman/Peachstate Historical Consulting Inc)](http://imgtech.gmw.cn/attachement/jpg/site2/20170310/448a5bc1e2861a2c4e592d.jpg "宇航员在太空中喝酒会怎么样？后果很严重")
+![(Credit: David Frohman/Peachstate Historical Consulting Inc)](http://imgtech.gmw.cn/attachement/jpg/site2/20170310/448a5bc1e2861a2c4e592d.jpg)
 
 　　图注：奥尔德林的圣餐杯回到了地球上
 
@@ -77,6 +77,6 @@
 
 　　**出品︱网易科学人栏目组 胖胖**
 
-　　**作者︱春春** [![](https://img.gmw.cn/pic/content_logo.png "返回光明网首页")](http://www.gmw.cn/)
+　　**作者︱春春** [![](https://img.gmw.cn/pic/content_logo.png)](http://www.gmw.cn/)
 
 \[责任编辑:肖春芳\]

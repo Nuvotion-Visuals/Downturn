@@ -9,7 +9,7 @@ The average cost of a graduation party in 2013 was a whopping $1,200, according 
 
 Thankfully, there are plenty of creative ways to trim a little grad party fat without sacrificing any of the fun or celebratory spirit.
 
-![Graduation](https://img-aws.ehowcdn.com/640/cme/cme_public_images/www_ehow_com/cdn-write.demandstudios.com/upload/image/2F/86/5547EF62-EAF5-4256-945D-0496F61C862F/5547EF62-EAF5-4256-945D-0496F61C862F.jpg "Graduation")
+![Graduation](https://img-aws.ehowcdn.com/640/cme/cme_public_images/www_ehow_com/cdn-write.demandstudios.com/upload/image/2F/86/5547EF62-EAF5-4256-945D-0496F61C862F/5547EF62-EAF5-4256-945D-0496F61C862F.jpg)
 
 (Mike Watson Images/Moodboard/Getty)
 

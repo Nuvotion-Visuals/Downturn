@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce, faviconUrl } from '../public/ui.mjs';
+import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox } from '../public/ui.mjs';
 
 // --- esc ---
 
@@ -89,6 +89,32 @@ test('inline: linked image with empty alt', () => {
 
 test('inline: keeps non-empty anchor links', () => {
   assert.ok(inline('[About](#_about)').includes('<a href="#_about">About</a>'));
+});
+
+test('inline: link with title attribute strips title from href', () => {
+  const result = inline('[Compiled language](/wiki/Compiled_language "Compiled language")');
+  assert.ok(result.includes('href="/wiki/Compiled_language"'));
+  assert.ok(!result.includes('Compiled language"'));
+});
+
+test('inline: link with title and spaces in title', () => {
+  const result = inline('[Web browser](https://en.wikipedia.org/wiki/Web_browser "Web browser")');
+  assert.strictEqual(result, '<a href="https://en.wikipedia.org/wiki/Web_browser">Web browser</a>');
+});
+
+test('inline: link without title unchanged', () => {
+  const result = inline('[test](https://example.com/path)');
+  assert.strictEqual(result, '<a href="https://example.com/path">test</a>');
+});
+
+test('inline: underscores in URLs not treated as italic', () => {
+  const result = inline('[Link](https://en.wikipedia.org/wiki/General-purpose_programming_language)');
+  assert.ok(result.includes('href="https://en.wikipedia.org/wiki/General-purpose_programming_language"'));
+  assert.ok(!result.includes('<em>'));
+});
+
+test('inline: underscores in link text still work as italic', () => {
+  assert.ok(inline('_italic text_').includes('<em>'));
 });
 
 test('inline: plain text unchanged', () => {
@@ -362,4 +388,34 @@ test('faviconUrl: invalid URL returns empty string', () => {
 
 test('faviconUrl: empty string returns empty', () => {
   assert.strictEqual(faviconUrl(''), '');
+});
+
+// --- resolveOmnibox ---
+
+test('omnibox: full URL passes through', () => {
+  assert.strictEqual(resolveOmnibox('https://example.com/page'), 'https://example.com/page');
+});
+
+test('omnibox: http URL passes through', () => {
+  assert.strictEqual(resolveOmnibox('http://example.com'), 'http://example.com');
+});
+
+test('omnibox: bare domain gets https', () => {
+  assert.strictEqual(resolveOmnibox('example.com'), 'https://example.com');
+});
+
+test('omnibox: domain with path', () => {
+  assert.strictEqual(resolveOmnibox('example.com/page'), 'https://example.com/page');
+});
+
+test('omnibox: plain text becomes Wikipedia search', () => {
+  assert.strictEqual(resolveOmnibox('how to cook pasta'), 'https://en.wikipedia.org/wiki/Special:Search?search=how%20to%20cook%20pasta');
+});
+
+test('omnibox: empty string returns empty', () => {
+  assert.strictEqual(resolveOmnibox(''), '');
+});
+
+test('omnibox: whitespace only returns empty', () => {
+  assert.strictEqual(resolveOmnibox('   '), '');
 });

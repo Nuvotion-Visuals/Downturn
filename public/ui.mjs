@@ -8,19 +8,19 @@ export function inline(text) {
   // Strip empty anchor links used as heading targets: [](#id) or [ ](#id)
   text = text.replace(/\[\s*\]\(#[^\)]*\)/g, '');
   // Linked images: [![alt](img)](url)
-  text = text.replace(/\[!\[([^\]]*)\]\(([^\)]+)\)\]\(([^\)]+)\)/g, '<a href="$3"><img alt="$1" src="$2"></a>');
+  text = text.replace(/\[!\[([^\]]*)\]\(([^\s\)]+)(?:\s+"[^"]*")?\)\]\(([^\s\)]+)(?:\s+"[^"]*")?\)/g, '<a href="$3"><img alt="$1" src="$2"></a>');
   // Images
-  text = text.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img alt="$1" src="$2">');
-  // Links
-  text = text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
+  text = text.replace(/!\[([^\]]*)\]\(([^\s\)]+)(?:\s+"[^"]*")?\)/g, '<img alt="$1" src="$2">');
+  // Links (strip optional title: [text](url "title"))
+  text = text.replace(/\[([^\]]+)\]\(([^\s\)]+)(?:\s+"[^"]*")?\)/g, '<a href="$2">$1</a>');
   // Bold + italic
   text = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
   // Bold
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  text = text.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  text = text.replace(/(?<![\/\w])__(.+?)__(?![\/\w])/g, '<strong>$1</strong>');
   // Italic
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  text = text.replace(/_(.+?)_/g, '<em>$1</em>');
+  text = text.replace(/(?<![\/\w])_(.+?)_(?![\/\w])/g, '<em>$1</em>');
   // Inline code
   text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
   return text;
@@ -170,6 +170,21 @@ export function debounce(fn, ms) {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), ms);
   };
+}
+
+export function resolveOmnibox(input) {
+  if (!input) return '';
+  const trimmed = input.trim();
+  if (!trimmed) return '';
+
+  // Already a URL
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+
+  // Looks like a domain
+  if (/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/.test(trimmed)) return 'https://' + trimmed;
+
+  // Default: Wikipedia search
+  return 'https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(trimmed);
 }
 
 export function faviconUrl(url) {

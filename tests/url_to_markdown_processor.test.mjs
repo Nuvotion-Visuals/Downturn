@@ -31,3 +31,25 @@ test('process html', () => {
 
 	assert.strictEqual(actual_markdown_output, expected_markdown_output);
 })
+
+test('strips link titles from output', () => {
+	const html = '<html><head><title>test</title></head><body><p><a href="https://example.com/page" title="Page Title">link</a> text here for readability to work</p><p>More content paragraph needed</p></body></html>';
+	const doc = new JSDOM(html);
+	const res = { header: () => {} };
+	const result = processor.process_dom('https://example.com/', doc, res, '', {
+		inline_title: false, ignore_links: false, improve_readability: true, absolute_urls: true,
+	});
+	assert.ok(!result.includes('"Page Title"'), 'should not contain link title');
+	assert.ok(result.includes('[link](https://example.com/page)'), 'should contain clean link');
+});
+
+test('strips Wikipedia-style link titles', () => {
+	const html = '<html><head><title>test</title></head><body><article><p><a href="/wiki/JavaScript" title="JavaScript">JS</a> is a programming language used widely on the web</p><p>It was created in 1995 by Brendan Eich</p></article></body></html>';
+	const doc = new JSDOM(html);
+	const res = { header: () => {} };
+	const result = processor.process_dom('https://en.wikipedia.org/wiki/Test', doc, res, '', {
+		inline_title: false, ignore_links: false, improve_readability: true, absolute_urls: true,
+	});
+	assert.ok(!result.includes('"JavaScript"'), 'should not contain link title');
+	assert.ok(result.includes('https://en.wikipedia.org/wiki/JavaScript'), 'should have absolute URL');
+});

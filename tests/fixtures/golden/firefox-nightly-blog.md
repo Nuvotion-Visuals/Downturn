@@ -141,13 +141,13 @@
 
 [Post a comment](#respond)
 
-1.  #### Alan Goodale ![](https://secure.gravatar.com/avatar/bd81725a781b9e288208c743ae499964?s=60&d=mm&r=g) wrote on [December 24, 2020 at 3:53 am:](https://blog.nightly.mozilla.org/2020/12/18/these-weeks-in-firefox-issue-85/#comment-7443 "Permanent link to this comment by Alan Goodale")
+1.  #### Alan Goodale ![](https://secure.gravatar.com/avatar/bd81725a781b9e288208c743ae499964?s=60&d=mm&r=g) wrote on [December 24, 2020 at 3:53 am:](https://blog.nightly.mozilla.org/2020/12/18/these-weeks-in-firefox-issue-85/#comment-7443)
     
     > Enhancement: Are there plans to provide a “collections” functionality for the desktop similar to what was released on Android? I need to be able to group the current instance of tabs into common “themes”. Close and open entire collections (themes) independently, with a single click. Read and update those same tabs, and then close them again with the latest URL of each tab being saved, rather than just the original seed URL. It’s similar to the “Restore previous session” functionality currently under Options\\General\\Startup, but different in that there would be multiple named “sessions” that could be restored individually, rather than just the one. It would also be helpful if the original seed URL for each tab could still be accessible, perhaps through a right click on the tab, but the latest viewed instance is the most important. Sync to Android would be a very desirable bonus.
     
     [Reply](https://blog.nightly.mozilla.org/2020/12/18/these-weeks-in-firefox-issue-85/?replytocom=7443#respond)
     
-2.  #### John Doe ![](https://secure.gravatar.com/avatar/6a6c19fea4a3676970167ce51f39e6ee?s=60&d=mm&r=g) wrote on [February 9, 2021 at 10:16 pm:](https://blog.nightly.mozilla.org/2020/12/18/these-weeks-in-firefox-issue-85/#comment-7588 "Permanent link to this comment by John Doe")
+2.  #### John Doe ![](https://secure.gravatar.com/avatar/6a6c19fea4a3676970167ce51f39e6ee?s=60&d=mm&r=g) wrote on [February 9, 2021 at 10:16 pm:](https://blog.nightly.mozilla.org/2020/12/18/these-weeks-in-firefox-issue-85/#comment-7588)
     
     > Thank you for fixing Bug 1553982! I have moved most of my work to another browser due to the need to restart so often but will try Firefox again now.
     

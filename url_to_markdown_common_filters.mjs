@@ -105,19 +105,22 @@ export default {
 			}
 		}
 
-		// make relative URLs absolute
-		if (absolute_urls && full_url) {
-			data = data.replaceAll(/(!?\[[^\]]*\]\()([^\)]+)\)/g,
-				(match, prefix, href) => {
-					if (/^(https?:|mailto:|data:|javascript:|#)/.test(href)) return match;
+		// Strip link titles and make relative URLs absolute
+		data = data.replaceAll(/(!?\[[^\]]*\]\()([^\)]+)\)/g,
+			(match, prefix, href) => {
+				// Strip optional title: url "title" or url 'title'
+				const titleMatch = href.match(/^(\S+)\s+(["'][^"']*["'])$/);
+				const urlPart = titleMatch ? titleMatch[1] : href;
+				if (absolute_urls && full_url && !/^(https?:|mailto:|data:|javascript:|#)/.test(urlPart)) {
 					try {
-						return prefix + new URL(href, full_url).href + ')';
+						return prefix + new URL(urlPart, full_url).href + ')';
 					} catch {
-						return match;
+						return prefix + urlPart + ')';
 					}
 				}
-			);
-		}
+				return prefix + urlPart + ')';
+			}
+		);
 
 		// remove inline links and refs
 		if (ignore_links) {

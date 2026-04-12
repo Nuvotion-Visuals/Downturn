@@ -7,7 +7,7 @@ Photo
 
 Credit Harry Campbell
 
-[Yahoo](http://www.nytimes.com/topic/company/yahoo-inc?inline=nyt-org "More information about Yahoo! Inc.")’s $4.8 billion sale to [Verizon](http://www.nytimes.com/topic/company/verizon-communications-inc?inline=nyt-org "More information about Verizon Communications Inc.") is a complicated beast, showing how different acquisition structures can affect how shareholders are treated.
+[Yahoo](http://www.nytimes.com/topic/company/yahoo-inc?inline=nyt-org)’s $4.8 billion sale to [Verizon](http://www.nytimes.com/topic/company/verizon-communications-inc?inline=nyt-org) is a complicated beast, showing how different acquisition structures can affect how shareholders are treated.
 
 First, let’s say what the Yahoo sale is not. It is not a sale of the publicly traded company. Instead, it is a sale of the Yahoo subsidiary and some related assets to Verizon.
 
@@ -47,7 +47,7 @@ In Yahoo’s case, this is not deliberate, though. It is simply the most expedie
 
 Whether this is the most tax-efficient way is unclear to me as a nontax lawyer (email me if you know). Yahoo is likely to have a tax bill on the sale, possibly a substantial one. And I presume there were legal reasons for not using a [Morris Trust structure](http://dealbook.nytimes.com/2014/04/29/alliant-techsystems-break-up-and-the-return-of-the-morris-trust/), in which Yahoo would have been spun off and immediately sold to Verizon so that only Yahoo’s shareholders paid tax on the deal. In truth, the Yahoo assets being sold are only about 10 percent of the value of the company, so the time and logistics for such a sale when Yahoo is a melting ice cube may not have been worth it.
 
-Finally, if another bidder still wants to acquire Yahoo, it has time. The agreement with Verizon allows Yahoo to terminate the deal and accept a superior offer by paying a $144 million breakup fee to Verizon. And if Yahoo shareholders change their minds and want to stick with Yahoo’s chief executive, [Marissa Mayer](http://topics.nytimes.com/top/reference/timestopics/people/m/marissa_mayer/index.html?inline=nyt-per "More articles about Marissa Mayer."), and vote down the deal, there is a so-called naked no-vote termination fee of $15 million payable to Verizon to reimburse expenses.
+Finally, if another bidder still wants to acquire Yahoo, it has time. The agreement with Verizon allows Yahoo to terminate the deal and accept a superior offer by paying a $144 million breakup fee to Verizon. And if Yahoo shareholders change their minds and want to stick with Yahoo’s chief executive, [Marissa Mayer](http://topics.nytimes.com/top/reference/timestopics/people/m/marissa_mayer/index.html?inline=nyt-per), and vote down the deal, there is a so-called naked no-vote termination fee of $15 million payable to Verizon to reimburse expenses.
 
 All in all, this was as hairy a deal as they come. There was the procedural and logistical complications of selling a company when the chief executive wanted to stay. Then there was the fact that this was an asset sale, including all of the challenges that go with it. Throw in all of the tax issues and the fact that this is a public company, and it is likely that the lawyers involved will have nightmares for years to come.
 
