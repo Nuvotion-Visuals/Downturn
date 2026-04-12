@@ -44,15 +44,24 @@ function extractNav(html, baseUrl) {
   for (const container of containers) {
     const anchors = container.querySelectorAll('a');
     for (const a of anchors) {
-      const text = (a.textContent || '').trim();
+      let text = (a.textContent || '');
+      text = text.replace(/\.[\w-]+\s*\{[^}]*\}/g, '').replace(/\s+/g, ' ').trim();
       let href = (a.getAttribute('href') || '').trim();
-      if (!text || !href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) continue;
+      if (!text || text.length > 80 || !href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) continue;
       // Resolve relative URLs
       try { href = new URL(href, baseUrl).href; } catch { continue; }
       if (seen.has(href)) continue;
       seen.add(href);
       nav.push({ text, href });
     }
+  }
+
+  // Always include site home as first item
+  if (baseUrl) {
+    try {
+      const origin = new URL(baseUrl).origin + '/';
+      if (!seen.has(origin)) nav.unshift({ text: 'Home', href: origin });
+    } catch {}
   }
 
   return nav;

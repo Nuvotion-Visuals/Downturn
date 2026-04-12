@@ -40,6 +40,79 @@ body {
 }
 a { color: var(--color-link); text-decoration: none; }
 a:hover { text-decoration: underline; }
+/* Tab bar */
+.tabbar {
+  display: flex;
+  align-items: flex-end;
+  background: var(--color-bg);
+  padding: 6px 8px 0;
+  flex-shrink: 0;
+  gap: 2px;
+}
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 2px;
+  min-width: 0;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  width: 180px;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.tab:hover { color: var(--color-text); }
+.tab.active {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.tab-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.tab-close {
+  display: none;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.tab-close:hover { background: var(--color-border); }
+.tab:hover .tab-close, .tab.active .tab-close { display: block; }
+.tab-new {
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+.tab-new:hover { background: var(--color-bg-tertiary); color: var(--color-text); }
 /* Top bar */
 .topbar {
   display: flex;
@@ -47,6 +120,7 @@ a:hover { text-decoration: underline; }
   gap: 8px;
   padding: 8px 16px;
   background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
 }
@@ -237,6 +311,7 @@ a:hover { text-decoration: underline; }
   text-overflow: ellipsis;
 }
 .nav-sidebar li a:hover { color: var(--color-link); background: var(--color-bg-tertiary); }
+.nav-sidebar li a.active { color: var(--color-text); background: var(--color-bg-tertiary); font-weight: 600; }
 .nav-sidebar .nav-empty { padding: 16px; color: var(--color-text-placeholder); text-align: center; font-style: italic; }
 .nav-sidebar::-webkit-scrollbar { width: 8px; }
 .nav-sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -286,6 +361,10 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
 
+<div class="tabbar">
+  <div class="tabs" id="tabContainer"></div>
+  <button class="tab-new" id="newTabBtn" title="New tab (Ctrl+T)">+</button>
+</div>
 <div class="topbar">
   <button class="nav-btn" id="navToggle" title="Toggle site navigation"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg></button>
   <div class="topbar-sep"></div>
@@ -326,6 +405,7 @@ a:hover { text-decoration: underline; }
     <button class="vt-btn" data-view="raw">Markdown</button>
     <button class="vt-btn active" data-view="preview">Preview</button>
   </div>
+  <button id="openBtn" disabled>Open in browser</button>
   <span id="status"></span>
   <span id="stats"></span>
 </div>
@@ -374,10 +454,6 @@ function loadSettings() {
   } catch { return false; }
 }
 
-// State
-let currentMarkdown = '';
-const pageCache = {}; // url -> { markdown, nav }
-
 // Elements
 const urlInput = document.getElementById('urlInput');
 const rawPane = document.getElementById('rawPane');
@@ -389,25 +465,169 @@ const stats = document.getElementById('stats');
 const divider = document.getElementById('divider');
 const settingsBtn = document.getElementById('settingsBtn');
 const settingsPopover = document.getElementById('settingsPopover');
+const tabContainer = document.getElementById('tabContainer');
 
-// Navigate to a URL — pushState controls browser history
+// Tab state
+let tabs = [];
+let activeTabId = 0;
+let nextTabId = 1;
+const pageCache = {};
+const TABS_KEY = 'downturn-tabs-v2';
+
+function saveTabs() {
+  const data = {
+    tabs: tabs.map(t => ({ id: t.id, url: t.url, markdown: t.markdown, nav: t.nav, stats: t.stats })),
+    activeTabId,
+    nextTabId,
+  };
+  sessionStorage.setItem(TABS_KEY, JSON.stringify(data));
+}
+
+function loadTabs() {
+  try {
+    const data = JSON.parse(sessionStorage.getItem(TABS_KEY));
+    if (!data || !data.tabs?.length) return false;
+    tabs = data.tabs.map(t => ({ ...t, rawScroll: 0, previewScroll: 0 }));
+    activeTabId = data.activeTabId;
+    nextTabId = data.nextTabId;
+    // Repopulate pageCache from tab data
+    for (const t of tabs) {
+      if (t.url && t.markdown) pageCache[t.url] = { markdown: t.markdown, nav: t.nav };
+    }
+    return true;
+  } catch { return false; }
+}
+
+function getTab(id) { return tabs.find(t => t.id === id); }
+function getActiveTab() { return getTab(activeTabId); }
+
+function tabTitle(tab) {
+  if (tab.markdown) {
+    const m = tab.markdown.match(/^#\s+(.+)/m);
+    if (m) return m[1].slice(0, 40);
+  }
+  if (tab.url) {
+    try { return new URL(tab.url).hostname; } catch {}
+  }
+  return 'New Tab';
+}
+
+function renderTabs() {
+  tabContainer.innerHTML = tabs.map(t =>
+    `<div class="tab${t.id === activeTabId ? ' active' : ''}" data-tab-id="${t.id}">` +
+    `<span class="tab-title">${tabTitle(t)}</span>` +
+    `<span class="tab-close">&times;</span></div>`
+  ).join('');
+  saveTabs();
+}
+
+function saveTabScroll() {
+  const tab = getActiveTab();
+  if (tab) {
+    tab.rawScroll = rawPane.scrollTop;
+    tab.previewScroll = previewPane.scrollTop;
+  }
+}
+
+function displayTab(tab) {
+  urlInput.value = tab.url || '';
+  if (tab.markdown) {
+    rawPane.textContent = tab.markdown;
+    previewPane.innerHTML = markdownToHtml(tab.markdown);
+    document.getElementById('copyBtn').disabled = false;
+    document.getElementById('downloadBtn').disabled = false;
+    document.getElementById('openBtn').disabled = false;
+  } else {
+    rawPane.innerHTML = '<div class="empty-state">Markdown will appear here</div>';
+    previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
+    document.getElementById('copyBtn').disabled = true;
+    document.getElementById('downloadBtn').disabled = true;
+    document.getElementById('openBtn').disabled = true;
+  }
+  renderNav(tab.nav || null);
+  stats.textContent = tab.stats || '';
+  statusEl.textContent = '';
+  requestAnimationFrame(() => {
+    rawPane.scrollTop = tab.rawScroll || 0;
+    previewPane.scrollTop = tab.previewScroll || 0;
+  });
+  window.history.replaceState({ url: tab.url }, '', tab.url ? '#' + tab.url : window.location.pathname);
+}
+
+function switchTab(id) {
+  if (id === activeTabId) return;
+  saveTabScroll();
+  activeTabId = id;
+  renderTabs();
+  displayTab(getActiveTab());
+}
+
+function createTab(url) {
+  const tab = { id: nextTabId++, url: '', markdown: '', nav: [], stats: '', rawScroll: 0, previewScroll: 0 };
+  tabs.push(tab);
+  saveTabScroll();
+  activeTabId = tab.id;
+  renderTabs();
+  displayTab(tab);
+  if (url) navigate(url);
+  else urlInput.focus();
+  return tab;
+}
+
+function closeTab(id) {
+  const idx = tabs.findIndex(t => t.id === id);
+  if (idx === -1) return;
+  tabs.splice(idx, 1);
+  if (tabs.length === 0) {
+    createTab();
+    return;
+  }
+  if (activeTabId === id) {
+    activeTabId = tabs[Math.min(idx, tabs.length - 1)].id;
+    displayTab(getActiveTab());
+  }
+  renderTabs();
+}
+
+// Tab bar events
+tabContainer.addEventListener('click', (e) => {
+  const close = e.target.closest('.tab-close');
+  if (close) {
+    const tabEl = close.closest('.tab');
+    closeTab(Number(tabEl.dataset.tabId));
+    return;
+  }
+  const tabEl = e.target.closest('.tab');
+  if (tabEl) switchTab(Number(tabEl.dataset.tabId));
+});
+document.getElementById('newTabBtn').addEventListener('click', () => createTab());
+
+// Navigate in current tab
 async function navigate(targetUrl, { pushState = true } = {}) {
   if (!targetUrl) return;
-
   targetUrl = normalizeUrl(targetUrl);
 
+  const tab = getActiveTab();
+  tab.url = targetUrl;
   urlInput.value = targetUrl;
 
-  // Check cache for instant back/forward
   if (pageCache[targetUrl]) {
     const cached = pageCache[targetUrl];
-    currentMarkdown = cached.markdown;
+    tab.markdown = cached.markdown;
+    tab.nav = cached.nav;
     const t0 = performance.now();
-    render(currentMarkdown);
-    renderNav(cached.nav);
-    showStats(currentMarkdown, performance.now() - t0, '(cached)');
+    rawPane.textContent = tab.markdown;
+    previewPane.innerHTML = markdownToHtml(tab.markdown);
+    renderNav(tab.nav);
+    tab.stats = formatStats(tab.markdown, performance.now() - t0, '(cached)');
+    stats.textContent = tab.stats;
+    document.getElementById('copyBtn').disabled = false;
+    document.getElementById('downloadBtn').disabled = false;
+    document.getElementById('openBtn').disabled = false;
+    requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
+    renderTabs();
     return;
   }
 
@@ -417,8 +637,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
   const t0 = performance.now();
 
   const params = new URLSearchParams({
-    url: targetUrl,
-    nav: 'true',
+    url: targetUrl, nav: 'true',
     title: document.getElementById('optTitle').checked,
     links: document.getElementById('optLinks').checked,
     images: document.getElementById('optImages').checked,
@@ -432,14 +651,22 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     const data = await resp.json();
     const elapsed = performance.now() - t0;
 
-    currentMarkdown = data.markdown;
+    tab.markdown = data.markdown;
+    tab.nav = data.nav;
     pageCache[targetUrl] = data;
 
-    render(data.markdown);
-    renderNav(data.nav);
-    showStats(data.markdown, elapsed);
+    rawPane.textContent = tab.markdown;
+    previewPane.innerHTML = markdownToHtml(tab.markdown);
+    renderNav(tab.nav);
+    tab.stats = formatStats(tab.markdown, elapsed);
+    stats.textContent = tab.stats;
+    document.getElementById('copyBtn').disabled = false;
+    document.getElementById('downloadBtn').disabled = false;
+    document.getElementById('openBtn').disabled = false;
+    requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
+    renderTabs();
   } catch (e) {
     statusEl.textContent = `Error: ${e.message}`;
     rawPane.textContent = `Error: ${e.message}`;
@@ -449,32 +676,20 @@ async function navigate(targetUrl, { pushState = true } = {}) {
   }
 }
 
-function render(markdown) {
-  rawPane.textContent = markdown;
-  previewPane.innerHTML = markdownToHtml(markdown);
-  document.getElementById('copyBtn').disabled = false;
-  document.getElementById('downloadBtn').disabled = false;
-  requestAnimationFrame(() => {
-    rawPane.scrollTop = 0;
-    previewPane.scrollTop = 0;
-  });
-}
-
-let currentNav = [];
-const navToggle = document.getElementById('navToggle');
-
 function renderNav(nav) {
   const ul = navSidebar.querySelector('ul');
-  currentNav = nav || [];
-  if (currentNav.length === 0) {
+  const currentUrl = urlInput.value;
+  const navArr = nav || [];
+  if (navArr.length === 0) {
     ul.innerHTML = '<li class="nav-empty">No navigation found</li>';
     return;
   }
-  ul.innerHTML = currentNav.map(n =>
-    `<li><a href="${n.href}" title="${n.text}">${n.text}</a></li>`
+  ul.innerHTML = navArr.map(n =>
+    `<li><a href="${n.href}" title="${n.text}"${n.href === currentUrl ? ' class="active"' : ''}>${n.text}</a></li>`
   ).join('');
 }
 
+const navToggle = document.getElementById('navToggle');
 navToggle.addEventListener('click', () => {
   navSidebar.classList.toggle('open');
   saveSettings();
@@ -487,34 +702,26 @@ function showStats(markdown, ms, suffix) {
 // Browser back/forward
 window.addEventListener('popstate', (e) => {
   const targetUrl = e.state?.url;
-  if (targetUrl) {
-    navigate(targetUrl, { pushState: false });
-  } else {
-    // Back to initial empty state
-    urlInput.value = '';
-    currentMarkdown = '';
-    rawPane.innerHTML = '<div class="empty-state">Markdown will appear here</div>';
-    previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
-    charCount.textContent = '';
-  }
+  if (targetUrl) navigate(targetUrl, { pushState: false });
 });
 
-// Init — load saved settings, or apply defaults on first visit
-if (!loadSettings()) {
-  applyView('preview');
-}
-(function init() {
+// Init
+if (!loadSettings()) applyView('preview');
+if (loadTabs()) {
+  // Restore saved tabs
+  renderTabs();
+  displayTab(getActiveTab());
+} else {
+  createTab(); // first empty tab
   const hash = window.location.hash.slice(1);
   const targetUrl = hash || new URLSearchParams(window.location.search).get('url');
   if (targetUrl) {
     window.history.replaceState({ url: targetUrl }, '', '#' + targetUrl);
     navigate(targetUrl, { pushState: false });
   }
-})();
+}
 
-// markdownToHtml, inline, esc, normalizeUrl, formatStats imported from ui.mjs
-
-// Link interception in preview and nav sidebar
+// Link interception — Ctrl/middle-click opens new tab
 for (const el of [previewPane, navSidebar]) {
   el.addEventListener('click', (e) => {
     const link = e.target.closest('a');
@@ -522,7 +729,19 @@ for (const el of [previewPane, navSidebar]) {
     e.preventDefault();
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#')) return;
-    navigate(href);
+    if (e.ctrlKey || e.metaKey || e.button === 1) {
+      createTab(href);
+    } else {
+      navigate(href);
+    }
+  });
+  el.addEventListener('auxclick', (e) => {
+    const link = e.target.closest('a');
+    if (!link || e.button !== 1) return;
+    e.preventDefault();
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    createTab(href);
   });
 }
 
@@ -542,36 +761,41 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
 document.getElementById('backBtn').addEventListener('click', () => history.back());
 document.getElementById('fwdBtn').addEventListener('click', () => history.forward());
 
-// Home button
+// Home button — clears active tab
 document.getElementById('homeBtn').addEventListener('click', () => {
-  urlInput.value = '';
-  currentMarkdown = '';
-  rawPane.innerHTML = '<div class="empty-state">Markdown will appear here</div>';
-  previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
-  renderNav(null);
-  stats.textContent = '';
-  statusEl.textContent = '';
-  document.getElementById('copyBtn').disabled = true;
-  document.getElementById('downloadBtn').disabled = true;
-  window.history.pushState({}, '', window.location.pathname);
+  const tab = getActiveTab();
+  tab.url = '';
+  tab.markdown = '';
+  tab.nav = [];
+  tab.stats = '';
+  displayTab(tab);
+  renderTabs();
   urlInput.focus();
 });
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'l') { e.preventDefault(); urlInput.focus(); urlInput.select(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 't') { e.preventDefault(); createTab(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'w') { e.preventDefault(); closeTab(activeTabId); }
+  if (e.ctrlKey && e.key === 'Tab') {
+    e.preventDefault();
+    const idx = tabs.findIndex(t => t.id === activeTabId);
+    const next = e.shiftKey ? (idx - 1 + tabs.length) % tabs.length : (idx + 1) % tabs.length;
+    switchTab(tabs[next].id);
+  }
 });
 
 // Copy
 const copyBtn = document.getElementById('copyBtn');
 copyBtn.addEventListener('click', async () => {
-  if (!currentMarkdown) return;
+  const md = getActiveTab()?.markdown;
+  if (!md) return;
   try {
-    await navigator.clipboard.writeText(currentMarkdown);
+    await navigator.clipboard.writeText(md);
   } catch {
-    // Fallback for non-secure contexts
     const ta = document.createElement('textarea');
-    ta.value = currentMarkdown;
+    ta.value = md;
     ta.style.position = 'fixed';
     ta.style.opacity = '0';
     document.body.appendChild(ta);
@@ -585,9 +809,9 @@ copyBtn.addEventListener('click', async () => {
 
 // Download
 document.getElementById('downloadBtn').addEventListener('click', () => {
-  if (!currentMarkdown) return;
-  // Extract title from first H1 line, fall back to URL slug
-  const h1Match = currentMarkdown.match(/^#\s+(.+)/m);
+  const tab = getActiveTab();
+  if (!tab?.markdown) return;
+  const h1Match = tab.markdown.match(/^#\s+(.+)/m);
   let slug;
   if (h1Match) {
     slug = h1Match[1].trim().toLowerCase()
@@ -595,17 +819,21 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
       .replace(/^-|-$/g, '').slice(0, 80);
   }
   if (!slug) {
-    try {
-      const pathname = new URL(urlInput.value).pathname.replace(/\/$/, '');
-      slug = pathname.split('/').pop() || 'page';
-    } catch { slug = 'page'; }
+    try { slug = new URL(tab.url).pathname.replace(/\/$/, '').split('/').pop() || 'page'; }
+    catch { slug = 'page'; }
   }
-  const blob = new Blob([currentMarkdown], { type: 'text/markdown' });
+  const blob = new Blob([tab.markdown], { type: 'text/markdown' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = slug + '.md';
   a.click();
   URL.revokeObjectURL(a.href);
+});
+
+// Open in browser
+document.getElementById('openBtn').addEventListener('click', () => {
+  const url = getActiveTab()?.url;
+  if (url) window.open(url, '_blank');
 });
 
 // View toggle
@@ -625,14 +853,12 @@ document.addEventListener('click', () => settingsPopover.classList.remove('open'
 settingsPopover.addEventListener('click', (e) => e.stopPropagation());
 settingsPopover.addEventListener('change', () => {
   saveSettings();
-  // Clear all cache and re-fetch current page with new options
   for (const key in pageCache) delete pageCache[key];
   const targetUrl = urlInput.value.trim();
   if (targetUrl) navigate(targetUrl, { pushState: false });
 });
 
 // Resizable divider
-// divider already declared above
 let dragging = false;
 divider.addEventListener('mousedown', (e) => {
   dragging = true;
