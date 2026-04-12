@@ -73,11 +73,45 @@ function parseBoolean(val, defaultVal) {
   return val === 'true';
 }
 
-async function handleRequest(request) {
+async function handleRequest(request, env) {
   const url = new URL(request.url);
 
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
+  }
+
+  // Search API
+  if (url.pathname === '/api/search') {
+    const query = url.searchParams.get('q');
+    if (!query) return new Response('Missing q parameter', { status: 400, headers: CORS_HEADERS });
+
+    const apiKey = env?.BRAVE_API_KEY || (typeof process !== 'undefined' ? process.env.BRAVE_API_KEY : '');
+    if (!apiKey) return new Response('Search not configured (missing BRAVE_API_KEY)', { status: 503, headers: CORS_HEADERS });
+
+    try {
+      const searchResp = await fetch(`https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=10`, {
+        headers: { 'Accept': 'application/json', 'Accept-Encoding': 'gzip', 'X-Subscription-Token': apiKey },
+      });
+      if (!searchResp.ok) return new Response(`Search API returned ${searchResp.status}`, { status: 502, headers: CORS_HEADERS });
+      const data = await searchResp.json();
+      const results = data.web?.results || [];
+
+      let md = `# Search: ${query}\n\n`;
+      if (!results.length) { md += 'No results found.\n'; }
+      for (const r of results) {
+        const host = r.url ? new URL(r.url).hostname.replace(/^www\./, '') : '';
+        md += `**[${r.title}](${r.url})**\n`;
+        md += `${host}\n`;
+        if (r.description) md += `${r.description}\n`;
+        md += `\n---\n\n`;
+      }
+
+      return new Response(JSON.stringify({ markdown: md, nav: [] }), {
+        headers: { ...CORS_HEADERS, 'Content-Type': 'application/json; charset=utf-8' },
+      });
+    } catch (e) {
+      return new Response(`Search error: ${e.message}`, { status: 500, headers: CORS_HEADERS });
+    }
   }
 
   // Serve static files, then API
@@ -167,6 +201,14 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
   const path = await import('node:path');
   const http = await import('node:http');
   const dir = path.dirname(new URL(import.meta.url).pathname);
+  // Load .env file
+  const envFile = path.join(dir, '.env');
+  if (fs.existsSync(envFile)) {
+    for (const line of fs.readFileSync(envFile, 'utf8').split('\n')) {
+      const match = line.match(/^\s*([^#=]+?)\s*=\s*(.*?)\s*$/);
+      if (match) process.env[match[1]] = match[2];
+    }
+  }
   const publicDir = path.join(dir, 'public');
   HTML_PAGE = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
   // Load static files
@@ -197,7 +239,7 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
         req.on('end', () => resolve(body));
       }) : undefined,
     });
-    const response = await handleRequest(request);
+    const response = await handleRequest(request, process.env);
     res.writeHead(response.status, Object.fromEntries(response.headers));
     res.end(await response.text());
   }).listen(port, () => console.log(`Downturn worker running on http://localhost:${port}`));

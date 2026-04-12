@@ -159,6 +159,7 @@ export function markdownToHtml(md) {
 
 export function normalizeUrl(targetUrl) {
   if (!targetUrl) return '';
+  if (targetUrl.startsWith('__search__:')) return targetUrl;
   if (!/^https?:\/\//i.test(targetUrl)) targetUrl = 'https://' + targetUrl;
   targetUrl = targetUrl.replace(/(https?:\/\/)\/+/g, '$1');
   return targetUrl;
@@ -183,8 +184,8 @@ export function resolveOmnibox(input) {
   // Looks like a domain
   if (/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/.test(trimmed)) return 'https://' + trimmed;
 
-  // Default: Wikipedia search
-  return 'https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(trimmed);
+  // Default: search
+  return '__search__:' + trimmed;
 }
 
 export function faviconUrl(url) {

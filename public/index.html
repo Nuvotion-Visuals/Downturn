@@ -784,7 +784,7 @@ function displayTab(tab) {
     document.getElementById('copyBtn').disabled = true;
     document.getElementById('downloadBtn').disabled = true;
   }
-  document.getElementById('openBtn').style.display = tab.url ? '' : 'none';
+  document.getElementById('openBtn').style.display = (tab.url && !tab.url.startsWith('__search__:')) ? '' : 'none';
   // Show file tree or nav depending on tab source
   if (folderTree.length && (tab.source === 'file' || !tab.url)) {
     renderFileTree(folderTree);
@@ -917,9 +917,20 @@ async function navigate(targetUrl, { pushState = true } = {}) {
   if (!targetUrl) return;
   targetUrl = normalizeUrl(targetUrl);
 
+  // Handle search queries
+  let isSearch = false;
+  let searchQuery = '';
+  if (targetUrl.startsWith('__search__:')) {
+    isSearch = true;
+    searchQuery = targetUrl.slice('__search__:'.length);
+    targetUrl = '__search__:' + searchQuery;
+  }
+
   const tab = getActiveTab();
+  const prevUrl = tab.url;
+  const prevMarkdown = tab.markdown;
   tab.url = targetUrl;
-  urlInput.value = targetUrl;
+  urlInput.value = isSearch ? searchQuery : targetUrl;
 
   // L1: in-memory cache, L2: IndexedDB cache
   if (!pageCache[targetUrl]) {
@@ -940,7 +951,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     document.getElementById('downloadBtn').disabled = false;
     document.getElementById('openBtn').style.display = '';
     requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
-    if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
+    if (pushState) window.history.pushState({ url: targetUrl }, '', isSearch ? '#search:' + searchQuery : '#' + targetUrl);
     statusEl.textContent = '';
     renderTabs();
     return;
@@ -961,7 +972,13 @@ async function navigate(targetUrl, { pushState = true } = {}) {
   });
 
   try {
-    const resp = await fetch(`${API_BASE}/api?${params}`);
+    let fetchUrl;
+    if (isSearch) {
+      fetchUrl = `${API_BASE}/api/search?q=${encodeURIComponent(searchQuery)}`;
+    } else {
+      fetchUrl = `${API_BASE}/api?${params}`;
+    }
+    const resp = await fetch(fetchUrl);
     if (!resp.ok) throw new Error(`${resp.status} ${resp.statusText}`);
     const data = await resp.json();
     const elapsed = performance.now() - t0;
@@ -982,14 +999,20 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     document.getElementById('downloadBtn').disabled = false;
     document.getElementById('openBtn').style.display = '';
     requestAnimationFrame(() => { rawPane.scrollTop = 0; previewPane.scrollTop = 0; });
-    if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
+    if (pushState) window.history.pushState({ url: targetUrl }, '', isSearch ? '#search:' + searchQuery : '#' + targetUrl);
     statusEl.textContent = '';
     renderTabs();
     updateBookmarkBtn();
   } catch (e) {
+    // Push error as its own history entry so back returns to previous page
+    tab.url = prevUrl;
+    tab.markdown = prevMarkdown;
+    if (pushState) window.history.pushState({ url: prevUrl }, '', window.location.hash);
+    urlInput.value = isSearch ? searchQuery : targetUrl;
     statusEl.textContent = `Error: ${e.message}`;
+    previewPane.innerHTML = `<div class="empty-state">Error: ${e.message}<br><br>This page may be blocking automated traffic.</div>`;
     rawPane.value = `Error: ${e.message}`;
-    previewPane.innerHTML = `<div class="empty-state">Error: ${e.message}</div>`;
+    renderTabs();
   } finally {
     loading.style.display = 'none';
   }

@@ -408,8 +408,8 @@ test('omnibox: domain with path', () => {
   assert.strictEqual(resolveOmnibox('example.com/page'), 'https://example.com/page');
 });
 
-test('omnibox: plain text becomes Wikipedia search', () => {
-  assert.strictEqual(resolveOmnibox('how to cook pasta'), 'https://en.wikipedia.org/wiki/Special:Search?search=how%20to%20cook%20pasta');
+test('omnibox: plain text becomes search', () => {
+  assert.strictEqual(resolveOmnibox('how to cook pasta'), '__search__:how to cook pasta');
 });
 
 test('omnibox: empty string returns empty', () => {
