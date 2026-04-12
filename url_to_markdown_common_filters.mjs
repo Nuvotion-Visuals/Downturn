@@ -76,13 +76,15 @@ export default {
   		html = html.replace(/<\/style>/gi, "");
   		return html;
 	},
-	filter: function (url, data, ignore_links=false) {
+	filter: function (url, data, ignore_links=false, absolute_urls=true) {
 		let domain='';
 		let base_address='';
+		let full_url = '';
 		if (url) {
 			url = new URL(url);
 			if (url) {
 				base_address = url.protocol+"//"+url.hostname;
+				full_url = url.href;
 				domain = url.hostname;
 			}
 		}
@@ -104,11 +106,18 @@ export default {
 		}
 
 		// make relative URLs absolute
-		data = data.replaceAll(/\[([^\]]*)\]\(\/([^\/][^\)]*)\)/g,
- 			(match, title, address) => {
-				return "["+title+"]("+base_address+"/"+address+")";
-  			}
-		);
+		if (absolute_urls && full_url) {
+			data = data.replaceAll(/(!?\[[^\]]*\]\()([^\)]+)\)/g,
+				(match, prefix, href) => {
+					if (/^(https?:|mailto:|data:|javascript:|#)/.test(href)) return match;
+					try {
+						return prefix + new URL(href, full_url).href + ')';
+					} catch {
+						return match;
+					}
+				}
+			);
+		}
 
 		// remove inline links and refs
 		if (ignore_links) {

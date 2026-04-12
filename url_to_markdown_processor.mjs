@@ -11,6 +11,7 @@ export default {
 		let inline_title = options.inline_title ?? true;
 		let ignore_links = options.ignore_links ?? false;
 		let improve_readability = options.improve_readability ?? true;
+		let absolute_urls = options.absolute_urls ?? true;
 		let title = document.window.document.querySelector('title');
 		if (title)
 			res.header("X-Title", encodeURIComponent(title.textContent));
@@ -36,7 +37,7 @@ export default {
 		for (let i=0;i<replacements.length;i++) {
 			markdown = markdown.replace(replacements[i].placeholder, replacements[i].replacement);
 		}
-		let result = (url) ? common_filters.filter(url, markdown, ignore_links) : markdown;
+		let result = (url) ? common_filters.filter(url, markdown, ignore_links, absolute_urls) : markdown;
 		if (inline_title && title) {
 			result = "# " + title.textContent + "\n" + result;
 		}

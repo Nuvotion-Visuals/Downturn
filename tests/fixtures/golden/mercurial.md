@@ -20,7 +20,7 @@ Contents
         *   [Phase-divergence: when a rewritten changeset is made public](#phase-divergence-when-a-rewritten-changeset-is-made-public)
     *   [Conclusion](#conclusion)
 
-Once you have mastered the art of mutable history in a single repository (see the [user guide](user-guide.html)), you can move up to the next level: _shared_ mutable history. evolve lets you push and pull draft changesets between repositories along with their obsolescence markers. This opens up a number of interesting possibilities.
+Once you have mastered the art of mutable history in a single repository (see the [user guide](http://fakehost/test/user-guide.html)), you can move up to the next level: _shared_ mutable history. evolve lets you push and pull draft changesets between repositories along with their obsolescence markers. This opens up a number of interesting possibilities.
 
 The simplest scenario is a single developer working across two computers. Say you’re working on code that must be tested on a remote test server, probably in a rack somewhere, only accessible by SSH, and running an “enterprise-grade” (out-of-date) OS. But you probably prefer to write code locally: everything is setup the way you like it, and you can use your preferred editor, IDE, merge/diff tools, etc.
 

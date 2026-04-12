@@ -6,15 +6,15 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 
 Links
 
-[link](foo/bar/baz.html)
+[link](http://fakehost/test/foo/bar/baz.html)
 
-[link](./foo/bar/baz.html)
+[link](http://fakehost/test/foo/bar/baz.html)
 
 [link](http://fakehost/foo/bar/baz.html)
 
 [link](#foo)
 
-[link](baz.html#foo)
+[link](http://fakehost/test/baz.html#foo)
 
 [link](http://fakehost/foo/bar/baz.html#foo)
 
@@ -24,9 +24,9 @@ Links
 
 Images
 
-![](foo/bar/baz.png)
+![](http://fakehost/test/foo/bar/baz.png)
 
-![](./foo/bar/baz.png)
+![](http://fakehost/test/foo/bar/baz.png)
 
 ![](http://fakehost/foo/bar/baz.png)
 

@@ -242,6 +242,41 @@ test('mcp: output_path takes precedence over output_dir', async () => {
   }
 });
 
+// --- absolute_urls option ---
+
+test('mcp: relative image URLs are resolved to absolute by default', async () => {
+  const html = '<html><body><h1>Test</h1><img src="images/photo.png" alt="photo"></body></html>';
+  const responses = await mcpRequest([
+    {
+      jsonrpc: '2.0', id: 1, method: 'tools/call',
+      params: {
+        name: 'html_to_markdown',
+        arguments: { html, url: 'https://example.com/guide/quickstart/' },
+      },
+    },
+  ]);
+  const resp = responses.find(r => r.id === 1);
+  const text = resp.result.content[0].text;
+  assert.ok(text.includes('https://example.com/guide/quickstart/images/photo.png'), 'relative image should be resolved to absolute');
+  assert.ok(!text.includes('](images/photo.png)'), 'relative path should not remain');
+});
+
+test('mcp: absolute_urls=false preserves relative URLs', async () => {
+  const html = '<html><body><h1>Test</h1><img src="images/photo.png" alt="photo"></body></html>';
+  const responses = await mcpRequest([
+    {
+      jsonrpc: '2.0', id: 1, method: 'tools/call',
+      params: {
+        name: 'html_to_markdown',
+        arguments: { html, url: 'https://example.com/guide/quickstart/', absolute_urls: false },
+      },
+    },
+  ]);
+  const resp = responses.find(r => r.id === 1);
+  const text = resp.result.content[0].text;
+  assert.ok(text.includes('](images/photo.png)'), 'relative path should be preserved when absolute_urls is false');
+});
+
 // --- Error handling ---
 
 test('mcp: missing required parameter returns error', async () => {

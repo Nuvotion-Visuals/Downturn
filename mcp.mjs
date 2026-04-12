@@ -51,7 +51,7 @@ function fetchUrl(url) {
 }
 
 // Convert URL to markdown, returns { markdown, html } so callers can extract metadata from the raw HTML
-async function urlToMarkdown(url, { title = true, links = true, clean = true } = {}) {
+async function urlToMarkdown(url, { title = true, links = true, clean = true, absoluteUrls = true } = {}) {
   const html = await fetchUrl(url);
   const stripped = filters.strip_style_and_script_blocks(html);
   const document = new JSDOM(stripped);
@@ -60,12 +60,13 @@ async function urlToMarkdown(url, { title = true, links = true, clean = true } =
     inline_title: title,
     ignore_links: !links,
     improve_readability: clean,
+    absolute_urls: absoluteUrls,
   };
   return { markdown: processor.process_dom(url, document, res, '', options), html };
 }
 
 // Convert HTML string to markdown, returns { markdown, html } for metadata extraction
-function htmlToMarkdown(htmlStr, url = '', { title = true, links = true, clean = true } = {}) {
+function htmlToMarkdown(htmlStr, url = '', { title = true, links = true, clean = true, absoluteUrls = true } = {}) {
   const stripped = filters.strip_style_and_script_blocks(htmlStr);
   const document = new JSDOM(stripped);
   const res = { header: () => {} };
@@ -73,6 +74,7 @@ function htmlToMarkdown(htmlStr, url = '', { title = true, links = true, clean =
     inline_title: title,
     ignore_links: !links,
     improve_readability: clean,
+    absolute_urls: absoluteUrls,
   };
   return { markdown: processor.process_dom(url, document, res, '', options), html: htmlStr };
 }
@@ -133,6 +135,7 @@ async function handleMessage(line) {
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
+              absolute_urls: { type: 'boolean', description: 'Resolve relative URLs to absolute using the page URL', default: true },
             },
             required: ['url'],
           },
@@ -150,6 +153,7 @@ async function handleMessage(line) {
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
+              absolute_urls: { type: 'boolean', description: 'Resolve relative URLs to absolute using the base URL', default: true },
             },
             required: ['html'],
           },
@@ -174,6 +178,7 @@ async function handleMessage(line) {
           title: args.include_title ?? true,
           links: args.include_links ?? true,
           clean: args.use_readability ?? true,
+          absoluteUrls: args.absolute_urls ?? true,
         });
       } else if (toolName === 'html_to_markdown') {
         if (!args.html) {
@@ -184,6 +189,7 @@ async function handleMessage(line) {
           title: args.include_title ?? true,
           links: args.include_links ?? true,
           clean: args.use_readability ?? true,
+          absoluteUrls: args.absolute_urls ?? true,
         });
       } else {
         sendError(id, -32601, `Unknown tool: ${toolName}`);

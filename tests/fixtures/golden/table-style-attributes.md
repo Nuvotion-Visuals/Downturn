@@ -57,15 +57,15 @@ An idiocy that all of these programs have in common is that, in addition to open
 > 
 > _Have you considered changing distributions?_
 > 
-> Yes, every single time I try something like this, I very seriously consider [getting a Mac](../gruntle/bittybox.html).
+> Yes, every single time I try something like this, I very seriously consider [getting a Mac](http://fakehost/gruntle/bittybox.html).
 > 
 > Really the only thing that's stopping me is that I fear the [Emacs situation](http://www.xemacs.org/).
 > 
 > (By which I mean, \`\`Lack of a usable version thereof.'' No, running RMSmacs inside a terminal window doesn't qualify. Nor does running an X server on the Mac: if I were going to switch, why in the world would I continue inflicting the X Windows Disaster on myself? Wouldn't getting away from that be the _whole point?_)
 > 
-> (I understand there is an almost-functional Aqua version of [RMSmacs](../hacks/why-cooperation-with-rms-is-impossible.mp3) now. I'll probably check it out at some point, but the problem with _[me](lemacs.html)_ switching from XEmacs to RMSmacs is that it would probably result in another [Slashdork](http://slashdot.org/article.pl?sid=03/01/24/1440207) post, meaning I'd wake up to another 150+ poorly spelled flames in my inbox... I'm hoping for a Aquafied XEmacs, but I know that's not likely to happen any time soon.)
+> (I understand there is an almost-functional Aqua version of [RMSmacs](http://fakehost/hacks/why-cooperation-with-rms-is-impossible.mp3) now. I'll probably check it out at some point, but the problem with _[me](http://fakehost/test/lemacs.html)_ switching from XEmacs to RMSmacs is that it would probably result in another [Slashdork](http://slashdot.org/article.pl?sid=03/01/24/1440207) post, meaning I'd wake up to another 150+ poorly spelled flames in my inbox... I'm hoping for a Aquafied XEmacs, but I know that's not likely to happen any time soon.)
 > 
-> By the way, the suggestion to switch Linux distrubutions in order to get a single app to work might sound absurd at first. And that's because [it is](linux.html). But I've been saturated with Unix-peanut-gallery effluvia for so long that it no longer even surprises me when every question -- no matter how simple -- results in someone suggesting that you either A) patch your kernel or B) change distros. It's inevitable and inescapable, like Hitler.
+> By the way, the suggestion to switch Linux distrubutions in order to get a single app to work might sound absurd at first. And that's because [it is](http://fakehost/test/linux.html). But I've been saturated with Unix-peanut-gallery effluvia for so long that it no longer even surprises me when every question -- no matter how simple -- results in someone suggesting that you either A) patch your kernel or B) change distros. It's inevitable and inescapable, like Hitler.
 
 * * *
 

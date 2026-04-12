@@ -5,7 +5,7 @@
 Herman Melville
 ---------------------------------------------------------------------------
 
-[![To the story text without notes](hmhome.gif )](http://www.vcu.edu/engweb/webtexts/bartleby.html)
+[![To the story text without notes](http://fakehost/test/hmhome.gif)](http://www.vcu.edu/engweb/webtexts/bartleby.html)
 ----------------------------------------------------------------------------------------------------
 
 ### Prepared by [Ann Woodlief,](http://www.vcu.edu/engweb) Virginia Commonwealth University

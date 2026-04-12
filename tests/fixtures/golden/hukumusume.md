@@ -8,11 +8,11 @@
 *                                                                                                                      :                                                                              
 
 
-[福娘童話集](../../../index.html) > [きょうのイソップ童話](../index.html) > [１月のイソップ童話](../itiran/01gatu.htm) > 欲張りなイヌ
+[福娘童話集](http://fakehost/index.html) > [きょうのイソップ童話](http://fakehost/index.html) > [１月のイソップ童話](http://fakehost/itiran/01gatu.htm) > 欲張りなイヌ
 
 元旦のイソップ童話
 
-![よくばりなイヌ](../../../gazou/pc_gazou/aesop/aesop052.jpg)
+![よくばりなイヌ](http://fakehost/gazou/pc_gazou/aesop/aesop052.jpg)
 
 欲張りなイヌ
 
@@ -37,7 +37,7 @@
 
 おしまい
 
-![前のページへ戻る](../../../gazou/pc_gazou/all/top_bana/back_logo_r.gif)
+![前のページへ戻る](http://fakehost/gazou/pc_gazou/all/top_bana/back_logo_r.gif)
 
 ![](file:///C:/Documents%20and%20Settings/%E7%A6%8F%E5%A8%98note/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/company_website15/image/spacer.gif)
 
