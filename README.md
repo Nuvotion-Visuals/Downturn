@@ -1,16 +1,25 @@
 # Downturn
 
-Fetch web pages and convert to markdown. Zero runtime dependencies.
+Fetch web pages and convert them to clean markdown. Zero runtime dependencies.
 
-Based on [macsplit/urltomarkdown](https://github.com/macsplit/urltomarkdown) by Lee Hanken. The original pulls in 634,636 lines of JavaScript through `node_modules/`. This is 5,862 lines, a 99.1% reduction.
+Use it as an MCP server, HTTP API, or as a markdown web browser — paste a URL, read the page as markdown, click links to keep browsing.
 
-The bulk of the original's size comes from [jsdom](https://github.com/jsdom/jsdom), a full browser environment simulation (DOM, CSS, events, navigation) used only to parse HTML into a DOM tree. Downturn replaces it with Mozilla's own [JSDOMParser](https://github.com/mozilla/readability/blob/main/JSDOMParser.js), the lightweight parser that Readability was actually designed for, extended with the handful of DOM methods that Turndown needs. The core libraries (Readability, Turndown) are vendored and ported to modern ESM. The result is validated against 415 tests, including Mozilla Readability's own 117 real-world test pages and Turndown's 140 conversion fixtures, both pulled from their upstream repos.
+Based on [macsplit/urltomarkdown](https://github.com/macsplit/urltomarkdown) by Lee Hanken — the original pulls in 634,636 lines of JavaScript through `node_modules/`. This is 6,051 lines, a 99.0% reduction.
 
-## Install
+## Web UI
 
 ```bash
-npx -y downturn
+node worker.mjs
 ```
+
+Open `http://localhost:4001` in your browser. Paste a URL, hit Enter, browse the web in markdown. Click any link to navigate to that page.
+
+Features:
+- Split view (markdown + rendered preview), or toggle to single pane
+- Browser back/forward navigation via URL hash
+- Copy markdown to clipboard, download as `.md`
+- Configurable: title, links, readability, absolute URL resolution
+- Deploys to Cloudflare Workers — bundle with `npx esbuild worker.mjs --bundle --outfile=dist/worker.js --format=esm --external:node:http`
 
 ## MCP Server
 
@@ -29,32 +38,24 @@ Tools:
 - **`url_to_markdown`** fetches a URL and returns markdown
 - **`html_to_markdown`** converts an HTML string to markdown
 
-Both accept `output_path` to write directly to a file, plus `include_title`, `include_links`, `use_readability` options.
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `output_path` | | Full file path to write markdown to |
+| `output_dir` | | Directory to write to; filename is auto-generated from the page title (h1, og:title, title tag, or URL slug) |
+| `include_title` | `true` | Prepend the page title as an H1 heading |
+| `include_links` | `true` | Include hyperlinks in the output |
+| `use_readability` | `true` | Use Readability to extract article content |
+| `absolute_urls` | `true` | Resolve relative URLs (images, links) to absolute using the page URL |
 
-Example agent interactions:
-- "Convert this page to markdown" returns the text in context
-- "Save https://example.com/docs to docs/reference.md" writes the file directly
-
-## HTTP Server
+## HTTP API
 
 ```bash
 PORT=3000 node index.mjs
 ```
 
-### GET
-
 ```
-GET /?url=https://example.com
+GET /?url=https://example.com&title=true&links=true&clean=true
 ```
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `url`     | required | URL to convert |
-| `title`   | `false` | Prepend page title as H1 |
-| `links`   | `true`  | Include hyperlinks (`false` to strip) |
-| `clean`   | `true`  | Use Readability to extract content (`false` for raw) |
-
-### POST
 
 ```
 POST /
@@ -63,27 +64,16 @@ Content-Type: application/x-www-form-urlencoded
 url=https://example.com&html=<html>...</html>
 ```
 
-Supply `html` directly to skip fetching. Query parameters work on POST too.
-
-### Response headers
-
-```
-Content-Type: text/markdown
-X-Title: URL-encoded page title
-Access-Control-Allow-Origin: *
-```
-
-Rate limited to 5 requests per 30 seconds per IP. Follows redirects up to 5 hops.
+Returns `Content-Type: text/markdown` with CORS headers. Rate limited to 5 requests per 30 seconds per IP.
 
 ## Pipeline
 
-1. Fetch page (`node:https`, follows redirects)
+1. Fetch page (follows redirects)
 2. Strip scripts and styles
 3. Extract article content (Mozilla Readability)
 4. Convert to markdown (Turndown)
-5. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
-
-HTML parsing uses Mozilla's JSDOMParser with extensions for `querySelector`, `outerHTML`, `cloneNode`, and void element handling.
+5. Resolve relative URLs to absolute
+6. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
 
 ## Testing
 
@@ -91,26 +81,22 @@ HTML parsing uses Mozilla's JSDOMParser with extensions for `querySelector`, `ou
 node --test tests/*.test.mjs
 ```
 
-415 tests covering the full pipeline against 117 real-world pages, plus Readability and Turndown fixture suites.
-
-## Docker
-
-```bash
-docker build -t downturn .
-docker run -p 1337:1337 downturn
-```
+472 tests covering the full pipeline, MCP integration, title extraction, and URL resolution.
 
 ## Structure
 
 ```
-index.mjs                              HTTP server
-mcp.mjs                               MCP stdio transport
+worker.mjs                             Cloudflare Worker + local dev server
+index.mjs                              HTTP API server
+mcp.mjs                                MCP stdio transport
+title_utils.mjs                        Title extraction and filename slugification
 url_to_markdown_processor.mjs          Core pipeline
 url_to_markdown_readers.mjs            URL fetching, redirect following
 url_to_markdown_formatters.mjs         Code block and table pre-processing
 url_to_markdown_common_filters.mjs     Post-processing filters
 url_to_markdown_apple_dev_docs.mjs     Apple developer docs parser
 html_table_to_markdown.mjs             HTML table conversion
+public/index.html                      Web UI (single file, inline CSS/JS)
 
 lib/
   html_parser.mjs                      DOM parser (vendored JSDOMParser)

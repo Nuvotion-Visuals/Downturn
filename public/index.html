@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Downturn</title>
+<style>
+/* GitHub dark theme tokens */
+:root {
+  --color-bg: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-tertiary: #21262d;
+  --color-border: #30363d;
+  --color-border-hover: #8b949e;
+  --color-text: #e6edf3;
+  --color-text-secondary: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-text-placeholder: #6e7681;
+  --color-link: #58a6ff;
+  --color-accent: #1f6feb;
+  --color-danger: #f85149;
+  --color-code-bg: #161b22;
+  --radius: 6px;
+  --font-sm: .75rem;
+  --font-base: .875rem;
+  --font-lg: 1.25rem;
+  --control-h: 32px;
+  --control-px: 12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+a { color: var(--color-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+.nav-btn {
+  height: var(--control-h);
+  padding: 0 var(--control-px);
+  font-size: var(--font-base);
+  font-weight: 500;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-btn:hover { background: var(--color-border); border-color: var(--color-border-hover); }
+#urlInput {
+  flex: 1;
+  height: var(--control-h);
+  padding: 0 var(--control-px);
+  font-size: var(--font-base);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  line-height: var(--control-h);
+  outline: none;
+}
+#urlInput:focus { border-color: var(--color-link); box-shadow: 0 0 0 3px rgba(31,111,235,.3); }
+#urlInput::placeholder { color: var(--color-text-placeholder); }
+.topbar-right { display: flex; gap: 8px; align-items: center; }
+/* Loading */
+#loading {
+  display: none;
+  width: 16px; height: 16px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-link);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+/* Settings popover */
+.settings-wrap { position: relative; }
+#settingsPopover {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  z-index: 10;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+#settingsPopover.open { display: block; }
+#settingsPopover label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: var(--font-base);
+  color: var(--color-text);
+  cursor: pointer;
+}
+/* Split pane */
+.panes {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+.pane {
+  flex: 1;
+  overflow: auto;
+  padding: 24px 32px;
+}
+.pane::-webkit-scrollbar { width: 8px; }
+.pane::-webkit-scrollbar-track { background: transparent; }
+.pane::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: 4px; }
+.pane::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
+#rawPane {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-right: 1px solid var(--color-border);
+  user-select: text;
+  color: var(--color-text);
+}
+.panes.single .pane {
+  border-right: none;
+  max-width: none;
+  padding-left: max(32px, calc((100% - 700px) / 2));
+  padding-right: max(32px, calc((100% - 700px) / 2));
+}
+.panes.single .divider { display: none; }
+.divider {
+  width: 4px;
+  cursor: col-resize;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+.divider:hover { background: var(--color-link); }
+/* Preview pane — GitHub markdown-body styling */
+#previewPane {
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  color: var(--color-text);
+}
+#previewPane h1 { font-size: 2em; font-weight: 600; margin: 0 0 16px; padding-bottom: 0.3em; border-bottom: 1px solid var(--color-border); }
+#previewPane h2 { font-size: 1.5em; font-weight: 600; margin: 24px 0 16px; padding-bottom: 0.3em; border-bottom: 1px solid var(--color-border); }
+#previewPane h3 { font-size: 1.25em; font-weight: 600; margin: 24px 0 16px; }
+#previewPane h4 { font-size: 1em; font-weight: 600; margin: 24px 0 16px; }
+#previewPane h5 { font-size: .875em; font-weight: 600; margin: 24px 0 16px; }
+#previewPane h6 { font-size: .85em; font-weight: 600; margin: 24px 0 16px; color: var(--color-text-muted); }
+#previewPane p { margin: 0 0 16px; }
+#previewPane a { color: var(--color-link); text-decoration: none; cursor: pointer; }
+#previewPane a:hover { text-decoration: underline; }
+#previewPane img { max-width: 100%; border-radius: var(--radius); margin: 8px 0; }
+#previewPane pre {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow-x: auto;
+  margin: 0 0 16px;
+  line-height: 1.45;
+}
+#previewPane code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 85%;
+}
+#previewPane :not(pre) > code {
+  background: var(--color-bg-tertiary);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius);
+  font-size: 85%;
+}
+#previewPane blockquote {
+  border-left: 0.25em solid var(--color-border);
+  padding: 0 1em;
+  margin: 0 0 16px;
+  color: var(--color-text-muted);
+}
+#previewPane ul, #previewPane ol { padding-left: 2em; margin: 0 0 16px; }
+#previewPane li { margin: 0.25em 0; }
+#previewPane li + li { margin-top: 0.25em; }
+#previewPane hr { border: none; border-top: 1px solid var(--color-border); margin: 24px 0; height: 0.25em; background: var(--color-border); border-radius: 2px; }
+#previewPane table { border-collapse: collapse; margin: 0 0 16px; width: auto; display: block; overflow-x: auto; }
+#previewPane th, #previewPane td { border: 1px solid var(--color-border); padding: 6px 13px; }
+#previewPane th { font-weight: 600; background: var(--color-bg-secondary); }
+#previewPane tr:nth-child(2n) { background: var(--color-bg-secondary); }
+#previewPane strong { font-weight: 600; }
+/* Bottom bar */
+.bottombar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+  font-size: var(--font-sm);
+  color: var(--color-text-muted);
+}
+.bottombar button {
+  height: 28px;
+  padding: 0 var(--control-px);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+#copyBtn { width: 60px; text-align: center; }
+.bottombar button:hover { background: var(--color-border); border-color: var(--color-border-hover); }
+.view-toggle {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.vt-btn {
+  height: 24px;
+  padding: 0 10px;
+  font-size: var(--font-sm);
+  background: var(--color-bg);
+  border: none;
+  border-right: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.vt-btn:last-child { border-right: none; }
+.vt-btn:hover { color: var(--color-text); }
+.vt-btn.active { background: var(--color-accent); color: #fff; }
+#status { flex: 1; }
+/* Empty state */
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-placeholder);
+  font-size: var(--font-base);
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <input type="text" id="urlInput" placeholder="Enter a URL and press Enter" autofocus>
+  <div id="loading"></div>
+  <div class="topbar-right">
+    <div class="settings-wrap">
+      <button class="nav-btn" id="settingsBtn">Options</button>
+      <div id="settingsPopover">
+        <label><input type="checkbox" id="optTitle" checked> Include title</label>
+        <label><input type="checkbox" id="optLinks" checked> Include links</label>
+        <label><input type="checkbox" id="optClean" checked> Use Readability</label>
+        <label><input type="checkbox" id="optAbsolute" checked> Absolute URLs</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panes">
+  <div class="pane" id="rawPane"><div class="empty-state">Markdown will appear here</div></div>
+  <div class="divider" id="divider"></div>
+  <div class="pane" id="previewPane"><div class="empty-state">Rendered preview will appear here</div></div>
+</div>
+
+<div class="bottombar">
+  <button id="copyBtn">Copy</button>
+  <button id="downloadBtn">Download .md</button>
+  <div class="view-toggle">
+    <button class="vt-btn active" data-view="both">Both</button>
+    <button class="vt-btn" data-view="raw">Markdown</button>
+    <button class="vt-btn" data-view="preview">Preview</button>
+  </div>
+  <span id="status"></span>
+  <span id="stats"></span>
+</div>
+
+<script>
+const API_BASE = '';
+
+// State
+let currentMarkdown = '';
+const mdCache = {}; // url -> markdown cache for instant back/forward
+
+// Elements
+const urlInput = document.getElementById('urlInput');
+const rawPane = document.getElementById('rawPane');
+const previewPane = document.getElementById('previewPane');
+const loading = document.getElementById('loading');
+const statusEl = document.getElementById('status');
+const stats = document.getElementById('stats');
+const divider = document.getElementById('divider');
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPopover = document.getElementById('settingsPopover');
+
+// Navigate to a URL — pushState controls browser history
+async function navigate(targetUrl, { pushState = true } = {}) {
+  if (!targetUrl) return;
+
+  // Normalize
+  if (!/^https?:\/\//i.test(targetUrl)) targetUrl = 'https://' + targetUrl;
+
+  urlInput.value = targetUrl;
+
+  // Check cache for instant back/forward
+  if (mdCache[targetUrl]) {
+    currentMarkdown = mdCache[targetUrl];
+    const t0 = performance.now();
+    render(currentMarkdown);
+    showStats(currentMarkdown, performance.now() - t0, '(cached)');
+    if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
+    statusEl.textContent = '';
+    return;
+  }
+
+  loading.style.display = 'block';
+  statusEl.textContent = 'Fetching...';
+  stats.textContent = '';
+  const t0 = performance.now();
+
+  const params = new URLSearchParams({
+    url: targetUrl,
+    title: document.getElementById('optTitle').checked,
+    links: document.getElementById('optLinks').checked,
+    clean: document.getElementById('optClean').checked,
+    absoluteUrls: document.getElementById('optAbsolute').checked,
+  });
+
+  try {
+    const resp = await fetch(`${API_BASE}/api?${params}`);
+    if (!resp.ok) throw new Error(`${resp.status} ${resp.statusText}`);
+    const markdown = await resp.text();
+    const elapsed = performance.now() - t0;
+
+    currentMarkdown = markdown;
+    mdCache[targetUrl] = markdown;
+
+    render(markdown);
+    showStats(markdown, elapsed);
+    if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
+    statusEl.textContent = '';
+  } catch (e) {
+    statusEl.textContent = `Error: ${e.message}`;
+    rawPane.textContent = `Error: ${e.message}`;
+    previewPane.innerHTML = `<div class="empty-state">Error: ${e.message}</div>`;
+  } finally {
+    loading.style.display = 'none';
+  }
+}
+
+function render(markdown) {
+  rawPane.textContent = markdown;
+  previewPane.innerHTML = markdownToHtml(markdown);
+  requestAnimationFrame(() => {
+    rawPane.scrollTop = 0;
+    previewPane.scrollTop = 0;
+  });
+}
+
+function showStats(markdown, ms, suffix) {
+  const chars = markdown.length;
+  const kb = (new Blob([markdown]).size / 1024).toFixed(1);
+  const time = Math.round(ms);
+  stats.textContent = `${chars.toLocaleString()} chars | ${kb} KB | ${time}ms${suffix ? ' ' + suffix : ''}`;
+}
+
+// Browser back/forward
+window.addEventListener('popstate', (e) => {
+  const targetUrl = e.state?.url;
+  if (targetUrl) {
+    navigate(targetUrl, { pushState: false });
+  } else {
+    // Back to initial empty state
+    urlInput.value = '';
+    currentMarkdown = '';
+    rawPane.innerHTML = '<div class="empty-state">Markdown will appear here</div>';
+    previewPane.innerHTML = '<div class="empty-state">Rendered preview will appear here</div>';
+    charCount.textContent = '';
+  }
+});
+
+// Load from URL on page load (e.g. shared link or refresh)
+(function init() {
+  const hash = window.location.hash.slice(1);
+  const targetUrl = hash || new URLSearchParams(window.location.search).get('url');
+  if (targetUrl) {
+    window.history.replaceState({ url: targetUrl }, '', '#' + targetUrl);
+    navigate(targetUrl, { pushState: false });
+  }
+})();
+
+// Markdown to HTML renderer
+function markdownToHtml(md) {
+  // Fenced code blocks
+  let html = md.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
+    `<pre><code class="language-${lang}">${esc(code.trimEnd())}</code></pre>`
+  );
+
+  const lines = html.split('\n');
+  let out = [];
+  let inList = false;
+  let listType = '';
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+
+    // Skip lines inside <pre> blocks
+    if (line.includes('<pre>')) {
+      let block = line;
+      while (!block.includes('</pre>') && i < lines.length - 1) {
+        i++;
+        block += '\n' + lines[i];
+      }
+      out.push(block);
+      continue;
+    }
+
+    // Headings
+    const headingMatch = line.match(/^(#{1,6})\s+(.+)/);
+    if (headingMatch) {
+      closeList();
+      const level = headingMatch[1].length;
+      out.push(`<h${level}>${inline(headingMatch[2])}</h${level}>`);
+      continue;
+    }
+
+    // Setext headings
+    if (i > 0 && /^[=-]{3,}\s*$/.test(line) && out.length) {
+      const prev = out.pop();
+      const tag = line[0] === '=' ? 'h1' : 'h2';
+      out.push(`<${tag}>${prev.replace(/^<p>|<\/p>$/g, '')}</${tag}>`);
+      continue;
+    }
+
+    // HR
+    if (/^(\*{3,}|-{3,}|_{3,})\s*$/.test(line)) {
+      closeList();
+      out.push('<hr>');
+      continue;
+    }
+
+    // Blockquote
+    if (line.startsWith('> ')) {
+      closeList();
+      let bqLines = [line.slice(2)];
+      while (i + 1 < lines.length && lines[i + 1].startsWith('> ')) {
+        i++;
+        bqLines.push(lines[i].slice(2));
+      }
+      out.push(`<blockquote><p>${inline(bqLines.join('<br>'))}</p></blockquote>`);
+      continue;
+    }
+
+    // Unordered list
+    const ulMatch = line.match(/^(\s*)[*+-]\s+(.*)/);
+    if (ulMatch) {
+      if (!inList || listType !== 'ul') {
+        closeList();
+        inList = true;
+        listType = 'ul';
+        out.push('<ul>');
+      }
+      out.push(`<li>${inline(ulMatch[2])}</li>`);
+      continue;
+    }
+
+    // Ordered list
+    const olMatch = line.match(/^(\s*)\d+\.\s+(.*)/);
+    if (olMatch) {
+      if (!inList || listType !== 'ol') {
+        closeList();
+        inList = true;
+        listType = 'ol';
+        out.push('<ol>');
+      }
+      out.push(`<li>${inline(olMatch[2])}</li>`);
+      continue;
+    }
+
+    // Table
+    if (line.includes('|') && i + 1 < lines.length && /^\|?\s*[-:]+[-|\s:]*$/.test(lines[i + 1])) {
+      closeList();
+      const headerCells = parseTableRow(line);
+      i++; // skip separator
+      let tableHtml = '<table><thead><tr>' +
+        headerCells.map(c => `<th>${inline(c)}</th>`).join('') +
+        '</tr></thead><tbody>';
+      while (i + 1 < lines.length && lines[i + 1].includes('|')) {
+        i++;
+        const cells = parseTableRow(lines[i]);
+        tableHtml += '<tr>' + cells.map(c => `<td>${inline(c)}</td>`).join('') + '</tr>';
+      }
+      tableHtml += '</tbody></table>';
+      out.push(tableHtml);
+      continue;
+    }
+
+    // Empty line
+    if (!line.trim()) {
+      closeList();
+      out.push('');
+      continue;
+    }
+
+    // Paragraph
+    closeList();
+    out.push(`<p>${inline(line)}</p>`);
+  }
+  closeList();
+  return out.join('\n');
+
+  function closeList() {
+    if (inList) {
+      out.push(`</${listType}>`);
+      inList = false;
+    }
+  }
+
+  function parseTableRow(row) {
+    return row.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+  }
+}
+
+function esc(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function inline(text) {
+  // Images
+  text = text.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img alt="$1" src="$2">');
+  // Links
+  text = text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
+  // Bold + italic
+  text = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  // Bold
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  // Italic
+  text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  text = text.replace(/_(.+?)_/g, '<em>$1</em>');
+  // Inline code
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  return text;
+}
+
+// Link interception in preview
+previewPane.addEventListener('click', (e) => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  e.preventDefault();
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('#')) return;
+  navigate(href);
+});
+
+// URL input
+urlInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') navigate(urlInput.value.trim());
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'l') { e.preventDefault(); urlInput.focus(); urlInput.select(); }
+});
+
+// Copy
+const copyBtn = document.getElementById('copyBtn');
+copyBtn.addEventListener('click', async () => {
+  if (!currentMarkdown) return;
+  try {
+    await navigator.clipboard.writeText(currentMarkdown);
+  } catch {
+    // Fallback for non-secure contexts
+    const ta = document.createElement('textarea');
+    ta.value = currentMarkdown;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  copyBtn.textContent = 'Copied!';
+  setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
+});
+
+// Download
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  if (!currentMarkdown) return;
+  // Extract title from first H1 line, fall back to URL slug
+  const h1Match = currentMarkdown.match(/^#\s+(.+)/m);
+  let slug;
+  if (h1Match) {
+    slug = h1Match[1].trim().toLowerCase()
+      .replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/-+/g, '-')
+      .replace(/^-|-$/g, '').slice(0, 80);
+  }
+  if (!slug) {
+    try {
+      const pathname = new URL(urlInput.value).pathname.replace(/\/$/, '');
+      slug = pathname.split('/').pop() || 'page';
+    } catch { slug = 'page'; }
+  }
+  const blob = new Blob([currentMarkdown], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = slug + '.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+// View toggle
+document.querySelector('.view-toggle').addEventListener('click', (e) => {
+  const btn = e.target.closest('.vt-btn');
+  if (!btn) return;
+  document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const view = btn.dataset.view;
+  const panes = document.querySelector('.panes');
+  rawPane.style.display = (view === 'preview') ? 'none' : '';
+  previewPane.style.display = (view === 'raw') ? 'none' : '';
+  panes.classList.toggle('single', view !== 'both');
+});
+
+// Settings popover
+settingsBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  settingsPopover.classList.toggle('open');
+});
+document.addEventListener('click', () => settingsPopover.classList.remove('open'));
+settingsPopover.addEventListener('click', (e) => e.stopPropagation());
+
+// Resizable divider
+// divider already declared above
+let dragging = false;
+divider.addEventListener('mousedown', (e) => {
+  dragging = true;
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+  e.preventDefault();
+});
+document.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  const panes = document.querySelector('.panes');
+  const rect = panes.getBoundingClientRect();
+  const ratio = (e.clientX - rect.left) / rect.width;
+  const clamped = Math.max(0.15, Math.min(0.85, ratio));
+  rawPane.style.flex = `0 0 ${clamped * 100}%`;
+  previewPane.style.flex = `0 0 ${(1 - clamped) * 100}%`;
+});
+document.addEventListener('mouseup', () => {
+  if (dragging) {
+    dragging = false;
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+  }
+});
+</script>
+</body>
+</html>
