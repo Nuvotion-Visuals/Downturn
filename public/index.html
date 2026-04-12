@@ -159,7 +159,6 @@ a:hover { text-decoration: underline; }
 .nav-btn:disabled:hover { background: none; }
 .topbar-sep { width: 1px; height: 20px; background: var(--color-border); flex-shrink: 0; }
 #urlInput {
-  flex: 1;
   height: var(--control-h);
   padding: 0 var(--control-px);
   font-size: var(--font-base);
@@ -367,6 +366,85 @@ a:hover { text-decoration: underline; }
 .nav-sidebar::-webkit-scrollbar { width: 8px; }
 .nav-sidebar::-webkit-scrollbar-track { background: transparent; }
 .nav-sidebar::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: 4px; }
+/* Sidebar tabs */
+.sidebar-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+.sidebar-tab {
+  flex: 1;
+  padding: 6px 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-muted);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  text-align: center;
+}
+.sidebar-tab:hover { color: var(--color-text); }
+.sidebar-tab.active { color: var(--color-text); border-bottom-color: var(--color-accent); }
+.sidebar-content { overflow-y: auto; flex: 1; }
+/* Autocomplete */
+.autocomplete {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  z-index: 20;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.autocomplete.open { display: block; }
+.ac-item {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: var(--font-sm);
+}
+.ac-item:hover, .ac-item.selected { background: var(--color-bg-tertiary); }
+.ac-title { color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ac-url { color: var(--color-text-muted); font-size: var(--font-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ac-star { color: var(--color-accent); margin-right: 4px; }
+/* Bookmark button */
+#bookmarkBtn .bm-filled { display: none; }
+#bookmarkBtn.active .bm-outline { display: none; }
+#bookmarkBtn.active .bm-filled { display: block; }
+#bookmarkBtn.active { color: var(--color-accent); }
+/* History items in sidebar */
+.history-date { padding: 8px 16px 4px; font-size: var(--font-sm); color: var(--color-text-muted); font-weight: 600; }
+.history-item {
+  display: block;
+  padding: 3px 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: var(--font-sm);
+}
+.history-item:hover { color: var(--color-link); background: var(--color-bg-tertiary); }
+.bookmark-item {
+  display: block;
+  padding: 3px 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: var(--font-sm);
+}
+.bookmark-item:hover { color: var(--color-link); background: var(--color-bg-tertiary); }
 /* Bottom bar */
 .bottombar {
   display: flex;
@@ -417,7 +495,7 @@ a:hover { text-decoration: underline; }
   <button class="tab-new" id="newTabBtn" title="New tab (Ctrl+T)">+</button>
 </div>
 <div class="topbar">
-  <button class="nav-btn" id="navToggle" title="Toggle site navigation"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg></button>
+  <button class="nav-btn" id="navToggle" title="Toggle sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm224 0l0 320 224 0 0-320L224 96zM88 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 96zM64 216c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0z"/></svg></button>
   <div class="topbar-sep"></div>
   <button class="nav-btn" id="backBtn" title="Back"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button>
   <button class="nav-btn" id="fwdBtn" title="Forward"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
@@ -426,9 +504,13 @@ a:hover { text-decoration: underline; }
   <div class="topbar-sep"></div>
   <button class="nav-btn" id="openFileBtn" title="Open file (Ctrl+O)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64L256 0l0 128 128 0z"/></svg></button>
   <button class="nav-btn" id="openFolderBtn" title="Open folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M88.7 223.8L0 375.8 0 96C0 60.7 28.7 32 64 32l117.5 0c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7L416 96c35.3 0 64 28.7 64 64l0 32-336 0c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.2C122.1 230 132.6 224 144 224l400 0c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480L32 480c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z"/></svg></button>
-  <input type="text" id="urlInput" placeholder="Enter a URL and press Enter" autofocus>
+  <div style="flex:1;position:relative">
+    <input type="text" id="urlInput" placeholder="Enter a URL and press Enter" autofocus style="width:100%">
+    <div class="autocomplete" id="autocomplete"></div>
+  </div>
   <div id="loading"></div>
   <div class="topbar-right">
+    <button class="nav-btn" id="bookmarkBtn" disabled title="Bookmark"><svg class="bm-outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 48C0 21.5 21.5 0 48 0l0 48 0 393.4 130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4 336 48 48 48 48 0 336 0c26.5 0 48 21.5 48 48l0 440c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488L0 48z"/></svg><svg class="bm-filled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"/></svg></button>
     <div class="settings-wrap">
       <button class="nav-btn" id="settingsBtn" title="Options"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg></button>
       <div id="settingsPopover">
@@ -443,7 +525,16 @@ a:hover { text-decoration: underline; }
 </div>
 
 <div class="main-area">
-  <div class="nav-sidebar open" id="navSidebar"><ul></ul></div>
+  <div class="nav-sidebar open" id="navSidebar">
+    <div class="sidebar-tabs">
+      <button class="sidebar-tab active" data-sidebar="nav">Nav</button>
+      <button class="sidebar-tab" data-sidebar="bookmarks">Bookmarks</button>
+      <button class="sidebar-tab" data-sidebar="history">History</button>
+    </div>
+    <div class="sidebar-content" id="sidebarNav"><ul></ul></div>
+    <div class="sidebar-content" id="sidebarBookmarks" style="display:none"></div>
+    <div class="sidebar-content" id="sidebarHistory" style="display:none"></div>
+  </div>
   <div class="panes">
     <textarea class="pane" id="rawPane" placeholder="Markdown will appear here"></textarea>
     <div class="divider" id="divider"></div>
@@ -466,10 +557,10 @@ a:hover { text-decoration: underline; }
 
 <script type="module">
 import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce } from './ui.mjs';
+import * as db from './db.mjs';
 const API_BASE = '';
 
 // Settings persistence
-const SETTINGS_KEY = 'downturn-settings';
 function saveSettings() {
   const settings = {
     optTitle: document.getElementById('optTitle').checked,
@@ -480,7 +571,7 @@ function saveSettings() {
     view: document.querySelector('.vt-btn.active')?.dataset.view || 'both',
     navOpen: document.getElementById('navSidebar').classList.contains('open'),
   };
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  db.saveSettings(settings);
 }
 function applyView(view) {
   document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
@@ -491,9 +582,9 @@ function applyView(view) {
   document.getElementById('previewPane').style.display = (view === 'raw') ? 'none' : '';
   panes.classList.toggle('single', view !== 'both');
 }
-function loadSettings() {
+async function loadSettings() {
   try {
-    const s = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+    const s = await db.getSettings();
     if (!s) return false;
     if (s.optTitle !== undefined) document.getElementById('optTitle').checked = s.optTitle;
     if (s.optLinks !== undefined) document.getElementById('optLinks').checked = s.optLinks;
@@ -526,7 +617,6 @@ let tabs = [];
 let activeTabId = 0;
 let nextTabId = 1;
 const pageCache = {};
-const TABS_KEY = 'downturn-tabs-v2';
 let folderHandle = null;
 let folderTree = [];
 let fileHandles = new Map();
@@ -537,12 +627,12 @@ function saveTabs() {
     activeTabId,
     nextTabId,
   };
-  sessionStorage.setItem(TABS_KEY, JSON.stringify(data));
+  db.saveTabs(data);
 }
 
-function loadTabs() {
+async function loadTabs() {
   try {
-    const data = JSON.parse(sessionStorage.getItem(TABS_KEY));
+    const data = await db.getTabs();
     if (!data || !data.tabs?.length) return false;
     tabs = data.tabs.map(t => ({ ...t, rawScroll: 0, previewScroll: 0 }));
     activeTabId = data.activeTabId;
@@ -614,6 +704,7 @@ function displayTab(tab) {
     previewPane.scrollTop = tab.previewScroll || 0;
   });
   window.history.replaceState({ url: tab.url }, '', tab.url ? '#' + tab.url : window.location.pathname);
+  updateBookmarkBtn();
 }
 
 function switchTab(id) {
@@ -693,6 +784,11 @@ async function navigate(targetUrl, { pushState = true } = {}) {
   tab.url = targetUrl;
   urlInput.value = targetUrl;
 
+  // L1: in-memory cache, L2: IndexedDB cache
+  if (!pageCache[targetUrl]) {
+    const dbCached = await db.getCache(targetUrl);
+    if (dbCached) pageCache[targetUrl] = { markdown: dbCached.markdown, nav: dbCached.nav };
+  }
   if (pageCache[targetUrl]) {
     const cached = pageCache[targetUrl];
     tab.markdown = cached.markdown;
@@ -736,6 +832,9 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     tab.markdown = data.markdown;
     tab.nav = data.nav;
     pageCache[targetUrl] = data;
+    db.setCache(targetUrl, data.markdown, data.nav);
+    const h1 = data.markdown.match(/^#\s+(.+)/m);
+    db.addHistory(targetUrl, h1 ? h1[1] : '');
 
     rawPane.value = tab.markdown;
     previewPane.innerHTML = markdownToHtml(tab.markdown);
@@ -749,6 +848,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     if (pushState) window.history.pushState({ url: targetUrl }, '', '#' + targetUrl);
     statusEl.textContent = '';
     renderTabs();
+    updateBookmarkBtn();
   } catch (e) {
     statusEl.textContent = `Error: ${e.message}`;
     rawPane.value = `Error: ${e.message}`;
@@ -759,7 +859,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
 }
 
 function renderNav(nav) {
-  const ul = navSidebar.querySelector('ul');
+  const ul = document.querySelector('#sidebarNav ul');
   const currentUrl = urlInput.value;
   const navArr = nav || [];
   if (navArr.length === 0) {
@@ -791,20 +891,22 @@ window.addEventListener('popstate', (e) => {
 });
 
 // Init
-if (!loadSettings()) applyView('preview');
-if (loadTabs()) {
-  // Restore saved tabs
-  renderTabs();
-  displayTab(getActiveTab());
-} else {
-  createTab(); // first empty tab
-  const hash = window.location.hash.slice(1);
-  const targetUrl = hash || new URLSearchParams(window.location.search).get('url');
-  if (targetUrl) {
-    window.history.replaceState({ url: targetUrl }, '', '#' + targetUrl);
-    navigate(targetUrl, { pushState: false });
+(async () => {
+  if (!(await loadSettings())) applyView('preview');
+  db.pruneCache(7);
+  if (await loadTabs()) {
+    renderTabs();
+    displayTab(getActiveTab());
+  } else {
+    createTab();
+    const hash = window.location.hash.slice(1);
+    const targetUrl = hash || new URLSearchParams(window.location.search).get('url');
+    if (targetUrl) {
+      window.history.replaceState({ url: targetUrl }, '', '#' + targetUrl);
+      navigate(targetUrl, { pushState: false });
+    }
   }
-}
+})();
 
 // Link interception — Ctrl/middle-click opens new tab
 for (const el of [previewPane]) {
@@ -837,7 +939,7 @@ urlInput.addEventListener('keydown', (e) => {
 
 // Refresh
 document.getElementById('refreshBtn').addEventListener('click', () => {
-  for (const key in pageCache) delete pageCache[key];
+  for (const key in pageCache) delete pageCache[key]; db.clearCache();
   const targetUrl = urlInput.value.trim();
   if (targetUrl) navigate(targetUrl, { pushState: false });
 });
@@ -877,7 +979,7 @@ async function scanDirectory(dirHandle, prefix = '') {
 }
 
 function renderFileTree(tree, depth = 0) {
-  const ul = navSidebar.querySelector('ul');
+  const ul = document.querySelector('#sidebarNav ul');
   const activeTab = getActiveTab();
   const activePath = activeTab?.filePath || '';
 
@@ -1120,10 +1222,161 @@ document.addEventListener('click', () => settingsPopover.classList.remove('open'
 settingsPopover.addEventListener('click', (e) => e.stopPropagation());
 settingsPopover.addEventListener('change', () => {
   saveSettings();
-  for (const key in pageCache) delete pageCache[key];
+  for (const key in pageCache) delete pageCache[key]; db.clearCache();
   const targetUrl = urlInput.value.trim();
   if (targetUrl) navigate(targetUrl, { pushState: false });
 });
+
+// Sidebar tabs
+document.querySelector('.sidebar-tabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('.sidebar-tab');
+  if (!tab) return;
+  document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  const mode = tab.dataset.sidebar;
+  document.getElementById('sidebarNav').style.display = mode === 'nav' ? '' : 'none';
+  document.getElementById('sidebarBookmarks').style.display = mode === 'bookmarks' ? '' : 'none';
+  document.getElementById('sidebarHistory').style.display = mode === 'history' ? '' : 'none';
+  if (mode === 'bookmarks') renderBookmarksSidebar();
+  if (mode === 'history') renderHistorySidebar();
+});
+
+// Bookmarks
+const bookmarkBtn = document.getElementById('bookmarkBtn');
+async function updateBookmarkBtn() {
+  const tab = getActiveTab();
+  if (!tab?.url) { bookmarkBtn.disabled = true; bookmarkBtn.classList.remove('active'); return; }
+  bookmarkBtn.disabled = false;
+  bookmarkBtn.classList.toggle('active', await db.isBookmarked(tab.url));
+}
+bookmarkBtn.addEventListener('click', async () => {
+  const tab = getActiveTab();
+  if (!tab?.url) return;
+  if (await db.isBookmarked(tab.url)) {
+    await db.removeBookmark(tab.url);
+  } else {
+    const h1 = tab.markdown?.match(/^#\s+(.+)/m);
+    await db.addBookmark(tab.url, h1 ? h1[1] : tab.url);
+  }
+  updateBookmarkBtn();
+});
+
+async function renderBookmarksSidebar() {
+  const el = document.getElementById('sidebarBookmarks');
+  const bookmarks = await db.getBookmarks();
+  if (!bookmarks.length) {
+    el.innerHTML = '<div class="nav-empty" style="padding:16px;color:var(--color-text-placeholder);text-align:center;font-style:italic">No bookmarks yet</div>';
+    return;
+  }
+  el.innerHTML = bookmarks.map(b =>
+    `<a class="bookmark-item" data-url="${b.url}" title="${b.url}">${b.title || b.url}</a>`
+  ).join('');
+}
+
+document.getElementById('sidebarBookmarks').addEventListener('click', (e) => {
+  const item = e.target.closest('.bookmark-item');
+  if (!item) return;
+  const url = item.dataset.url;
+  if (e.ctrlKey || e.metaKey) createTab(url);
+  else navigate(url);
+});
+
+// History sidebar
+async function renderHistorySidebar() {
+  const el = document.getElementById('sidebarHistory');
+  const history = await db.getHistory(100);
+  if (!history.length) {
+    el.innerHTML = '<div class="nav-empty" style="padding:16px;color:var(--color-text-placeholder);text-align:center;font-style:italic">No history yet</div>';
+    return;
+  }
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const yesterday = today - 86400000;
+  const week = today - 7 * 86400000;
+  let html = '';
+  let section = '';
+  for (const h of history) {
+    let label;
+    if (h.timestamp >= today) label = 'Today';
+    else if (h.timestamp >= yesterday) label = 'Yesterday';
+    else if (h.timestamp >= week) label = 'Last 7 days';
+    else label = 'Older';
+    if (label !== section) { section = label; html += `<div class="history-date">${label}</div>`; }
+    html += `<a class="history-item" data-url="${h.url}" title="${h.url}">${h.title || h.url}</a>`;
+  }
+  el.innerHTML = html;
+}
+
+document.getElementById('sidebarHistory').addEventListener('click', (e) => {
+  const item = e.target.closest('.history-item');
+  if (!item) return;
+  const url = item.dataset.url;
+  if (e.ctrlKey || e.metaKey) createTab(url);
+  else navigate(url);
+});
+
+// URL autocomplete
+const autocomplete = document.getElementById('autocomplete');
+let acIndex = -1;
+
+urlInput.addEventListener('input', debounce(async () => {
+  const q = urlInput.value.trim();
+  if (!q || q.startsWith('http://') || q.startsWith('https://')) {
+    // Only autocomplete partial queries, not full URLs
+    if (q.length < 5) { autocomplete.classList.remove('open'); return; }
+  }
+  const [histResults, bookmarks] = await Promise.all([
+    db.searchHistory(q),
+    db.getBookmarks(),
+  ]);
+  const bmMatches = bookmarks.filter(b =>
+    b.url.toLowerCase().includes(q.toLowerCase()) || (b.title && b.title.toLowerCase().includes(q.toLowerCase()))
+  );
+  const seen = new Set();
+  const items = [];
+  for (const b of bmMatches.slice(0, 3)) {
+    if (seen.has(b.url)) continue; seen.add(b.url);
+    items.push({ title: b.title, url: b.url, star: true });
+  }
+  for (const h of histResults.slice(0, 8)) {
+    if (seen.has(h.url)) continue; seen.add(h.url);
+    items.push({ title: h.title, url: h.url, star: false });
+  }
+  if (!items.length) { autocomplete.classList.remove('open'); return; }
+  acIndex = -1;
+  autocomplete.innerHTML = items.map((it, i) =>
+    `<div class="ac-item" data-url="${it.url}" data-index="${i}">` +
+    `<span class="ac-title">${it.star ? '<span class="ac-star">&#9733;</span>' : ''}${it.title || it.url}</span>` +
+    `<span class="ac-url">${it.url}</span></div>`
+  ).join('');
+  autocomplete.classList.add('open');
+}, 100));
+
+autocomplete.addEventListener('click', (e) => {
+  const item = e.target.closest('.ac-item');
+  if (!item) return;
+  autocomplete.classList.remove('open');
+  navigate(item.dataset.url);
+});
+
+urlInput.addEventListener('keydown', (e) => {
+  if (!autocomplete.classList.contains('open')) return;
+  const items = autocomplete.querySelectorAll('.ac-item');
+  if (e.key === 'ArrowDown') { e.preventDefault(); acIndex = Math.min(acIndex + 1, items.length - 1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); acIndex = Math.max(acIndex - 1, -1); }
+  else if (e.key === 'Enter' && acIndex >= 0) { e.preventDefault(); autocomplete.classList.remove('open'); navigate(items[acIndex].dataset.url); return; }
+  else if (e.key === 'Escape') { autocomplete.classList.remove('open'); return; }
+  else return;
+  items.forEach((it, i) => it.classList.toggle('selected', i === acIndex));
+});
+
+urlInput.addEventListener('blur', () => {
+  setTimeout(() => autocomplete.classList.remove('open'), 200);
+});
+
+// Update bookmark button on navigate
+const origNavigate = navigate;
+// (bookmark state updates are handled inline below)
 
 // Resizable divider
 let dragging = false;
