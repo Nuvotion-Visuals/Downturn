@@ -103,12 +103,16 @@ a:hover { text-decoration: underline; }
   flex-shrink: 0;
 }
 .tab:hover { color: var(--color-text); }
+.tab.drag-over-left { box-shadow: -2px 0 0 0 var(--color-accent); }
+.tab.drag-over-right { box-shadow: 2px 0 0 0 var(--color-accent); }
+.tab.dragging { opacity: 0.4; }
 .tab.active {
   background: var(--color-bg-secondary);
   color: var(--color-text);
   border-color: var(--color-border);
   box-shadow: 0 1px 0 0 var(--color-bg-secondary);
 }
+.tab-icon, .sidebar-icon { width: 16px; height: 16px; flex-shrink: 0; border-radius: var(--space-xs); }
 .tab-title {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -465,11 +469,13 @@ a:hover { text-decoration: underline; }
 .autocomplete.open { display: block; }
 .ac-item {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
   padding: var(--space-md) var(--control-px);
   cursor: pointer;
   font-size: var(--font-xs);
 }
+.ac-item > div { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .ac-item:hover, .ac-item.selected { background: var(--color-bg-tertiary); }
 .ac-title { color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ac-url { color: var(--color-text-muted); font-size: var(--font-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -482,7 +488,9 @@ a:hover { text-decoration: underline; }
 /* Sidebar list items (shared) */
 .history-date { padding: var(--space-md) var(--space-lg) var(--space-sm); font-size: var(--font-xs); color: var(--color-text-muted); font-weight: 600; }
 .history-item, .bookmark-item {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
   padding: var(--space-sm) var(--space-lg);
   color: var(--color-text-muted);
   text-decoration: none;
@@ -620,7 +628,7 @@ a:hover { text-decoration: underline; }
 </div>
 
 <script type="module">
-import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce } from './ui.mjs';
+import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce, faviconUrl } from './ui.mjs';
 import * as db from './db.mjs';
 import { THEMES, applyTheme, getSystemTheme, listFonts } from './themes.mjs';
 const API_BASE = '';
@@ -745,11 +753,12 @@ function tabTitle(tab) {
 }
 
 function renderTabs() {
-  tabContainer.innerHTML = tabs.map(t =>
-    `<div class="tab${t.id === activeTabId ? ' active' : ''}" data-tab-id="${t.id}">` +
-    `<span class="tab-title">${tabTitle(t)}</span>` +
-    `<span class="tab-close">&times;</span></div>`
-  ).join('');
+  tabContainer.innerHTML = tabs.map(t => {
+    const icon = t.url ? `<img class="tab-icon" src="${faviconUrl(t.url)}">` : '';
+    return `<div class="tab${t.id === activeTabId ? ' active' : ''}" data-tab-id="${t.id}" draggable="true">` +
+    `${icon}<span class="tab-title">${tabTitle(t)}</span>` +
+    `<span class="tab-close">&times;</span></div>`;
+  }).join('');
   saveTabs();
 }
 
@@ -857,7 +866,50 @@ tabContainer.addEventListener('click', (e) => {
   const tabEl = e.target.closest('.tab');
   if (tabEl) switchTab(Number(tabEl.dataset.tabId));
 });
+tabContainer.addEventListener('auxclick', (e) => {
+  if (e.button !== 1) return;
+  const tabEl = e.target.closest('.tab');
+  if (tabEl) { e.preventDefault(); closeTab(Number(tabEl.dataset.tabId)); }
+});
 document.getElementById('newTabBtn').addEventListener('click', () => createTab());
+
+// Tab drag reorder
+let dragTabId = null;
+tabContainer.addEventListener('dragstart', (e) => {
+  const tabEl = e.target.closest('.tab');
+  if (!tabEl) return;
+  dragTabId = Number(tabEl.dataset.tabId);
+  tabEl.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+});
+tabContainer.addEventListener('dragend', (e) => {
+  dragTabId = null;
+  tabContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('dragging', 'drag-over-left', 'drag-over-right'));
+});
+tabContainer.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const tabEl = e.target.closest('.tab');
+  tabContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('drag-over-left', 'drag-over-right'));
+  if (!tabEl || Number(tabEl.dataset.tabId) === dragTabId) return;
+  const rect = tabEl.getBoundingClientRect();
+  const half = (e.clientX - rect.left) < rect.width / 2;
+  tabEl.classList.add(half ? 'drag-over-left' : 'drag-over-right');
+});
+tabContainer.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const tabEl = e.target.closest('.tab');
+  if (!tabEl || dragTabId === null) return;
+  const fromIdx = tabs.findIndex(t => t.id === dragTabId);
+  let toIdx = tabs.findIndex(t => t.id === Number(tabEl.dataset.tabId));
+  if (fromIdx === -1 || toIdx === -1 || fromIdx === toIdx) return;
+  const rect = tabEl.getBoundingClientRect();
+  const insertAfter = (e.clientX - rect.left) >= rect.width / 2;
+  const [moved] = tabs.splice(fromIdx, 1);
+  toIdx = tabs.findIndex(t => t.id === Number(tabEl.dataset.tabId));
+  tabs.splice(insertAfter ? toIdx + 1 : toIdx, 0, moved);
+  renderTabs();
+});
 
 // Navigate in current tab
 async function navigate(targetUrl, { pushState = true } = {}) {
@@ -1423,7 +1475,7 @@ async function renderBookmarksSidebar() {
     return;
   }
   el.innerHTML = bookmarks.map(b =>
-    `<a class="bookmark-item" data-url="${b.url}" title="${b.url}">${b.title || b.url}</a>`
+    `<a class="bookmark-item" data-url="${b.url}" title="${b.url}"><img class="sidebar-icon" src="${faviconUrl(b.url)}">${b.title || b.url}</a>`
   ).join('');
 }
 
@@ -1456,7 +1508,7 @@ async function renderHistorySidebar() {
     else if (h.timestamp >= week) label = 'Last 7 days';
     else label = 'Older';
     if (label !== section) { section = label; html += `<div class="history-date">${label}</div>`; }
-    html += `<a class="history-item" data-url="${h.url}" title="${h.url}">${h.title || h.url}</a>`;
+    html += `<a class="history-item" data-url="${h.url}" title="${h.url}"><img class="sidebar-icon" src="${faviconUrl(h.url)}">${h.title || h.url}</a>`;
   }
   el.innerHTML = html;
 }
@@ -1500,8 +1552,9 @@ urlInput.addEventListener('input', debounce(async () => {
   acIndex = -1;
   autocomplete.innerHTML = items.map((it, i) =>
     `<div class="ac-item" data-url="${it.url}" data-index="${i}">` +
-    `<span class="ac-title">${it.star ? '<span class="ac-star">&#9733;</span>' : ''}${it.title || it.url}</span>` +
-    `<span class="ac-url">${it.url}</span></div>`
+    `<img class="sidebar-icon" src="${faviconUrl(it.url)}">` +
+    `<div><span class="ac-title">${it.star ? '<span class="ac-star">&#9733;</span>' : ''}${it.title || it.url}</span>` +
+    `<span class="ac-url">${it.url}</span></div></div>`
   ).join('');
   autocomplete.classList.add('open');
 }, 100));

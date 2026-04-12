@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce } from '../public/ui.mjs';
+import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce, faviconUrl } from '../public/ui.mjs';
 
 // --- esc ---
 
@@ -344,4 +344,22 @@ test('debounce: passes arguments', async () => {
   fn(2, 3);
   await new Promise(r => setTimeout(r, 80));
   assert.strictEqual(result, 5);
+});
+
+// --- faviconUrl ---
+
+test('faviconUrl: valid URL returns google favicon service URL', () => {
+  assert.strictEqual(faviconUrl('https://example.com/page'), 'https://www.google.com/s2/favicons?domain=example.com&sz=16');
+});
+
+test('faviconUrl: URL with port extracts hostname', () => {
+  assert.strictEqual(faviconUrl('https://example.com:8080/path'), 'https://www.google.com/s2/favicons?domain=example.com&sz=16');
+});
+
+test('faviconUrl: invalid URL returns empty string', () => {
+  assert.strictEqual(faviconUrl('not a url'), '');
+});
+
+test('faviconUrl: empty string returns empty', () => {
+  assert.strictEqual(faviconUrl(''), '');
 });

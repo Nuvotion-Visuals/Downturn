@@ -172,6 +172,12 @@ export function debounce(fn, ms) {
   };
 }
 
+export function faviconUrl(url) {
+  try {
+    return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=16`;
+  } catch { return ''; }
+}
+
 export function formatStats(markdown, ms, suffix) {
   const chars = markdown.length;
   const bytes = new TextEncoder().encode(markdown).length;
