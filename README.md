@@ -1,25 +1,40 @@
 # Downturn
 
-Fetch web pages and convert them to clean markdown. Zero runtime dependencies.
+A markdown web browser. Convert any web page to clean markdown and browse the web in a distraction-free reader. Edit with live preview, open local files and folders, manage bookmarks and history.
 
-Use it as an MCP server, HTTP API, or as a markdown web browser — paste a URL, read the page as markdown, click links to keep browsing.
+Also works as an MCP server for AI agents and a standalone HTTP API.
 
-Based on [macsplit/urltomarkdown](https://github.com/macsplit/urltomarkdown) by Lee Hanken — the original pulls in 634,636 lines of JavaScript through `node_modules/`. This is 6,051 lines, a 99.0% reduction.
-
-## Web UI
+## Web Browser
 
 ```bash
 node worker.mjs
 ```
 
-Open `http://localhost:4001` in your browser. Paste a URL, hit Enter, browse the web in markdown. Click any link to navigate to that page.
+Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter.
 
-Features:
-- Split view (markdown + rendered preview), or toggle to single pane
-- Browser back/forward navigation via URL hash
-- Copy markdown to clipboard, download as `.md`
-- Configurable: title, links, readability, absolute URL resolution
-- Deploys to Cloudflare Workers — bundle with `npx esbuild worker.mjs --bundle --outfile=dist/worker.js --format=esm --external:node:http`
+- **Browse the web in markdown** — click links to navigate, Ctrl+click to open in a new tab
+- **Tabs** — drag to reorder, middle-click to close, Ctrl+T/W to create/close
+- **Split view** — markdown editor + rendered preview, or toggle to single pane
+- **Edit** — the markdown pane is always editable with live preview
+- **Local files** — open `.md` files or entire folders with a file tree sidebar
+- **Save** — Ctrl+S saves to the opened file, or triggers Save As
+- **Bookmarks** — star icon bookmarks the current page, viewable in the sidebar
+- **History** — automatic, searchable, grouped by date in the sidebar
+- **Autocomplete** — URL bar suggests from history and bookmarks as you type
+- **Search** — plain text searches Wikipedia; results render as markdown
+- **Site navigation** — sidebar extracts nav links from the page, with a site home link
+- **Themes** — Dark, Light, and Black (OLED). Auto-detects system preference
+- **Fonts** — choose editor and preview fonts from installed system fonts
+- **Favicons** — shown in tabs, bookmarks, history, and autocomplete
+- **PWA** — installable as a standalone app with offline support
+
+## Deploy
+
+```bash
+npx wrangler deploy
+```
+
+Or run locally with `node worker.mjs`. No build step needed.
 
 ## MCP Server
 
@@ -35,17 +50,18 @@ Features:
 ```
 
 Tools:
-- **`url_to_markdown`** fetches a URL and returns markdown
-- **`html_to_markdown`** converts an HTML string to markdown
+- **`url_to_markdown`** — fetch a URL and return markdown
+- **`html_to_markdown`** — convert an HTML string to markdown
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
 | `output_path` | | Full file path to write markdown to |
-| `output_dir` | | Directory to write to; filename is auto-generated from the page title (h1, og:title, title tag, or URL slug) |
-| `include_title` | `true` | Prepend the page title as an H1 heading |
-| `include_links` | `true` | Include hyperlinks in the output |
-| `use_readability` | `true` | Use Readability to extract article content |
-| `absolute_urls` | `true` | Resolve relative URLs (images, links) to absolute using the page URL |
+| `output_dir` | | Directory to write to; filename auto-generated from page title |
+| `include_title` | `true` | Prepend page title as H1 |
+| `include_links` | `true` | Include hyperlinks |
+| `include_images` | `true` | Include images |
+| `use_readability` | `true` | Extract article content |
+| `absolute_urls` | `true` | Resolve relative URLs to absolute |
 
 ## HTTP API
 
@@ -55,16 +71,10 @@ PORT=3000 node index.mjs
 
 ```
 GET /?url=https://example.com&title=true&links=true&clean=true
+POST / with html= and url= parameters
 ```
 
-```
-POST /
-Content-Type: application/x-www-form-urlencoded
-
-url=https://example.com&html=<html>...</html>
-```
-
-Returns `Content-Type: text/markdown` with CORS headers. Rate limited to 5 requests per 30 seconds per IP.
+Returns `Content-Type: text/markdown` with CORS headers.
 
 ## Pipeline
 
@@ -73,7 +83,8 @@ Returns `Content-Type: text/markdown` with CORS headers. Rate limited to 5 reque
 3. Extract article content (Mozilla Readability)
 4. Convert to markdown (Turndown)
 5. Resolve relative URLs to absolute
-6. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
+6. Strip link titles and encode parentheses in URLs
+7. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
 
 ## Testing
 
@@ -81,7 +92,7 @@ Returns `Content-Type: text/markdown` with CORS headers. Rate limited to 5 reque
 node --test tests/*.test.mjs
 ```
 
-472 tests covering the full pipeline, MCP integration, title extraction, and URL resolution.
+579 tests covering the conversion pipeline, URL resolution, link title stripping, markdown rendering, worker API, MCP integration, nav extraction, title extraction, omnibox, favicons, and debounce.
 
 ## Structure
 
@@ -89,14 +100,23 @@ node --test tests/*.test.mjs
 worker.mjs                             Cloudflare Worker + local dev server
 index.mjs                              HTTP API server
 mcp.mjs                                MCP stdio transport
-title_utils.mjs                        Title extraction and filename slugification
-url_to_markdown_processor.mjs          Core pipeline
-url_to_markdown_readers.mjs            URL fetching, redirect following
-url_to_markdown_formatters.mjs         Code block and table pre-processing
+wrangler.toml                          Cloudflare deployment config
+url_to_markdown_processor.mjs          Core conversion pipeline
 url_to_markdown_common_filters.mjs     Post-processing filters
+url_to_markdown_formatters.mjs         Code block and table pre-processing
+url_to_markdown_readers.mjs            URL fetching, redirect following
 url_to_markdown_apple_dev_docs.mjs     Apple developer docs parser
 html_table_to_markdown.mjs             HTML table conversion
-public/index.html                      Web UI (single file, inline CSS/JS)
+title_utils.mjs                        Title extraction and filename slugification
+
+public/
+  index.html                           Web UI
+  ui.mjs                               Markdown renderer, omnibox, utilities
+  db.mjs                               IndexedDB storage (settings, history, bookmarks, cache)
+  themes.mjs                           Theme system (dark, light, black)
+  sw.js                                Service worker for PWA/offline
+  start.md                             Start page content
+  site.webmanifest                     PWA manifest
 
 lib/
   html_parser.mjs                      DOM parser (vendored JSDOMParser)
@@ -109,7 +129,6 @@ lib/
 
 ## Credits
 
-- [Lee Hanken](https://github.com/macsplit/urltomarkdown), original project
 - [Mozilla Readability](https://github.com/mozilla/readability) (Apache 2.0)
 - [JSDOMParser](https://github.com/mozilla/readability/blob/main/JSDOMParser.js) (MPL 2.0)
 - [Turndown](https://github.com/mixmark-io/turndown) (MIT)
