@@ -1,5 +1,4 @@
-# The sharing economy is a lie: Uber, Ayn Rand and the truth about tech
-            and libertarians - Salon.com
+# The sharing economy is a lie: Uber, Ayn Rand and the truth about tech and libertarians - Salon.com
 Horror stories about the increasingly unpopular taxi service Uber have been commonplace in recent months, but there is still much to be learned from its handling of the recent hostage drama in downtown Sydney, Australia. We’re told that we reveal our true character in moments of crisis, and apparently that’s as true for companies as it is for individuals.
 
 A number of experts have challenged the idea that the horrific explosion of violence in a Sydney café was “terrorism,” since the attacker was mentally unbalanced and acted alone. But, terror or not, the ordeal was certainly terrifying. Amid the chaos and uncertainty, the city believed itself to be under a coordinated and deadly attack.

@@ -1,6 +1,4 @@
-# 
-            Conversations with a Cryptid - Chapter 1 - AMournfulHowlInTheNight - 僕のヒーローアカデミア | Boku no Hero Academia | My Hero Academia [Archive of Our Own]
-        
+# Conversations with a Cryptid - Chapter 1 - AMournfulHowlInTheNight - 僕のヒーローアカデミア | Boku no Hero Academia | My Hero Academia [Archive of Our Own]
 ### Chapter Text
 
 Izuku was struggling to understand how he had even managed to get here, seated before the archvillain of Japan with only a sense of dread to keep him company. All Might sat concealed in an observation room, of the firm opinion that he could only aggravate the prisoner and he sent Izuku off with a strained smile. A vague haze hovered over Izuku’s memory. It started with a simple conversation gone astray on a long drive home.

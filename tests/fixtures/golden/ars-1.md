@@ -1,6 +1,4 @@
-# 
-            Just-released Minecraft exploit makes it easy to crash game servers | Ars Technica
-        
+# Just-released Minecraft exploit makes it easy to crash game servers | Ars Technica
 #### Biz & IT —
 
 Two-year-old bug exposes thousands of servers to crippling attack.

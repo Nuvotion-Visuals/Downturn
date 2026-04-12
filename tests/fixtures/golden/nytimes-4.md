@@ -1,6 +1,4 @@
-# 
-            As Debt Rises, the Government Will Soon Spend More on Interest Than on the Military - The New York Times
-        
+# As Debt Rises, the Government Will Soon Spend More on Interest Than on the Military - The New York Times
 Tax cuts, spending increases and higher interest rates could make it harder to respond to future recessions and deal with other needs.
 
 Image![](https://static01.nyt.com/images/2018/09/15/business/15DEBTS01/merlin_138209730_5f3b5746-4962-4207-a24f-aea644a8636f-articleLarge.jpg?quality=75&auto=webp&disable=upscale)

@@ -1,6 +1,4 @@
-# 
-            Facebook Is Tracking Me Even Though I’m Not on Facebook | American Civil Liberties Union
-        
+# Facebook Is Tracking Me Even Though I’m Not on Facebook | American Civil Liberties Union
 I don't use Facebook. I'm not technophobic — I'm a geek. I've been using email since the early 1990s, I have accounts on hundreds of services around the net, and I do software development and internet protocol design both for work and for fun. I believe that a globe-spanning communications network like the internet can be a positive social force, and I publish much of my own work on the open web.
 
 But Facebook and other massive web companies represent a strong push toward unaccountable centralized social control, which I think makes our society more unequal and more unjust. The Cambridge Analytica scandal is one instance of this long-running problem with what I call the "surveillance economy." I don't want to submit to these power structures, and I don’t want my presence on such platforms to serve as bait that lures other people into the digital panopticon.

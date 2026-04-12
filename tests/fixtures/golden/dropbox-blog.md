@@ -1,6 +1,4 @@
-# 
-            How we designed Dropbox ATF: an async task framework - Dropbox
-        
+# How we designed Dropbox ATF: an async task framework - Dropbox
 I joined Dropbox not long after graduating with a Master’s degree in computer science. Aside from an internship, this was my first big-league engineering job. My team had already begun designing a critical internal service that most of our software would use: It would handle asynchronous computing requests behind the scenes, powering everything from dragging a file into a Dropbox folder to scheduling a marketing campaign.
 
 This Asynchronous Task Framework (ATF) would replace multiple bespoke async systems used by different engineering teams. It would reduce redundant development, incompatibilities, and reliance on legacy software. There were no open-source projects or buy-not-build solutions that worked well for our use case and scale, so we had to create our own. ATF is both an important and interesting challenge, though, so we were happy to design, build and deploy our own in-house service.

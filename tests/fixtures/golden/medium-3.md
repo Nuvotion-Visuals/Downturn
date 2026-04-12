@@ -1,6 +1,4 @@
-# 
-            Samantha and The Great Big Lie. How to get shanked doing what people… | by John C. Welch | Medium
-        
+# Samantha and The Great Big Lie. How to get shanked doing what people… | by John C. Welch | Medium
 [![John C. Welch](https://miro.medium.com/fit/c/96/96/0*qPHQu8WqsC6cV_ud.jpg)](/@johncwelch?source=post_page-----d146a92473a1----------------------)
 
 How to get shanked doing what people say they want

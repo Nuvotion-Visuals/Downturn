@@ -1,6 +1,4 @@
-# 
-            Manhole Fires and Burst Pipes: How Winter Wreaks Havoc on What’s Underneath N.Y.C. - The New York Times
-        
+# Manhole Fires and Burst Pipes: How Winter Wreaks Havoc on What’s Underneath N.Y.C. - The New York Times
 New York’s aging below-street infrastructure is tough to maintain, and the corrosive rock salt and “freeze-thaw” cycles of winter make it even worse.
 
 Image![](https://static01.nyt.com/images/2019/02/21/nyregion/21winterutilities1/merlin_150498339_cf9085e5-9756-4169-a5a5-5b516316a3fa-articleLarge.jpg?quality=75&auto=webp&disable=upscale)

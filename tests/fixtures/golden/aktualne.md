@@ -1,6 +1,4 @@
-# 
-            West Ham hrozí gigantům, okouzlil i Linekera. Součkovu práci je snadné přehlédnout - Aktuálně.cz
-        
+# West Ham hrozí gigantům, okouzlil i Linekera. Součkovu práci je snadné přehlédnout - Aktuálně.cz
 Zázrak jedné sezony? West Ham dává pochybovačům stále pádnější odpovědi a fotbalový svět si začíná uvědomovat, že se absolutní anglická fotbalová elita rozrůstá o nového člena. Tým manažera Davida Moyese prohání giganty i v aktuálním ročníku Premier League.
 
 Pět vítězných soutěžních duelů v řadě, během nich jediný inkasovaný gól. Čtvrté místo v lize, stejný bodový zisk jako loňský šampion Manchester City a nadšené ohlasy z tábora těch nejrenomovanějších komentátorů ostrovního fotbalu.

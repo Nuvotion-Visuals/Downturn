@@ -1,6 +1,4 @@
-# 
-            Alaskan halibut, caught by a century-old Seattle boat, provides a glimpse of Amazon’s strategy with Whole Foods | The Seattle Times
-        
+# Alaskan halibut, caught by a century-old Seattle boat, provides a glimpse of Amazon’s strategy with Whole Foods | The Seattle Times
 From the deck of his 106-year-old halibut schooner, undergoing a seasonal overhaul at Fisherman’s Terminal in Seattle, skipper Wade Bassi has better insight than most into what’s happening at Amazon-owned Whole Foods Market, at least as pertains to the product he knows best.
 
 While he doesn’t buy halibut much — he’s got a freezer full of it — Bassi, 43 years a fisherman, keeps an eye on how it’s handled and presented in the grocery stores and fish markets.

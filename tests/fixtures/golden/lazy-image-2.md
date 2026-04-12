@@ -1,6 +1,4 @@
-# 
-            The Spectacular Story Of Metroid, One Of Gaming's Richest Universes
-        
+# The Spectacular Story Of Metroid, One Of Gaming's Richest Universes
 _Nothing beats the passion of a true fan writing about something they love. That's what you're about to see here: one of the richest, most amazing tributes to a great gaming series that we've ever run on_ Kotaku_. **Warning #1:** this one might make your browser chug, so close your other tabs. **Warning #2:** This piece might make it hurt a little more than there are no new_ Metroid _games from Nintendo on the horizon._
 
 _Please note that this is the first half of Mama Robotnik's massive_ Metroid _story._ [_The second half can be found here_](https://kotaku.com/the-spectacular-story-of-metroid-part-2-1284621108)_. The entire post is a greatly-expanded version of_ [_a post_](http://www.neogaf.com/forum/showthread.php?t=649215) _that Mama Robotnik originally published on the NeoGAF forum before revising and reworking it for Kotaku. Take it away, MR..._
@@ -46,31 +44,19 @@ Part One: The Wars in Heaven
 
 _(_[_Artist: 3ihard_](http://3ihard.deviantart.com/art/Chozo-dramatic-97410107)_)_
 
-On an unknown planet in the universe, a race of avian humanoids evolved. The species that will come to be known as the Chozo possessed great strength, agility and intelligence. The species is peaceful, and is driven by a social/religious value that nature is sacred. \[M1 / MP\]
+On an unknown planet in the universe, a race of avian humanoids evolved. The species that will come to be known as the Chozo possessed great strength, agility and intelligence. The species is peaceful, and is driven by a social/religious value that nature is sacred. \[M1 / MP\](http://fakehost/test/[_Artist:%203ihard_](http://3ihard.deviantart.com/art/Chozo-Goddess-121103720))
 
-([_Artist: 3ihard_](http://3ihard.deviantart.com/art/Chozo-Goddess-121103720))
+Certain blessed individuals were born with a unique gift – the vague comprehension of events set to take place in the distant future. Driven by these prophecies, the race advanced quickly and became space faring. With abstract predictions of a hostile universe, the Chozo developed powered armour and armaments to defend themselves. Prepared for whatever hostility awaited them, the Chozo explored the stars. \[M1 / MP / MP SP\](http://fakehost/test/_Artist:%20Elearia_)
 
-Certain blessed individuals were born with a unique gift – the vague comprehension of events set to take place in the distant future. Driven by these prophecies, the race advanced quickly and became space faring. With abstract predictions of a hostile universe, the Chozo developed powered armour and armaments to defend themselves. Prepared for whatever hostility awaited them, the Chozo explored the stars. \[M1 / MP / MP SP\]
+The Chozo discovered that – despite their prophets’ visions of a chaotic and warring universe – the cosmos was enjoying a prolonged period of peace and enlightenment. First contact was made with a number of old and wise races, such as the Ylla, the N’kren, the Bryyonians, the Alimbic and the Luminoth. The species shared their cultures and technology, and gently colonised wild worlds such as Aether, Elysia, and Tallon IV. \[MP / MPH / MP2 / MP3\](http://fakehost/test/[_Artist:%20Slapshoft_](http://slapshoft.deviantart.com/art/quot-Past-is-Prologue-quot-259977883))
 
-(_Artist: Elearia_)
+Peace reigned through the cosmos. The alliance was a great universal renaissance, and lasted for a millennium. \[MPH SP / MP2 SP / MP3 SP\](http://fakehost/test/[_Artist:%203ihard_](http://3ihard.deviantart.com/art/Oracle-of-Chozo-164523580))
 
-The Chozo discovered that – despite their prophets’ visions of a chaotic and warring universe – the cosmos was enjoying a prolonged period of peace and enlightenment. First contact was made with a number of old and wise races, such as the Ylla, the N’kren, the Bryyonians, the Alimbic and the Luminoth. The species shared their cultures and technology, and gently colonised wild worlds such as Aether, Elysia, and Tallon IV. \[MP / MPH / MP2 / MP3\]
-
-([_Artist: Slapshoft_](http://slapshoft.deviantart.com/art/quot-Past-is-Prologue-quot-259977883))
-
-Peace reigned through the cosmos. The alliance was a great universal renaissance, and lasted for a millennium. \[MPH SP / MP2 SP / MP3 SP\]
-
-([_Artist: 3ihard_](http://3ihard.deviantart.com/art/Oracle-of-Chozo-164523580))
-
-During this calm, the Chozo prophets continued to receive increasingly severe visions of chaos. They foresaw a universe consumed by war, horrors evolving on distant worlds, and a great toxicity waiting to be unleashed. As the visions became more precise, the species isolated itself from its allies. The Chozo civilisation became intensely driven to fight this unclear threat. \[MP / MP3 SP / M2 SP /MF SP\]
-
-([_Artist: DanilLovesFood_](http://danillovesfood.deviantart.com/art/Commission-Metroid-Prime-Skytown-Elysia-336095763))
+During this calm, the Chozo prophets continued to receive increasingly severe visions of chaos. They foresaw a universe consumed by war, horrors evolving on distant worlds, and a great toxicity waiting to be unleashed. As the visions became more precise, the species isolated itself from its allies. The Chozo civilisation became intensely driven to fight this unclear threat. \[MP / MP3 SP / M2 SP /MF SP\](http://fakehost/test/[_Artist:%20DanilLovesFood_](http://danillovesfood.deviantart.com/art/Commission-Metroid-Prime-Skytown-Elysia-336095763))
 
 The Chozo needed more potent tools to locate this unseen and distant danger. They expanded their SkyTown colony on the gas giant Elysia and remade it into a vast interstellar observatory powered by the planet’s endless storms. The facility was of such scale that an entire species of artificial life became necessary to maintain it. The Chozo created their first species – the mechanical Elysians. \[MP3 / MP3 SP\]
 
-Probes were launched across the universe, and the Elysians and Chozo scrutinised the data. The search took generations, while the planet’s tempestuous atmosphere battered SkyTown, weathering the station faster than the Elysians could maintain it. After countless probe launches, a partial transmission received from a decaying and distant satellite set prophecy in motion. \[MP3\]
-
-([_Artist: Mechanical-Hand_](http://mechanical-hand.deviantart.com/art/Phaaze-138141037))
+Probes were launched across the universe, and the Elysians and Chozo scrutinised the data. The search took generations, while the planet’s tempestuous atmosphere battered SkyTown, weathering the station faster than the Elysians could maintain it. After countless probe launches, a partial transmission received from a decaying and distant satellite set prophecy in motion. \[MP3\](http://fakehost/test/[_Artist:%20Mechanical-Hand_](http://mechanical-hand.deviantart.com/art/Phaaze-138141037))
 
 The data received was terrifying. The blue planet registered as an organism, somehow existing as both mineral and flesh. Impossible radiation pulsed from the surface, which overwhelmed the Chozo satellite and rendered it inert. The location of the planet was immediately lost, and only a broad region of space could be established. \[MP3\]
 
@@ -82,15 +68,11 @@ The Chozo reconciled their vague discovery of a blue living planet with their pr
 
 ([_Artist: 3ihard_](http://3ihard.deviantart.com/art/Chozo-flighter-175094535))
 
-Finding the exact location of the deadly planet becomes a priority for the Chozo civilisation. A gargantuan ship was assembled on the holy planet of Tallon IV, and dispatched to the dark corner of the universe where the Elysian satellite had been lost. The greatest Chozo warriors, scientists and prophets commenced a crusade for the hostile world, knowing that they would likely never make it back home. During their long journey, they conceive a name for their target: Phaaze. \[MP3 SP\]
-
-([_Artist: SesakaTH_](http://sesakath.deviantart.com/art/MP-C-Phaaze-89786422))
+Finding the exact location of the deadly planet becomes a priority for the Chozo civilisation. A gargantuan ship was assembled on the holy planet of Tallon IV, and dispatched to the dark corner of the universe where the Elysian satellite had been lost. The greatest Chozo warriors, scientists and prophets commenced a crusade for the hostile world, knowing that they would likely never make it back home. During their long journey, they conceive a name for their target: Phaaze. \[MP3 SP\](http://fakehost/test/[_Artist:%20SesakaTH_](http://sesakath.deviantart.com/art/MP-C-Phaaze-89786422))
 
 Generations passed, and the Chozo expedition finally located the blue planet. As they approached, they witnessed the living world as it endlessly pulsed with blue and white energies. There was nothing like this place elsewhere in the universe. \[MP3 SP\]
 
-Their scans confirmed their worst fears – this atmosphere was a bath of radiation and mutation – and evolution had produced horrors. \[MP3 SP\]
-
-([_Artist: SamusMMX_](http://samusmmx.deviantart.com/art/Phazon-Worm-252806281))
+Their scans confirmed their worst fears – this atmosphere was a bath of radiation and mutation – and evolution had produced horrors. \[MP3 SP\](http://fakehost/test/[_Artist:%20SamusMMX_](http://samusmmx.deviantart.com/art/Phazon-Worm-252806281))
 
 For billions of years, Phaaze had mutated and irradiated life that evolved on its surface. The strongest creatures had survived to thrive in an ecosystem of beautiful poison. It was then that the Chozo understood: They had arrived at the home of the most devastating and deranged creatures in the known universe. \[MP3 SP\]
 
@@ -98,29 +80,21 @@ If these monsters were to escape their containment on Phaaze, they would voracio
 
 The Chozo expedition came to an impasse. The threat of Phaaze’s superpredators had to be neutralised, but severe action against the planet would be sacrilege. The Chozo held life sacred, and refused to destroy the unique living world. \[MP3 SP\]
 
-A dangerous plan was agreed upon. The expedition ship landed on Phaaze, exposing the crew to tremendous radiation. \[MP3 SP\]
-
-([_Artist: Adoublea_](http://adoublea.deviantart.com/art/Metroid-Chozo-warrior-138820343))
+A dangerous plan was agreed upon. The expedition ship landed on Phaaze, exposing the crew to tremendous radiation. \[MP3 SP\](http://fakehost/test/[_Artist:%20Adoublea_](http://adoublea.deviantart.com/art/Metroid-Chozo-warrior-138820343))
 
 Chozo Warriors in power suits fought the planet’s creatures as they swarmed the ship. The soldiers battled, watching their kin die around them, in a desperate mission to buy time. \[MP3 SP\]
 
-The scientists within the ship began to harness the intense radiation around them, to try and engineer an artificial predator that could neutralise the planet’s superpredators. With access to the unique Phazon mutagen that covered the poisonous world, genetic engineering that should have taken decades was done in days. The Chozo engineered the first Metroid. \[MP3 SP\]
-
-([_Artist: Methuselah3000_](http://methuselah3000.deviantart.com/art/Chozo-Creator-278707002))
+The scientists within the ship began to harness the intense radiation around them, to try and engineer an artificial predator that could neutralise the planet’s superpredators. With access to the unique Phazon mutagen that covered the poisonous world, genetic engineering that should have taken decades was done in days. The Chozo engineered the first Metroid. \[MP3 SP\](http://fakehost/test/[_Artist:%20Methuselah3000_](http://methuselah3000.deviantart.com/art/Chozo-Creator-278707002))
 
 The Metroid creature was unleashed onto the planet, and the radiation caused it to reproduce quickly. The resulting swarm of Metroids began to consume the planet’s monstrosities and established themselves as Phaaze’s apex predator. \[MP3 SP\]
 
-The Chozo mission was complete. The worst creatures were being hunted to extinction, and the Metroids were expected to die from starvation soon after. The cost had been enormous – most of the crew had been killed defending the ship, and the survivors were deathly ill from radiation poisoning. The burnt and damaged ship took off for the long journey home, but the crew soon succumbed to the radiation they had endured. The autopilot took the ship of Chozo bodies home. \[MP3 SP\]
-
-([_Artist: 3ihard_](http://3ihard.deviantart.com/art/Phazon-Mines-178697159))
+The Chozo mission was complete. The worst creatures were being hunted to extinction, and the Metroids were expected to die from starvation soon after. The cost had been enormous – most of the crew had been killed defending the ship, and the survivors were deathly ill from radiation poisoning. The burnt and damaged ship took off for the long journey home, but the crew soon succumbed to the radiation they had endured. The autopilot took the ship of Chozo bodies home. \[MP3 SP\](http://fakehost/test/[_Artist:%203ihard_](http://3ihard.deviantart.com/art/Phazon-Mines-178697159))
 
 On Phaaze, the Metroid presence lasted decades as they consumed the planet’s superpredators. The corpses of Chozo warriors were absorbed into the planet, and their battle armour slowly became weathered and scattered. The planet’s slow sentience developed an outrage that seethed under its continents. It had been violated by the Chozo. As the Metroid infestation began to die out, Phaaze developed a very primitive concept of purpose and retribution. \[MP3 SP\]
 
 Phaaze established a vague awareness of concepts it had absorbed from the brains of the Chozo warrior corpses – and the location of two worlds from the Chozo’s memories. As the planet entered its reproductive cycle, it purposely directed two of its seeds towards the planets Tallon IV and Aether. In the seed sent to the Chozo world, Phaaze included one of the last surviving Metroid creatures and some ruined pieces of Chozo armour, intended as a reminder of the crime Phaaze had endured at their hands. The planet sent its second seed to Aether, as the absorbed memories informed the living planet that its inhabitants were friends of the Chozo, and therefore the enemies of Phaaze. \[MP 1 / MP 2 SP / MP3 SP\]
 
-The expedition ship – heavily damaged by radiation and lack of maintenance – was guided back to civilisation by an increasingly erratic auto-pilot. After decades it eventually approached the Chozo world of Zebes, and crash-landed onto its surface. The Chozo civilisation attempted to recover data logs from the wreckage with very limited success – they were able to understand the sacrifice that the heroic crew had made, and confirmed the apparent success of the Metroids in neutralising the creatures on the living planet. The Chozo authorities were unable to establish the location of Phaaze, or recover much in the way of scientific data concerning it. \[MP3 SP / SM SP\]
-
-([_Artist: Methuselah3000_](http://methuselah3000.deviantart.com/art/MDB-Bestiary-Metroid-Prime-338464952))
+The expedition ship – heavily damaged by radiation and lack of maintenance – was guided back to civilisation by an increasingly erratic auto-pilot. After decades it eventually approached the Chozo world of Zebes, and crash-landed onto its surface. The Chozo civilisation attempted to recover data logs from the wreckage with very limited success – they were able to understand the sacrifice that the heroic crew had made, and confirmed the apparent success of the Metroids in neutralising the creatures on the living planet. The Chozo authorities were unable to establish the location of Phaaze, or recover much in the way of scientific data concerning it. \[MP3 SP / SM SP\](http://fakehost/test/[_Artist:%20Methuselah3000_](http://methuselah3000.deviantart.com/art/MDB-Bestiary-Metroid-Prime-338464952))
 
 As the Tallon IV seed began its centuries of travelling through space, the lone Metroid within absorbed vast amounts of Phazon and radiation. It became self-aware, and grew in size, intelligence and strength. It used the ruined pieces of Chozo armour to construct itself an exoskeleton, and descended into madness. The exoskeleton failed to protect the creature from the endless radiation, and the Metroid became as exotic as Phaaze’s extinct superpredators: An undying tortured genius. \[MP / MP2 / MP3 / MP3 SP\]
 
@@ -128,27 +102,19 @@ The creature that would come to be known as Metroid Prime resented Phaaze for im
 
 ### The Dark Planet
 
-With a clear understanding of the danger of living planets, the Chozo authority commenced a search for similar threats. With far more advanced technology than their ancestors had during the Elysian era, the Chozo were unfortunate enough to find a planet of even greater horrors. \[MP 3 SP / M2\]
-
-([Artist: PeaceFistArtist](http://peacefistartist.deviantart.com/art/SR388-126083062))
+With a clear understanding of the danger of living planets, the Chozo authority commenced a search for similar threats. With far more advanced technology than their ancestors had during the Elysian era, the Chozo were unfortunate enough to find a planet of even greater horrors. \[MP 3 SP / M2\](http://fakehost/test/[Artist:%20PeaceFistArtist](http://peacefistartist.deviantart.com/art/SR388-126083062))
 
 The Chozo detected strange readings coming from a world in a desolate part of the galaxy. The planet had been previously considered so obscure and unimportant that it didn’t have a name, merely catalogued with the codename SR388 and left to its obscurity. A detailed analysis picked up some extremely strange observations; though seemingly mineral, the caverns and liquids beneath the surface shifted with metabolic rhythm – as if the whole planet was somehow a living thing. A ship was dispatched, and the strongest Chozo warriors braved the caverns beneath the surface. \[M2 / M2 SP\]
 
-Few made it back. They told of a cauldron of evil, an environment so hostile and vicious that it had birthed the most terrible things. \[M2\]
-
-([Artist: LightningArts](http://lightningarts.deviantart.com/art/Metroid-Metal-Fusion-Sector1-393385160))
+Few made it back. They told of a cauldron of evil, an environment so hostile and vicious that it had birthed the most terrible things. \[M2\](http://fakehost/test/[Artist:%20LightningArts](http://lightningarts.deviantart.com/art/Metroid-Metal-Fusion-Sector1-393385160))
 
 Beneath that planet, evolution had been won by an abomination that could steal the flesh, abilities, memories and strengths of all of its prey. The creature was a fusion of energy and plasma that parasitized on life itself. With no word suitable for the nightmare they had discovered, the Chozo simply called it X. If these X-Parasites somehow gained access to the wider universe, there would be no force that could contain them. \[M2\]
 
 The threat had to be dealt with. Remembering the apparent success of the Chozo expedition to Phaaze, a plan was put into action. The Chozo assembled their best and brightest, their strongest and wisest. They carved their way into SR388, and dispatched mechanical creatures to construct secure facilities. Robots and Chozo warriors repressed all instances of the X-Parasite as they found them, but casualties were high. The planet appeared to fight the Chozo at every turn, it drowned the invaders in acid and unleashed ambushes of creatures. The endless swam of X-Parasites gained strength from the corpses around them. \[MP3 SP / M2\]
 
-Deep in the planet, a glass laboratory was created, its walls highly resistant to SR388’s acid belly. Here, in dangerous proximity to the X-Parasites, the Chozo scientists began their work. \[M2\]
+Deep in the planet, a glass laboratory was created, its walls highly resistant to SR388’s acid belly. Here, in dangerous proximity to the X-Parasites, the Chozo scientists began their work. \[M2\](http://fakehost/test/[_Artist:%203ihard_](http://3ihard.deviantart.com/art/Chozo-Account-119685313))
 
-([_Artist: 3ihard_](http://3ihard.deviantart.com/art/Chozo-Account-119685313))
-
-The Chozo tried to recreate the plan of their ancestors – the use of Metroids to pacify superpredators too dangerous to exist. Without access to the same planetary radiation and materials the Phaaze expedition had, progress was slow. As the war against the planet was raging around them, the Chozo scientists were able to engineer Metroids, but not a variant strong enough to overcome the X-Parasites. As more and more Chozo died protecting the laboratory, a different approach was needed. \[M2 SP\]
-
-([_Artist: Starshadow76_](http://starshadow76.deviantart.com/art/Metroid-Queen-Concept-Art-157008177))
+The Chozo tried to recreate the plan of their ancestors – the use of Metroids to pacify superpredators too dangerous to exist. Without access to the same planetary radiation and materials the Phaaze expedition had, progress was slow. As the war against the planet was raging around them, the Chozo scientists were able to engineer Metroids, but not a variant strong enough to overcome the X-Parasites. As more and more Chozo died protecting the laboratory, a different approach was needed. \[M2 SP\](http://fakehost/test/[_Artist:%20Starshadow76_](http://starshadow76.deviantart.com/art/Metroid-Queen-Concept-Art-157008177))
 
 The Chozo succeeded in engineering a Metroid Queen, a colossal creature who would lay Metroid Hatchling eggs. When hatched, these resulting Metroids were strong and durable creatures, and finally potent enough to combat the X menace. The Chozo knew that to completely suppress the parasites, the Metroid presence on SR388 had to be permanent. To ensure that the species would not overfeed on the environment and wipe out its food chains, the scientists hardwired an instinct into the Metroid Queen’s feral mind: Only thirty-nine Metroids were to exist on the planet at any one time. This, it was hoped, would keep their numbers high enough to destroy any X re-emergence, but low enough so that they wouldn’t consume the rest of the life on the planet, and starve to death from lack of food. \[M2\]
 
@@ -156,9 +122,7 @@ The scientists assembled a payload of Hatchling Eggs and the surviving Chozo war
 
 The Chozo had won their war, but only just. Most of the warriors and scientists had not survived, and those that were left had to make sure that the X-Parasites had been permanently suppressed. The planet shook with tremors; the earth shifted and acid poured, as if the world was trying to crush the Chozo in their glass laboratory. \[M2 SP\]
 
-The X-Parasites did not return, and the Metroid Queen continued to scream as her glass prison shook. The Chozo didn’t realise it, but her despair was being heard. \[M2 SP\]
-
-([_Artist: Hermax669_](http://hermax669.deviantart.com/art/Omega-Metroid-93544917))
+The X-Parasites did not return, and the Metroid Queen continued to scream as her glass prison shook. The Chozo didn’t realise it, but her despair was being heard. \[M2 SP\](http://fakehost/test/[_Artist:%20Hermax669_](http://hermax669.deviantart.com/art/Omega-Metroid-93544917))
 
 SR388 had been violated by the Chozo. Though very different to Phaaze, SR388 had its own vague sense of awareness. It perceived the Chozo as a viral infection, and the dead X-Parasites as part of itself. It understood loss, and shook with ancient rage. \[MP3 SP / M2 SP / MF SP\]
 
@@ -179,19 +143,13 @@ Worse still, their prophets continued to have visions of endless conflict and de
 
 The bulk of the Chozo civilisation retired themselves from galactic affairs, leaving only a few scattered colonies amongst the stars. The race retreated to the holy planet of Tallon IV, to shun their technologies and begin simpler, poetic lives. These Chozo reconnected themselves to the natural world and tried to find a harmony with it. As time went on, the most potent prophets became manic, and tried to warn their fellows of a great poison that was to come. \[M1 / MP\]
 
-These visions were met with increasing dismissal, but the day finally came when the prophets were believed. After eons swimming in the stars, Phaaze’s seed entered the Tallon system. \[MP / MP3\]
+These visions were met with increasing dismissal, but the day finally came when the prophets were believed. After eons swimming in the stars, Phaaze’s seed entered the Tallon system. \[MP / MP3\](http://fakehost/test/[_Artist:%20Hameed_](http://hameed.deviantart.com/art/Cessation-619497))
 
-([_Artist: Hameed_](http://hameed.deviantart.com/art/Cessation-619497))
-
-The Leviathan crashed down, and rained poison and death unto the world. The impact survivors watched as their sacred nature succumbed to the mutagens leaking from the seed, and barricaded themselves in their temples as the flora and fauna transformed. Phazon spread beneath the surface of the dying planet, and radiation storms battered the surface. \[MP\]
-
-([_Source: Riivka_](http://riivka.deviantart.com/art/Fading-321733899))
+The Leviathan crashed down, and rained poison and death unto the world. The impact survivors watched as their sacred nature succumbed to the mutagens leaking from the seed, and barricaded themselves in their temples as the flora and fauna transformed. Phazon spread beneath the surface of the dying planet, and radiation storms battered the surface. \[MP\](http://fakehost/test/[_Source:%20Riivka_](http://riivka.deviantart.com/art/Fading-321733899))
 
 The Chozos’ punishment for their sins, and the fulfilment of Phaaze’s wrath, reached biblical proportions. The Chozo of Tallon IV did not get to rest in peace. Their life energies suffered from Phazon disruption, and upon death they became mad ghosts who screamed forever as they were torn in and out of the material world. In this purgatory, the undead immaterial Chozo murdered anyone they could find. \[MP / MP3 SP\]
 
-As their numbers dwindled, the last of the Chozo constructed a great temple above the impact crater. Within this temple, they used what little technology remained to project an energy field around the Leviathan to slow the spread of contagion. As the Chozo civilisation on Tallon IV was extinguished, their dying prophets told of a hero who would one day emerge, to enter the crater and defeat the evil worm within. \[MP\]
-
-([_Source: Havoc-DM_](http://havoc-dm.deviantart.com/art/Metroid-Prime-74392852))
+As their numbers dwindled, the last of the Chozo constructed a great temple above the impact crater. Within this temple, they used what little technology remained to project an energy field around the Leviathan to slow the spread of contagion. As the Chozo civilisation on Tallon IV was extinguished, their dying prophets told of a hero who would one day emerge, to enter the crater and defeat the evil worm within. \[MP\](http://fakehost/test/[_Source:%20Havoc-DM_](http://havoc-dm.deviantart.com/art/Metroid-Prime-74392852))
 
 Within the Impact Crater, Metroid Prime remained trapped within the Chozo energy field. In its armour constructed from ancient Chozo power suits, it continued its wait to be unleashed on the universe. \[MP / MP3 SP\]
 
@@ -199,23 +157,17 @@ Within the Impact Crater, Metroid Prime remained trapped within the Chozo energy
 
 ([Artist: 3ihard](http://3ihard.deviantart.com/art/luminoth-priest-191995430))
 
-On the planet Aether, an ancient race of mystics known as the Luminoth received the horrifying data coming from Tallon IV. In distant times, the Luminoth and the Chozo had been steadfast allies – until the Chozo retreat ended their ties. Desperate to assist, the Luminoth began to organise a rescue mission. \[MP2 / MP2 SP\]
-
-([Artist: PugOfDoon](http://pugofdoom.deviantart.com/art/Chozo-Ghost-88765133))
+On the planet Aether, an ancient race of mystics known as the Luminoth received the horrifying data coming from Tallon IV. In distant times, the Luminoth and the Chozo had been steadfast allies – until the Chozo retreat ended their ties. Desperate to assist, the Luminoth began to organise a rescue mission. \[MP2 / MP2 SP\](http://fakehost/test/[Artist:%20PugOfDoon](http://pugofdoom.deviantart.com/art/Chozo-Ghost-88765133))
 
 A dark transmission was received from Tallon IV. The image showed a screaming, ghostly Chozo figure, flickering in and out of the living universe. In its undead madness, it spoke for its kin. It raged that they would kill anyone who would set foot on their world. The planet was pandemonium, a cursed world on which the dead could not die. As the signal faded, the Luminoth realised that there was no one left alive to rescue. \[MP SP / MP2 SP\]
 
 The Luminoth were receiving strange readings from the devastated planet. A mutagen was spreading, unlike anything they had ever encountered. They scanned the stars for its source, and made a devastating discovery – a mass of the same mutagen was on a collision course with Aether. Phaaze’s second seed had nearly arrived at its destination. \[MP2 SP / MP3 SP\]
 
-The people of Aether turned to their technology to save them. Their planet had no native star of its own, and had been implanted millennia ago with a complex energy network that sustained all life. This system was reverently called the Light of Aether, and harnessed the light of the universe in its mechanism. The Luminoth realised that even with this great power, they could not destroy the Phazon Leviathan. A different approach was needed. \[MP2 / MP2 SP\]
-
-([_Artist: SesaKath_](http://sesakath.deviantart.com/art/Sanctuary-Fortress-Ing-Hive-72912247))
+The people of Aether turned to their technology to save them. Their planet had no native star of its own, and had been implanted millennia ago with a complex energy network that sustained all life. This system was reverently called the Light of Aether, and harnessed the light of the universe in its mechanism. The Luminoth realised that even with this great power, they could not destroy the Phazon Leviathan. A different approach was needed. \[MP2 / MP2 SP\](http://fakehost/test/[_Artist:%20SesaKath_](http://sesakath.deviantart.com/art/Sanctuary-Fortress-Ing-Hive-72912247))
 
 The Luminoth used their great Light to engineer a small pocket universe, a dark lifeless echo of existence. The plan was bold: they would use the Light of Aether to surgically open the fabric of reality in the path of the Phazon seed, and allow it to harmlessly enter the pocket universe. If all went well, they would be saved. \[MP2 SP\]
 
-The day came, and the Leviathan entered Aether’s atmosphere. The Luminoth commenced their great plan. \[MP2 SP\]
-
-([_Artist: Adriencgd_](http://adriencgd.deviantart.com/art/Clashing-Neighbors-327277211))
+The day came, and the Leviathan entered Aether’s atmosphere. The Luminoth commenced their great plan. \[MP2 SP\](http://fakehost/test/[_Artist:%20Adriencgd_](http://adriencgd.deviantart.com/art/Clashing-Neighbors-327277211))
 
 Phaaze’s seed was a sum of living materials beyond Luminoth comprehension. It hit the pocket universe with incalculable force, and a tsunami of exotic energy ruptured space and time. The equipment containing the dark reality lost containment within moments, and the Luminoth were helpless as their creation expanded across the entire planet. A wave of dark energy absorbed creatures, structures and land into the dark universe, and what was once a single planet – was now two. \[MP2 / MP2 SP\]
 
@@ -225,13 +177,9 @@ The Luminoth surveyed the devastation. The Phazon seed was gone – it had indee
 
 In the dark universe, a grotesque world was being born. Previous inhabitants of Aether, having been absorbed when containment of the pocket universe was lost, found themselves twisted by the corrosive new reality around them. Most perished, and their flesh fed the strange carnivorous fungi that glowed sickly colours. Some survivors were mutated by the Phazon slowly spreading beneath the surface, and adapted to survive in the hostility. \[MP2 SP\]
 
-Aether and its echo, the Phazon-infested Dark Aether, existed in synchronicity. As the Luminoth tried to rebuild their planet, it took only decades for cracks to form in the ether separating the two realities. As rips in the universe shattered open, Aether became a battlefield. \[MP2\]
+Aether and its echo, the Phazon-infested Dark Aether, existed in synchronicity. As the Luminoth tried to rebuild their planet, it took only decades for cracks to form in the ether separating the two realities. As rips in the universe shattered open, Aether became a battlefield. \[MP2\](http://fakehost/test/[_Artist:%20Xxkiragaxx_](http://xxkiragaxx.deviantart.com/art/ING-181463823))
 
-([_Artist: Xxkiragaxx_](http://xxkiragaxx.deviantart.com/art/ING-181463823))
-
-A womb of Phazon mutation and dark energies had birthed a cunning and ferocious horde. The Ing erupted through the cracks between the two worlds, and commenced slaughter. They were fought back by the Luminoth, and a war began between the two parallel worlds. The Ing invaded Aether with regularity, and killed, pillaged and destroyed all that they could find. The Luminoth retaliated and crusaded into Dark Aether in their Light Suits, on suicide missions to exterminate the source of the Ing menace. Both sides suffered colossal casualties as the decades went on. \[MP2\]
-
-([_Artist: 3ihard_](http://3ihard.deviantart.com/art/The-U-MOS-118477953))
+A womb of Phazon mutation and dark energies had birthed a cunning and ferocious horde. The Ing erupted through the cracks between the two worlds, and commenced slaughter. They were fought back by the Luminoth, and a war began between the two parallel worlds. The Ing invaded Aether with regularity, and killed, pillaged and destroyed all that they could find. The Luminoth retaliated and crusaded into Dark Aether in their Light Suits, on suicide missions to exterminate the source of the Ing menace. Both sides suffered colossal casualties as the decades went on. \[MP2\](http://fakehost/test/[_Artist:%203ihard_](http://3ihard.deviantart.com/art/The-U-MOS-118477953))
 
 The war was being lost by the Luminoth. The Ing had exterminated most of their race and had stolen too many vital technologies. With the theft of essential energy components from the Light of Aether power network, they had become a defeated people. \[MP2\]
 
@@ -243,9 +191,7 @@ The Ing had destroyed all of Aether’s ancient ships, and condemned the Luminot
 
 As the Chozo and the Luminoth fell, so too did other ancient races. In a distant part of the universe, the Alimbics were a militaristic society that maintained peace in their galactic cluster. Their order was shattered when a murderous entity, originating from someplace beyond the understood universe, plummeted into one of their worlds. The creature emerged from the devastation as a gaseous entity, and assumed an Alimbic-styled body to begin its onslaught. \[MPH\]
 
-This alien juggernaut was named Gorea by the Alimbic race, and they soon understood it brought only death. Gorea killed every Alimbic it could find, and destroyed everything in its path. Planet after planet fell to Gorea, and the Alimbics realised the creature would never stop. \[MPH\]
-
-([_Artist: Sesakath_](http://sesakath.deviantart.com/art/The-Oubliette-46403925))
+This alien juggernaut was named Gorea by the Alimbic race, and they soon understood it brought only death. Gorea killed every Alimbic it could find, and destroyed everything in its path. Planet after planet fell to Gorea, and the Alimbics realised the creature would never stop. \[MPH\](http://fakehost/test/[_Artist:%20Sesakath_](http://sesakath.deviantart.com/art/The-Oubliette-46403925))
 
 The Alimbics performed an act of supreme sacrifice. They combined the mental energies of their entire race to forge a prison for Gorea. The psychic prison held it bound, and it was transplanted into an organic vessel called The Oubliette. The vessel was launched into the void outside of the universe, a course that would keep its indestructible prisoner in exile forever. The systems of the prison ship were tasked to scan the every molecule of the imprisoned Gorea, and devise an Omega weapon that could be used to kill it. \[MPH / MPH SP\]
 
@@ -263,17 +209,11 @@ A great war exploded across Bryyo. By its end, the scholars had been wiped out a
 
 ### The Little Rainy Planet
 
-The onslaught of vengeances, conquerors, poisons and politics destroyed the old races. The Alimbics had lost their flesh, while the Bryyonians had lost their souls. The Luminoth had retreated into stasis, and the Chozo of Tallon IV had been condemned to a living death. \[MP / MPH / MP2 / MP3\]
+The onslaught of vengeances, conquerors, poisons and politics destroyed the old races. The Alimbics had lost their flesh, while the Bryyonians had lost their souls. The Luminoth had retreated into stasis, and the Chozo of Tallon IV had been condemned to a living death. \[MP / MPH / MP2 / MP3\](http://fakehost/test/[_Artist:%20Kaiquesilva_](http://kaiquesilva.deviantart.com/art/Planet-Zebes-251229151))
 
-([_Artist: Kaiquesilva_](http://kaiquesilva.deviantart.com/art/Planet-Zebes-251229151))
+On a small, rainy planet called Zebes, the last known Chozo colony had watched the stars with impotence. This small settlement of the nearly-extinct avian race witnessed the end of the great universal renaissance, and the slow beginning of a new chapter in galactic history. Gradually, the younger races were launching their first satellites into space. In time, new empires would rise to take the place of the old. \[M1 / M1 SP\](http://fakehost/test/[_Artist:%203ihard_](http://3ihard.deviantart.com/art/Praying-for-Universe-179491357))
 
-On a small, rainy planet called Zebes, the last known Chozo colony had watched the stars with impotence. This small settlement of the nearly-extinct avian race witnessed the end of the great universal renaissance, and the slow beginning of a new chapter in galactic history. Gradually, the younger races were launching their first satellites into space. In time, new empires would rise to take the place of the old. \[M1 / M1 SP\]
-
-([_Artist: 3ihard_](http://3ihard.deviantart.com/art/Praying-for-Universe-179491357))
-
-Zebes prophets’ saw the visions the Chozo had always endured: great wars, spreading poison and death. And suddenly, something bold was foreseen. \[M1 SP / MP3 SP\]
-
-([_Artist: Fddt_](http://fddt.deviantart.com/art/Samus-Aran-368975394))
+Zebes prophets’ saw the visions the Chozo had always endured: great wars, spreading poison and death. And suddenly, something bold was foreseen. \[M1 SP / MP3 SP\](http://fakehost/test/[_Artist:%20Fddt_](http://fddt.deviantart.com/art/Samus-Aran-368975394))
 
 A great hunter, clad in orange, red and green. The Chozo glimpsed a future hero, alone in the darkness beneath worlds, fighting so that good could survive evil. They saw her curing poisoned planets, and ending galactic wars. They saw the universe’s one chance to survive its apocalyptic future. They saw the only one who could defy prophecy. \[M1 / MP3 SP\]
 
@@ -292,9 +232,7 @@ The humans reverse engineered their salvage, and advanced with pace. Within anot
 
 In a less hospitable region of space, a cabal of battered races joined their forces to survive. On planets where acid rain burned flesh and magma flowed, the alliance expanded into a hardened space empire. They ventured into nearby systems and took what they needed from anyone they could reach. They found the ruins of the old races and ransacked the ancient technologies within. They immersed themselves in science and unlocked the secrets of their finds. Within decades, they had advanced their spread with stronger and faster ships. The creatures enhanced themselves, rewriting their genetics and integrating mechanisms beneath their flesh. They were unique: a cybernetic race of furious murderers with a skill for patient scientific process. As more planets were invaded, their conquered civilisations were conscripted by force. \[M1 SP / MP / MP3\]
 
-The inevitable moment came when their Empire reached the borders of the vast Galactic Federation. \[M1 SP / MP / MP3\]
-
-([_Artist: Mr-Corr_](http://mr-corr.deviantart.com/art/fight-for-norion-175087687))
+The inevitable moment came when their Empire reached the borders of the vast Galactic Federation. \[M1 SP / MP / MP3\](http://fakehost/test/[_Artist:%20Mr-Corr_](http://mr-corr.deviantart.com/art/fight-for-norion-175087687))
 
 First contact was brief and furious. On that day, the warning went out to all the worlds of the Federation: Beware the Space Pirates. Though no state of war was officially declared, the empires attacked each other on sight. The Galactic Federation was large enough to repress any meaningful incursions into their space. \[M1 SP / MP SP / MP3 SP / SM SP\]
 
@@ -302,27 +240,19 @@ First contact was brief and furious. On that day, the warning went out to all th
 
 The Galactic Federation discovered the last Chozo Colony on Zebes. The tired, ancient avians welcomed the humans and shared with them wisdom and knowledge. They offered the Galactic Federation new sciences, and taught them how to make organic computers. The Federation studied the Chozo’s own central processing unit, an engineered brain that mothered over their colony, and left with plans to assemble their own variants. On the nearest habitable planet of K-2L, a colony was established. \[M1 / MP3 SP\]
 
-On this world, the human Samus Aran was born. \[M1\]
-
-([_Artist: Methuselah3000_](http://methuselah3000.deviantart.com/art/Zebesian-Space-Pirate-301454831))
+On this world, the human Samus Aran was born. \[M1\](http://fakehost/test/[_Artist:%20Methuselah3000_](http://methuselah3000.deviantart.com/art/Zebesian-Space-Pirate-301454831))
 
 Barely out of infancy, the young Samus witnessed her family die. A Space Pirate raiding party overwhelmed her colony and murdered everyone she ever knew. By staying silent while surrounded by horror, Samus survived as the Pirates ransacked the settlement and left. \[M1\]
 
 The Chozo colony on Zebes received K-2L’s automated distress signal. In an ancient dusty ship, they reached the planet and found Samus to be the only survivor of the massacre. The child was brought to Zebes, and the Chozo deliberated. Should she be returned to her own kind, or allowed to stay? \[M1\]
 
-Across the colony, the Prophets experienced a simultaneous moment of clarity. They understood immediately that they had found their prophesised hero. The young girl was their inheritor, and would grow strong. She would learn all she could from them, and take their strongest technologies into the universe. She would be the hero against the oncoming storm. \[M1 SP\]
+Across the colony, the Prophets experienced a simultaneous moment of clarity. They understood immediately that they had found their prophesised hero. The young girl was their inheritor, and would grow strong. She would learn all she could from them, and take their strongest technologies into the universe. She would be the hero against the oncoming storm. \[M1 SP\](http://fakehost/test/[_Artist:%20R3dFiVe_](http://r3dfive.deviantart.com/art/The-Birth-Of-The-Hunter-255511894))
 
-([_Artist: R3dFiVe_](http://r3dfive.deviantart.com/art/The-Birth-Of-The-Hunter-255511894))
-
-Samus Aran reached maturity amongst the Chozo. She was trained in the combat arts of the great extinct races. She was infused with Chozo genetic material so she could employ their technologies. She was educated to be a scientist, an explorer, and a tactician. Everything that was good about the Chozo civilisation was allowed to live on in Samus. \[M1\]
-
-([_Artist: Pyra_](http://pyra.deviantart.com/art/Decaying-Elder-53293713))
+Samus Aran reached maturity amongst the Chozo. She was trained in the combat arts of the great extinct races. She was infused with Chozo genetic material so she could employ their technologies. She was educated to be a scientist, an explorer, and a tactician. Everything that was good about the Chozo civilisation was allowed to live on in Samus. \[M1\](http://fakehost/test/[_Artist:%20Pyra_](http://pyra.deviantart.com/art/Decaying-Elder-53293713))
 
 Samus became an adult, and the Chozo presented her with their greatest works: a toughened power suit and an agile spacecraft, both more potent than anything their race had ever made. The Chozo leader, decaying and blind, told Samus it was time for her to find her destiny in the universe. Samus Aran departed for the stars, and years pass. \[M1 / M1 SP\]
 
-As Samus tried to reconnect with her heritage on Earth, the last Chozo prophets on Zebes received a final vision: The Space Pirates were coming for them. It was time for the last Chozo to be extinguished from the universe. \[M1 SP\]
-
-([_Artist: Phobos-Romulus_](http://phobos-romulus.deviantart.com/art/The-Chozo-187935440))
+As Samus tried to reconnect with her heritage on Earth, the last Chozo prophets on Zebes received a final vision: The Space Pirates were coming for them. It was time for the last Chozo to be extinguished from the universe. \[M1 SP\](http://fakehost/test/[_Artist:%20Phobos-Romulus_](http://phobos-romulus.deviantart.com/art/The-Chozo-187935440))
 
 The Chozo hid their technologies throughout the planet, in places that they were certain Samus would find them. They concealed a second Power Suit within the walls of their holy temple, having foreseen that Samus may require it in the future. They then returned to the surface to await the inevitable. \[M1 SP\]
 
@@ -330,9 +260,7 @@ The Space Pirates invaded in force, and murdered Samus Aran’s second family. T
 
 ### The Mother Brain
 
-Space Pirate scientists arrived shortly after the carnage and focused their attention on the legendary Chozo organic central processing unit. They rewrote its benign programming and injected stimulants into its flesh. They enabled it to form an artificial intelligence obsessed with strategy and conquest. They drove its computational potential towards absolute advancement of the Space Pirate Empire. \[M1 SP\]
-
-([_Artist: Jaagup_](http://jaagup.deviantart.com/art/mother-brain-258536723))
+Space Pirate scientists arrived shortly after the carnage and focused their attention on the legendary Chozo organic central processing unit. They rewrote its benign programming and injected stimulants into its flesh. They enabled it to form an artificial intelligence obsessed with strategy and conquest. They drove its computational potential towards absolute advancement of the Space Pirate Empire. \[M1 SP\](http://fakehost/test/[_Artist:%20Jaagup_](http://jaagup.deviantart.com/art/mother-brain-258536723))
 
 The results went beyond High Command’s most optimistic projections. The Space Pirates had created a leader, a desperately needed figure to unite their fragmented empire. They had created their Mother Brain. The great Space Pirate generals Ridley and Kraid arrived at Zebes, ready to pay tribute to their new master and to plan for the future. Mother Brain delivered to the Space Pirates knowledge and power. She told them of a world referenced in her oldest Chozo databanks, a planet bathed in a mutagenic poison waiting to be farmed. She instructed High Command to prepare an armada of ships and invade the planet Tallon IV. \[M1 / MP SP\]
 
@@ -340,9 +268,7 @@ The order was followed immediately, and the High Command discovered a world dera
 
 ### The Metroids
 
-A perfect storm brewed. As the Space Pirates gained access to the most potent mutagen in the universe, the Galactic Federation made an equally eventful discovery: They found the dark planet SR388. \[M1 / M2\]
-
-([_Artist: Fireborn Form_](http://firebornform.deviantart.com/art/SR388-Tunnels-353312617))
+A perfect storm brewed. As the Space Pirates gained access to the most potent mutagen in the universe, the Galactic Federation made an equally eventful discovery: They found the dark planet SR388. \[M1 / M2\](http://fakehost/test/[_Artist:%20Fireborn%20Form_](http://firebornform.deviantart.com/art/SR388-Tunnels-353312617))
 
 A Galactic Federation survey team studied the surface, and soon encountered a gelatinous creature that swam through air. The alien defied gravity and physics as it phased through dense rock with ease. It perceived the survey team, and made a few curious chirps in their direction. It then suddenly changed temperament, aggressively charging to latch itself onto the skull of one of the party. The victim died in agony as the Metroid fed on all the energy within, and could not be removed until its prey had been reduced to a dried husk of collapsing matter. The young Metroid had just killed, in a way that science could not explain. \[M1 SP / M2 SP\]
 
@@ -360,27 +286,17 @@ With the arrival of the first Phazon samples from Tallon IV, the exotic substanc
 
 ([_Artist: Ojanpohja_](http://ojanpohja.deviantart.com/art/Space-Pirate-31294390))
 
-In her first mission as a Bounty Hunter, Samus Arran was commissioned by the Galactic Federation to neutralise the stolen Metroids. Through careful investigation, Samus discovered that the Pirates are operating from Zebes – her home. She concluded that the Space Pirates had murdered her second family, as they had done with her first. They have took from her everyone she ever loved, and destroyed her two worlds. \[M1\]
+In her first mission as a Bounty Hunter, Samus Arran was commissioned by the Galactic Federation to neutralise the stolen Metroids. Through careful investigation, Samus discovered that the Pirates are operating from Zebes – her home. She concluded that the Space Pirates had murdered her second family, as they had done with her first. They have took from her everyone she ever loved, and destroyed her two worlds. \[M1\](http://fakehost/test/[_Artist:%20Stuart%20Hughe_](http://stuarthughe.deviantart.com/art/Samus-Varia-322194081))
 
-([_Artist: Stuart Hughe_](http://stuarthughe.deviantart.com/art/Samus-Varia-322194081))
+Samus stormed Zebes and killed everyone in her path. \[M1\](http://fakehost/test/[_Artist:%20Immarart_](http://immarart.deviantart.com/art/Metroid-337270954))
 
-Samus stormed Zebes and killed everyone in her path. \[M1\]
-
-([_Artist: Immarart_](http://immarart.deviantart.com/art/Metroid-337270954))
-
-As her defences were breached, Mother Brain unleashed the great generals Ridley and Kraid. Both were killled, and, desperate to stop the intruder, Mother Brain released the Metroids. Samus Aran exterminated the creatures, and invaded the inner sanctum. \[M1\]
-
-([_Artist: Twigs_](http://twigs.deviantart.com/art/The-Mother-s-Chamber-140408495))
+As her defences were breached, Mother Brain unleashed the great generals Ridley and Kraid. Both were killled, and, desperate to stop the intruder, Mother Brain released the Metroids. Samus Aran exterminated the creatures, and invaded the inner sanctum. \[M1\](http://fakehost/test/[_Artist:%20Twigs_](http://twigs.deviantart.com/art/The-Mother-s-Chamber-140408495))
 
 Samus confronted the malevolent Mother Brain and blasted apart her body. A power overload was caused, and the Tourian facility shook itself apart. Samus evacuated to her ship and tried to leave Zebes, but a Space Pirate battleship in orbit registered her ascent and opened fire. Samus’ gunship plummeted back towards the Zebes and impacted Chozodia, her former home. \[M1\]
 
-Extremely lucky to be alive, Samus crawled out of the remains of her destroyed power suit, and fled as Space Pirate forces stormed the area. Samus hid, crawled and ran to find sanctuary in the deepest part of the Chozo’s most revered temple. \[M1\]
+Extremely lucky to be alive, Samus crawled out of the remains of her destroyed power suit, and fled as Space Pirate forces stormed the area. Samus hid, crawled and ran to find sanctuary in the deepest part of the Chozo’s most revered temple. \[M1\](http://fakehost/test/[_Artist:%20Eyes5_](http://eyes5.deviantart.com/art/Blessing-6012954))
 
-([_Artist: Eyes5_](http://eyes5.deviantart.com/art/Blessing-6012954))
-
-Samus found herself surrounded with murals of the dead Chozo, and accepted she was alone in the universe. Overcoming despair, she solved the trials of the Chozodian temple and a concealed power suit was revealed to her. This shining armour was even more potent than the one she had just lost, and was able to integrate the most exotic Chozo technologies. Samus realised the greater meaning of her find; the Chozo had left her gifts for her in places they had foreseen she would traverse. Her adopted family continued to protect her long after their deaths, and she would find their statues cradling survival equipment in the darkest corners of the cosmos. \[M1 / MP / MP3 / M2 / SM\]
-
-([_Artist: Imachinivid_](http://imachinivid.deviantart.com/art/Super-missile-309591371))
+Samus found herself surrounded with murals of the dead Chozo, and accepted she was alone in the universe. Overcoming despair, she solved the trials of the Chozodian temple and a concealed power suit was revealed to her. This shining armour was even more potent than the one she had just lost, and was able to integrate the most exotic Chozo technologies. Samus realised the greater meaning of her find; the Chozo had left her gifts for her in places they had foreseen she would traverse. Her adopted family continued to protect her long after their deaths, and she would find their statues cradling survival equipment in the darkest corners of the cosmos. \[M1 / MP / MP3 / M2 / SM\](http://fakehost/test/[_Artist:%20Imachinivid_](http://imachinivid.deviantart.com/art/Super-missile-309591371))
 
 With her new armaments, Samus cleansed the Space Pirate presence from Zebes. She came to be known as “The Hunter”, and the Space Pirates learned that they will always be hunted down for what they did to her families. They fled the planet in terror. \[M1 / MP / MP2 / MP3\]
 
@@ -388,23 +304,15 @@ With her new armaments, Samus cleansed the Space Pirate presence from Zebes. She
 
 As years passed, Samus Aran accepted further missions from the Galactic Federation. The bounty earned funded her personal vendetta against the Space Pirates. She improved her armaments, paid for black market information and stormed their outposts. Samus showed her enemies no mercy, and became the feared nemesis of their entire civilisation. With the income from her Federation services, Samus had soon amassed enough money to buy the most secret information regarding the Space Pirates: the coordinates of their stronghold on an old forgotten planet called Tallon IV. \[MP1 SP\]
 
-Samus guided her ship into the Tallon system and investigated an orbiting space station. She discovered a failed genetic engineering facility whose Space Pirate crew was murdered when they lost control of their own creations. Samus fought her way through the ferocious beasts scattered within, and discovered a half-insane cyborg recreation of the Space Pirate general Ridley. As the station began to collapse, the biomechanical dragon fled to the world below, and Samus pursued. \[MP1\]
-
-([_Artist: Lightningarts_](http://lightningarts.deviantart.com/art/Metroid-Metal-Where-It-All-Begins-393272172))
+Samus guided her ship into the Tallon system and investigated an orbiting space station. She discovered a failed genetic engineering facility whose Space Pirate crew was murdered when they lost control of their own creations. Samus fought her way through the ferocious beasts scattered within, and discovered a half-insane cyborg recreation of the Space Pirate general Ridley. As the station began to collapse, the biomechanical dragon fled to the world below, and Samus pursued. \[MP1\](http://fakehost/test/[_Artist:%20Lightningarts_](http://lightningarts.deviantart.com/art/Metroid-Metal-Where-It-All-Begins-393272172))
 
 Samus lost Ridley in the planet’s stormy atmosphere, and elected to land in a nearby jungle to conceal her presence from the Pirate ground forces. Exploring the surroundings, Samus discovered that the planet was once home to the bulk of the extinct Chozo civilisation. In a great temple Samus studied poetic murals that told of the Phazon comet that had struck their world. The scribblings informed her of a creature trapped deep in the comet that they referred to as “The Worm,” and of the powerful shield they erected to prevent its escape. Samus read their last prophecy; that a hero would traverse fire and ice, jungle and cave, and find twelve sacred keys that would deactivate the barrier and allow passage to the Impact Crater. This saviour from the stars would bring down the ancient shield, and destroy the worm that infected their planet. \[MP1\]
 
-She continued her exploration, and battled ferocious flora and fauna. The Hunter came to understand that the Space Pirates had established a complex military installation that descended far below the surface. \[MP1\]
+She continued her exploration, and battled ferocious flora and fauna. The Hunter came to understand that the Space Pirates had established a complex military installation that descended far below the surface. \[MP1\](http://fakehost/test/[_Artist:%20R-Sraven_](http://r-sraven.deviantart.com/art/Metroid-Prime-Lost-Ruins-33577678))
 
-([_Artist: R-Sraven_](http://r-sraven.deviantart.com/art/Metroid-Prime-Lost-Ruins-33577678))
+Samus hunted the Pirates and accessed their computer logs. The Empire had found quantities of an intensely potent mutagen called Phazon. Laboratories across the outpost experimented with the substance, and in a short space of time they had created prototypes for the next generation of their races: powerful Phazon-fuelled juggernauts. Should these advances continue, Samus knew that the Space Pirates would be able to conquer the Galactic Federation. \[MP1\](http://fakehost/test/[_Artist:%20Greenstranger_](http://greenstranger.deviantart.com/art/Metroid-Ceres-Station-Lab-358321968))
 
-Samus hunted the Pirates and accessed their computer logs. The Empire had found quantities of an intensely potent mutagen called Phazon. Laboratories across the outpost experimented with the substance, and in a short space of time they had created prototypes for the next generation of their races: powerful Phazon-fuelled juggernauts. Should these advances continue, Samus knew that the Space Pirates would be able to conquer the Galactic Federation. \[MP1\]
-
-([_Artist: Greenstranger_](http://greenstranger.deviantart.com/art/Metroid-Ceres-Station-Lab-358321968))
-
-In the most secure laboratory, Samus made a devastating discovery. The Space Pirates had used Phazon to create an army of stable clone Metroids and lost containment. The Metroid creatures were roaming the caverns deep in the planet, reproducing and mutating as the Phazon influenced their physiology. \[MP1\]
-
-([_Artist: Ohimseeinstars_](http://greenstranger.deviantart.com/art/Metroid-Ceres-Station-Lab-358321968))
+In the most secure laboratory, Samus made a devastating discovery. The Space Pirates had used Phazon to create an army of stable clone Metroids and lost containment. The Metroid creatures were roaming the caverns deep in the planet, reproducing and mutating as the Phazon influenced their physiology. \[MP1\](http://fakehost/test/[_Artist:%20Ohimseeinstars_](http://greenstranger.deviantart.com/art/Metroid-Ceres-Station-Lab-358321968))
 
 Samus’ final discovery was the most horrific. The powerful, poisonous Phazon was not a rare material on Tallon IV. Despite the Chozo shield containing the Impact Crater, the substance had spread and consumed the world inside-out. The core of the planet presented the Space Pirates with a vast supply of Phazon, enough to fuel their conquest of the stars. \[MP1\]
 
@@ -412,13 +320,9 @@ Samus destroyed the mining facilities and laboratories, and reconstructed the tw
 
 ### The Worm
 
-Samus Aran had opened Metroid Prime’s cage, and had no understanding of what she was about to unleash on the universe. The creature had been imprisoned in a different era, and had spent eons being tortuously transformed by Phazon into an undying mad genius. \[MP1\]
+Samus Aran had opened Metroid Prime’s cage, and had no understanding of what she was about to unleash on the universe. The creature had been imprisoned in a different era, and had spent eons being tortuously transformed by Phazon into an undying mad genius. \[MP1\](http://fakehost/test/_Artist:%20Chrysaetos-Pteron_)
 
-(_Artist: Chrysaetos-Pteron_)
-
-Samus and the ancient Metroid battled, and the bounty hunter shattered the creature’s metal armour. By channelling the surrounding Phazon deposits into a supercharged energy beam, Samus was able to devastate Metroid Prime’s gelatinous body. After a tremendous battle, the old creature began to collapse on itself. \[MP1\]
-
-([_Artist: Sabretoontigers_](http://sabretoontigers.deviantart.com/art/Samus-308644319))
+Samus and the ancient Metroid battled, and the bounty hunter shattered the creature’s metal armour. By channelling the surrounding Phazon deposits into a supercharged energy beam, Samus was able to devastate Metroid Prime’s gelatinous body. After a tremendous battle, the old creature began to collapse on itself. \[MP1\](http://fakehost/test/[_Artist:%20Sabretoontigers_](http://sabretoontigers.deviantart.com/art/Samus-308644319))
 
 Seemingly dying, Metroid Prime lashed out, grabbing a layer of material from Samus Aran’s armour. The creature melted into a pool of Phazon particles, and the bounty hunter evacuated the Impact Crater. \[MP1\]
 
@@ -426,9 +330,7 @@ Samus Aran had seemingly succeeded in her mission. The surviving Space Pirates a
 
 ### The Dark Hunter
 
-Metroid Prime’s exposure to millennia of Phazon had given the creature extremely exotic abilities, the most potent being its durability – to recreate itself after nearly any level of destruction. As it had collapsed on itself, the essence of Metroid Prime craved the strength and adaptability present in Samus Aran. In the Talon IV impact crater, Metroid Prime recreated itself as a dark copy of the woman who had defeated it. \[MP 1 / MP2 / MP3 SP\]
-
-([_Artist: Imachinivid_](http://imachinivid.deviantart.com/art/Dark-Samus-returns-295856131))
+Metroid Prime’s exposure to millennia of Phazon had given the creature extremely exotic abilities, the most potent being its durability – to recreate itself after nearly any level of destruction. As it had collapsed on itself, the essence of Metroid Prime craved the strength and adaptability present in Samus Aran. In the Talon IV impact crater, Metroid Prime recreated itself as a dark copy of the woman who had defeated it. \[MP 1 / MP2 / MP3 SP\](http://fakehost/test/[_Artist:%20Imachinivid_](http://imachinivid.deviantart.com/art/Dark-Samus-returns-295856131))
 
 Dark Samus clawed its way out of the Impact Crater. It departed Tallon IV to spread its venom across the stars, and to sow the seeds of a great war. \[MP1 / MP2 / MP3\]
 

@@ -1,6 +1,4 @@
-# 
-            On Recent Controversial Events - Bradley M. Kuhn ( Brad ) ( bkuhn )
-        
+# On Recent Controversial Events - Bradley M. Kuhn ( Brad ) ( bkuhn )
 Tuesday 15 October 2019 by Bradley M. Kuhn
 
 The last 33 days have been unprecedentedly difficult for the software freedom community and for me personally. Folks have been emailing, phoning, texting, tagging me on social media (— the last of which has been funny, because all my social media accounts are placeholder accounts). But, just about everyone has urged me to comment on the serious issues that the software freedom community now faces. Until now, I have stayed silent regarding all these current topics: from Richard M. Stallman (RMS)'s public statements, to [his resignation from the Free Software Foundation (FSF)](https://www.fsf.org/news/richard-m-stallman-resigns), to the Epstein scandal and its connection to MIT. I've also avoided generally commenting on software freedom organizational governance during this period. I did this for good reason, which is explained below. However, in this blog post, I now share my primary comments on the matters that seem to currently be of the utmost attention of the Open Source and Free Software communities.

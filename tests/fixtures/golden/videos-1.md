@@ -1,6 +1,4 @@
-# 
-            How to watch the 21 best films of 2017 - Vox
-        
+# How to watch the 21 best films of 2017 - Vox
 In the introduction to her review anthology _For Keeps: 30 Years at the Movies_, the legendary film critic Pauline Kael wrote, “I’m frequently asked why I don’t write my memoirs. I think I have.” She meant what most movie critics realize at some point: that reading your past reviews and revisiting the lists of films you liked most during the year reveals not just something about a particular year in cinema, but something about you as well.
 
 That’s the feeling I get constructing my list of the best films of 2017, a year that overflowed with great films in every genre, from horror and romantic comedy to documentary and arthouse drama. Some of the films on my list have commonalities — ghosts, meditations on memory and interpersonal connection, and women who refuse to behave — but mostly they underscore just how vibrant cinema remains as an art form, even in the midst of massive cultural shifts in the industry and beyond. And it is a keen reminder to me of all the 2017 conversations I’ve had around and at the movies — and the ways I will never be the same.

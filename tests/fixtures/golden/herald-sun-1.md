@@ -1,5 +1,4 @@
-# Angry media won’t buckle over new surveillance laws
-						| Herald Sun
+# Angry media won’t buckle over new surveillance laws | Herald Sun
 A new Bill would require telecommunications service providers to store so-called ‘metadata’ for two years. _Source:_ Supplied
 
 **A HIGH-powered federal government team has been doing the rounds of media organisations in the past few days in an attempt to allay concerns about the impact of new surveillance legislation on press freedom. It failed.**

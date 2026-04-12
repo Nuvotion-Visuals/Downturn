@@ -1,6 +1,4 @@
-# 
-            Node.js and CPU profiling on production (in real-time without downtime)
-        
+# Node.js and CPU profiling on production (in real-time without downtime)
 [![Vincent Vallet](https://miro.medium.com/fit/c/96/96/1*vFTVh_mYyf0p6m7f77A3vw.jpeg)](/@vincentvallet?source=post_page-----d6e62af173e2----------------------)
 
 Why CPU monitoring is important?

@@ -1,6 +1,4 @@
-# 
-            The New York Times en Español - The New York Times
-        
+# The New York Times en Español - The New York Times
 Highlights
 ----------
 

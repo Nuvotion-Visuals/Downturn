@@ -14,7 +14,7 @@ export default {
 		let absolute_urls = options.absolute_urls ?? true;
 		let title = document.window.document.querySelector('title');
 		if (title)
-			res.header("X-Title", encodeURIComponent(title.textContent));
+			res.header("X-Title", encodeURIComponent(title.textContent.replace(/\s+/g, ' ').trim()));
 		if (id) {
 			let el = document.window.document.querySelector("#"+id);
 			if (el) document = new JSDOM('<!DOCTYPE html>'+ el.innerHTML);
@@ -37,9 +37,14 @@ export default {
 		for (let i=0;i<replacements.length;i++) {
 			markdown = markdown.replace(replacements[i].placeholder, replacements[i].replacement);
 		}
+		// Normalize broken headings: # \n Title -> # Title
+		markdown = markdown.replace(/^(#{1,6})\s*\n\s*(.+)/gm, '$1 $2');
+		// Rejoin broken links/images split across lines
+		markdown = markdown.replace(/\)\s*\n[\s\n]*\]\(/g, ')](');
+		markdown = markdown.replace(/\]\s*\n[\s\n]*\(/g, '](');
 		let result = (url) ? common_filters.filter(url, markdown, ignore_links, absolute_urls) : markdown;
 		if (inline_title && title) {
-			result = "# " + title.textContent + "\n" + result;
+			result = "# " + title.textContent.replace(/\s+/g, ' ').trim() + "\n" + result;
 		}
 		return result;
 	}

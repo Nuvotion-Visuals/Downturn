@@ -1,6 +1,4 @@
-# 
-            Tite diz que errou ao levar taça da Libertadores a Lula em 2012 - 21/12/2018 - Esporte - Folha
-        
+# Tite diz que errou ao levar taça da Libertadores a Lula em 2012 - 21/12/2018 - Esporte - Folha
 Após rechaçar [um encontro da seleção brasileira com o presidente eleito Jair](https://www1.folha.uol.com.br/esporte/2018/12/tite-se-recusa-a-encontrar-bolsonaro-antes-da-disputa-da-copa-america.shtml) [Bolsonaro](https://www1.folha.uol.com.br/esporte/2018/12/tite-se-recusa-a-encontrar-bolsonaro-antes-da-disputa-da-copa-america.shtml), o técnico Tite declarou que errou ao levar a taça da Copa Libertadores de 2012, conquistada pelo Corinthians, ao ex-presidente Luiz Inácio Lula da Silva.
 
 Ao lado de representantes do clube paulista, o atual comandante do Brasil ainda entregou uma réplica do troféu a Lula.

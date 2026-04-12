@@ -1,6 +1,4 @@
-# 
-            Outside the web: standalone WebAssembly binaries using Emscripten · V8
-        
+# Outside the web: standalone WebAssembly binaries using Emscripten · V8
 Emscripten has always focused first and foremost on compiling to the Web and other JavaScript environments like Node.js. But as WebAssembly starts to be used _without_ JavaScript, new use cases are appearing, and so we've been working on support for emitting [**standalone Wasm**](https://github.com/emscripten-core/emscripten/wiki/WebAssembly-Standalone) files from Emscripten, that do not depend on the Emscripten JS runtime! This post explains why that's interesting.
 
 Using standalone mode in Emscripten [#](#using-standalone-mode-in-emscripten)

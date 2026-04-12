@@ -1,6 +1,4 @@
-# 
-            Simple Anomaly Detection Using Plain SQL | Haki Benita
-        
+# Simple Anomaly Detection Using Plain SQL | Haki Benita
 * * *
 
 Many developers think that having a critical bug in their code is the worst thing that can happen. Well, there is something much worse than that: Having a critical bug in your code and **not knowing about it!**

@@ -1,6 +1,4 @@
-# 
-            Evolve: Shared Mutable History — evolve extension for Mercurial
-        
+# Evolve: Shared Mutable History — evolve extension for Mercurial
 Contents
 
 *   [Evolve: Shared Mutable History](#evolve-shared-mutable-history)

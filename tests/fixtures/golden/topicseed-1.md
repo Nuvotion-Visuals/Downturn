@@ -1,6 +1,4 @@
-# 
-            Content Depth — Write Comprehensively About Your Core Topics | topicseed
-        
+# Content Depth — Write Comprehensively About Your Core Topics | topicseed
 *   [Assess How Deep Is Your Content](#assess-how-deep-is-your-content)
 *   [Rewrite With Content Depth In Mind](#rewrite-with-content-depth-in-mind)
 *   [Yes, Content Depth and Breadth Overlap](#yes-content-depth-and-breadth-overlap)

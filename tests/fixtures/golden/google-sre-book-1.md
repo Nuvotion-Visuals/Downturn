@@ -1,6 +1,4 @@
-# 
-            Google - Site Reliability Engineering
-        
+# Google - Site Reliability Engineering
 Monitoring Distributed Systems
 ------------------------------
 

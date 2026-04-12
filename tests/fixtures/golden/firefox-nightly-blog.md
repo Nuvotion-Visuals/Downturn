@@ -1,6 +1,4 @@
-# 
-            These Weeks in Firefox: Issue 85 – Firefox Nightly News
-        
+# These Weeks in Firefox: Issue 85 – Firefox Nightly News
 ### Highlights
 
 *   [Here’s our Firefox Year in Review!](https://blog.mozilla.org/blog/2020/12/15/our-year-in-review-how-weve-kept-firefox-working-for-you-in-2020/)

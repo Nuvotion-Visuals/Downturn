@@ -1,6 +1,4 @@
-# 
-            'What is the sea telling us?': Māori tribes fearful over whale strandings | Eleanor Ainge Roy | Environment | The Guardian
-        
+# 'What is the sea telling us?': Māori tribes fearful over whale strandings | Eleanor Ainge Roy | Environment | The Guardian
 Whale whisperer Hori Parata was just seven years old when he attended his first mass stranding, a beaching of porpoises in New Zealand’s Northland, their cries screeching through the air on the deserted stretch of sand.
 
 Seven decades later, Parata, 75, has now overseen more than 500 strandings and is renowned in [New Zealand](https://www.theguardian.com/world/newzealand) as the leading Māori whale expert, called on by tribes around the country for cultural guidance as marine strandings become increasingly complex and fatal.

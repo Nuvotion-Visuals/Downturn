@@ -1,6 +1,4 @@
-# 
-            Hermitian matrix - Wikipedia
-        
+# Hermitian matrix - Wikipedia
 In mathematics, a **Hermitian matrix** (or **self-adjoint matrix**) is a [complex](http://fakehost/wiki/Complex_number%20%22Complex%20number%22) [square matrix](http://fakehost/wiki/Square_matrix%20%22Square%20matrix%22) that is equal to its own [conjugate transpose](http://fakehost/wiki/Conjugate_transpose%20%22Conjugate%20transpose%22)—that is, the element in the i\-th row and j\-th column is equal to the [complex conjugate](http://fakehost/wiki/Complex_conjugate%20%22Complex%20conjugate%22) of the element in the j\-th row and i\-th column, for all indices i and j:
 
 ![{\displaystyle A{\text{ Hermitian}}\quad \iff \quad a_{ij}={\overline {a_{ji}}}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/28a0aaa74b2267a48312e19321211cd9e3a39228)

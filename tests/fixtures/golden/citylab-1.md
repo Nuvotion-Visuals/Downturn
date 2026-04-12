@@ -1,6 +1,4 @@
-# 
-            A Brief History of Neon Signage - CityLab
-        
+# A Brief History of Neon Signage - CityLab
   
 
     ![](https://cdn.citylab.com/media/img/citylab/2019/04/mr1/300.jpg?mod=1556645448)

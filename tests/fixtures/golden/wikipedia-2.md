@@ -1,6 +1,4 @@
-# 
-            New Zealand - Wikipedia
-        
+# New Zealand - Wikipedia
 [Coordinates](http://fakehost/wiki/Geographic_coordinate_system%20%22Geographic%20coordinate%20system%22): [42°S 174°E﻿ / ﻿42°S 174°E](https://tools.wmflabs.org/geohack/geohack.php?pagename=New_Zealand&params=42_S_174_E_scale:5000000_source:GNS)
 
 

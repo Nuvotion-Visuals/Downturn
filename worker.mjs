@@ -70,8 +70,12 @@ async function handleRequest(request) {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
-  // API lives at /api, everything else serves the HTML page
+  // Serve static files, then API
   if (url.pathname !== '/api' && request.method !== 'POST') {
+    if (STATIC_FILES[url.pathname]) {
+      const { content, type } = STATIC_FILES[url.pathname];
+      return new Response(content, { headers: { 'Content-Type': type } });
+    }
     return new Response(HTML_PAGE, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
   }
 
@@ -140,8 +144,9 @@ async function handleRequest(request) {
   }
 }
 
-// HTML_PAGE is set by the build script for Cloudflare, or loaded from disk for local dev
+// Static files — loaded from disk for local dev, embedded at build time for Cloudflare
 let HTML_PAGE = '<!-- placeholder: replaced at build time or runtime -->';
+const STATIC_FILES = {};
 
 // Cloudflare Workers entry point
 export default { fetch: handleRequest };
@@ -152,7 +157,14 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
   const path = await import('node:path');
   const http = await import('node:http');
   const dir = path.dirname(new URL(import.meta.url).pathname);
-  HTML_PAGE = fs.readFileSync(path.join(dir, 'public', 'index.html'), 'utf8');
+  const publicDir = path.join(dir, 'public');
+  HTML_PAGE = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+  // Load static JS modules
+  for (const file of fs.readdirSync(publicDir).filter(f => f.endsWith('.mjs') || f.endsWith('.js') || f.endsWith('.css'))) {
+    const ext = path.extname(file);
+    const types = { '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css' };
+    STATIC_FILES['/' + file] = { content: fs.readFileSync(path.join(publicDir, file), 'utf8'), type: types[ext] };
+  }
   const port = process.env.PORT || 4001;
   http.createServer(async (req, res) => {
     const request = new Request(`http://localhost:${port}${req.url}`, {

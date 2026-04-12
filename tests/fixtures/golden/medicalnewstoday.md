@@ -1,6 +1,4 @@
-# 
-            How does the brain turn unconscious information into conscious thought?
-        
+# How does the brain turn unconscious information into conscious thought?
 Neuroscience tells us that most of the work done by our brains happens on an unconscious level, but when does that "a-ha!" moment occur? And what happens during it? New research investigates.
 
 ![hand holding brain lightbulb](https://cdn1.medicalnewstoday.com/content/images/articles/318/318674/hand-holding-brain-lightbulb.jpg)  

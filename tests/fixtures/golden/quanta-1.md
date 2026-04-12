@@ -1,6 +1,4 @@
-# 
-            Quanta Magazine
-        
+# Quanta Magazine
 A little over half a century ago, chaos started spilling out of a famous experiment. It came not from a petri dish, a beaker or an astronomical observatory, but from the vacuum tubes and diodes of a Royal McBee LGP-30. This “desk” computer — it was the size of a desk — weighed some 800 pounds and sounded like a passing propeller plane. It was so loud that it even got its own office on the fifth floor in Building 24, a drab structure near the center of the Massachusetts Institute of Technology. Instructions for the computer came from down the hall, from the office of a meteorologist named Edward Norton Lorenz.
 
 The story of chaos is usually told like this: Using the LGP-30, Lorenz made paradigm-wrecking discoveries. In 1961, having programmed a set of equations into the computer that would simulate future weather, he found that tiny differences in starting values could lead to drastically different outcomes. This sensitivity to initial conditions, later popularized as the butterfly effect, made predicting the far future a fool’s errand. But Lorenz also found that these unpredictable outcomes weren’t quite random, either. When visualized in a certain way, they seemed to prowl around a shape called a strange attractor.

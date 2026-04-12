@@ -1,6 +1,4 @@
-# 
-            Screenshot : «Vape Wave», «6 Days», «Alphonse Président»… - Culture / Next
-        
+# Screenshot : «Vape Wave», «6 Days», «Alphonse Président»… - Culture / Next
 Séries, documentaires, programmes jeunesse… Retrouvez les recommandations de _Libération_ pour savoir quoi regarder sur vos écrans cette semaine.
 
 ### Pour dépasser le tabac
