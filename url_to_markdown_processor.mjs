@@ -39,6 +39,8 @@ export default {
 		}
 		// Normalize broken headings: # \n Title -> # Title
 		markdown = markdown.replace(/^(#{1,6})\s*\n\s*(.+)/gm, '$1 $2');
+		// Strip empty anchor links (permalink anchors like [](url)), but not images ![](url)
+		markdown = markdown.replace(/(?<!!)\[]\([^)]*\)/g, '');
 		// Rejoin broken links/images split across lines
 		markdown = markdown.replace(/\)\s*\n[\s\n]*\]\(/g, ')](');
 		markdown = markdown.replace(/\]\s*\n[\s\n]*\(/g, '](');

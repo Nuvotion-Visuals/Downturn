@@ -43,6 +43,22 @@ test('strips link titles from output', () => {
 	assert.ok(result.includes('[link](https://example.com/page)'), 'should contain clean link');
 });
 
+test('strips empty permalink anchors from headings', () => {
+	const html = '<html><head><title>test</title></head><body><article>' +
+		'<h2>Why are there so many dependencies?<a href="/docs/faq#why-deps"></a></h2>' +
+		'<p>Making a full-featured media framework is a huge undertaking.</p>' +
+		'<h2>Is it X11 independent?<a href="/docs/faq#x11"></a></h2>' +
+		'<p>Yes, we have no hard dependency on X11.</p>' +
+		'</article></body></html>';
+	const doc = new JSDOM(html);
+	const res = { header: () => {} };
+	const result = processor.process_dom('https://example.com/docs/faq', doc, res, '', {
+		inline_title: false, ignore_links: false, improve_readability: true, absolute_urls: true,
+	});
+	assert.ok(!result.includes('[]('), 'should not contain empty anchor links');
+	assert.ok(result.includes('Why are there so many dependencies?'), 'heading text should remain');
+});
+
 test('strips Wikipedia-style link titles', () => {
 	const html = '<html><head><title>test</title></head><body><article><p><a href="/wiki/JavaScript" title="JavaScript">JS</a> is a programming language used widely on the web</p><p>It was created in 1995 by Brendan Eich</p></article></body></html>';
 	const doc = new JSDOM(html);
