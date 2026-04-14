@@ -575,6 +575,34 @@ a:hover { text-decoration: underline; }
 .view-toggle .vt-btn:last-child { border-right: 1px solid var(--color-border); border-radius: 0 var(--radius) var(--radius) 0; }
 .vt-btn.active { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-white); }
 #status { flex: 1; }
+/* Zen mode */
+#zenBtn svg, #zenExitBtn svg { width: var(--icon-md); height: var(--icon-md); fill: currentColor; }
+#zenExitBtn {
+  display: none;
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-lg);
+  z-index: 50;
+  height: var(--control-h-sm);
+  padding: 0 var(--control-px);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+#zenExitBtn:hover { background: var(--color-border); border-color: var(--color-border-hover); }
+body.zen .tabbar,
+body.zen .topbar,
+body.zen .bottombar,
+body.zen .nav-sidebar,
+body.zen .right-sidebar,
+body.zen .sidebar-overlay,
+body.zen .divider { display: none !important; }
+body.zen .panes { border-top: none; }
+body.zen #zenExitBtn { display: flex; }
 /* Empty state */
 .empty-state {
   display: flex;
@@ -784,7 +812,9 @@ a:hover { text-decoration: underline; }
   <button id="openBtn" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg><span class="btn-label">Open in browser</span></button>
   <span id="status"></span>
   <span id="stats"></span>
+  <button id="zenBtn" title="Zen mode"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z"/></svg></button>
 </div>
+<button id="zenExitBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 320c-17.7 0-32 14.3-32 32l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0z"/></svg></button>
 
 <script type="module">
 import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox } from './ui.mjs';
@@ -916,7 +946,7 @@ function tabTitle(tab) {
 
 function renderTabs() {
   tabContainer.innerHTML = tabs.map(t => {
-    const icon = t.url ? `<img class="tab-icon" src="${faviconUrl(t.url)}">` : '';
+    const icon = `<img class="tab-icon" src="${t.url && !t.url.startsWith('__search__:') ? faviconUrl(t.url) : '/favicon.svg'}">`;
     return `<div class="tab${t.id === activeTabId ? ' active' : ''}" data-tab-id="${t.id}" draggable="true">` +
     `${icon}<span class="tab-title">${tabTitle(t)}</span>` +
     `<span class="tab-close">&times;</span></div>`;
@@ -1918,6 +1948,17 @@ document.addEventListener('touchend', () => {
     document.body.style.userSelect = '';
   }
 });
+
+// Zen mode
+const zenBtn = document.getElementById('zenBtn');
+const zenExitBtn = document.getElementById('zenExitBtn');
+zenBtn.addEventListener('click', () => {
+  const rect = zenBtn.getBoundingClientRect();
+  zenExitBtn.style.bottom = (window.innerHeight - rect.bottom) + 'px';
+  zenExitBtn.style.right = (window.innerWidth - rect.right) + 'px';
+  document.body.classList.add('zen');
+});
+zenExitBtn.addEventListener('click', () => document.body.classList.remove('zen'));
 
 // Edge-swipe navigation (mobile PWA)
 let swipeStartX = 0, swipeStartY = 0;

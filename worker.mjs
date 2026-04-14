@@ -276,6 +276,7 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
     });
     const response = await handleRequest(request, process.env);
     res.writeHead(response.status, Object.fromEntries(response.headers));
-    res.end(await response.text());
+    const buf = await response.arrayBuffer();
+    res.end(Buffer.from(buf));
   }).listen(port, () => console.log(`Downturn worker running on http://localhost:${port}`));
 }

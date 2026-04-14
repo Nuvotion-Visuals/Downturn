@@ -1,4 +1,4 @@
-# Welcome to Downturn
+# Downturn
 
 A markdown web browser. Convert any web page to clean markdown and browse the web in a distraction-free reader. Edit with live preview, open local files and folders, manage bookmarks and history.
 
@@ -49,6 +49,10 @@ Downturn works as a PWA on mobile devices. The layout adapts for touch with larg
 ## Browser Extension
 
 Available as a Chrome and Firefox extension. Click the icon to convert the current page to markdown instantly — no server needed. Edit the result, copy to clipboard, or download as a `.md` file.
+
+## Zen Mode
+
+Click the expand icon in the bottom bar to hide all UI chrome and focus on the content. A floating exit button in the corner brings everything back.
 
 ## Copy and Download
 

@@ -30,6 +30,7 @@ Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter
 - **Favicons** — shown in tabs, bookmarks, history, and autocomplete
 - **PWA** — installable as a standalone app with offline support
 - **Mobile** — responsive layout with touch targets, swipe navigation, and sidebar overlay
+- **Zen mode** — hide all UI chrome to focus on content
 
 ## Browser Extension
 
