@@ -58,10 +58,11 @@ jobs:
         with:
           node-version: 24
       - run: npm run ext:build
-      - run: cd extension/dist && zip -r ../../downturn-extension.zip .
       - run: |
           VERSION=$(jq -r .version package.json)
-          gh release create "v$VERSION" downturn-extension.zip \
+          gh release create "v$VERSION" \
+            extension/downturn-chrome.zip \
+            extension/downturn-firefox.xpi \
             --title "v$VERSION" \
             --generate-notes
         env:

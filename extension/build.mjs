@@ -26,4 +26,9 @@ cpSync(join(publicDir, 'favicon-96x96.png'), join(icons, 'icon-16.png'));
 cpSync(join(publicDir, 'favicon-96x96.png'), join(icons, 'icon-48.png'));
 cpSync(join(publicDir, 'favicon-96x96.png'), join(icons, 'icon-128.png'));
 
+// Package for Chrome (.zip) and Firefox (.xpi)
+execSync(`cd ${dist} && zip -r ../downturn-chrome.zip .`);
+cpSync(join(dir, 'downturn-chrome.zip'), join(dir, 'downturn-firefox.xpi'));
+
 console.log('Extension built to extension/dist/');
+console.log('Packages: extension/downturn-chrome.zip, extension/downturn-firefox.xpi');

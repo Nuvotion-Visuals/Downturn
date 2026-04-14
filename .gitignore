@@ -3,4 +3,6 @@
 .claude
 dist/
 extension/dist/
+extension/*.zip
+extension/*.xpi
 .wrangler/
