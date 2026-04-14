@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Downturn</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -577,11 +577,12 @@ a:hover { text-decoration: underline; }
     --space-xl: 16px;
   }
   .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .tab { flex: 0 0 auto; width: auto; min-width: 80px; max-width: 120px; }
-  .tabbar { padding: var(--space-sm) var(--space-sm) 0; }
+  .tab { flex: 0 0 auto; width: auto; min-width: 120px; max-width: 200px; }
+  .tabbar { padding: var(--space-sm) var(--space-sm) 0; border-bottom: none; }
   #backBtn, #fwdBtn, #refreshBtn, #homeBtn,
   #openFileBtn, #openFolderBtn, .topbar-sep { display: none; }
   .topbar { padding: var(--space-sm) var(--space-md); gap: var(--space-sm); }
+  #urlInput, #rawPane, select, textarea, input[type="text"] { font-size: 16px; }
   .nav-sidebar.open {
     position: fixed;
     top: 0; bottom: 0; left: 0;
@@ -606,6 +607,7 @@ a:hover { text-decoration: underline; }
   .panes.single .pane { padding-left: var(--space-lg); padding-right: var(--space-lg); }
   .divider { display: none; }
   .vt-btn[data-view="both"] { display: none; }
+  .vt-btn[data-view="raw"] { border-radius: var(--radius) 0 0 var(--radius); }
   .bottombar {
     flex-wrap: wrap;
     padding: var(--space-sm) var(--space-md);
@@ -636,7 +638,7 @@ a:hover { text-decoration: underline; }
   .tab:active { background: var(--color-bg-tertiary); }
   .nav-btn:active { background: var(--color-bg-tertiary); }
   .bottombar button:active:not(:disabled) { background: var(--color-border); }
-  .tab-close { display: block; }
+  .tab.active .tab-close { display: block; }
   .nav-sidebar li a, .file-tree-item, .history-item, .bookmark-item { min-height: 44px; display: flex; align-items: center; }
   .sidebar-tab { min-height: 44px; }
   .ac-item { min-height: 44px; }
@@ -726,7 +728,7 @@ a:hover { text-decoration: underline; }
     <button class="vt-btn" data-view="raw">Markdown</button>
     <button class="vt-btn active" data-view="preview">Preview</button>
   </div>
-  <button id="openBtn" style="display:none">Open in browser</button>
+  <button id="openBtn" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg><span class="btn-label">Open in browser</span></button>
   <span id="status"></span>
   <span id="stats"></span>
 </div>
