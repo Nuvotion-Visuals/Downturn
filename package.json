@@ -1,6 +1,6 @@
 {
   "name": "downturn",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "type": "module",
   "description": "Web page to markdown with zero dependencies — 99% less code than the original",
   "main": "index.mjs",
