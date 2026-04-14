@@ -10,7 +10,7 @@ And this distinction is important to make and establish from the beginning. Effe
 
 Content depth should be the urgent priority for your content marketing strategy, and clearly defined in your [content briefs](http://fakehost/blog/content-briefs). Start by dominating your own core topics, before venturing across the pond and write about linked subject matters. Otherwise, you are the opposite of an authority as the definition states that an authority is _“a person with extensive or specialized knowledge about a subject; an expert”._ Lastly, do not mistake article depth vs. article length: a blog post’s extreme wordcount has nothing to do with its content depth.
 
-[](#assess-how-deep-is-your-content)Assess How Deep Is Your Content
+Assess How Deep Is Your Content
 -------------------------------------------------------------------
 
 The first task on your list, right now, is to shortlist your core topics. What are you trying to be an expert on? Then, go through each one of your pieces of content and understand how well each blog post is covering its focus topic(s). Not how many times specific keywords appear, or how well the article is outlined and structured.
@@ -21,7 +21,7 @@ In other words, each article should reach an incredible level of content depth f
 
 Remember that **skyscraper content** and **10x content** are not necessarily the answer. These content writing strategies state that in order to beat another piece of content, you need to write 10x more. Either in quantity with a 10x word count or in quality by putting times more information within your own piece of content. Such articles often become unreadable and discourage visitors from absorbing all the knowledge. The best alternative is the create [pillar pages](https://topicseed.com/blog/how-broad-should-topics-be-for-pillar-pages) centered around core topics, and several articles dealing with each specific section in depth. This is **deep content powered by a [smart internal linking strategy](https://topicseed.com/blog/internal-linking-strategies-for-topic-clustering)** and search engines love that in this day and age where attention spans are short! _With that being said, avoid writing 600-word articles!_
 
-[](#rewrite-with-content-depth-in-mind)Rewrite With Content Depth In Mind
+Rewrite With Content Depth In Mind
 -------------------------------------------------------------------------
 
 Once you know which articles are lacking depth of knowledge and information, it is time to rethink each one. For each article, make a list of what essential pieces of information or data are missing. Then decide where to fit them, and decide whether the article would benefit from a full rewrite or not. As a rule of thumb, if you need to change a third of your article, you may need to rewrite it entirely. Of course, this does not mean erasing all work done prior, but it means starting afresh! Trying to **fit deep content into an existing blog** post gives you constraints so doing it from scratch can actually be easier to fight thin content.
@@ -32,7 +32,7 @@ All content writers know that when you open Google Docs, WordPress, or your text
 
 With the massive rise of voice searches, [users tend to use full questions for their search queries](http://fakehost/blog/featured-snippets-using-questions). What used to be `top bottled water brands` is now `OK google, what is the best bottled-water brand in Texas`? The point being, [**keywords are losing traction**](https://topicseed.com/blog/keyword-search-volume-overrated) to leave space for a more natural language understanding of a blog post’s textual content, and meaning.
 
-[](#yes-content-depth-and-breadth-overlap)Yes, Content Depth and Breadth Overlap
+Yes, Content Depth and Breadth Overlap
 --------------------------------------------------------------------------------
 
 _“A topic can be defined as the company it keeps.”_ A very accurate saying loved by ontologists within the fields of computational linguistics, and information science. In simpler terms, a topic and all the terminology it is encompassing will inevitably overlap with related topics. Which, in turn, will form [**topic clusters**](https://topicseed.com/blog/topic-clusters-relationships).
@@ -43,7 +43,7 @@ A keyword, phrase, or term, is not a prisoner to a single concept at all. This i
 
 Therefore, content depth and content breadth are not to be opposed. Content marketers should use both strategies in order to reach ultimate **topical authority** over their choice of subject matters.
 
-[](#depth-of-content--quality--frequency)Depth of Content = Quality + Frequency
+Depth of Content = Quality + Frequency
 -------------------------------------------------------------------------------
 
 Up until recently, long-form blog posts generally were **evergreen articles** that generated a constant stream of organic traffic for a website. This was a lead magnet generation strategy which worked well: hire a writer, include the right keywords, reach over a 5,000-word word count, and hit publish. Then, wait.

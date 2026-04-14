@@ -21,8 +21,19 @@ jobs:
           echo "old=$OLD new=$NEW"
           [ "$OLD" != "$NEW" ] && echo "changed=true" >> "$GITHUB_OUTPUT" || echo "changed=false" >> "$GITHUB_OUTPUT"
 
-  deploy:
+  test:
     needs: check-version
+    if: needs.check-version.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm test
+
+  deploy:
+    needs: [check-version, test]
     if: needs.check-version.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +43,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   publish:
-    needs: check-version
+    needs: [check-version, test]
     if: needs.check-version.outputs.changed == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -47,7 +58,7 @@ jobs:
       - run: npm publish --access public
 
   release:
-    needs: check-version
+    needs: [check-version, test]
     if: needs.check-version.outputs.changed == 'true'
     runs-on: ubuntu-latest
     permissions:

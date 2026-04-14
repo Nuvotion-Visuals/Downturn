@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Downturn</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -63,6 +63,7 @@ body {
   color: var(--color-text);
   line-height: 1.5;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -525,7 +526,8 @@ a:hover { text-decoration: underline; }
   color: var(--color-text);
   cursor: pointer;
 }
-#copyBtn { width: 60px; text-align: center; }
+.bottombar button svg { width: var(--icon-md); height: var(--icon-md); fill: currentColor; flex-shrink: 0; }
+.bottombar button { display: flex; align-items: center; gap: var(--space-sm); }
 .bottombar button:hover:not(:disabled) { background: var(--color-border); border-color: var(--color-border-hover); }
 .bottombar button:disabled { color: var(--color-text-muted); cursor: default; }
 .view-toggle { display: inline-flex; }
@@ -542,6 +544,89 @@ a:hover { text-decoration: underline; }
   height: 100%;
   color: var(--color-text-placeholder);
   font-size: var(--font-sm);
+}
+/* === Responsive: Mobile === */
+@media (max-width: 639px) {
+  :root {
+    --control-h: 44px;
+    --control-h-sm: 40px;
+    --icon-sm: 14px;
+    --icon-md: 18px;
+    --icon-lg: 20px;
+    --sidebar-w: 85vw;
+    --tab-w: auto;
+    --content-max-w: 100%;
+    --space-2xl: 16px;
+    --space-xl: 16px;
+  }
+  .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { flex: 0 0 auto; width: auto; min-width: 80px; max-width: 120px; }
+  .tabbar { padding: var(--space-sm) var(--space-sm) 0; }
+  #backBtn, #fwdBtn, #refreshBtn, #homeBtn,
+  #openFileBtn, #openFolderBtn, .topbar-sep { display: none; }
+  .topbar { padding: var(--space-sm) var(--space-md); gap: var(--space-sm); }
+  .nav-sidebar.open {
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    width: min(320px, 85vw);
+    z-index: 100;
+  }
+  .right-sidebar.open {
+    position: fixed;
+    top: 0; bottom: 0; right: 0;
+    width: min(320px, 85vw);
+    z-index: 100;
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+  .sidebar-overlay.open { display: block; }
+  .pane { padding: var(--space-lg); }
+  .panes.single .pane { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+  .divider { display: none; }
+  .vt-btn[data-view="both"] { display: none; }
+  .bottombar {
+    flex-wrap: wrap;
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+  }
+  .bottombar button { height: 40px; font-size: var(--font-sm); justify-content: center; }
+  .bottombar .btn-label { display: none; }
+  #status { width: 100%; text-align: center; font-size: var(--font-xs); }
+  #stats { display: none; }
+  #settingsPopover {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    min-width: 100%;
+    padding: var(--space-lg);
+  }
+}
+@media (min-width: 640px) {
+  .sidebar-overlay { display: none !important; }
+}
+/* Touch devices: active states + always-visible close */
+@media (pointer: coarse) {
+  .tab:active { background: var(--color-bg-tertiary); }
+  .nav-btn:active { background: var(--color-bg-tertiary); }
+  .bottombar button:active:not(:disabled) { background: var(--color-border); }
+  .tab-close { display: block; }
+  .nav-sidebar li a, .file-tree-item, .history-item, .bookmark-item { min-height: 44px; display: flex; align-items: center; }
+  .sidebar-tab { min-height: 44px; }
+  .ac-item { min-height: 44px; }
+}
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .bottombar { padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom)); }
 }
 </style>
 </head>
@@ -582,8 +667,9 @@ a:hover { text-decoration: underline; }
   </div>
 </div>
 
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 <div class="main-area">
-  <div class="nav-sidebar open" id="navSidebar">
+  <div class="nav-sidebar" id="navSidebar">
     <div class="sidebar-tabs">
       <button class="sidebar-tab active" data-sidebar="nav">Nav</button>
       <button class="sidebar-tab" data-sidebar="bookmarks">Bookmarks</button>
@@ -616,8 +702,8 @@ a:hover { text-decoration: underline; }
 </div>
 
 <div class="bottombar">
-  <button id="copyBtn" disabled>Copy</button>
-  <button id="downloadBtn" disabled>Download .md</button>
+  <button id="copyBtn" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M208 0L332.1 0c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9L448 336c0 26.5-21.5 48-48 48l-192 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48zM48 128l80 0 0 64-64 0 0 256 192 0 0-32 64 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 176c0-26.5 21.5-48 48-48z"/></svg><span class="btn-label">Copy</span></button>
+  <button id="downloadBtn" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg><span class="btn-label">Download</span></button>
   <div class="view-toggle">
     <button class="vt-btn" data-view="both">Both</button>
     <button class="vt-btn" data-view="raw">Markdown</button>
@@ -670,9 +756,11 @@ async function loadSettings() {
     if (s.optImages !== undefined) document.getElementById('optImages').checked = s.optImages;
     if (s.optClean !== undefined) document.getElementById('optClean').checked = s.optClean;
     if (s.optAbsolute !== undefined) document.getElementById('optAbsolute').checked = s.optAbsolute;
-    if (s.view) applyView(s.view);
+    let view = s.view;
+    if (view === 'both' && window.innerWidth < 640) view = 'preview';
+    if (view) applyView(view);
     const sidebar = document.getElementById('navSidebar');
-    if (s.navOpen) sidebar.classList.add('open');
+    if (s.navOpen && window.innerWidth >= 640) sidebar.classList.add('open');
     else sidebar.classList.remove('open');
     // Theme
     if (s.theme) {
@@ -716,7 +804,7 @@ let fileHandles = new Map();
 
 function saveTabs() {
   const data = {
-    tabs: tabs.map(t => ({ id: t.id, url: t.url, markdown: t.markdown, nav: t.nav, stats: t.stats })),
+    tabs: tabs.map(t => ({ id: t.id, url: t.url, markdown: t.markdown, nav: t.nav, stats: t.stats, source: t.source, filePath: t.filePath })),
     activeTabId,
     nextTabId,
   };
@@ -761,6 +849,10 @@ function renderTabs() {
     `<span class="tab-close">&times;</span></div>`;
   }).join('');
   saveTabs();
+  // Scroll active tab into view on narrow screens
+  requestAnimationFrame(() => {
+    tabContainer.querySelector('.tab.active')?.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+  });
 }
 
 function saveTabScroll() {
@@ -1032,8 +1124,20 @@ function renderNav(nav) {
 }
 
 const navToggle = document.getElementById('navToggle');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+function updateOverlay() {
+  const anyOpen = navSidebar.classList.contains('open') || document.getElementById('rightSidebar').classList.contains('open');
+  sidebarOverlay.classList.toggle('open', anyOpen && window.innerWidth < 640);
+}
 navToggle.addEventListener('click', () => {
   navSidebar.classList.toggle('open');
+  updateOverlay();
+  saveSettings();
+});
+sidebarOverlay.addEventListener('click', () => {
+  navSidebar.classList.remove('open');
+  document.getElementById('rightSidebar').classList.remove('open');
+  sidebarOverlay.classList.remove('open');
   saveSettings();
 });
 
@@ -1373,8 +1477,8 @@ copyBtn.addEventListener('click', async () => {
     document.execCommand('copy');
     document.body.removeChild(ta);
   }
-  copyBtn.textContent = 'Copied!';
-  setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
+  copyBtn.querySelector('.btn-label').textContent = 'Copied!';
+  setTimeout(() => { copyBtn.querySelector('.btn-label').textContent = 'Copy'; }, 1500);
 });
 
 // Download
@@ -1493,6 +1597,7 @@ document.getElementById('fontPreview').addEventListener('change', (e) => {
 // Right sidebar toggle
 document.getElementById('rightSidebarToggle').addEventListener('click', () => {
   document.getElementById('rightSidebar').classList.toggle('open');
+  updateOverlay();
 });
 
 // Sidebar tabs
@@ -1670,6 +1775,49 @@ document.addEventListener('mouseup', () => {
     document.body.style.cursor = '';
     document.body.style.userSelect = '';
   }
+});
+// Touch support for divider
+divider.addEventListener('touchstart', (e) => {
+  dragging = true;
+  document.body.style.userSelect = 'none';
+  e.preventDefault();
+});
+document.addEventListener('touchmove', (e) => {
+  if (!dragging) return;
+  const panes = document.querySelector('.panes');
+  const rect = panes.getBoundingClientRect();
+  const touch = e.touches[0];
+  const ratio = (touch.clientX - rect.left) / rect.width;
+  const clamped = Math.max(0.15, Math.min(0.85, ratio));
+  rawPane.style.flex = `0 0 ${clamped * 100}%`;
+  previewPane.style.flex = `0 0 ${(1 - clamped) * 100}%`;
+});
+document.addEventListener('touchend', () => {
+  if (dragging) {
+    dragging = false;
+    document.body.style.userSelect = '';
+  }
+});
+
+// Edge-swipe navigation (mobile PWA)
+let swipeStartX = 0, swipeStartY = 0;
+document.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  if (t.clientX < 20 || t.clientX > window.innerWidth - 20) {
+    swipeStartX = t.clientX;
+    swipeStartY = t.clientY;
+  } else {
+    swipeStartX = -1;
+  }
+});
+document.addEventListener('touchend', (e) => {
+  if (swipeStartX < 0) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - swipeStartX;
+  const dy = Math.abs(t.clientY - swipeStartY);
+  if (dy > Math.abs(dx)) return;
+  if (swipeStartX < 20 && dx > 80) history.back();
+  if (swipeStartX > window.innerWidth - 20 && dx < -80) history.forward();
 });
 
 // Register service worker
