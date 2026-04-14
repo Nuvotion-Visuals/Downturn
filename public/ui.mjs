@@ -5,6 +5,9 @@ export function esc(s) {
 }
 
 export function inline(text) {
+  // Inline code first — protect contents from other transformations
+  const codes = [];
+  text = text.replace(/`([^`]+)`/g, (_, code) => { codes.push(`<code>${esc(code)}</code>`); return `\x00C${codes.length - 1}\x00`; });
   // Strip empty anchor links used as heading targets: [](#id) or [ ](#id)
   text = text.replace(/\[\s*\]\(#[^\)]*\)/g, '');
   // Linked images: [![alt](img)](url)
@@ -21,8 +24,8 @@ export function inline(text) {
   // Italic
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
   text = text.replace(/(?<![\/\w])_(.+?)_(?![\/\w])/g, '<em>$1</em>');
-  // Inline code
-  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Restore inline code
+  text = text.replace(/\x00C(\d+)\x00/g, (_, i) => codes[i]);
   return text;
 }
 

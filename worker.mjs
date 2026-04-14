@@ -159,11 +159,14 @@ async function handleRequest(request, env) {
       const resp = await fetch(rawUrl, { headers: { 'User-Agent': USER_AGENT } });
       if (resp.ok) {
         let markdown = await resp.text();
-        // Resolve relative image/link URLs to GitHub
+        // Resolve relative image/link URLs to GitHub, protecting code blocks
         const base = `https://github.com/${owner}/${repo}/blob/HEAD/`;
         const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/`;
+        const codeBlocks = [];
+        markdown = markdown.replace(/(`{1,3})[\s\S]*?\1/g, (m) => { codeBlocks.push(m); return `\x00CB${codeBlocks.length - 1}\x00`; });
         markdown = markdown.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/g, (m, alt, path) => `![${alt}](${rawBase}${path})`);
         markdown = markdown.replace(/\[([^\]]+)\]\((?!https?:\/\/)(?!#)([^)]+)\)/g, (m, text, path) => `[${text}](${base}${path})`);
+        markdown = markdown.replace(/\x00CB(\d+)\x00/g, (m, i) => codeBlocks[i]);
         const nav = [
           { text: 'Code', href: targetUrl },
           { text: 'Issues', href: `https://github.com/${owner}/${repo}/issues` },

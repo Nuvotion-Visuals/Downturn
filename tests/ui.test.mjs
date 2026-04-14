@@ -121,6 +121,23 @@ test('inline: plain text unchanged', () => {
   assert.strictEqual(inline('plain text'), 'plain text');
 });
 
+test('inline: code with brackets not treated as link', () => {
+  const result = inline("`filter: ['em', 'i']` selects elements");
+  assert.ok(result.includes('<code>'));
+  assert.ok(!result.includes('<a href'));
+});
+
+test('inline: code content is HTML-escaped', () => {
+  const result = inline('use `<div>` here');
+  assert.ok(result.includes('&lt;div&gt;'));
+});
+
+test('inline: code with link-like pattern not matched', () => {
+  const result = inline('`[text](url)` is a link');
+  assert.ok(!result.includes('<a href'));
+  assert.ok(result.includes('<code>'));
+});
+
 // --- markdownToHtml ---
 
 test('md: h1', () => {
