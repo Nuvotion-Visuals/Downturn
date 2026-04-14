@@ -186,6 +186,84 @@ async function handleRequest(request, env) {
       // Fall through to normal fetch if README not found
     }
 
+    // YouTube: extract transcript via Android InnerTube API
+    const ytMatch = !html && targetUrl && targetUrl.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i);
+    if (ytMatch) {
+      const videoId = ytMatch[1];
+      try {
+        const YT_UA = 'com.google.android.youtube/20.10.38 (Linux; U; Android 14)';
+        const playerResp = await fetch('https://www.youtube.com/youtubei/v1/player?prettyPrint=false', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'User-Agent': YT_UA },
+          body: JSON.stringify({
+            context: { client: { clientName: 'ANDROID', clientVersion: '20.10.38' } },
+            videoId,
+          }),
+        });
+        if (playerResp.ok) {
+          const data = await playerResp.json();
+          const videoTitle = data?.videoDetails?.title || 'YouTube Video';
+          const tracks = data?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
+          if (Array.isArray(tracks) && tracks.length) {
+            // Prefer manual English, then any English, then manual any, then first
+            const track = tracks.find(t => t.languageCode === 'en' && !t.kind) ||
+                          tracks.find(t => t.languageCode === 'en') ||
+                          tracks.find(t => !t.kind) ||
+                          tracks[0];
+            const captionResp = await fetch(track.baseUrl, { headers: { 'User-Agent': YT_UA } });
+            if (captionResp.ok) {
+              const xml = await captionResp.text();
+              const segments = [];
+              // srv3 format: <p t="ms" d="ms">text</p>
+              const srv3Re = /<p\s+t="(\d+)"\s+d="(\d+)"[^>]*>([\s\S]*?)<\/p>/g;
+              let m;
+              while ((m = srv3Re.exec(xml)) !== null) {
+                const ms = parseInt(m[1]);
+                let text = m[3].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/\n/g, ' ').trim();
+                if (!text) continue;
+                const totalSecs = Math.floor(ms / 1000);
+                const mins = Math.floor(totalSecs / 60);
+                const secs = (totalSecs % 60).toString().padStart(2, '0');
+                segments.push({ time: `${mins}:${secs}`, text });
+              }
+              // Fallback: classic format <text start="s" dur="s">
+              if (!segments.length) {
+                const classicRe = /<text start="([\d.]+)" dur="([\d.]+)"[^>]*>([\s\S]*?)<\/text>/g;
+                while ((m = classicRe.exec(xml)) !== null) {
+                  const s = parseFloat(m[1]);
+                  let text = m[3].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/\n/g, ' ').trim();
+                  if (!text) continue;
+                  const mins = Math.floor(s / 60);
+                  const secs = Math.floor(s % 60).toString().padStart(2, '0');
+                  segments.push({ time: `${mins}:${secs}`, text });
+                }
+              }
+              if (segments.length) {
+                const langName = track.name?.runs?.[0]?.text || track.name?.simpleText || track.languageCode || '';
+                const autoGen = track.kind === 'asr' ? ' (auto-generated)' : '';
+                let markdown = `# ${videoTitle}\n\n`;
+                markdown += `[Watch on YouTube](https://www.youtube.com/watch?v=${videoId})\n\n`;
+                markdown += `**Transcript** — ${langName}${autoGen}\n\n---\n\n`;
+                for (const seg of segments) {
+                  markdown += `**${seg.time}** ${seg.text}\n\n`;
+                }
+                const nav = [{ text: 'Watch on YouTube', href: `https://www.youtube.com/watch?v=${videoId}` }];
+                if (includeNav) {
+                  return new Response(JSON.stringify({ markdown, nav }), {
+                    headers: { ...CORS_HEADERS, 'Content-Type': 'application/json; charset=utf-8' },
+                  });
+                }
+                return new Response(markdown, {
+                  headers: { ...CORS_HEADERS, 'Content-Type': 'text/markdown; charset=utf-8' },
+                });
+              }
+            }
+          }
+        }
+      } catch {}
+      // No transcript available — fall through to normal page conversion
+    }
+
     if (!html) {
       const resp = await fetch(targetUrl, {
         headers: { 'User-Agent': USER_AGENT },

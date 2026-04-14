@@ -738,6 +738,7 @@ body.zen #zenExitBtn { display: flex; }
         <label><input type="checkbox" id="optImages" checked> Include images</label>
         <label><input type="checkbox" id="optClean" checked> Use Readability</label>
         <label><input type="checkbox" id="optAbsolute" checked> Absolute URLs</label>
+        <label><input type="checkbox" id="optTimestamps"> Include timestamps</label>
       </div>
     </div>
     <button class="nav-btn" id="rightSidebarToggle" title="Toggle right sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M512 96c0-35.3-28.7-64-64-64L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-320zM288 96l0 320L64 416 64 96l224 0zm136 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-48 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0zm24 120c0 13.3-10.7 24-24 24l-48 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24zm-24 72c13.3 0 24 10.7 24 24s-10.7 24-24 24l-48 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0z"/></svg></button>
@@ -832,6 +833,7 @@ function saveSettings() {
     optImages: document.getElementById('optImages').checked,
     optClean: document.getElementById('optClean').checked,
     optAbsolute: document.getElementById('optAbsolute').checked,
+    optTimestamps: document.getElementById('optTimestamps').checked,
     view: document.querySelector('.vt-btn.active')?.dataset.view || 'both',
     navOpen: document.getElementById('navSidebar').classList.contains('open'),
     theme: currentThemeName,
@@ -861,6 +863,7 @@ async function loadSettings() {
     if (s.optImages !== undefined) document.getElementById('optImages').checked = s.optImages;
     if (s.optClean !== undefined) document.getElementById('optClean').checked = s.optClean;
     if (s.optAbsolute !== undefined) document.getElementById('optAbsolute').checked = s.optAbsolute;
+    if (s.optTimestamps !== undefined) document.getElementById('optTimestamps').checked = s.optTimestamps;
     let view = s.view;
     if (view === 'both' && window.innerWidth < 640) view = 'preview';
     if (view) applyView(view);
@@ -966,11 +969,17 @@ function saveTabScroll() {
   }
 }
 
+function applyTimestamps(md) {
+  if (document.getElementById('optTimestamps').checked) return md;
+  return md.replace(/\*\*\d+:\d+\*\*\s*/g, '');
+}
+
 function displayTab(tab) {
   urlInput.value = tab.filePath || tab.url || '';
   if (tab.markdown) {
-    rawPane.value = tab.markdown;
-    previewPane.innerHTML = markdownToHtml(tab.markdown);
+    const display = applyTimestamps(tab.markdown);
+    rawPane.value = display;
+    previewPane.innerHTML = markdownToHtml(display);
     document.getElementById('copyBtn').disabled = false;
     document.getElementById('downloadBtn').disabled = false;
   } else {
@@ -1137,8 +1146,9 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     tab.markdown = cached.markdown;
     tab.nav = cached.nav;
     const t0 = performance.now();
-    rawPane.value = tab.markdown;
-    previewPane.innerHTML = markdownToHtml(tab.markdown);
+    const cachedDisplay = applyTimestamps(tab.markdown);
+    rawPane.value = cachedDisplay;
+    previewPane.innerHTML = markdownToHtml(cachedDisplay);
     renderNav(tab.nav);
     tab.stats = formatStats(tab.markdown, performance.now() - t0, '(cached)');
     stats.textContent = tab.stats;
@@ -1185,8 +1195,9 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     const h1 = data.markdown.match(/^#\s+(.+)/m);
     db.addHistory(targetUrl, h1 ? h1[1] : '');
 
-    rawPane.value = tab.markdown;
-    previewPane.innerHTML = markdownToHtml(tab.markdown);
+    const fetchDisplay = applyTimestamps(tab.markdown);
+    rawPane.value = fetchDisplay;
+    previewPane.innerHTML = markdownToHtml(fetchDisplay);
     renderNav(tab.nav);
     tab.stats = formatStats(tab.markdown, elapsed);
     stats.textContent = tab.stats;
@@ -1947,6 +1958,17 @@ document.addEventListener('touchend', () => {
     dragging = false;
     document.body.style.userSelect = '';
   }
+});
+
+// Timestamps toggle — re-render without refetching
+document.getElementById('optTimestamps').addEventListener('change', () => {
+  const tab = getActiveTab();
+  if (tab?.markdown) {
+    const display = applyTimestamps(tab.markdown);
+    rawPane.value = display;
+    previewPane.innerHTML = markdownToHtml(display);
+  }
+  saveSettings();
 });
 
 // Zen mode
