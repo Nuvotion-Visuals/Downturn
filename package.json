@@ -10,9 +10,8 @@
   "scripts": {
     "start": "node index.mjs",
     "test": "node --test tests/*.test.mjs",
-    "dev": "PORT=4001 node --watch index.mjs",
+    "dev": "PORT=4001 node --watch worker.mjs",
     "mcp": "node mcp.mjs",
-    "worker:dev": "PORT=4001 node worker.mjs",
     "worker:bundle": "npx esbuild worker.mjs --bundle --outfile=dist/worker.js --format=esm --external:node:http",
     "ext:build": "node extension/build.mjs"
   },

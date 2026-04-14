@@ -809,7 +809,7 @@ function switchTab(id) {
   displayTab(getActiveTab());
 }
 
-function createTab(url) {
+function createTab(url, { startPage = true } = {}) {
   const tab = { id: nextTabId++, url: '', markdown: '', nav: [], stats: '', rawScroll: 0, previewScroll: 0 };
   tabs.push(tab);
   saveTabScroll();
@@ -818,7 +818,7 @@ function createTab(url) {
   displayTab(tab);
   if (url) {
     navigate(url);
-  } else {
+  } else if (startPage) {
     loadStartPage(tab);
     urlInput.focus();
   }
@@ -1247,26 +1247,43 @@ navSidebar.addEventListener('click', (e) => {
 
 // Open file button
 document.getElementById('openFileBtn').addEventListener('click', async () => {
-  if (!window.showOpenFilePicker) { statusEl.textContent = 'File API not available (requires HTTPS)'; return; }
-  try {
-    const [handle] = await window.showOpenFilePicker({
-      types: [{ description: 'Markdown', accept: { 'text/markdown': ['.md', '.markdown', '.txt'] } }],
-    });
-    const file = await handle.getFile();
-    const text = await file.text();
-    const tab = createTab();
-    tab.source = 'file';
-    tab.filePath = handle.name;
-    tab.markdown = text;
-    fileHandles.set(tab.id, handle);
-    displayTab(tab);
-    renderTabs();
-  } catch {}
+  if (window.showOpenFilePicker) {
+    try {
+      const [handle] = await window.showOpenFilePicker({
+        types: [{ description: 'Markdown', accept: { 'text/markdown': ['.md', '.markdown', '.txt'] } }],
+      });
+      const file = await handle.getFile();
+      const text = await file.text();
+      const tab = createTab(null, { startPage: false });
+      tab.source = 'file';
+      tab.filePath = handle.name;
+      tab.markdown = text;
+      fileHandles.set(tab.id, handle);
+      displayTab(tab);
+      renderTabs();
+    } catch {}
+  } else {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.md,.markdown,.txt';
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (!file) return;
+      const text = await file.text();
+      const tab = createTab(null, { startPage: false });
+      tab.source = 'file';
+      tab.filePath = file.name;
+      tab.markdown = text;
+      displayTab(tab);
+      renderTabs();
+    };
+    input.click();
+  }
 });
 
 // Open folder button
 document.getElementById('openFolderBtn').addEventListener('click', async () => {
-  if (!window.showDirectoryPicker) { statusEl.textContent = 'Folder API not available (requires HTTPS)'; return; }
+  if (!window.showDirectoryPicker) { statusEl.textContent = 'Folder browsing requires a Chromium-based browser over HTTPS'; return; }
   try {
     folderHandle = await window.showDirectoryPicker();
     folderTree = await scanDirectory(folderHandle);
@@ -1292,10 +1309,19 @@ async function saveFile() {
       tab.filePath = handle.name;
     } catch { return; }
   }
-  if (!handle) return;
-  const writable = await handle.createWritable();
-  await writable.write(rawPane.value);
-  await writable.close();
+  if (handle) {
+    const writable = await handle.createWritable();
+    await writable.write(rawPane.value);
+    await writable.close();
+  } else {
+    const name = (tab.filePath || 'document').replace(/\.md$/, '') + '.md';
+    const blob = new Blob([rawPane.value], { type: 'text/markdown' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
   tab.markdown = rawPane.value;
   statusEl.textContent = 'Saved';
   setTimeout(() => { statusEl.textContent = ''; }, 1500);
