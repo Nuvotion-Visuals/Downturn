@@ -24,6 +24,8 @@ Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter
 - **History** — automatic, searchable, grouped by date in the sidebar
 - **Autocomplete** — URL bar suggests from history and bookmarks as you type
 - **Search** — plain text searches the web; results render as markdown
+- **YouTube** — paste a YouTube URL to get the video transcript as markdown with optional timestamps
+- **GitHub** — paste a GitHub repo URL to view the README
 - **Site navigation** — sidebar extracts nav links from the page, with a site home link
 - **Themes** — Dark, Light, and Black (OLED). Auto-detects system preference
 - **Typography** — choose editor and preview fonts with a visual picker, adjust font size, line height, and line width
@@ -65,7 +67,7 @@ Deploys automatically to Cloudflare Workers on version bump via GitHub Actions. 
 ```
 
 Tools:
-- **`url_to_markdown`** — fetch a URL and return markdown
+- **`url_to_markdown`** — fetch a URL and return markdown. GitHub repos return the README. YouTube videos return the transcript.
 - **`html_to_markdown`** — convert an HTML string to markdown
 
 | Parameter | Default | Description |

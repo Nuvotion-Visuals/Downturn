@@ -52,6 +52,90 @@ function fetchUrl(url) {
 
 // Convert URL to markdown, returns { markdown, html } so callers can extract metadata from the raw HTML
 async function urlToMarkdown(url, { title = true, links = true, clean = true, absoluteUrls = true } = {}) {
+  // GitHub repo: fetch README directly
+  const ghMatch = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)\/?$/);
+  if (ghMatch) {
+    const [, owner, repo] = ghMatch;
+    try {
+      const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/README.md`;
+      const md = await fetchUrl(rawUrl);
+      const base = `https://github.com/${owner}/${repo}/blob/HEAD/`;
+      const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/`;
+      const codeBlocks = [];
+      let markdown = md.replace(/(`{1,3})[\s\S]*?\1/g, (m) => { codeBlocks.push(m); return `\x00CB${codeBlocks.length - 1}\x00`; });
+      markdown = markdown.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/g, (m, alt, path) => `![${alt}](${rawBase}${path})`);
+      markdown = markdown.replace(/\[([^\]]+)\]\((?!https?:\/\/)(?!#)([^)]+)\)/g, (m, text, path) => `[${text}](${base}${path})`);
+      markdown = markdown.replace(/\x00CB(\d+)\x00/g, (m, i) => codeBlocks[i]);
+      return { markdown, html: md };
+    } catch {}
+  }
+
+  // YouTube: fetch transcript via Android InnerTube API
+  const ytMatch = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i);
+  if (ytMatch) {
+    const videoId = ytMatch[1];
+    try {
+      const YT_UA = 'com.google.android.youtube/20.10.38 (Linux; U; Android 14)';
+      const resp = await fetch('https://www.youtube.com/youtubei/v1/player?prettyPrint=false', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'User-Agent': YT_UA },
+        body: JSON.stringify({
+          context: { client: { clientName: 'ANDROID', clientVersion: '20.10.38' } },
+          videoId,
+        }),
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        const videoTitle = data?.videoDetails?.title || 'YouTube Video';
+        const tracks = data?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
+        if (Array.isArray(tracks) && tracks.length) {
+          const track = tracks.find(t => t.languageCode === 'en' && !t.kind) ||
+                        tracks.find(t => t.languageCode === 'en') ||
+                        tracks.find(t => !t.kind) ||
+                        tracks[0];
+          const captionResp = await fetch(track.baseUrl, { headers: { 'User-Agent': YT_UA } });
+          if (captionResp.ok) {
+            const xml = await captionResp.text();
+            const segments = [];
+            const srv3Re = /<p\s+t="(\d+)"\s+d="(\d+)"[^>]*>([\s\S]*?)<\/p>/g;
+            let m;
+            while ((m = srv3Re.exec(xml)) !== null) {
+              const ms = parseInt(m[1]);
+              let text = m[3].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/\n/g, ' ').trim();
+              if (!text) continue;
+              const totalSecs = Math.floor(ms / 1000);
+              const mins = Math.floor(totalSecs / 60);
+              const secs = (totalSecs % 60).toString().padStart(2, '0');
+              segments.push({ time: `${mins}:${secs}`, text });
+            }
+            if (!segments.length) {
+              const classicRe = /<text start="([\d.]+)" dur="([\d.]+)"[^>]*>([\s\S]*?)<\/text>/g;
+              while ((m = classicRe.exec(xml)) !== null) {
+                const s = parseFloat(m[1]);
+                let text = m[3].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/\n/g, ' ').trim();
+                if (!text) continue;
+                const mins = Math.floor(s / 60);
+                const secs = Math.floor(s % 60).toString().padStart(2, '0');
+                segments.push({ time: `${mins}:${secs}`, text });
+              }
+            }
+            if (segments.length) {
+              const langName = track.name?.runs?.[0]?.text || track.name?.simpleText || track.languageCode || '';
+              const autoGen = track.kind === 'asr' ? ' (auto-generated)' : '';
+              let markdown = `# ${videoTitle}\n\n`;
+              markdown += `[Watch on YouTube](https://www.youtube.com/watch?v=${videoId})\n\n`;
+              markdown += `**Transcript** — ${langName}${autoGen}\n\n---\n\n`;
+              for (const seg of segments) {
+                markdown += `**${seg.time}** ${seg.text}\n\n`;
+              }
+              return { markdown, html: '' };
+            }
+          }
+        }
+      }
+    } catch {}
+  }
+
   const html = await fetchUrl(url);
   const stripped = filters.strip_style_and_script_blocks(html);
   const document = new JSDOM(stripped);
@@ -125,15 +209,16 @@ async function handleMessage(line) {
       tools: [
         {
           name: 'url_to_markdown',
-          description: 'Fetch a web page and convert it to markdown. Extracts the main article content, strips navigation and ads.',
+          description: 'Fetch a web page and convert it to markdown. Extracts the main article content, strips navigation and ads. GitHub repo URLs return the README. YouTube URLs return the transcript.',
           inputSchema: {
             type: 'object',
             properties: {
-              url: { type: 'string', description: 'The URL to fetch and convert' },
+              url: { type: 'string', description: 'The URL to fetch and convert. Supports web pages, GitHub repos, and YouTube videos.' },
               output_path: { type: 'string', description: 'Full file path to write the markdown to. Overrides output_dir.' },
               output_dir: { type: 'string', description: 'Directory to write the markdown to. Filename is auto-generated from the page title (h1 → og:title → <title> → URL slug).' },
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
+              include_images: { type: 'boolean', description: 'Include images in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
               absolute_urls: { type: 'boolean', description: 'Resolve relative URLs to absolute using the page URL', default: true },
             },
@@ -152,6 +237,7 @@ async function handleMessage(line) {
               output_dir: { type: 'string', description: 'Directory to write the markdown to. Filename is auto-generated from the page title (h1 → og:title → <title> → URL slug).' },
               include_title: { type: 'boolean', description: 'Prepend the page title as an H1 heading', default: true },
               include_links: { type: 'boolean', description: 'Include hyperlinks in the output', default: true },
+              include_images: { type: 'boolean', description: 'Include images in the output', default: true },
               use_readability: { type: 'boolean', description: 'Use Readability to extract article content', default: true },
               absolute_urls: { type: 'boolean', description: 'Resolve relative URLs to absolute using the base URL', default: true },
             },
@@ -196,7 +282,10 @@ async function handleMessage(line) {
         return;
       }
 
-      const { markdown, html: sourceHtml } = result;
+      let { markdown, html: sourceHtml } = result;
+      if (args.include_images === false) {
+        markdown = markdown.replace(/!\[[^\]]*\]\([^\)]+\)\n*/g, '');
+      }
 
       // Resolve output path: explicit output_path wins, then output_dir with auto-naming
       let outPath = null;

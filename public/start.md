@@ -14,6 +14,14 @@ Paste any URL and get a clean markdown version of the page. Readability extracts
 
 Type any text to search the web. Results render as markdown with clickable links to browse further.
 
+## YouTube Transcripts
+
+Paste a YouTube URL to get the video transcript as markdown. Toggle timestamps on or off in the settings without refetching.
+
+## GitHub READMEs
+
+Paste a GitHub repo URL to view the README directly as markdown with resolved images and links.
+
 ## Tabs
 
 Open multiple pages at once. Each tab preserves its own content, scroll position, and navigation state. Drag tabs to reorder, middle-click to close. Tabs persist across page refreshes.
