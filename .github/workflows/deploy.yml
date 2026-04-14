@@ -45,3 +45,24 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - run: npm publish --access public
+
+  release:
+    needs: check-version
+    if: needs.check-version.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm run ext:build
+      - run: cd extension/dist && zip -r ../../downturn-extension.zip .
+      - run: |
+          VERSION=$(jq -r .version package.json)
+          gh release create "v$VERSION" downturn-extension.zip \
+            --title "v$VERSION" \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

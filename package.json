@@ -13,7 +13,8 @@
     "dev": "PORT=4001 node --watch index.mjs",
     "mcp": "node mcp.mjs",
     "worker:dev": "PORT=4001 node worker.mjs",
-    "worker:bundle": "npx esbuild worker.mjs --bundle --outfile=dist/worker.js --format=esm --external:node:http"
+    "worker:bundle": "npx esbuild worker.mjs --bundle --outfile=dist/worker.js --format=esm --external:node:http",
+    "ext:build": "node extension/build.mjs"
   },
   "author": "Tom Leamon",
   "repository": {

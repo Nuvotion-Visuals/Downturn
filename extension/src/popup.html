@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="toolbar">
+    <button id="rawBtn" class="active">Markdown</button>
+    <button id="previewBtn">Preview</button>
+    <div id="spacer"></div>
+    <span id="status">Converting...</span>
+    <button id="copyBtn" title="Copy to clipboard">Copy</button>
+    <button id="downloadBtn" title="Download .md file">Download</button>
+  </div>
+  <div id="preview"></div>
+  <textarea id="raw"></textarea>
+  <script src="popup.js"></script>
+</body>
+</html>
