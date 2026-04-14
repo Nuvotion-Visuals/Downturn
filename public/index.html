@@ -269,7 +269,24 @@ a:hover { text-decoration: underline; }
   color: var(--color-text);
   margin-top: var(--space-xs);
 }
-.right-sidebar-content select:focus { border-color: var(--color-link); outline: none; }
+.font-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  margin-top: var(--space-xs);
+}
+.font-item {
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.font-item:hover { background: var(--color-bg-tertiary); color: var(--color-text); }
+.font-item.active { background: var(--color-accent); color: var(--color-white); }
 /* Main layout */
 .main-area { flex: 1; display: flex; overflow: hidden; }
 /* Split pane */
@@ -694,9 +711,9 @@ a:hover { text-decoration: underline; }
         <button class="theme-btn" data-theme="midnight">Black</button>
       </div>
       <div class="settings-section">Editor Font</div>
-      <select id="fontEditor"><option value="">System Default</option></select>
+      <div class="font-list" id="fontEditor"></div>
       <div class="settings-section">Preview Font</div>
-      <select id="fontPreview"><option value="">System Default</option></select>
+      <div class="font-list" id="fontPreview"></div>
     </div>
   </div>
 </div>
@@ -733,8 +750,8 @@ function saveSettings() {
     view: document.querySelector('.vt-btn.active')?.dataset.view || 'both',
     navOpen: document.getElementById('navSidebar').classList.contains('open'),
     theme: currentThemeName,
-    fontEditor: document.getElementById('fontEditor').value || null,
-    fontPreview: document.getElementById('fontPreview').value || null,
+    fontEditor: document.getElementById('fontEditor').querySelector('.font-item.active')?.dataset.font || null,
+    fontPreview: document.getElementById('fontPreview').querySelector('.font-item.active')?.dataset.font || null,
   };
   db.saveSettings(settings);
 }
@@ -769,12 +786,10 @@ async function loadSettings() {
     }
     // Fonts
     if (s.fontEditor) {
-      document.getElementById('fontEditor').value = s.fontEditor;
-      document.documentElement.style.setProperty('--font-mono', `"${s.fontEditor}", var(--font-mono)`);
+      document.documentElement.style.setProperty('--font-mono', `"${s.fontEditor}", ui-monospace, monospace`);
     }
     if (s.fontPreview) {
-      document.getElementById('fontPreview').value = s.fontPreview;
-      document.documentElement.style.setProperty('--font-family', `"${s.fontPreview}", var(--font-family)`);
+      document.documentElement.style.setProperty('--font-family', `"${s.fontPreview}", -apple-system, sans-serif`);
     }
     return true;
   } catch { return false; }
@@ -1558,41 +1573,38 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
 });
 
 // Font pickers
+function buildFontList(container, fonts, cssVar, fallback, savedValue) {
+  container.innerHTML = '';
+  const def = document.createElement('div');
+  def.className = 'font-item' + (!savedValue ? ' active' : '');
+  def.textContent = 'System Default';
+  def.dataset.font = '';
+  container.appendChild(def);
+  for (const f of fonts) {
+    const item = document.createElement('div');
+    item.className = 'font-item' + (f === savedValue ? ' active' : '');
+    item.textContent = f;
+    item.style.fontFamily = `"${f}"`;
+    item.dataset.font = f;
+    container.appendChild(item);
+  }
+  container.addEventListener('click', (e) => {
+    const item = e.target.closest('.font-item');
+    if (!item) return;
+    container.querySelectorAll('.font-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    const font = item.dataset.font;
+    if (font) document.documentElement.style.setProperty(cssVar, `"${font}", ${fallback}`);
+    else document.documentElement.style.removeProperty(cssVar);
+    saveSettings();
+  });
+}
 (async () => {
   const { all, mono } = await listFonts();
-  const editorSel = document.getElementById('fontEditor');
-  const previewSel = document.getElementById('fontPreview');
-  for (const f of mono) {
-    if (f === 'System Default') continue;
-    const opt = document.createElement('option');
-    opt.value = f; opt.textContent = f; opt.style.fontFamily = f;
-    editorSel.appendChild(opt);
-  }
-  for (const f of all) {
-    if (f === 'System Default') continue;
-    const opt = document.createElement('option');
-    opt.value = f; opt.textContent = f; opt.style.fontFamily = f;
-    previewSel.appendChild(opt);
-  }
-  // Restore saved values
   const s = await db.getSettings();
-  if (s?.fontEditor) editorSel.value = s.fontEditor;
-  if (s?.fontPreview) previewSel.value = s.fontPreview;
+  buildFontList(document.getElementById('fontEditor'), mono, '--font-mono', 'ui-monospace, monospace', s?.fontEditor);
+  buildFontList(document.getElementById('fontPreview'), all, '--font-family', '-apple-system, sans-serif', s?.fontPreview);
 })();
-
-document.getElementById('fontEditor').addEventListener('change', (e) => {
-  const font = e.target.value;
-  if (font) document.documentElement.style.setProperty('--font-mono', `"${font}", ui-monospace, monospace`);
-  else document.documentElement.style.removeProperty('--font-mono');
-  saveSettings();
-});
-
-document.getElementById('fontPreview').addEventListener('change', (e) => {
-  const font = e.target.value;
-  if (font) document.documentElement.style.setProperty('--font-family', `"${font}", -apple-system, sans-serif`);
-  else document.documentElement.style.removeProperty('--font-family');
-  saveSettings();
-});
 
 // Right sidebar toggle
 document.getElementById('rightSidebarToggle').addEventListener('click', () => {
