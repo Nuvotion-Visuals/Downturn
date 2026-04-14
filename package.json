@@ -1,8 +1,8 @@
 {
   "name": "downturn",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "type": "module",
-  "description": "Web page to markdown with zero dependencies — 99% less code than the original",
+  "description": "Markdown web browser and editor",
   "main": "index.mjs",
   "bin": {
     "downturn": "./mcp.mjs"

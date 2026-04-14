@@ -151,6 +151,38 @@ async function handleRequest(request, env) {
       return new Response('Missing url parameter', { status: 400, headers: CORS_HEADERS });
     }
 
+    // GitHub repo: fetch README directly as markdown
+    const ghMatch = !html && targetUrl && targetUrl.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)\/?$/);
+    if (ghMatch) {
+      const [, owner, repo] = ghMatch;
+      const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/README.md`;
+      const resp = await fetch(rawUrl, { headers: { 'User-Agent': USER_AGENT } });
+      if (resp.ok) {
+        let markdown = await resp.text();
+        // Resolve relative image/link URLs to GitHub
+        const base = `https://github.com/${owner}/${repo}/blob/HEAD/`;
+        const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/`;
+        markdown = markdown.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/g, (m, alt, path) => `![${alt}](${rawBase}${path})`);
+        markdown = markdown.replace(/\[([^\]]+)\]\((?!https?:\/\/)(?!#)([^)]+)\)/g, (m, text, path) => `[${text}](${base}${path})`);
+        const nav = [
+          { text: 'Code', href: targetUrl },
+          { text: 'Issues', href: `https://github.com/${owner}/${repo}/issues` },
+          { text: 'Pull Requests', href: `https://github.com/${owner}/${repo}/pulls` },
+          { text: 'Actions', href: `https://github.com/${owner}/${repo}/actions` },
+          { text: 'Releases', href: `https://github.com/${owner}/${repo}/releases` },
+        ];
+        if (includeNav) {
+          return new Response(JSON.stringify({ markdown, nav }), {
+            headers: { ...CORS_HEADERS, 'Content-Type': 'application/json; charset=utf-8' },
+          });
+        }
+        return new Response(markdown, {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'text/markdown; charset=utf-8' },
+        });
+      }
+      // Fall through to normal fetch if README not found
+    }
+
     if (!html) {
       const resp = await fetch(targetUrl, {
         headers: { 'User-Agent': USER_AGENT },
