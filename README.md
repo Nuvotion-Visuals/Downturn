@@ -6,6 +6,8 @@ Also works as an MCP server for AI agents, a browser extension, and a standalone
 
 [GitHub](https://github.com/Nuvotion-Visuals/Downturn) | [npm](https://www.npmjs.com/package/downturn)
 
+<img width="1181" height="998" alt="Screenshot_20260414_012630" src="https://github.com/user-attachments/assets/0ed28494-f59b-4166-a540-32ed20fef86f" />
+
 ## Web Browser
 
 ```bash
