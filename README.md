@@ -2,12 +2,14 @@
 
 A markdown web browser. Convert any web page to clean markdown and browse the web in a distraction-free reader. Edit with live preview, open local files and folders, manage bookmarks and history.
 
-Also works as an MCP server for AI agents and a standalone HTTP API.
+Also works as an MCP server for AI agents, a browser extension, and a standalone HTTP API.
+
+[GitHub](https://github.com/Nuvotion-Visuals/Downturn) | [npm](https://www.npmjs.com/package/downturn)
 
 ## Web Browser
 
 ```bash
-node worker.mjs
+npm run dev
 ```
 
 Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter.
@@ -21,12 +23,24 @@ Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter
 - **Bookmarks** — star icon bookmarks the current page, viewable in the sidebar
 - **History** — automatic, searchable, grouped by date in the sidebar
 - **Autocomplete** — URL bar suggests from history and bookmarks as you type
-- **Search** — plain text searches Wikipedia; results render as markdown
+- **Search** — plain text searches the web; results render as markdown
 - **Site navigation** — sidebar extracts nav links from the page, with a site home link
 - **Themes** — Dark, Light, and Black (OLED). Auto-detects system preference
-- **Fonts** — choose editor and preview fonts from installed system fonts
+- **Typography** — choose editor and preview fonts with a visual picker, adjust font size, line height, and line width
 - **Favicons** — shown in tabs, bookmarks, history, and autocomplete
 - **PWA** — installable as a standalone app with offline support
+- **Mobile** — responsive layout with touch targets, swipe navigation, and sidebar overlay
+
+## Browser Extension
+
+Available for Chrome and Firefox. Converts the current page to markdown with one click — no server needed. Edit the result, copy to clipboard, or download as `.md`.
+
+Build:
+```bash
+npm run ext:build
+```
+
+Load unpacked from `extension/dist/` in Chrome (`chrome://extensions`) or as a temporary add-on in Firefox (`about:debugging`).
 
 ## Deploy
 
@@ -34,7 +48,7 @@ Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter
 npx wrangler deploy
 ```
 
-Or run locally with `node worker.mjs`. No build step needed.
+Deploys automatically to Cloudflare Workers on version bump via GitHub Actions. Also publishes to npm and creates a GitHub release with the browser extension packages.
 
 ## MCP Server
 
@@ -83,16 +97,17 @@ Returns `Content-Type: text/markdown` with CORS headers.
 3. Extract article content (Mozilla Readability)
 4. Convert to markdown (Turndown)
 5. Resolve relative URLs to absolute
-6. Strip link titles and encode parentheses in URLs
-7. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
+6. Strip empty permalink anchors and link titles
+7. Encode parentheses in URLs
+8. Apply site-specific filters (Wikipedia, Medium, Stack Overflow, etc.)
 
 ## Testing
 
 ```bash
-node --test tests/*.test.mjs
+npm test
 ```
 
-579 tests covering the conversion pipeline, URL resolution, link title stripping, markdown rendering, worker API, MCP integration, nav extraction, title extraction, omnibox, favicons, and debounce.
+580 tests covering the conversion pipeline, URL resolution, link title stripping, permalink anchor stripping, markdown rendering, worker API, MCP integration, nav extraction, title extraction, omnibox, favicons, and debounce. Tests run automatically in CI before deploy.
 
 ## Structure
 
@@ -117,6 +132,12 @@ public/
   sw.js                                Service worker for PWA/offline
   start.md                             Start page content
   site.webmanifest                     PWA manifest
+
+extension/
+  manifest.json                        Browser extension manifest (Chrome + Firefox)
+  src/                                 Extension source files
+  build.mjs                            esbuild bundler
+  dist/                                Built extension (gitignored)
 
 lib/
   html_parser.mjs                      DOM parser (vendored JSDOMParser)

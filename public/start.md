@@ -8,11 +8,11 @@ Type a URL, search term, or domain in the address bar and press **Enter**. Click
 
 ## Browse the Web
 
-Paste any URL and get a clean markdown version of the page. Readability extracts the article content, stripping navigation and clutter. All relative URLs are resolved to absolute so images and links work. Code blocks are syntax highlighted.
+Paste any URL and get a clean markdown version of the page. Readability extracts the article content, stripping navigation and clutter. All relative URLs are resolved to absolute so images and links work.
 
 ## Search
 
-Type any text to search Wikipedia. Results render as markdown with clickable links to browse further.
+Type any text to search the web. Results render as markdown with clickable links to browse further.
 
 ## Tabs
 
@@ -24,7 +24,7 @@ The markdown pane is always editable. Type or modify content and see the preview
 
 ## Local Files
 
-Open `.md` files directly with the file icon, or open an entire folder to browse a file tree in the sidebar. Ctrl+S saves back to the original file, or triggers Save As for new content.
+Open `.md` files directly with the file icon, or open an entire folder to browse a file tree in the sidebar. Ctrl+S saves back to the original file, or triggers Save As for new content. Works in Firefox and Safari using a standard file picker fallback.
 
 ## Site Navigation
 
@@ -38,9 +38,17 @@ Click the bookmark icon to save the current page. History is recorded automatica
 
 Toggle between **Both** (split view), **Markdown** (editor only), or **Preview** (rendered output only) using the buttons in the bottom bar.
 
-## Themes
+## Themes and Typography
 
-Choose between **Dark**, **Light**, and **Black** (OLED) themes in the right sidebar. Automatically matches your system preference. Editor and preview fonts are customizable from your installed system fonts.
+Choose between **Dark**, **Light**, and **Black** (OLED) themes in the right sidebar. Automatically matches your system preference. Customize editor and preview fonts from your installed system fonts, with a visual font picker that renders each option in its own typeface. Adjust font size, line height, and line width to your preference.
+
+## Mobile
+
+Downturn works as a PWA on mobile devices. The layout adapts for touch with larger tap targets, a simplified toolbar, and swipe-from-edge navigation. The sidebar slides in as an overlay with navigation, back/forward, refresh, home, and file controls.
+
+## Browser Extension
+
+Available as a Chrome and Firefox extension. Click the icon to convert the current page to markdown instantly — no server needed. Edit the result, copy to clipboard, or download as a `.md` file.
 
 ## Copy and Download
 
@@ -50,14 +58,16 @@ Choose between **Dark**, **Light**, and **Black** (OLED) themes in the right sid
 
 Access conversion options via the gear icon:
 
-- **Include title** — prepend the page title as an H1 heading
-- **Include links** — keep hyperlinks in the output
-- **Include images** — keep images in the output
-- **Use Readability** — extract article content (disable for raw conversion)
-- **Absolute URLs** — resolve relative URLs to absolute
+- **Include title** -- prepend the page title as an H1 heading
+- **Include links** -- keep hyperlinks in the output
+- **Include images** -- keep images in the output
+- **Use Readability** -- extract article content (disable for raw conversion)
+- **Absolute URLs** -- resolve relative URLs to absolute
 
 ## About
 
-Downturn also works as an MCP server for AI agents and a standalone HTTP API. Deploy to Cloudflare Workers with `npx wrangler deploy`.
+Downturn also works as an MCP server for AI agents and a standalone HTTP API. Deploy to Cloudflare Workers with `npx wrangler deploy`. Install from npm with `npx -y downturn`.
+
+[GitHub](https://github.com/Nuvotion-Visuals/Downturn)
 
 Built on [Mozilla Readability](https://github.com/mozilla/readability) and [Turndown](https://github.com/mixmark-io/turndown).
