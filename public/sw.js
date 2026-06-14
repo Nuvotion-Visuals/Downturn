@@ -1,4 +1,4 @@
-const CACHE_NAME = 'downturn-v12';
+const CACHE_NAME = 'downturn-v14';
 const SHELL_ASSETS = [
   '/',
   '/ui.mjs',

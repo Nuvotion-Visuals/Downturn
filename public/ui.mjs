@@ -8,6 +8,14 @@ export function inline(text) {
   // Inline code first — protect contents from other transformations
   const codes = [];
   text = text.replace(/`([^`]+)`/g, (_, code) => { codes.push(`<code>${esc(code)}</code>`); return `\x00C${codes.length - 1}\x00`; });
+  // Wiki-links: [[path|display]] or [[path]]
+  text = text.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, path, display) =>
+    `<a href="note://${path.trim()}">${esc(display.trim())}</a>`);
+  text = text.replace(/\[\[([^\]]+)\]\]/g, (_, path) => {
+    const p = path.trim();
+    const display = p.includes('/') ? p.slice(p.lastIndexOf('/') + 1) : p;
+    return `<a href="note://${p}">${esc(display)}</a>`;
+  });
   // Strip empty anchor links used as heading targets: [](#id) or [ ](#id)
   text = text.replace(/\[\s*\]\(#[^\)]*\)/g, '');
   // Linked images: [![alt](img)](url)
@@ -30,6 +38,19 @@ export function inline(text) {
 }
 
 export function markdownToHtml(md) {
+  // Footnotes (standard [^id] references paired with [^id]: definitions).
+  // Extract the definitions, then turn inline references into superscript links.
+  const footnoteDefs = new Map();
+  const footnoteOrder = [];
+  md = md.replace(/^\[\^([^\]\s]+)\]:[ \t]*(.*)$/gm, (_, id, content) => {
+    if (!footnoteDefs.has(id)) { footnoteDefs.set(id, content.trim()); footnoteOrder.push(id); }
+    return '';
+  });
+  md = md.replace(/\[\^([^\]\s]+)\]/g, (m, id) =>
+    footnoteDefs.has(id)
+      ? `<sup class="footnote-ref"><a href="#fn-${esc(id)}" id="fnref-${esc(id)}">${esc(id)}</a></sup>`
+      : m);
+
   // Fenced code blocks
   let html = md.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
     `<pre><code class="language-${lang}">${esc(code.trimEnd())}</code></pre>`
@@ -146,6 +167,15 @@ export function markdownToHtml(md) {
     out.push(`<p>${inline(line)}</p>`);
   }
   closeList();
+  if (footnoteOrder.length) {
+    let fn = '\n<hr class="footnotes-sep">\n<section class="footnotes"><ol>';
+    for (const id of footnoteOrder) {
+      const content = inline(footnoteDefs.get(id))
+        .replace(/(^|[^">])(https?:\/\/[^\s<]+)/g, '$1<a href="$2">$2</a>');
+      fn += `<li id="fn-${esc(id)}">${content} <a href="#fnref-${esc(id)}" class="footnote-back" title="Back to reference">↩</a></li>`;
+    }
+    return out.join('\n') + fn + '</ol></section>';
+  }
   return out.join('\n');
 
   function closeList() {
@@ -163,6 +193,7 @@ export function markdownToHtml(md) {
 export function normalizeUrl(targetUrl) {
   if (!targetUrl) return '';
   if (targetUrl.startsWith('__search__:')) return targetUrl;
+  if (targetUrl.startsWith('note://')) return targetUrl;
   if (!/^https?:\/\//i.test(targetUrl)) targetUrl = 'https://' + targetUrl;
   targetUrl = targetUrl.replace(/(https?:\/\/)\/+/g, '$1');
   return targetUrl;
@@ -183,6 +214,7 @@ export function resolveOmnibox(input) {
 
   // Already a URL
   if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  if (trimmed.startsWith('note://')) return trimmed;
 
   // Looks like a domain
   if (/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/.test(trimmed)) return 'https://' + trimmed;
@@ -203,4 +235,14 @@ export function formatStats(markdown, ms, suffix) {
   const kb = (bytes / 1024).toFixed(1);
   const time = Math.round(ms);
   return `${chars.toLocaleString()} chars | ${kb} KB | ${time}ms${suffix ? ' ' + suffix : ''}`;
+}
+
+export function parseWikiLinks(content) {
+  const links = [];
+  const re = /\[\[([^\]|]+?)(?:\|[^\]]+)?\]\]/g;
+  let m;
+  while ((m = re.exec(content)) !== null) {
+    links.push(m[1].trim());
+  }
+  return [...new Set(links)];
 }

@@ -331,16 +331,23 @@ if (typeof process !== 'undefined' && process.argv[1]?.endsWith('worker.mjs')) {
     '.webmanifest': 'application/manifest+json', '.json': 'application/json',
     '.md': 'text/markdown',
   };
-  for (const file of fs.readdirSync(publicDir)) {
-    const ext = path.extname(file);
-    if (!MIME[ext]) continue;
-    const filePath = path.join(publicDir, file);
-    if (ext === '.png' || ext === '.ico') {
-      STATIC_FILES['/' + file] = { content: fs.readFileSync(filePath), type: MIME[ext], binary: true };
-    } else {
-      STATIC_FILES['/' + file] = { content: fs.readFileSync(filePath, 'utf8'), type: MIME[ext] };
+  function loadStaticDir(dir, prefix) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.isDirectory()) {
+        loadStaticDir(path.join(dir, entry.name), prefix + entry.name + '/');
+        continue;
+      }
+      const ext = path.extname(entry.name);
+      if (!MIME[ext]) continue;
+      const filePath = path.join(dir, entry.name);
+      if (ext === '.png' || ext === '.ico') {
+        STATIC_FILES['/' + prefix + entry.name] = { content: fs.readFileSync(filePath), type: MIME[ext], binary: true };
+      } else {
+        STATIC_FILES['/' + prefix + entry.name] = { content: fs.readFileSync(filePath, 'utf8'), type: MIME[ext] };
+      }
     }
   }
+  loadStaticDir(publicDir, '');
   const port = process.env.PORT || 4001;
   http.createServer(async (req, res) => {
     const request = new Request(`http://localhost:${port}${req.url}`, {

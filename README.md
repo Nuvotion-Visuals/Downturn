@@ -20,7 +20,8 @@ Open `http://localhost:4001`. Type a URL, search term, or domain and press Enter
 - **Tabs** — drag to reorder, middle-click to close, Ctrl+T/W to create/close
 - **Split view** — markdown editor + rendered preview, or toggle to single pane
 - **Edit** — the markdown pane is always editable with live preview
-- **Local files** — open `.md` files or entire folders with a file tree sidebar
+- **Footnotes** — standard `[^1]` references with `[^1]:` definitions render as a linked footnotes section; click a reference to jump to the citation and the ↩ back-link to return
+- **Local files & folders** — open a single `.md` file or an entire folder with a file-tree sidebar. Inside a folder, relative and repo-root-absolute image paths (e.g. `/media/pic.png`) resolve against the folder root, and links between `.md` files open in place (Ctrl/middle-click opens a new tab)
 - **Save** — Ctrl+S saves to the opened file, or triggers Save As
 - **Bookmarks** — star icon bookmarks the current page, viewable in the sidebar
 - **History** — automatic, searchable, grouped by date in the sidebar
@@ -112,7 +113,7 @@ Returns `Content-Type: text/markdown` with CORS headers.
 npm test
 ```
 
-580 tests covering the conversion pipeline, URL resolution, link title stripping, permalink anchor stripping, markdown rendering, worker API, MCP integration, nav extraction, title extraction, omnibox, favicons, and debounce. Tests run automatically in CI before deploy.
+618 tests covering the conversion pipeline, URL resolution, link title stripping, permalink anchor stripping, markdown rendering, worker API, MCP integration, nav extraction, title extraction, omnibox, favicons, and debounce. Tests run automatically in CI before deploy.
 
 ## Structure
 

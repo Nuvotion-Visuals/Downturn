@@ -1,6 +1,6 @@
 {
   "name": "downturn",
-  "version": "2.1.6",
+  "version": "2.3.0",
   "type": "module",
   "description": "Markdown web browser and editor",
   "main": "index.mjs",

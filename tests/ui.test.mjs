@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox } from '../public/ui.mjs';
+import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox, parseWikiLinks } from '../public/ui.mjs';
 
 // --- esc ---
 
@@ -435,4 +435,75 @@ test('omnibox: empty string returns empty', () => {
 
 test('omnibox: whitespace only returns empty', () => {
   assert.strictEqual(resolveOmnibox('   '), '');
+});
+
+// --- wiki-links in inline ---
+
+test('inline: [[path]] renders as note link', () => {
+  assert.strictEqual(inline('[[ideas]]'), '<a href="note://ideas">ideas</a>');
+});
+
+test('inline: [[path|text]] renders with display text', () => {
+  assert.strictEqual(inline('[[ideas|My Ideas]]'), '<a href="note://ideas">My Ideas</a>');
+});
+
+test('inline: [[nested/path]] uses last segment as display', () => {
+  assert.strictEqual(inline('[[a/b/c]]'), '<a href="note://a/b/c">c</a>');
+});
+
+test('inline: [[link]] inside backticks not processed', () => {
+  const result = inline('`[[ideas]]`');
+  assert.ok(result.includes('<code>[[ideas]]</code>'));
+});
+
+test('inline: wiki-link with bold', () => {
+  const result = inline('**[[ideas]]**');
+  assert.ok(result.includes('<strong>'));
+  assert.ok(result.includes('note://ideas'));
+});
+
+test('inline: text around wiki-link preserved', () => {
+  assert.strictEqual(inline('see [[ideas]] here'), 'see <a href="note://ideas">ideas</a> here');
+});
+
+// --- normalizeUrl: note:// ---
+
+test('normalizeUrl: note:// passthrough', () => {
+  assert.strictEqual(normalizeUrl('note://ideas'), 'note://ideas');
+});
+
+test('normalizeUrl: note:// with nested path passthrough', () => {
+  assert.strictEqual(normalizeUrl('note://projects/downturn/ideas'), 'note://projects/downturn/ideas');
+});
+
+// --- resolveOmnibox: note:// ---
+
+test('omnibox: note:// passthrough', () => {
+  assert.strictEqual(resolveOmnibox('note://ideas'), 'note://ideas');
+});
+
+// --- parseWikiLinks ---
+
+test('parseWikiLinks: extracts simple links', () => {
+  assert.deepStrictEqual(parseWikiLinks('[[a]] and [[b]]'), ['a', 'b']);
+});
+
+test('parseWikiLinks: extracts path with display text', () => {
+  assert.deepStrictEqual(parseWikiLinks('[[a|display]]'), ['a']);
+});
+
+test('parseWikiLinks: deduplicates', () => {
+  assert.deepStrictEqual(parseWikiLinks('[[a]] then [[a]]'), ['a']);
+});
+
+test('parseWikiLinks: returns empty for no links', () => {
+  assert.deepStrictEqual(parseWikiLinks('hello world'), []);
+});
+
+test('parseWikiLinks: handles nested paths', () => {
+  assert.deepStrictEqual(parseWikiLinks('[[projects/downturn/ideas]]'), ['projects/downturn/ideas']);
+});
+
+test('parseWikiLinks: trims whitespace in paths', () => {
+  assert.deepStrictEqual(parseWikiLinks('[[ ideas ]]'), ['ideas']);
 });
