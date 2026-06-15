@@ -123,6 +123,7 @@ a:hover { text-decoration: underline; }
   flex: 1;
   min-width: 0;
 }
+.tab-dirty { color: var(--color-accent); font-weight: 700; margin-right: 2px; }
 .tab-close {
   display: none;
   width: var(--icon-lg);
@@ -164,6 +165,7 @@ a:hover { text-decoration: underline; }
 .icon-settings { -webkit-mask-image: url(/images/icons/settings.svg); mask-image: url(/images/icons/settings.svg); }
 .icon-right-sidebar { -webkit-mask-image: url(/images/icons/right-sidebar.svg); mask-image: url(/images/icons/right-sidebar.svg); }
 .icon-copy { -webkit-mask-image: url(/images/icons/copy.svg); mask-image: url(/images/icons/copy.svg); }
+.icon-save { -webkit-mask-image: url(/images/icons/save.svg); mask-image: url(/images/icons/save.svg); }
 .icon-download { -webkit-mask-image: url(/images/icons/download.svg); mask-image: url(/images/icons/download.svg); }
 .icon-open-external { -webkit-mask-image: url(/images/icons/open-external.svg); mask-image: url(/images/icons/open-external.svg); }
 .icon-zen-expand { -webkit-mask-image: url(/images/icons/zen-expand.svg); mask-image: url(/images/icons/zen-expand.svg); }
@@ -642,6 +644,8 @@ a:hover { text-decoration: underline; }
 .bottombar button { display: flex; align-items: center; gap: var(--space-sm); }
 .bottombar button:hover:not(:disabled) { background: var(--color-border); border-color: var(--color-border-hover); }
 .bottombar button:disabled { color: var(--color-text-muted); cursor: default; }
+#saveBtn.is-dirty { color: var(--color-accent); border-color: var(--color-accent); }
+#saveBtn.is-dirty .icon { background: var(--color-accent); }
 .view-toggle { display: inline-flex; }
 .view-toggle .vt-btn { border-radius: 0; border-right: none; }
 .view-toggle .vt-btn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
@@ -878,6 +882,7 @@ body.zen #zenExitBtn { display: flex; }
 </div>
 
 <div class="bottombar">
+  <button id="saveBtn" style="display:none" title="Save (Ctrl+S)"><span class="icon icon-save"></span><span class="btn-label">Save</span></button>
   <button id="copyBtn" disabled><span class="icon icon-copy"></span><span class="btn-label">Copy</span></button>
   <button id="downloadBtn" disabled><span class="icon icon-download"></span><span class="btn-label">Download</span></button>
   <button id="saveNoteBtn" style="display:none"><span class="icon icon-file"></span><span class="btn-label">Save to Notes</span></button>
@@ -1011,7 +1016,7 @@ async function loadTabs() {
   try {
     const data = await db.getTabs();
     if (!data || !data.tabs?.length) return false;
-    tabs = data.tabs.map(t => ({ ...t, rawScroll: 0, previewScroll: 0 }));
+    tabs = data.tabs.map(t => ({ ...t, rawScroll: 0, previewScroll: 0, savedMarkdown: t.markdown }));
     activeTabId = data.activeTabId;
     nextTabId = data.nextTabId;
     // Repopulate pageCache from tab data
@@ -1037,18 +1042,38 @@ function tabTitle(tab) {
   return 'Start Page';
 }
 
+// A tab is editable (has a save target) if it's a disk file or a note.
+function isEditable(tab) {
+  return !!tab && (tab.source === 'file' || tab.url?.startsWith('note://'));
+}
+// Editable tab whose buffer differs from what was last loaded/saved.
+function isDirty(tab) {
+  return isEditable(tab) && tab.markdown !== tab.savedMarkdown;
+}
+
 function renderTabs() {
   tabContainer.innerHTML = tabs.map(t => {
     const icon = `<img class="tab-icon" src="${t.url && !t.url.startsWith('__search__:') ? faviconUrl(t.url) : '/favicon.svg'}">`;
+    const dirty = isDirty(t) ? '<span class="tab-dirty">*</span>' : '';
     return `<div class="tab${t.id === activeTabId ? ' active' : ''}" data-tab-id="${t.id}" draggable="true">` +
-    `${icon}<span class="tab-title">${tabTitle(t)}</span>` +
+    `${icon}<span class="tab-title">${dirty}${tabTitle(t)}</span>` +
     `<span class="tab-close">&times;</span></div>`;
   }).join('');
+  updateSaveButton();
   saveTabs();
   // Scroll active tab into view on narrow screens
   requestAnimationFrame(() => {
     tabContainer.querySelector('.tab.active')?.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
   });
+}
+
+// Show the Save button for editable tabs; emphasize it when there are changes.
+function updateSaveButton() {
+  const saveBtn = document.getElementById('saveBtn');
+  if (!saveBtn) return;
+  const tab = getActiveTab();
+  saveBtn.style.display = isEditable(tab) ? '' : 'none';
+  saveBtn.classList.toggle('is-dirty', isDirty(tab));
 }
 
 function saveTabScroll() {
@@ -1094,6 +1119,7 @@ function displayTab(tab) {
   });
   window.history.replaceState({ url: tab.url }, '', tab.url ? '#' + tab.url : window.location.pathname);
   updateBookmarkBtn();
+  updateSaveButton();
 }
 
 function switchTab(id) {
@@ -1240,6 +1266,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
     const t0 = performance.now();
     if (note) {
       tab.markdown = note.content;
+      tab.savedMarkdown = note.content;
       tab.nav = [];
       rawPane.value = note.content;
       previewPane.innerHTML = markdownToHtml(note.content);
@@ -1252,6 +1279,7 @@ async function navigate(targetUrl, { pushState = true } = {}) {
       document.getElementById('saveNoteBtn').style.display = 'none';
     } else {
       tab.markdown = '';
+      tab.savedMarkdown = '';
       tab.nav = [];
       rawPane.value = '';
       previewPane.innerHTML = '<div class="empty-state">New note. Start typing.</div>';
@@ -1498,20 +1526,26 @@ async function persistTaskToggle(tab) {
     const notePath = tab.url.slice('note://'.length);
     await db.saveNote(notePath, tab.markdown);
     await db.updateBacklinks(notePath, parseWikiLinks(tab.markdown));
-    statusEl.textContent = 'Saved';
-    setTimeout(() => { statusEl.textContent = ''; }, 1500);
+    tab.savedMarkdown = tab.markdown;
+    flashStatus('Saved');
+    renderTabs();
     if (document.querySelector('.sidebar-tab[data-sidebar="notes"]').classList.contains('active')) renderNotesSidebar();
     return;
   }
   const handle = fileHandles.get(tab.id);
   if (tab.source === 'file' && handle) {
     try {
+      if (!(await ensureWritable(handle))) { flashStatus('Write permission denied', 2500); renderTabs(); return; }
       const writable = await handle.createWritable();
       await writable.write(rawPane.value);
       await writable.close();
-      statusEl.textContent = 'Saved';
-      setTimeout(() => { statusEl.textContent = ''; }, 1500);
-    } catch {}
+      tab.savedMarkdown = tab.markdown;
+      flashStatus('Saved');
+      renderTabs();
+    } catch (err) {
+      flashStatus('Save failed: ' + (err?.message || err), 3000);
+      renderTabs();
+    }
     return;
   }
   // Web-page view: keep the in-memory + IndexedDB cache copies in sync so the
@@ -1723,6 +1757,7 @@ async function openFileFromTree(path, { pushState = true } = {}) {
   tab.source = 'file';
   tab.filePath = path;
   tab.markdown = text;
+  tab.savedMarkdown = text;
   tab.url = '';
   tab.nav = [];
   fileHandles.set(tab.id, handle);
@@ -1788,6 +1823,7 @@ document.getElementById('openFileBtn').addEventListener('click', async () => {
       tab.source = 'file';
       tab.filePath = handle.name;
       tab.markdown = text;
+      tab.savedMarkdown = text;
       fileHandles.set(tab.id, handle);
       displayTab(tab);
       renderTabs();
@@ -1804,6 +1840,7 @@ document.getElementById('openFileBtn').addEventListener('click', async () => {
       tab.source = 'file';
       tab.filePath = file.name;
       tab.markdown = text;
+      tab.savedMarkdown = text;
       displayTab(tab);
       renderTabs();
     };
@@ -1815,7 +1852,7 @@ document.getElementById('openFileBtn').addEventListener('click', async () => {
 document.getElementById('openFolderBtn').addEventListener('click', async () => {
   if (!window.showDirectoryPicker) { statusEl.textContent = 'Folder browsing requires a Chromium-based browser over HTTPS'; return; }
   try {
-    folderHandle = await window.showDirectoryPicker();
+    folderHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
     for (const url of folderImageCache.values()) URL.revokeObjectURL(url);
     folderImageCache.clear();
     folderTree = await scanDirectory(folderHandle);
@@ -1825,7 +1862,21 @@ document.getElementById('openFolderBtn').addEventListener('click', async () => {
   } catch {}
 });
 
-// Save (Ctrl+S)
+// Ensure a File System Access handle has readwrite permission (folder/file handles
+// are granted read-only by default). Must be called from a user gesture.
+async function ensureWritable(handle) {
+  if (!handle?.queryPermission) return true;
+  const opts = { mode: 'readwrite' };
+  if (await handle.queryPermission(opts) === 'granted') return true;
+  return (await handle.requestPermission(opts)) === 'granted';
+}
+
+function flashStatus(msg, ms = 1500) {
+  statusEl.textContent = msg;
+  setTimeout(() => { if (statusEl.textContent === msg) statusEl.textContent = ''; }, ms);
+}
+
+// Save (Ctrl+S / Save button)
 async function saveFile() {
   const tab = getActiveTab();
   if (!tab?.markdown && !rawPane.value) return;
@@ -1835,10 +1886,9 @@ async function saveFile() {
     const notePath = tab.url.slice('note://'.length);
     tab.markdown = rawPane.value;
     await db.saveNote(notePath, rawPane.value);
-    const targets = parseWikiLinks(rawPane.value);
-    await db.updateBacklinks(notePath, targets);
-    statusEl.textContent = 'Saved';
-    setTimeout(() => { statusEl.textContent = ''; }, 1500);
+    await db.updateBacklinks(notePath, parseWikiLinks(rawPane.value));
+    tab.savedMarkdown = rawPane.value;
+    flashStatus('Saved');
     renderTabs();
     if (document.querySelector('.sidebar-tab[data-sidebar="notes"]').classList.contains('active')) renderNotesSidebar();
     return;
@@ -1857,9 +1907,15 @@ async function saveFile() {
     } catch { return; }
   }
   if (handle) {
-    const writable = await handle.createWritable();
-    await writable.write(rawPane.value);
-    await writable.close();
+    try {
+      if (!(await ensureWritable(handle))) { flashStatus('Write permission denied', 2500); return; }
+      const writable = await handle.createWritable();
+      await writable.write(rawPane.value);
+      await writable.close();
+    } catch (e) {
+      flashStatus('Save failed: ' + (e?.message || e), 3000);
+      return;
+    }
   } else {
     const name = (tab.filePath || 'document').replace(/\.md$/, '') + '.md';
     const blob = new Blob([rawPane.value], { type: 'text/markdown' });
@@ -1870,10 +1926,17 @@ async function saveFile() {
     URL.revokeObjectURL(a.href);
   }
   tab.markdown = rawPane.value;
-  statusEl.textContent = 'Saved';
-  setTimeout(() => { statusEl.textContent = ''; }, 1500);
+  tab.savedMarkdown = rawPane.value;
+  flashStatus('Saved');
   renderTabs();
 }
+
+document.getElementById('saveBtn').addEventListener('click', () => saveFile());
+
+// Warn before leaving with unsaved changes in any editable tab.
+window.addEventListener('beforeunload', (e) => {
+  if (tabs.some(isDirty)) { e.preventDefault(); e.returnValue = ''; }
+});
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
