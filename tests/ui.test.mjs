@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { esc, inline, markdownToHtml, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox, parseWikiLinks } from '../public/ui.mjs';
+import { esc, inline, markdownToHtml, toggleTaskAt, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox, parseWikiLinks } from '../public/ui.mjs';
 
 // --- esc ---
 
@@ -506,4 +506,236 @@ test('parseWikiLinks: handles nested paths', () => {
 
 test('parseWikiLinks: trims whitespace in paths', () => {
   assert.deepStrictEqual(parseWikiLinks('[[ ideas ]]'), ['ideas']);
+});
+
+// --- GFM: strikethrough ---
+
+test('inline: strikethrough with ~~', () => {
+  assert.strictEqual(inline('~~gone~~'), '<del>gone</del>');
+});
+
+test('inline: strikethrough inside text', () => {
+  assert.strictEqual(inline('a ~~b~~ c'), 'a <del>b</del> c');
+});
+
+test('inline: strikethrough not applied inside inline code', () => {
+  assert.strictEqual(inline('`~~keep~~`'), '<code>~~keep~~</code>');
+});
+
+// --- GFM: backslash escapes ---
+
+test('inline: backslash escapes asterisks (no emphasis)', () => {
+  assert.strictEqual(inline('\\*not bold\\*'), '*not bold*');
+});
+
+test('inline: backslash escapes underscore', () => {
+  assert.strictEqual(inline('a\\_b\\_c'), 'a_b_c');
+});
+
+test('inline: backslash-escaped bracket does not start a link', () => {
+  assert.strictEqual(inline('\\[text\\](url)'), '[text](url)');
+});
+
+test('inline: escaped less-than is HTML-safe', () => {
+  assert.strictEqual(inline('\\<tag\\>'), '&lt;tag&gt;');
+});
+
+// --- GFM: autolinks ---
+
+test('inline: autolinks a bare http URL', () => {
+  assert.strictEqual(inline('see https://example.com here'),
+    'see <a href="https://example.com">https://example.com</a> here');
+});
+
+test('inline: autolinks a www URL with http href', () => {
+  assert.strictEqual(inline('go www.example.com now'),
+    'go <a href="http://www.example.com">www.example.com</a> now');
+});
+
+test('inline: autolink excludes trailing punctuation', () => {
+  assert.strictEqual(inline('visit https://example.com.'),
+    'visit <a href="https://example.com">https://example.com</a>.');
+});
+
+test('inline: autolink excludes unbalanced trailing paren', () => {
+  assert.strictEqual(inline('(https://example.com)'),
+    '(<a href="https://example.com">https://example.com</a>)');
+});
+
+test('inline: existing markdown link is not double-autolinked', () => {
+  assert.strictEqual(inline('[site](https://example.com)'),
+    '<a href="https://example.com">site</a>');
+});
+
+test('inline: URL inside inline code is not autolinked', () => {
+  assert.strictEqual(inline('`https://example.com`'),
+    '<code>https://example.com</code>');
+});
+
+// --- GFM: task lists ---
+
+test('md: task list renders checkboxes', () => {
+  const html = markdownToHtml('- [ ] todo\n- [x] done');
+  assert.ok(html.includes('<li class="task-list-item"><input type="checkbox"> todo</li>'));
+  assert.ok(html.includes('<li class="task-list-item"><input type="checkbox" checked> done</li>'));
+});
+
+test('md: task list accepts uppercase X', () => {
+  const html = markdownToHtml('- [X] done');
+  assert.ok(html.includes('<input type="checkbox" checked>'));
+});
+
+test('md: non-task bracket content is left alone', () => {
+  const html = markdownToHtml('- [z] not a task');
+  assert.ok(html.includes('<li>[z] not a task</li>'));
+  assert.ok(!html.includes('checkbox'));
+});
+
+// --- GFM: nested lists & ordered start ---
+
+test('md: nested unordered list', () => {
+  const html = markdownToHtml('- a\n  - b\n  - c\n- d');
+  assert.strictEqual(html, '<ul><li>a<ul><li>b</li><li>c</li></ul></li><li>d</li></ul>');
+});
+
+test('md: ordered list honors start number', () => {
+  const html = markdownToHtml('3. three\n4. four');
+  assert.ok(html.includes('<ol start="3">'));
+  assert.ok(html.includes('<li>three</li>'));
+});
+
+test('md: ordered list starting at 1 has no start attribute', () => {
+  const html = markdownToHtml('1. one\n2. two');
+  assert.ok(html.includes('<ol>'));
+  assert.ok(!html.includes('start='));
+});
+
+test('md: nested ordered list inside unordered', () => {
+  const html = markdownToHtml('- a\n  1. one\n  2. two\n- b');
+  assert.strictEqual(html, '<ul><li>a<ol><li>one</li><li>two</li></ol></li><li>b</li></ul>');
+});
+
+// --- GFM: tables ---
+
+test('md: table column alignment', () => {
+  const html = markdownToHtml('| L | C | R |\n|:--|:-:|--:|\n| a | b | c |');
+  assert.ok(html.includes('<th style="text-align:left">L</th>'));
+  assert.ok(html.includes('<th style="text-align:center">C</th>'));
+  assert.ok(html.includes('<th style="text-align:right">R</th>'));
+  assert.ok(html.includes('<td style="text-align:center">b</td>'));
+});
+
+test('md: table without alignment has no style', () => {
+  const html = markdownToHtml('| a | b |\n|---|---|\n| 1 | 2 |');
+  assert.ok(html.includes('<th>a</th>'));
+  assert.ok(!html.includes('text-align'));
+});
+
+test('md: escaped pipe stays inside one table cell', () => {
+  const html = markdownToHtml('| a | b |\n|---|---|\n| `x\\|y` | z |');
+  assert.ok(html.includes('<td><code>x|y</code></td>'));
+  assert.ok(html.includes('<td>z</td>'));
+});
+
+// --- GFM: fenced code info strings ---
+
+test('md: tilde fenced code block', () => {
+  const html = markdownToHtml('~~~\ncode\n~~~');
+  assert.ok(html.includes('<pre><code'));
+  assert.ok(html.includes('code'));
+});
+
+test('md: fence language with plus sign is preserved', () => {
+  const html = markdownToHtml('```c++\nint x;\n```');
+  assert.ok(html.includes('class="language-c++"'));
+  assert.ok(html.includes('int x;'));
+});
+
+test('md: fence language with hash is preserved', () => {
+  const html = markdownToHtml('```c#\nvar x;\n```');
+  assert.ok(html.includes('class="language-c#"'));
+});
+
+// --- CommonMark: indented code blocks ---
+
+test('md: indented code block', () => {
+  const html = markdownToHtml('    const x = 1;\n    const y = 2;');
+  assert.strictEqual(html, '<pre><code>const x = 1;\nconst y = 2;</code></pre>');
+});
+
+test('md: indented code escapes HTML', () => {
+  const html = markdownToHtml('    <div>hi</div>');
+  assert.ok(html.includes('&lt;div&gt;'));
+  assert.ok(!html.includes('<div>hi</div>'));
+});
+
+// --- CommonMark: soft / hard line breaks ---
+
+test('md: consecutive lines join into one paragraph', () => {
+  assert.strictEqual(markdownToHtml('line one\nline two'), '<p>line one line two</p>');
+});
+
+test('md: trailing two spaces produce a hard break', () => {
+  assert.strictEqual(markdownToHtml('line one  \nline two'), '<p>line one<br>line two</p>');
+});
+
+test('md: blank line still separates paragraphs', () => {
+  assert.strictEqual(markdownToHtml('one\n\ntwo'), '<p>one</p>\n\n<p>two</p>');
+});
+
+test('md: heading after paragraph breaks the paragraph', () => {
+  const html = markdownToHtml('text here\n# Heading');
+  assert.ok(html.includes('<p>text here</p>'));
+  assert.ok(html.includes('<h1>Heading</h1>'));
+});
+
+// --- ATX closing hashes ---
+
+test('md: strips trailing closing hashes from heading', () => {
+  assert.strictEqual(markdownToHtml('## Title ##'), '<h2>Title</h2>');
+});
+
+test('md: keeps interior hash in heading text', () => {
+  assert.strictEqual(markdownToHtml('# a # b'), '<h1>a # b</h1>');
+});
+
+// --- toggleTaskAt: writing checkbox state back to markdown ---
+
+test('toggleTaskAt: checks an unchecked box', () => {
+  assert.strictEqual(toggleTaskAt('- [ ] todo', 0), '- [x] todo');
+});
+
+test('toggleTaskAt: unchecks a checked box', () => {
+  assert.strictEqual(toggleTaskAt('- [x] done', 0), '- [ ] done');
+});
+
+test('toggleTaskAt: toggles only the targeted index', () => {
+  const src = '- [ ] a\n- [ ] b\n- [ ] c';
+  assert.strictEqual(toggleTaskAt(src, 1), '- [ ] a\n- [x] b\n- [ ] c');
+});
+
+test('toggleTaskAt: indexes across nested task items in source order', () => {
+  const src = '- [ ] a\n  - [ ] b\n- [ ] c';
+  assert.strictEqual(toggleTaskAt(src, 2), '- [ ] a\n  - [ ] b\n- [x] c');
+});
+
+test('toggleTaskAt: uppercase X is treated as checked', () => {
+  assert.strictEqual(toggleTaskAt('- [X] done', 0), '- [ ] done');
+});
+
+test('toggleTaskAt: preserves indentation and bullet marker', () => {
+  assert.strictEqual(toggleTaskAt('   * [ ] x', 0), '   * [x] x');
+});
+
+test('toggleTaskAt: out-of-range index leaves source unchanged', () => {
+  assert.strictEqual(toggleTaskAt('- [ ] a', 5), '- [ ] a');
+});
+
+test('toggleTaskAt: ignores non-task list items', () => {
+  assert.strictEqual(toggleTaskAt('- plain\n- [ ] task', 0), '- plain\n- [x] task');
+});
+
+test('toggleTaskAt: skips task-like lines inside fenced code blocks', () => {
+  const src = '```\n- [ ] not real\n```\n- [ ] real';
+  assert.strictEqual(toggleTaskAt(src, 0), '```\n- [ ] not real\n```\n- [x] real');
 });

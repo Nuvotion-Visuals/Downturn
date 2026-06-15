@@ -420,6 +420,9 @@ a:hover { text-decoration: underline; }
 #previewPane ul, #previewPane ol { padding-left: 2em; margin: 0 0 var(--space-lg); }
 #previewPane li { margin: 0.25em 0; }
 #previewPane li + li { margin-top: 0.25em; }
+#previewPane del { opacity: 0.7; }
+#previewPane .task-list-item { list-style: none; margin-left: -1.2em; }
+#previewPane .task-list-item input { margin-right: 0.5em; }
 #previewPane hr { border: none; border-top: 1px solid var(--color-border); margin: var(--space-xl) 0; height: 0.25em; background: var(--color-border); border-radius: var(--space-xs); }
 #previewPane sup.footnote-ref { font-size: 0.75em; }
 #previewPane sup.footnote-ref a { text-decoration: none; padding: 0 0.1em; }
@@ -891,7 +894,7 @@ body.zen #zenExitBtn { display: flex; }
 <button id="zenExitBtn"><span class="icon icon-zen-collapse"></span></button>
 
 <script type="module">
-import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox, parseWikiLinks } from './ui.mjs';
+import { markdownToHtml, inline, esc, normalizeUrl, formatStats, debounce, faviconUrl, resolveOmnibox, parseWikiLinks, toggleTaskAt } from './ui.mjs';
 import * as db from './db.mjs';
 import { THEMES, applyTheme, getSystemTheme, listFonts } from './themes.mjs';
 const API_BASE = '';
@@ -1469,6 +1472,54 @@ for (const el of [previewPane]) {
     }
     createTab(href);
   });
+}
+
+// Interactive task-list checkboxes — clicking writes [ ]<->[x] back to the markdown.
+// The clicked box maps to the Nth task marker in source order (rendered in document
+// order), so we toggle that ordinal in both the editable buffer (rawPane) and the
+// canonical markdown (tab.markdown), then persist by content type.
+previewPane.addEventListener('change', async (e) => {
+  const box = e.target.closest('input[type="checkbox"]');
+  if (!box) return;
+  const tab = getActiveTab();
+  if (!tab) return;
+  const index = [...previewPane.querySelectorAll('input[type="checkbox"]')].indexOf(box);
+  if (index < 0) return;
+  rawPane.value = toggleTaskAt(rawPane.value, index);
+  tab.markdown = toggleTaskAt(tab.markdown, index);
+  stats.textContent = formatStats(rawPane.value, 0, '(edited)');
+  tab.stats = stats.textContent;
+  renderTabs();
+  await persistTaskToggle(tab);
+});
+
+async function persistTaskToggle(tab) {
+  if (tab.url?.startsWith('note://')) {
+    const notePath = tab.url.slice('note://'.length);
+    await db.saveNote(notePath, tab.markdown);
+    await db.updateBacklinks(notePath, parseWikiLinks(tab.markdown));
+    statusEl.textContent = 'Saved';
+    setTimeout(() => { statusEl.textContent = ''; }, 1500);
+    if (document.querySelector('.sidebar-tab[data-sidebar="notes"]').classList.contains('active')) renderNotesSidebar();
+    return;
+  }
+  const handle = fileHandles.get(tab.id);
+  if (tab.source === 'file' && handle) {
+    try {
+      const writable = await handle.createWritable();
+      await writable.write(rawPane.value);
+      await writable.close();
+      statusEl.textContent = 'Saved';
+      setTimeout(() => { statusEl.textContent = ''; }, 1500);
+    } catch {}
+    return;
+  }
+  // Web-page view: keep the in-memory + IndexedDB cache copies in sync so the
+  // toggle survives tab switches and reloads-from-cache.
+  if (tab.url && !tab.url.startsWith('__search__')) {
+    if (pageCache[tab.url]) pageCache[tab.url].markdown = tab.markdown;
+    db.setCache(tab.url, tab.markdown, tab.nav);
+  }
 }
 
 // URL input
