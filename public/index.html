@@ -10,12 +10,15 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 <style>
 :root {
   /* Colors */
   --color-bg: #0d1117;
   --color-bg-secondary: #161b22;
   --color-bg-tertiary: #21262d;
+  --color-code-bg: rgba(110, 118, 129, 0.4);
   --color-border: #30363d;
   --color-border-hover: #8b949e;
   --color-text: #e6edf3;
@@ -408,10 +411,21 @@ a:hover { text-decoration: underline; }
   font-size: var(--font-code);
 }
 #previewPane :not(pre) > code {
-  background: var(--color-bg-tertiary);
-  padding: 0.2em 0.4em;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  padding: 0.1em 0.4em;
   border-radius: var(--radius);
   font-size: var(--font-code);
+}
+/* When highlight.js has themed a block, let its background own the box (one clean
+   github-dark block); non-highlighted blocks keep the app-themed <pre> styling above. */
+#previewPane pre:has(code.hljs) { background: none; border: none; padding: 0; }
+#previewPane pre code.hljs {
+  display: block;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow-x: auto;
 }
 #previewPane blockquote {
   border-left: 0.25em solid var(--color-border);
@@ -1555,6 +1569,27 @@ async function persistTaskToggle(tab) {
     db.setCache(tab.url, tab.markdown, tab.nav);
   }
 }
+
+// Syntax highlighting (highlight.js, loaded from CDN in <head>). A MutationObserver
+// re-highlights code blocks whenever the preview is re-rendered, so we don't need to
+// hook every previewPane.innerHTML call site. Highlighting is best-effort: if hljs
+// isn't available (e.g. offline), the preview just shows plain code blocks.
+function highlightPreview() {
+  if (!window.hljs) return;
+  hlObserver.disconnect();
+  for (const block of previewPane.querySelectorAll('pre code:not([data-highlighted])')) {
+    // If the declared language isn't loaded, drop the class so hljs auto-detects
+    // instead of warning and falling back to plain text.
+    const m = block.className.match(/\blanguage-([\w-]+)/i);
+    if (m && !hljs.getLanguage(m[1])) block.classList.remove(m[0]);
+    try { hljs.highlightElement(block); } catch {}
+  }
+  hlObserver.observe(previewPane, { childList: true, subtree: true });
+}
+const hlObserver = new MutationObserver(highlightPreview);
+hlObserver.observe(previewPane, { childList: true, subtree: true });
+highlightPreview();                                 // first render (hljs is a blocking <head> script)
+window.addEventListener('load', highlightPreview);  // fallback if the CDN script loaded late
 
 // URL input
 urlInput.addEventListener('keydown', (e) => {
