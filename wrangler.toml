@@ -1,4 +1,5 @@
 name = "downturn"
+account_id = "8032681d05bf65018d3aa15cd7320853"
 main = "worker.mjs"
 compatibility_date = "2025-04-01"
 assets = { directory = "public" }
